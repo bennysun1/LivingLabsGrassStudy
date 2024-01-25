@@ -1,0 +1,23 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Living Labs Grass Study"
+  author: "Ben Sunshine"
+  date: "1/25/2024"
+  chapters:
+    - index.qmd
+    - hog.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: 
+      light: cosmo
+      dark: darkly
+  pdf:
+    documentclass: scrreprt
+  
+editor: visual

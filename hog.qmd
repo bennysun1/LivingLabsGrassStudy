@@ -1,0 +1,5 @@
+---
+title: "HOGs"
+---
+
+## Historgram of Gradients
