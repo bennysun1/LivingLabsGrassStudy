@@ -1,5 +1,171 @@
 ---
 title: "HOGs"
+editor_options: 
+  chunk_output_type: inline
 ---
 
 ## Historgram of Gradients
+
+```{r}
+library(mapsapi)
+library(mapboxapi)
+library(magick)
+```
+```{r}
+key = "pk.eyJ1IjoiYmVubnlzdW4xIiwiYSI6ImNsczNuYTg2bjB6MWIybG11eWFsZWJrNjUifQ.8qFLlzNMxjmtULH1-NK3Nw"
+mapboxapi::mb_access_token("pk.eyJ1IjoiYmVubnlzdW4xIiwiYSI6ImNsczNuYTg2bjB6MWIybG11eWFsZWJrNjUifQ.8qFLlzNMxjmtULH1-NK3Nw", install = TRUE)
+```
+
+## San Francisco, CA
+```{r}
+# points_of_interest <- tibble::tibble(
+#   longitude = c(-122.527972, -122.526361, -122.384423, -122.355432),
+#   latitude = c(37.797679, 37.717774, 37.810405, 37.711881)
+#   )
+# 
+# prepped_pois <- prep_overlay_markers(
+#   data = points_of_interest,
+#   marker_type = "pin-l",
+#   label = 1:4,
+#   color = "#fff", 
+# )
+
+map <- static_mapbox(
+  style_url = "mapbox://styles/mapbox/satellite-v9",
+  #username = "kwalkertcu",
+  overlay_markers = prepped_pois, 
+  width = 1200,
+  height = 800, 
+  image = T, latitude = 37.762493, longitude = -122.442878, zoom = 12
+)
+
+
+map
+
+magick::image_write(map, "san_francisco_scale_zoom_12.png")
+```
+
+
+
+## Salt Lake City, UT
+
+```{r}
+points_of_interest <- tibble::tibble(
+  longitude = c(-112.065945, -111.853948, -111.852956, -112.023371),
+  latitude = c(40.794275, 40.791516, 40.502308, 40.502308)
+  )
+
+prepped_pois <- prep_overlay_markers(
+  data = points_of_interest,
+  marker_type = "pin-l",
+  label = 1:4,
+  color = "#fff", 
+)
+
+map <- static_mapbox(
+  style_url = "mapbox://styles/mapbox/satellite-v9",
+  #username = "kwalkertcu",
+  #overlay_markers = prepped_pois, 
+  width = 800,
+  height = 1200, 
+  image = T, 
+  latitude = 40.7,
+  longitude = -111.876183, zoom = 12
+)
+
+
+map
+
+magick::image_write(map, "salt_lake_city_zoom_12.png")
+```
+
+## Detroit, MI
+
+```{r}
+# points_of_interest <- tibble::tibble(
+#   longitude = c(-112.065945, -111.853948, -111.852956, -112.023371),
+#   latitude = c(40.794275, 40.791516, 40.502308, 40.502308)
+#   )
+# 
+# prepped_pois <- prep_overlay_markers(
+#   data = points_of_interest,
+#   marker_type = "pin-l",
+#   label = 1:4,
+#   color = "#fff", 
+# )
+
+map <- static_mapbox(
+  style_url = "mapbox://styles/mapbox/satellite-v9",
+  #username = "kwalkertcu",
+  #overlay_markers = prepped_pois, 
+  width = 1200,
+  height = 800, 
+  image = T, 
+  latitude = 42.336322,
+  longitude = -83.048705, zoom = 12
+)
+
+
+map
+
+magick::image_write(map, "detroit_zoom_12.png")
+```
+
+
+
+
+## HOG SF
+```{r}
+library(OpenImageR)
+#path = system.file("~/repos/LivingLabsGrassStudy/san_francisco_zoom_12.png", "1.png", package = "OpenImageR")
+image = rgb_2gray(readImage("~/repos/LivingLabsGrassStudy/san_francisco_zoom_12.png"))
+image=image*255 # Convert to gray values
+hog = HOG(image, cells = 9, orientations = 4)
+
+
+plot(hog, main = "Histogram of Oriented Gradients (HOG) from Image")
+
+hist(hog)
+```
+
+```{r}
+image = readImage("~/repos/LivingLabsGrassStudy/grid.png")
+image=image*255 # Convert to gray values
+hog = HOG(image[,,-4], cells = 2, orientations = 4)
+
+dim(image)
+
+plot(hog, main = "Histogram of Oriented Gradients (HOG) from Image")
+
+hist(hog)
+```
+
+```{r}
+image = readImage("~/repos/LivingLabsGrassStudy/color_example.jpg")
+#image=image*255 # Convert to gray values
+hog = HOG(image, cells = 8)
+
+dim(image)
+
+plot(hog, main = "Histogram of Oriented Gradients (HOG) from Image")
+
+hist(hog)
+```
+```{r}
+library(image.dlib)
+library(magick)
+image <- magick::image_read("~/repos/LivingLabsGrassStudy/color_example.jpg")
+#image <- readImage("~/repos/LivingLabsGrassStudy/color_example.jpg")
+#image=image*255 # Convert to gray values
+
+feats <- image_data(image, channels = "rgb")
+feats <- as.integer(feats, transpose = FALSE)
+feats <- image_fhog(feats, cell_size = 8)
+str(feats)
+
+hist(feats$fhog)
+
+feats$fhog[1, 1, ]
+image.dlib::image_fhog(image, cell_size = 8, filter_rows_padding = 1, filter_cols_padding = 1)
+```
+
