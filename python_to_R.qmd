@@ -1,0 +1,227 @@
+---
+title: "Python Test"
+---
+
+```{r load_r_packages}
+library(reticulate)
+library(tidyverse)
+Sys.which("python")
+```
+
+```{python load_python_modules}
+
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# jupyter only inline output command
+#%matplotlib inline
+
+from skimage.io import imread, imshow
+from skimage.transform import resize
+from skimage.feature import hog
+from skimage import data, exposure
+
+
+```
+
+```{python}
+image = imread('color_example.jpg')
+image_read = imshow(image)
+print(image.shape)
+```
+
+```{r}
+py$image_read
+```
+
+```{python}
+resized_image = resize(image, (100,150))
+#resized_image = resize(image, (100,150))
+
+imshow(resized_image)
+print(resized_image.shape)
+```
+
+```{r}
+#py$resized_image
+```
+
+```{python}
+fig, hog_image = hog(resized_image, orientations=9, pixels_per_cell=(8, 8), 
+                     feature_vector = True,
+                    cells_per_block=(2, 2), visualize=True, channel_axis=2 #multichannel=True
+)
+```
+
+```{python Grid Search}
+from skimage.feature import hog
+import numpy as np
+
+
+# grids
+# TODO: check big jumps
+orientations_values = [5, 10, 25, 50]
+pixels_per_cell_values = [(4, 4), (6, 6), (8, 8)]
+cells_per_block_values = [(1, 1), (2, 2), (3, 3)]
+
+print("Image shape:", resized_image.shape)
+
+for orientations in orientations_values:
+    for pixels_per_cell in pixels_per_cell_values:
+        for cells_per_block in cells_per_block_values:
+            hog_features, hog_image = hog(
+                resized_image,
+                orientations=orientations,
+                pixels_per_cell=pixels_per_cell,
+                cells_per_block=cells_per_block,
+                visualize=True,
+                feature_vector=True,
+                channel_axis=2
+            )
+            
+            print("Orientations:", orientations, "| Pixels per Cell:", pixels_per_cell, 
+            "| Cells per Block:", cells_per_block)
+            plt.imshow(hog_image, cmap=plt.cm.gray)
+            plt.show()
+
+```
+
+
+
+```{python}
+#import numpy
+#numpy.printoptions(threshold=sys.maxsize)#numpy.inf
+#print(hog_image[1])
+#len(hog_image[0])
+#hog_image[0]
+import math
+
+hog_mag_hyp = []
+hog_gradient_angle = []
+
+
+for r in range(1, 99):
+    for c in range(1, 149):
+        mag_x = hog_image[r,c+1] - hog_image[r,c-1]
+        mag_y = hog_image[r+1,c] - hog_image[r-1,c]
+        
+        if mag_x == 0:
+            if mag_y == 0:
+                continue
+            else:
+                angle = math.pi / 2
+        else:
+            angle = math.atan(mag_y/mag_x)
+        
+        hog_gradient_angle.append(angle)
+        
+        mag_hyp = math.sqrt(math.exp2(mag_x) + math.exp2(mag_y))
+        hog_mag_hyp.append(mag_hyp)
+        
+# Creating DataFrame
+# TODO: Add this code above into the nested for loops above
+# store the paramters in columns
+hog_df = pd.DataFrame({'hog_mag_hyp': hog_mag_hyp, 'hog_gradient_angle': hog_gradient_angle})
+
+#print(hog_gradient_mag)
+plt.hist(hog_gradient_angle) 
+plt.title("histogram") 
+plt.show()
+
+print(len(hog_mag_hyp))
+print(len(hog_gradient_angle))
+
+```
+
+
+
+```{r}
+hist(py$hog_gradient_angle)
+```
+
+```{python}
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 7), sharex=True, sharey=True)
+
+ax1.imshow(resized_image, cmap=plt.cm.gray)
+ax1.set_title('Input image')
+
+# Rescale histogram for better display 
+hog_color_rescaled = exposure.rescale_intensity(hog_image, in_range=(0, 10))
+
+ax2.imshow(hog_color_rescaled, cmap=plt.cm.gray)
+ax2.set_title('Histogram of Oriented Gradients (HOG)')
+
+# store to file
+plt.savefig("color_example_hog.png", dpi=125)
+
+plt.show()
+
+```
+
+```{r}
+# print(py$plt)
+# py$hog_gradient_angle
+
+hog_df <- py$hog_df %>%
+  mutate(mag_bin = cut(hog_mag_hyp, breaks = 5),
+         unit_cir_angle = ifelse(hog_gradient_angle < 0, hog_gradient_angle + 2*pi, hog_gradient_angle))
+
+hog_df %>%
+  filter(hog_gradient_angle == 0) %>%
+  arrange(desc(hog_mag_hyp))
+
+hog_df %>%
+  filter(hog_gradient_angle >= 1.5) %>%
+  arrange(desc(hog_mag_hyp))
+
+```
+
+```{r}
+
+weighted_hog <-
+  hog_df %>%
+  group_by(mag_bin, hog_gradient_angle) %>%
+  summarise(metric = n()*hog_mag_hyp)
+
+ggplot(hog_df, aes(x = hog_gradient_angle)) +
+  geom_bar(width = 1, colour = "black") +
+  coord_polar()
+
+ggplot(hog_df, aes(x = hog_gradient_angle, fill = hog_mag_hyp)) +
+  geom_histogram(bins = 20) +
+  coord_polar()
+
+
+ggplot(hog_df, aes(x = unit_cir_angle, fill = mag_bin)) +
+  geom_histogram(breaks = seq(0, 2*pi, length.out = 15), color = "white") +
+  coord_polar(theta = "x", start = 3*pi/2, direction = -1) +
+  scale_x_continuous(breaks = c(0, pi/4, pi/2, 3*pi/4, pi, 5*pi/4, 3*pi/2, 7*pi/4), 
+                     labels = c("0", "π/4", "π/2", "3π/4", "π", "5π/4", "3π/2", "7π/4")) +
+  labs(title = "Polar Plot of Gradients and Magnitudes",
+       fill = "Magnitude Range") +
+  theme_minimal()
+
+ggplot(weighted_hog, aes(x = unit_cir_angle, y = ,fill = mag_bin)) +
+  geom_histogram(breaks = seq(0, 2*pi, length.out = 15), color = "white") +
+  coord_polar(theta = "x", start = 3*pi/2, direction = -1) +
+  scale_x_continuous(breaks = c(0, pi/4, pi/2, 3*pi/4, pi, 5*pi/4, 3*pi/2, 7*pi/4), 
+                     labels = c("0", "π/4", "π/2", "3π/4", "π", "5π/4", "3π/2", "7π/4")) +
+  labs(title = "Polar Plot of Gradients and Magnitudes",
+       fill = "Magnitude Range") +
+  theme_minimal()
+
+
+
+
+
+
+
+# ggplot(hog_df, aes(x = hog_gradient_angle, fill = hog_mag_hyp)) +
+#   geom_histogram(bins = 20) +
+#   coord_polar(theta = "x", start = 0) +
+#   scale_x_continuous(labels = function(x) {as.character(round(x*2*pi, digits = 5))},
+#                      breaks = c(0, pi/2, pi, 3*pi/2, 2*pi)) +
+#   theme_minimal()
+
+
+```

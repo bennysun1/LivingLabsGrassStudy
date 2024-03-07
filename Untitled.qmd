@@ -1,0 +1,17 @@
+---
+title: "Python Try"
+---
+
+```{r}
+reticulate::repl_python()
+```
+
+```{python}
+import matplotlib.pyplot as plt
+%matplotlib inline
+from skimage.io import imread, imshow
+from skimage.transform import resize
+from skimage.feature import hog
+from skimage import data, exposure
+```
+
