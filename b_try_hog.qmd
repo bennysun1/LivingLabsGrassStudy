@@ -1,0 +1,314 @@
+---
+title: "B Try"
+---
+
+```{r load_r_packages}
+library(reticulate)
+library(tidyverse)
+Sys.which("python")
+```
+
+```{python load_python_modules}
+
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# jupyter only inline output command
+#%matplotlib inline
+
+from skimage.io import imread, imshow
+from skimage.transform import resize
+from skimage.feature import hog
+from skimage import data, exposure
+
+
+import matplotlib.pyplot as plt
+from skimage import io
+from skimage import color
+from skimage.transform import resize
+import math
+from skimage.feature import hog
+import numpy as np
+
+
+```
+
+
+```{python}
+img = resize(color.rgb2gray(io.imread("b_test_image_copy.jpg")), (128, 64))
+
+resized_img = resize(img, (128*4, 64*4))
+plt.axis("off")
+plt.imshow(resized_img)
+print(resized_img.shape)
+
+```
+
+
+
+```{python}
+plt.figure(figsize=(15, 8))
+plt.imshow(img, cmap="gray")
+plt.axis("off")
+plt.show()
+
+img = np.array(img)
+
+```
+
+
+```{python}
+# calculate gradients and angles
+mag = []
+theta = []
+for i in range(128):
+  magnitudeArray = []
+  angleArray = []
+  for j in range(64):
+    # Condition for axis 0
+    if j-1 <= 0 or j+1 >= 64:
+      if j-1 <= 0:
+        # Condition if first element
+        Gx = img[i][j+1] - 0
+      elif j + 1 >= len(img[0]):
+        Gx = 0 - img[i][j-1]
+    # Condition for first element
+    else:
+      Gx = img[i][j+1] - img[i][j-1]
+    
+    # Condition for axis 1
+    if i-1 <= 0 or i+1 >= 128:
+      if i-1 <= 0:
+        Gy = 0 - img[i+1][j]
+      elif i +1 >= 128:
+        Gy = img[i-1][j] - 0
+    else:
+      Gy = img[i-1][j] - img[i+1][j]
+
+    # Calculating magnitude
+    magnitude = math.sqrt(pow(Gx, 2) + pow(Gy, 2))
+    magnitudeArray.append(round(magnitude, 9))
+
+    # Calculating angle
+    if Gx == 0:
+      angle = math.degrees(0.0)
+    else:
+      angle = math.degrees(abs(math.atan(Gy / Gx)))
+    angleArray.append(round(angle, 9))
+  mag.append(magnitudeArray)
+  theta.append(angleArray)
+```
+
+
+```{python}
+mag = np.array(mag)
+theta = np.array(theta)
+
+```
+
+```{r}
+hist(py$mag)
+hist(py$theta)
+```
+
+```{python}
+plt.figure(figsize=(15, 8))
+plt.imshow(theta, cmap="gray")
+plt.axis("off")
+plt.show()
+```
+
+```{python}
+number_of_bins = 9
+step_size = 180 / number_of_bins
+```
+
+```{python}
+#Function to calculate the value of centre of jth bin
+def calculate_j(angle):
+  temp = (angle / step_size) - 0.5
+  j = math.floor(temp)
+  return j
+```
+
+```{python}
+# Function to calculate the value of jth bin
+def calculate_Cj(j):
+  Cj = step_size * (j + 0.5)
+  return round(Cj, 9)
+```
+
+```{python}
+def calculate_value_j(magnitude, angle, j):
+  Cj = calculate_Cj(j+1)
+  Vj = magnitude * ((Cj - angle) / step_size)
+  return round(Vj, 9)
+```
+
+
+```{python}
+histogram_points_nine = []
+
+for i in range(0, 128, 8):
+  temp = []
+  for j in range(0, 64, 8):
+    magnitude_values = [[mag[i][x] for x in range(j, j+8)] for i in range(i,i+8)]
+    angle_values = [[theta[i][x] for x in range(j, j+8)] for i in range(i, i+8)]
+    for k in range(len(magnitude_values)):
+      for l in range(len(magnitude_values[0])):
+        bins = [0.0 for _ in range(number_of_bins)]
+        value_j = calculate_j(angle_values[k][l])
+        Vj = calculate_value_j(magnitude_values[k][l], angle_values[k][l], value_j)
+        Vj_1 = magnitude_values[k][l] - Vj
+        bins[value_j]+=Vj
+        bins[value_j+1]+=Vj_1
+        bins = [round(x, 9) for x in bins]
+    temp.append(bins)
+  histogram_points_nine.append(temp)
+  
+
+print(len(histogram_points_nine))
+print(len(histogram_points_nine[0]))
+print(len(histogram_points_nine[0][0]))
+```
+
+```{python}
+epsilon = 1e-05
+
+feature_vectors = []
+for i in range(0, len(histogram_points_nine) - 1, 1):
+  temp = []
+  for j in range(0, len(histogram_points_nine[0]) - 1, 1):
+    values = [[histogram_points_nine[i][x] for x in range(j, j+2)] for i in range(i, i+2)]
+    final_vector = []
+    for k in values:
+      for l in k:
+        for m in l:
+          final_vector.append(m)
+    k = round(math.sqrt(sum([pow(x, 2) for x in final_vector])), 9)
+    final_vector = [round(x/(k + epsilon), 9) for x in final_vector]
+    temp.append(final_vector)
+  feature_vectors.append(temp)
+  
+print(len(feature_vectors))
+print(len(feature_vectors[0]))
+print(len(feature_vectors[0][0]))
+```
+
+
+```{python}
+img = imread("b_test_image_copy.jpg")
+plt.axis("off")
+plt.imshow(img)
+print(img.shape)
+
+resized_img = resize(img, (128*4, 64*4))
+plt.axis("off")
+plt.imshow(resized_img)
+print(resized_img.shape)
+
+
+fd, hog_image = hog(resized_img, orientations=9, pixels_per_cell=(8, 8),
+                	cells_per_block=(2, 2), visualize=True, channel_axis = 2 
+                	#multichannel=True
+                	)
+plt.axis("off")
+plt.imshow(hog_image, cmap="gray")
+plt.show()
+plt.savefig('b_hog.jpg')
+
+```
+
+
+## DO IT AGAIN
+```{python}
+img_2 = resize(color.rgb2gray(io.imread("b_hog.jpg")), (128, 64))
+#img_2 = resize(color.rgb2gray(io.imread("b_test_image_copy.jpg")), (128, 64))
+
+
+img_2 = np.array(img_2)
+
+mag_2 = []
+theta_2 = []
+for i in range(128):
+  magnitudeArray_2 = []
+  angleArray_2 = []
+  for j in range(64):
+    # Condition for axis 0
+    if j-1 <= 0 or j+1 >= 64:
+      if j-1 <= 0:
+        # Condition if first element
+        Gx = img_2[i][j+1] - 0
+      elif j + 1 >= len(img_2[0]):
+        Gx = 0 - img_2[i][j-1]
+    # Condition for first element
+    else:
+      Gx = img_2[i][j+1] - img_2[i][j-1]
+    
+    # Condition for axis 1
+    if i-1 <= 0 or i+1 >= 128:
+      if i-1 <= 0:
+        Gy = 0 - img_2[i+1][j]
+      elif i +1 >= 128:
+        Gy = img_2[i-1][j] - 0
+    else:
+      Gy = img_2[i-1][j] - img_2[i+1][j]
+
+    # Calculating magnitude
+    magnitude_2 = math.sqrt(pow(Gx, 2) + pow(Gy, 2))
+    magnitudeArray_2.append(round(magnitude_2, 9))
+
+    # Calculating angle
+    if Gx == 0:
+      angle_2 = math.degrees(0.0)
+    else:
+      angle_2 = math.degrees(abs(math.atan(Gy / Gx)))
+    angleArray_2.append(round(angle_2, 9))
+  mag_2.append(magnitudeArray_2)
+  theta_2.append(angleArray_2)
+  
+  
+
+```
+
+
+```{python}
+mag_2 = np.array(mag_2)
+theta_2 = np.array(theta_2)
+```
+
+```{r}
+hist(py$mag_2)
+hist(py$theta_2)
+```
+
+
+```{python}
+hog_df = pd.DataFrame({'mag': mag_2, 'theta': theta_2})
+```
+
+
+
+```{r}
+
+hog_df <-
+  data.frame(mag = py$mag_2,
+             theta = py$theta_2)
+
+ggplot(hog_df %>% filter(mag >= 0.05), aes(x = theta)) +
+  geom_histogram(#breaks = seq(0, 2*pi, length.out = 15), color = "white"
+    ) +
+  coord_polar(
+    #theta = "x", start = 3*pi/2, direction = -1
+    ) +
+  scale_x_continuous(
+    #breaks = c(0, pi/4, pi/2, 3*pi/4, pi, 5*pi/4, 3*pi/2, 7*pi/4), 
+                     #labels = c("0", "π/4", "π/2", "3π/4", "π", "5π/4", "3π/2", "7π/4"
+    ) +
+  labs(title = "Polar Plot of Gradients and Magnitudes",
+       fill = "Magnitude Range") +
+  theme_minimal()
+```
+
+
+

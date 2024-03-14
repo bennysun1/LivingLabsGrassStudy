@@ -6,6 +6,17 @@ title: "Python Try"
 reticulate::repl_python()
 ```
 
+
+```{r}
+library(reticulate)
+os <- import("os")
+plt <- import("matplotlib.pyplot as plt")
+os$listdir(".")
+```
+
+
+
+
 ```{python}
 import matplotlib.pyplot as plt
 %matplotlib inline
