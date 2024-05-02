@@ -47,9 +47,9 @@ print(resized_image.shape)
 ```
 
 ```{python}
-fig, hog_image = hog(resized_image, orientations=9, pixels_per_cell=(10, 10), 
+fig, hog_image = hog(resized_image, orientations=9, pixels_per_cell=(4, 4), 
                      feature_vector = True,
-                    cells_per_block=(10, 10), visualize=True, channel_axis=2 #multichannel=True
+                    cells_per_block=(4,4), visualize=True, channel_axis=2 #multichannel=True
 )
 ```
 
@@ -123,6 +123,7 @@ for r in range(1, 299):
 # store the paramters in columns
 hog_df = pd.DataFrame({'hog_mag_hyp': hog_mag_hyp, 'hog_gradient_angle': hog_gradient_angle})
 
+hog_mag_hyp.shape
 #print(hog_gradient_mag)
 plt.hist(hog_gradient_angle) 
 plt.title("histogram") 
