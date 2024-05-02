@@ -11,12 +11,14 @@ library(mapsapi)
 library(mapboxapi)
 library(magick)
 ```
+
 ```{r}
 key = "pk.eyJ1IjoiYmVubnlzdW4xIiwiYSI6ImNsczNuYTg2bjB6MWIybG11eWFsZWJrNjUifQ.8qFLlzNMxjmtULH1-NK3Nw"
 # mapboxapi::mb_access_token("pk.eyJ1IjoiYmVubnlzdW4xIiwiYSI6ImNsczNuYTg2bjB6MWIybG11eWFsZWJrNjUifQ.8qFLlzNMxjmtULH1-NK3Nw", install = TRUE)
 ```
 
 ## San Francisco, CA
+
 ```{r}
 # points_of_interest <- tibble::tibble(
 #   longitude = c(-122.527972, -122.526361, -122.384423, -122.355432),
@@ -34,9 +36,9 @@ map <- static_mapbox(
   style_url = "mapbox://styles/mapbox/satellite-v9",
   #username = "kwalkertcu",
   #overlay_markers = prepped_pois, 
-  width = 1200,
-  height = 800, 
-  image = T, latitude = 37.762493, longitude = -122.442878, zoom = 12
+  width = 300,
+  height = 200, 
+  image = T, latitude = 37.792004, longitude = -122.428079, zoom = 12
 )
 
 
@@ -44,8 +46,6 @@ map
 
 magick::image_write(map, "san_francisco_scale_zoom_12.png")
 ```
-
-
 
 ## Salt Lake City, UT
 
@@ -111,10 +111,8 @@ map
 magick::image_write(map, "detroit_zoom_12.png")
 ```
 
-
-
-
 ## HOG SF
+
 ```{r}
 # library(OpenImageR)
 # #path = system.file("~/repos/LivingLabsGrassStudy/san_francisco_zoom_12.png", "1.png", package = "OpenImageR")
@@ -170,8 +168,6 @@ magick::image_write(map, "detroit_zoom_12.png")
 # image.dlib::image_fhog(image, cell_size = 8, filter_rows_padding = 1, filter_cols_padding = 1)
 ```
 
-
-
 ```{r}
 # reticulate::py_install("matplotlib")
 # reticulate::py_install("scikit-image")
@@ -195,7 +191,6 @@ magick::image_write(map, "detroit_zoom_12.png")
 # from skimage.feature import hog
 # from skimage import data, exposure
 ```
-
 
 ```{python}
 image = imread('color_example.jpg')
@@ -256,7 +251,6 @@ use_python("~/.virtualenvs/r-reticulate/bin/python")
 #/Users/bensunshine/Library/r-miniconda-arm64/envs/r-reticulate
 ```
 
-
 ```{r}
 library(reticulate)
 
@@ -278,8 +272,6 @@ py_run_string("from skimage.io import imread, imshow")
 reticulate::py_last_error()
 ```
 
-
-
 ```{r}
 library(reticulate)
 
@@ -295,16 +287,15 @@ py_config()
 
 torch <- import("torch")
 ```
+
 ```{r}
 py_config()
 ```
+
 ```{python}
 from skimage.io import imread, imshow
 
 ```
-
-
-
 
 ```{python}
 import sys
@@ -314,6 +305,3 @@ from skimage.transform import resize
 from skimage.feature import hog
 from skimage import data, exposure
 ```
-
-
-
