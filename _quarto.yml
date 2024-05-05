@@ -8,7 +8,10 @@ book:
   date: "1/25/2024"
   chapters:
     - index.qmd
-    - hog.qmd
+    - introduction.qmd
+    - methods.qmd
+    - results.qmd
+    - conclusion.qmd
 
 bibliography: references.bib
 

@@ -193,115 +193,45 @@ magick::image_write(map, "detroit_zoom_12.png")
 ```
 
 ```{python}
-image = imread('color_example.jpg')
-imshow(image)
-print(image.shape)
-
-resized_image = resize(image, (100,150))
-imshow(resized_image)
-print(resized_image.shape)
-
-
-fig, hog_image = hog(resized_image, orientations=9, pixels_per_cell=(8, 8), 
-                     feature_vector = True,
-                    cells_per_block=(2, 2), visualize=True, channel_axis=2 #multichannel=True
-)
-
-import math
-
-hog_gradient_angle = []
-
-for r in range(1, 99):
-    for c in range(1, 149):
-        gx = hog_image[r,c+1] - hog_image[r,c-1]
-        gy = hog_image[r+1,c] - hog_image[r-1,c]
-        
-        if gx == 0:
-            if gy == 0:
-                continue
-            else:
-                angle = math.pi / 2
-        else:
-            angle = math.atan(gy/gx)
-        
-        hog_gradient_angle.append(angle)
-
-#print(hog_gradient_mag)
-plt.hist(hog_gradient_angle) 
-plt.title("histogram") 
-plt.show()
+# image = imread('color_example.jpg')
+# imshow(image)
+# print(image.shape)
+# 
+# resized_image = resize(image, (100,150))
+# imshow(resized_image)
+# print(resized_image.shape)
+# 
+# 
+# fig, hog_image = hog(resized_image, orientations=9, pixels_per_cell=(8, 8), 
+#                      feature_vector = True,
+#                     cells_per_block=(2, 2), visualize=True, channel_axis=2 #multichannel=True
+# )
+# 
+# import math
+# 
+# hog_gradient_angle = []
+# 
+# for r in range(1, 99):
+#     for c in range(1, 149):
+#         gx = hog_image[r,c+1] - hog_image[r,c-1]
+#         gy = hog_image[r+1,c] - hog_image[r-1,c]
+#         
+#         if gx == 0:
+#             if gy == 0:
+#                 continue
+#             else:
+#                 angle = math.pi / 2
+#         else:
+#             angle = math.atan(gy/gx)
+#         
+#         hog_gradient_angle.append(angle)
+# 
+# #print(hog_gradient_mag)
+# plt.hist(hog_gradient_angle) 
+# plt.title("histogram") 
+# plt.show()
 ```
 
-```{r}
-virtualenv_list()
-py_install(c("scikit-image", "matplotlib"))
 
-library(reticulate)
-conda_list()
-use_miniconda("/Users/bensunshine/Library/r-miniconda-arm64/envs/r-reticulate/bin/python")
-use_condaenv("~/anaconda3/bin")
 
-use_python("~/.virtualenvs/r-reticulate/bin/python")
-use_python("/usr/local/bin/python3.11", required = TRUE)
 
-use_python("~/.virtualenvs/r-reticulate/bin/python")
-
-#use_python("/Users/bensunshine/anaconda3/envs/livingLabsGrassStudy/bin/python")
-
-#/Users/bensunshine/Library/r-miniconda-arm64/envs/r-reticulate
-```
-
-```{r}
-library(reticulate)
-
-# indicate that we want to use a specific virtualenv
-virtualenv_list()
-use_virtualenv("r-reticulate", required = T)
-virtualenv_install("r-reticulate", "skimage")
-
-#sys <- import("sys")
-#skimage_io <- import("skimage.io")
-scikit_img <- import("scikit-image")
-skimage <- import("skimage.io", convert=FALSE)
-
-py_list_packages()
-use_python("r-reticulate")
-py_install("scikit-image")
-py_run_string("from skimage.io import imread, imshow")
-
-reticulate::py_last_error()
-```
-
-```{r}
-library(reticulate)
-
-virtualenv_create(
-  envname  = "torch",
-  python   = "/usr/local/bin/python3.8",
-  packages = c("numpy", "torch"),
-  system_site_packages = FALSE
-)
-
-use_virtualenv("torch", required = TRUE)
-py_config()
-
-torch <- import("torch")
-```
-
-```{r}
-py_config()
-```
-
-```{python}
-from skimage.io import imread, imshow
-
-```
-
-```{python}
-import sys
-
-from skimage.io import imread, imshow
-from skimage.transform import resize
-from skimage.feature import hog
-from skimage import data, exposure
-```

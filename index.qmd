@@ -1,11 +1,7 @@
 ---
-title: "Introduction"
+title: "Abstract"
+author: "Ben Sunshine"
+indent: true
 ---
 
-## Forward
-https://lear.inrialpes.fr/people/triggs/pubs/Dalal-cvpr05.pdf
-
-  The first step involves computing the image gradients, which, in this case, represent the variations in grass lay direction. The algorithm captures both the horizontal and vertical gradients in the images obtained from on-the-ground measurements and aerial photography.
-  The gradient magnitudes and directions are computed to quantify the strength and orientation of the grass lay variations. These gradients indicate the patterns and directions in which the grass lays. The image is divided then into small cells. Each cell serves as a localized region for constructing histograms of gradient directions. Within each cell, the histogram bins the gradient directions based on the observed orientations of the grass lay. This provides a representation of the predominant directions of the grass within that specific region.
-  To account for variations in lighting, terrain, and other factors, the histograms are grouped into larger blocks. Normalization techniques, such as L2 normalization, are applied to enhance the robustness of the algorithm to changes in conditions. The final HOG descriptor is formed by concatenating the normalized block histograms. This descriptor represents the distribution of grass lay orientations across the analyzed image.
-  HOG descriptors obtained from both on-the-ground and aerial data serve as crucial features for training machine learning classifiers. The trained classifier can then distinguish between different patterns of grass lay direction, assisting in the analysis of the relationship between wind and grass lay.
+|       In Alaska, indigenous hunters and gatherers have long observed the alignment of grass and plants after the growing season as indicative of prevailing wind directions and shifts. Due to the remote and harsh conditions, traditional weather stations are absent to measure shifts in historically predominant wind directions. In a previous study Dr. Jon Rosales (Environmental Studies) and his team collected images of grass lay from St. Lawrence Island, Alaska, and manually attempted to measure grass lay angles. This project investigated the Histogram of Oriented Gradients (HOG) algorithm to automate this process. We applied the algorithm to various images of grass fields sampled from the internet to test its viability.

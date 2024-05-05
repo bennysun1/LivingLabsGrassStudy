@@ -1,0 +1,21 @@
+---
+title: "Methods"
+author: "Ben Sunshine"
+---
+
+|       The HOG algorithm, introduced by Navneet Dalal and Bill Triggs in 2005, is a popular technique for object detection in images. The algorithm can identify gradient magnitudes and angles at each pixel in an image. The preliminary steps involved using the ‘skimage’ library from Python to preprocess the images of interest. This included loading, resizing, and converting the images to grayscale. Images were rescaled to standardize their resolutions and preserve their aspect ratios to prevent distortion that could affect the accuracy of angle identification. Converting the images to grayscale was necessary because it allowed for focusing on a single channel to represent pixel intensity, rather than three channels (red, green, and blue).
+|       The HOG features were then computed for the resized images, which involved calculating the gradient magnitudes and angles at each pixel. The gradient magnitude at each pixel is comprised of the gradients in the ‘x’ and ‘y’ directions. The gradient in the x-direction is computed by subtracting the pixel value to the left of pixel of interest is subtracted from the pixel value to its right. Similarly, the gradient in the y-direction is calculated by pixel value below the pixel of interest is subtracted from the pixel value above the pixel of interest. Now to calculate the gradient magnitude at the pixel of interest, the Pythagorean Theorem can be utilized where the gradient magnitude is equal to the square root of the x-gradient squared plus the y-gradient squared. The angle at a given pixel can be calculated by taking the inverse tangent of its y-gradient divided by its x-gradient. It is important to note all angles produced by this algorithm are between zero and one hundred eighty degrees. This occurs, because the inverse tangent function used for calculating a given pixel’s angle cannot distinguish between all four quadrants. OR:
+
+<div align="center">
+#$Magnitude(\mu)=\sqrt{G_{x}^{2} + G_{y}^{2}}$
+
+
+#$Angle(\Theta)=\arctan({\frac{G_{y}^{2}}{G_{x}^{2}}})$
+<div>
+
+
+
+<div align="left">
+|       Next, histograms are constructed to visualize the distribution of gradient magnitudes and angles. Two different techniques for creating gradient angle histograms were implemented. The second scheme uses the same number of bins, but factors in a pixel’s gradient magnitude and its allocation to its bordering bins. Here, the weight assigned to each bin is calculated by the angle’s deviation from the center of its central bin. This approach allows for a more representative histogram which splits angles between bins and takes their magnitudes into account.<div>
+
+|       Lastly, these histograms are converted to polar histograms so the primary angles can be visualized and compared to their original images.

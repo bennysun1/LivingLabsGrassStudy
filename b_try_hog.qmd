@@ -4,13 +4,14 @@ author: "Ben Sunshine"
 editor_options: 
   chunk_output_type: console
 ---
-
+## Load R Packages
 ```{r load_r_packages}
 library(reticulate)
 library(tidyverse)
 Sys.which("python")
 ```
 
+## Load Python Libraries
 ```{python load_python_modules}
 
 import matplotlib.pyplot as plt
@@ -36,39 +37,41 @@ import numpy as np
 
 ```
 
+
+## Read, Grayscale, Resize Image
 ```{python}
 # TODO: DONT CHANGE HEIGHT AND WIDTH
-img = color.rgb2gray(io.imread("grass_image2.jpg"))
+img = color.rgb2gray(io.imread("images/grass_image2.jpg"))
 
-# img = color.rgb2gray(io.imread("b_test_image_copy.jpg"))
-#img = color.rgb2gray(io.imread("long_grass_sample.jpeg"))
-#img = color.rgb2gray(io.imread("diagnol_lines.jpg"))
+# img = color.rgb2gray(io.imread("images/b_test_image_copy.jpg"))
+#img = color.rgb2gray(io.imread("images/long_grass_sample.jpeg"))
+#img = color.rgb2gray(io.imread("images/diagnol_lines.jpg"))
 
-#img = color.rgb2gray(io.imread("san_francisco_scale_zoom_12.png"))
+#img = color.rgb2gray(io.imread("images/san_francisco_scale_zoom_12.png"))
 
-#img = color.rgb2gray(io.imread("diagnol_lines_flipped.jpg"))
-#img = color.rgb2gray(io.imread("long_grass_sample_cropped.jpg"))
+#img = color.rgb2gray(io.imread("images/diagnol_lines_flipped.jpg"))
+#img = color.rgb2gray(io.imread("images/long_grass_sample_cropped.jpg"))
 
 # aerial rotated image
-#img = color.rgb2gray(io.imread("living_lab_aerial/aerial_grass_living_lab_rotated.jpg"))
+#img = color.rgb2gray(io.imread("images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg"))
 
 # zoomed internet photo
-#img = color.rgb2gray(io.imread("dead_grass_zoom.jpeg"))
+#img = color.rgb2gray(io.imread("images/dead_grass_zoom.jpeg"))
 
 
 # zoomed in 11
-#img = color.rgb2gray(io.imread("living_lab_aerial/LL_zoomed_in_11.jpg"))
+#img = color.rgb2gray(io.imread("images/living_lab_aerial/LL_zoomed_in_11.jpg"))
 
 # zoomed in 12
-#img = color.rgb2gray(io.imread("living_lab_aerial/LL_zoomed_in_12.jpg"))
+#img = color.rgb2gray(io.imread("images/living_lab_aerial/LL_zoomed_in_12.jpg"))
 
 # zoomed in 16
-#img = color.rgb2gray(io.imread("living_lab_aerial/LL_zoomed_in_16_side.jpg"))
+#img = color.rgb2gray(io.imread("images/living_lab_aerial/LL_zoomed_in_16_side.jpg"))
 
 
 
 # real one
-#img = color.rgb2gray(io.imread("living_labs_real_grass_image.jpg"))
+#img = color.rgb2gray(io.imread("images/living_labs_real_grass_image.jpg"))
 
 
 
@@ -81,6 +84,7 @@ aspect_ratio = img.shape[0]/img.shape[1]
 
 height = 200
 width = int(height/aspect_ratio)
+width = 300
 
 # height = 128
 # width = 192
@@ -100,7 +104,7 @@ plt.imshow(img)
 print(img.shape)
 
 ```
-
+## Plot Resized Gray Scale Image
 ```{python}
 plt.figure(figsize=(15, 8))
 plt.imshow(img, cmap="gray")
@@ -112,56 +116,7 @@ img = np.array(img)
 ```
 
 
-
-```{python}
-# calculate gradients and angles
-mag = []
-theta = []
-for i in range(height):
-  magnitudeArray = []
-  angleArray = []
-  for j in range(width):
-    # Condition for axis 0
-    if j-1 <= 0 or j+1 >= width:
-      if j-1 <= 0:
-        # Condition if first element
-        Gx = img[i][j+1] - 0
-      elif j + 1 >= len(img[0]):
-        Gx = 0 - img[i][j-1]
-    # Condition for first element
-    else:
-      Gx = img[i][j+1] - img[i][j-1]
-    
-    # Condition for edge case height
-    if i-1 <= 0 or i+1 >= height:
-      if i-1 <= 0:
-        Gy = 0 - img[i+1][j]
-      elif i+1 >= height:
-        Gy = img[i-1][j] - 0
-    else:
-      Gy = img[i+1][j] - img[i-1][j]
-
-    # Calculating magnitude
-    magnitude = math.sqrt(pow(Gx, 2) + pow(Gy, 2))
-    magnitudeArray.append(round(magnitude, 9))
-
-    # Calculating angle
-    if Gx == 0:
-      angle = math.degrees(0.0)
-    else:
-      #angle = math.degrees(abs(math.atan(Gy / Gx)))
-      angle = math.degrees((math.atan(Gy / Gx)))
-      
-      # if the angle is negative, need to be between 0 and 360 degrees
-      if angle < 0:
-        #angle = angle + 360
-        angle = angle + 180
-
-    angleArray.append(round(angle, 9))
-  mag.append(magnitudeArray)
-  theta.append(angleArray)
-```
-
+## Collect Feature Vectors
 
 ```{python}
 import math
@@ -215,12 +170,12 @@ for i in range(height):
 ```
 
 
-
 ```{python}
 mag = np.array(mag)
 theta = np.array(theta)
 ```
 
+## Make HOG DF
 ```{r}
 hist(py$mag)
 hist(py$theta)
@@ -232,6 +187,8 @@ hog_df <- data.frame(mag = as.vector(py$mag),
 
 ```
 
+
+## Defining Function for Calculating HOG Neighbors
 ```{r}
 # Define the number of bins
 num_bins <- 9
@@ -273,7 +230,7 @@ bin_contributions[9]
 bin_contributions[1]
 
 
-hog_df <- data.frame(mag = as.vector(py$mag),
+contribution_hog_df <- data.frame(mag = as.vector(py$mag),
                      theta = as.vector((py$theta))) %>%
   mutate(radian = theta*(pi/180)) %>%
   filter(mag > 0.1) %>%
@@ -290,7 +247,7 @@ hog_df <- data.frame(mag = as.vector(py$mag),
          )
 
 # split_histo_df <- hog_df[4:ncol(hog_df)] %>%
-split_histo_df <- hog_df %>%
+split_histo_df <- contribution_hog_df %>%
   pivot_longer(names_to = "bin", values_to = "contribution", cols = 4:ncol(hog_df)) %>%
   mutate(bin = as.numeric(bin))
 
@@ -328,56 +285,13 @@ polar_split_plot <-
 
 polar_split_plot
 
-# Define the number of bins
-# num_bins <- 9
-# 
-# # Function to calculate the contributions to neighboring bins
-# calculate_bin_contributions <- function(angle, magnitude, num_bins) {
-#   bin_width <- 180 / num_bins
-#   contributions <- numeric(num_bins)
-#   
-#   # Find the central bin
-#   central_bin <- floor(angle / bin_width) %% num_bins
-#   
-#   # Calculate the contributions to neighboring bins
-#   weight <- (1 - abs((angle %% bin_width) / bin_width)) * magnitude
-#   
-#   # Determine the bin for each contribution
-#   bins <- (central_bin + c(-1, 0)) %% num_bins
-#   bins <- ifelse(bins == 0, num_bins, bins)  # Replace 0 with num_bins
-#   
-#   # Allocate contributions to bins
-#   contributions[bins[1]] <- weight
-#   contributions[bins[2]] <- magnitude - weight
-#   
-#   # Return a dataframe with columns for each bin
-#   bin_names <- sprintf("X%d", seq(0, 180 - bin_width, by = bin_width))
-#   bin_df <- data.frame(matrix(contributions, nrow = 1, byrow = TRUE, dimnames = list(NULL, bin_names)))
-#   
-#   return(bin_df)
-# }
-
-
-# # Sample data frame
-# hog_df <- data.frame(mag = c(13.6, 15.2, 10.5),
-#                      theta = c(36, 48, 72))
-# 
-# # Apply the function to each row of the data frame
-# bin_df_list <- mapply(calculate_bin_contributions, hog_df$theta, hog_df$mag, num_bins, SIMPLIFY = FALSE)
-# 
-# # Combine the list of dataframes into a single dataframe
-# result_df <- do.call(rbind, bin_df_list)
-# 
-# # Print the result
-# print(result_df)
-# 
 
 
 
 ```
 
 
-
+## Create Histogram Plots of Gradient Magnitudes and Angles
 ```{r}
 
 histogram_mag_plot <-
@@ -391,7 +305,7 @@ histogram_mag_plot <-
 
 histogram_mag_plot
 
-ggsave("grass2_magnitude_histogram.jpg", histogram_mag_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/grass2_magnitude_histogram.jpg", histogram_mag_plot, width = 6, height = 4, dpi = 300)
 
 histogram_theta_plot <-
   ggplot(hog_df, aes(x = theta)) +
@@ -404,20 +318,11 @@ histogram_theta_plot <-
 
 histogram_theta_plot
 
-ggsave("grass2_angles_histogram.jpg", histogram_theta_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/grass2_angles_histogram.jpg", histogram_theta_plot, width = 6, height = 4, dpi = 300)
 
 ```
 
-```{python}
-mag = np.array(mag)
-theta = np.array(theta)
-
-# mag_2.shape
-# # mag_2.shape
-# 
-# hog_df = pd.DataFrame({'mag': mag_2, 'theta': theta_2})
-```
-
+## Plot Magnitudes as Image
 ```{python}
 import matplotlib.pyplot as plt
 
@@ -432,6 +337,7 @@ plt.savefig("mag.png", dpi=300)
 
 
 ```
+
 
 ```{python}
 number_of_bins = 9
@@ -464,62 +370,56 @@ def calculate_value_j(magnitude, angle, j):
 ```{python}
 histogram_points_nine = []
 high_val = 10
-for i in range(0, height, high_val):
-  temp = []
-  for j in range(0, width, high_val):
-    magnitude_values = [[mag[i][x] for x in range(j, j+high_val)] for i in range(i,i+high_val)]
-    angle_values = [[theta[i][x] for x in range(j, j+high_val)] for i in range(i, i+high_val)]
-    for k in range(len(magnitude_values)):
-      for l in range(len(magnitude_values[0])):
-        bins = [0.0 for _ in range(number_of_bins)]
-        value_j = calculate_j(angle_values[k][l])
-        Vj = calculate_value_j(magnitude_values[k][l], angle_values[k][l], value_j)
-        Vj_1 = magnitude_values[k][l] - Vj
-        bins[value_j]+=Vj
-        bins[value_j+1]+=Vj_1
-        bins = [round(x, 9) for x in bins]
-    temp.append(bins)
-  histogram_points_nine.append(temp)
-
-print(len(histogram_points_nine))
-print(len(histogram_points_nine[0]))
-print(len(histogram_points_nine[0][0]))
+# for i in range(0, height, high_val):
+#   temp = []
+#   for j in range(0, width, high_val):
+#     magnitude_values = [[mag[i][x] for x in range(j, j+high_val)] for i in range(i,i+high_val)]
+#     angle_values = [[theta[i][x] for x in range(j, j+high_val)] for i in range(i, i+high_val)]
+#     for k in range(len(magnitude_values)):
+#       for l in range(len(magnitude_values[0])):
+#         bins = [0.0 for _ in range(number_of_bins)]
+#         value_j = calculate_j(angle_values[k][l])
+#         Vj = calculate_value_j(magnitude_values[k][l], angle_values[k][l], value_j)
+#         Vj_1 = magnitude_values[k][l] - Vj
+#         bins[value_j]+=Vj
+#         bins[value_j+1]+=Vj_1
+#         bins = [round(x, 9) for x in bins]
+#     temp.append(bins)
+#   histogram_points_nine.append(temp)
+# 
+# print(len(histogram_points_nine))
+# print(len(histogram_points_nine[0]))
+# print(len(histogram_points_nine[0][0]))
 ```
 
 ```{python}
 epsilon = 1e-05
 
-feature_vectors = []
-for i in range(0, len(histogram_points_nine) - 1, 1):
-  temp = []
-  for j in range(0, len(histogram_points_nine[0]) - 1, 1):
-    values = [[histogram_points_nine[i][x] for x in range(j, j+2)] for i in range(i, i+2)]
-    final_vector = []
-    for k in values:
-      for l in k:
-        for m in l:
-          final_vector.append(m)
-    k = round(math.sqrt(sum([pow(x, 2) for x in final_vector])), 9)
-    final_vector = [round(x/(k + epsilon), 9) for x in final_vector]
-    temp.append(final_vector)
-  feature_vectors.append(temp)
-  
-print(len(feature_vectors))
-print(len(feature_vectors[0]))
-print(len(feature_vectors[0][0]))
+# feature_vectors = []
+# for i in range(0, len(histogram_points_nine) - 1, 1):
+#   temp = []
+#   for j in range(0, len(histogram_points_nine[0]) - 1, 1):
+#     values = [[histogram_points_nine[i][x] for x in range(j, j+2)] for i in range(i, i+2)]
+#     final_vector = []
+#     for k in values:
+#       for l in k:
+#         for m in l:
+#           final_vector.append(m)
+#     k = round(math.sqrt(sum([pow(x, 2) for x in final_vector])), 9)
+#     final_vector = [round(x/(k + epsilon), 9) for x in final_vector]
+#     temp.append(final_vector)
+#   feature_vectors.append(temp)
+#   
+# print(len(feature_vectors))
+# print(len(feature_vectors[0]))
+# print(len(feature_vectors[0][0]))
 ```
 
 
-
-```{r}
-mag_angle_df<- py$df_angles_gradients
-
-hist(mag_angle_df$theta)
-```
-
+## Generate HOG Image 
 ```{python}
-img = imread("living_lab_aerial/aerial_grass_living_lab_rotated.jpg")
-img = color.rgb2gray(io.imread("grass_image2.jpg"))
+img = imread("images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg")
+img = color.rgb2gray(io.imread("images/grass_image2.jpg"))
 
 aspect_ratio = img.shape[0]/img.shape[1]
 
@@ -548,145 +448,13 @@ fd, hog_image = hog(resized_img, orientations=9, pixels_per_cell=(8, 8),
 plt.axis("off")
 plt.imshow(hog_image, cmap="gray")
 plt.show()
-plt.savefig('grass2_image_hog.jpg')
+plt.savefig('images/plots/grass2_image_hog.jpg')
 
 ```
 
+
+## Polar Plot of Angles from Standard HOG
 ```{r}
-#py$hog_image
-
-
-```
-
-## DO IT AGAIN
-
-```{python}
-## ORIGINAL THAT DIDNT WORK WHEN CREATING A DF!!!
-
-# img_2 = resize(color.rgb2gray(io.imread("b_hog.jpg")), (128, 64))
-# #img_2 = resize(color.rgb2gray(io.imread("b_test_image_copy.jpg")), (128, 64))
-# 
-# 
-# img_2 = np.array(img_2)
-# 
-# mag_2 = []
-# theta_2 = []
-# for i in range(128):
-#   magnitudeArray_2 = []
-#   angleArray_2 = []
-#   for j in range(64):
-#     # Condition for axis 0
-#     if j-1 <= 0 or j+1 >= 64:
-#       if j-1 <= 0:
-#         # Condition if first element
-#         Gx = img_2[i][j+1] - 0
-#       elif j + 1 >= len(img_2[0]):
-#         Gx = 0 - img_2[i][j-1]
-#     # Condition for first element
-#     else:
-#       Gx = img_2[i][j+1] - img_2[i][j-1]
-#     
-#     # Condition for axis 1
-#     if i-1 <= 0 or i+1 >= 128:
-#       if i-1 <= 0:
-#         Gy = 0 - img_2[i+1][j]
-#       elif i +1 >= 128:
-#         Gy = img_2[i-1][j] - 0
-#     else:
-#       Gy = img_2[i-1][j] - img_2[i+1][j]
-# 
-#     # Calculating magnitude
-#     magnitude_2 = math.sqrt(pow(Gx, 2) + pow(Gy, 2))
-#     magnitudeArray_2.append(round(magnitude_2, 9))
-#     
-# 
-#     # Calculating angle
-#     if Gx == 0:
-#       angle_2 = math.degrees(0.0)
-#     else:
-#       angle_2 = math.degrees(abs(math.atan(Gy / Gx)))
-#     angleArray_2.append(round(angle_2, 9))
-# 
-#     
-#   mag_2.append(magnitudeArray_2)
-#   theta_2.append(angleArray_2)
-  
-  
-```
-
-```{python}
-# img_2 = resize(color.rgb2gray(io.imread("grass_image_hog.jpg")), (height, width))
-# #img_2 = io.imread("b_hog.jpg")
-# 
-# plt.imshow(img_2, cmap="gray")
-# #img_2 = resize(color.rgb2gray(io.imread("b_test_image_copy.jpg")), (128, 64))
-# 
-# 
-# img_2 = np.array(img_2)
-# 
-# mag_2 = []
-# theta_2 = []
-# for i in range(height):
-#   # magnitudeArray_2 = []
-#   # angleArray_2 = []
-#   for j in range(width):
-#     # Condition for axis 0
-#     if j-1 <= 0 or j+1 >= width:
-#       if j-1 <= 0:
-#         # Condition if first element
-#         Gx = img_2[i][j+1] - 0
-#       elif j + 1 >= len(img_2[0]):
-#         Gx = 0 - img_2[i][j-1]
-#     # Condition for first element
-#     else:
-#       Gx = img_2[i][j+1] - img_2[i][j-1]
-#     
-#     # Condition for axis 1
-#     if i-1 <= 0 or i+1 >= height:
-#       if i-1 <= 0:
-#         Gy = 0 - img_2[i+1][j]
-#       elif i +1 >= height:
-#         Gy = img_2[i-1][j] - 0
-#     else:
-#       Gy = img_2[i-1][j] - img_2[i+1][j]
-# 
-#     # Calculating magnitude
-#     magnitude_2 = math.sqrt(pow(Gx, 2) + pow(Gy, 2))
-#     #magnitudeArray_2.append(round(magnitude_2, 9))
-#     mag_2.append(round(magnitude_2, 9))
-# 
-#     # Calculating angle
-#     if Gx == 0:
-#       angle_2 = math.degrees(0.0)
-#     else:
-#       angle_2 = math.degrees(abs(math.atan(Gy / Gx)))
-#     #angleArray_2.append(round(angle_2, 9))
-#     theta_2.append(round(angle_2, 9))
-    
-  #mag_2.append(magnitudeArray_2)
-  #theta_2.append(angleArray_2)
-  
-  
-```
-
-```{python}
-# mag_2 = np.array(mag_2)
-# theta_2 = np.array(theta_2)
-# 
-# mag_2.shape
-```
-
-```{r}
-# hist(py$mag_2)
-# hist(py$theta_2)
-```
-
-```{python}
-#hog_df = pd.DataFrame({'mag': mag_2, 'theta': theta_2})
-```
-
-```{r}
-## TODO: Make Degrees, add cardinal directions
 grass2_polar_plot <-
 ggplot(hog_df %>% filter(mag >= 0.1), 
        aes(x = radian)) +
@@ -709,12 +477,14 @@ grass2_polar_plot
 
 #ggsave("_polar_plot.jpg", polar_plot, width = 6, height = 4, dpi = 300)
 
-all_plots <- ggpubr::ggarrange(diaganol_polar_plot, sf_polar_plot, grass2_polar_plot, aerial_ll_polar_plot)
+#all_plots <- ggpubr::ggarrange(diaganol_polar_plot, sf_polar_plot, grass2_polar_plot, aerial_ll_polar_plot)
 
-ggsave("results_all_plots.jpg", all_plots, width = 7, height = 7)
+#ggsave("images/plots/results_all_plots.jpg", all_plots, width = 7, height = 7)
 
 ```
 
+
+## HOG Image of Internet Grass
 ```{python}
 from skimage import color, io, exposure
 from skimage.transform import resize
@@ -722,7 +492,7 @@ import matplotlib.pyplot as plt
 from skimage.feature import hog
 
 # Load the image and preprocess it
-img = color.rgb2gray(io.imread("grass_image2.jpg"))
+img = color.rgb2gray(io.imread("images/grass_image2.jpg"))
 # img = color.rgb2gray(io.imread("diagnol_lines_flipped.jpg"))
 
 aspect_ratio = img.shape[0] / img.shape[1]
@@ -758,7 +528,7 @@ hog_color_rescaled = exposure.rescale_intensity(hog_image, in_range=(0, 10))
 ax3.imshow(hog_color_rescaled, cmap=plt.cm.gray)
 ax3.set_title('Histogram of Oriented Gradients (HOG)')
 
-plt.savefig("rescaled_grass2_image_hog.png", dpi=300)
+plt.savefig("images/plots/rescaled_grass2_image_hog.png", dpi=300)
 
 plt.show()
 
@@ -773,7 +543,7 @@ import matplotlib.pyplot as plt
 from skimage.feature import hog
 
 # Load the image and preprocess it
-img = io.imread("grass_image2.jpg")
+img = io.imread("images/grass_image2.jpg")
 # img = color.rgb2gray(io.imread("diagnol_lines_flipped.jpg"))
 
 aspect_ratio = img.shape[0] / img.shape[1]
@@ -809,18 +579,18 @@ ax3.imshow(hog_color_rescaled, cmap=plt.cm.gray)
 ax3.set_title('Histogram of Oriented Gradients (HOG) Image')
 
 # Plot the histogram of oriented gradients
-angle_hist = io.imread("grass2_angles_histogram.jpg")
-resized_hist = resize(angle_hist, (height, width))
-ax4.imshow(resized_hist, cmap=plt.cm.gray)
-ax4.set_title('Angle Histogram')
+# angle_hist = io.imread("images/grass2_angles_histogram.jpg")
+# resized_hist = resize(angle_hist, (height, width))
+# ax4.imshow(resized_hist, cmap=plt.cm.gray)
+# ax4.set_title('Angle Histogram')
+# 
+# # Plot the polar plot
+# polar_plot = io.imread("images/grass2_polar_plot.jpg")
+# resized_polar = resize(polar_plot, (height, width))
+# ax5.imshow(resized_polar, cmap=plt.cm.gray)
+# ax5.set_title('Polar Plot')
 
-# Plot the polar plot
-polar_plot = io.imread("grass2_polar_plot.jpg")
-resized_polar = resize(polar_plot, (height, width))
-ax5.imshow(resized_polar, cmap=plt.cm.gray)
-ax5.set_title('Polar Plot')
-
-plt.savefig("rescaled_grass2_image_hog.png", dpi=300)
+plt.savefig("images/plots/rescaled_grass2_image_hog.png", dpi=300)
 
 plt.show()
 
@@ -833,7 +603,7 @@ plt.show()
 ## Titus Flip
 
 ```{python}
-image = imread('TitusFlip.jpg')
+image = imread('images/TitusFlip.jpg')
 imshow(image)
 print(image.shape)
 resized_image = resize(image, (300, 400))
@@ -855,7 +625,7 @@ ax2.imshow(hog_color_rescaled, cmap=plt.cm.gray)
 ax2.set_title('Histogram of Oriented Gradients (HOG)')
 
 # store to file
-plt.savefig("titus_flip_example_hog.png", dpi=300)
+plt.savefig("images/plots/titus_flip_example_hog.png", dpi=300)
 
 plt.show()
 ```

@@ -29,16 +29,6 @@
   \usepackage[]{microtype}
   \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\makeatletter
-\@ifundefined{KOMAClassName}{% if non-KOMA class
-  \IfFileExists{parskip.sty}{%
-    \usepackage{parskip}
-  }{% else
-    \setlength{\parindent}{0pt}
-    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
-}{% if KOMA class
-  \KOMAoptions{parskip=half}}
-\makeatother
 \usepackage{xcolor}
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \setcounter{secnumdepth}{5}
@@ -155,7 +145,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, interior hidden, sharp corners, frame hidden, breakable, enhanced]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, sharp corners, interior hidden, breakable, boxrule=0pt, enhanced, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -165,45 +155,114 @@
 }
 \bookmarksetup{startatroot}
 
-\hypertarget{introduction}{%
-\chapter{Introduction}\label{introduction}}
+\hypertarget{abstract}{%
+\chapter{Abstract}\label{abstract}}
 
-\hypertarget{forward}{%
-\section{Forward}\label{forward}}
-
-https://lear.inrialpes.fr/people/triggs/pubs/Dalal-cvpr05.pdf
-
-The first step involves computing the image gradients, which, in this
-case, represent the variations in grass lay direction. The algorithm
-captures both the horizontal and vertical gradients in the images
-obtained from on-the-ground measurements and aerial photography. The
-gradient magnitudes and directions are computed to quantify the strength
-and orientation of the grass lay variations. These gradients indicate
-the patterns and directions in which the grass lays. The image is
-divided then into small cells. Each cell serves as a localized region
-for constructing histograms of gradient directions. Within each cell,
-the histogram bins the gradient directions based on the observed
-orientations of the grass lay. This provides a representation of the
-predominant directions of the grass within that specific region. To
-account for variations in lighting, terrain, and other factors, the
-histograms are grouped into larger blocks. Normalization techniques,
-such as L2 normalization, are applied to enhance the robustness of the
-algorithm to changes in conditions. The final HOG descriptor is formed
-by concatenating the normalized block histograms. This descriptor
-represents the distribution of grass lay orientations across the
-analyzed image. HOG descriptors obtained from both on-the-ground and
-aerial data serve as crucial features for training machine learning
-classifiers. The trained classifier can then distinguish between
-different patterns of grass lay direction, assisting in the analysis of
-the relationship between wind and grass lay.
+~~~~~~In Alaska, indigenous hunters and gatherers have long observed the
+alignment of grass and plants after the growing season as indicative of
+prevailing wind directions and shifts. Due to the remote and harsh
+conditions, traditional weather stations are absent to measure shifts in
+historically predominant wind directions. In a previous study Dr.~Jon
+Rosales (Environmental Studies) and his team collected images of grass
+lay from St.~Lawrence Island, Alaska, and manually attempted to measure
+grass lay angles. This project investigated the Histogram of Oriented
+Gradients (HOG) algorithm to automate this process. We applied the
+algorithm to various images of grass fields sampled from the internet to
+test its viability.
 
 \bookmarksetup{startatroot}
 
-\hypertarget{hogs}{%
-\chapter{HOGs}\label{hogs}}
+\hypertarget{introduction}{%
+\chapter{Introduction}\label{introduction}}
 
-\hypertarget{historgram-of-gradients}{%
-\section{Historgram of Gradients}\label{historgram-of-gradients}}
+~~~~~~Subsistence-oriented indigenous communities across Alaska rely
+heavily on Traditional Ecological Knowledge (TEK), a holistic
+understanding of their environment acquired through generations of
+observation and cultural transmission. Among the Anishinaabek tradition,
+sweetgrass symbolizes wisdom and knowledge, passed down from elders to
+younger generations. Indigenous hunters and gatherers have long observed
+the alignment of grass and plants after the growing season as indicative
+of prevailing wind directions. Predominant wind direction serve a
+crucial role to subsistence practitioners when hunting, fishing,
+settling, and keeping track of changing weather. On islands like
+St.~Lawrence Island in Savoonga, AK, natives have observed a shift from
+historically predominant northerly wind patterns to southerly and
+easterly and dominated winds. This hypothesis has not yet been
+confirmed, due to the absence of weather stations.\\
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}This
+research project seeks to reinforce Traditional Ecological Knowledge
+(TEK) with Scientific Ecological Knowledge (SEK) to develop our
+understanding of Alaskan indigenous wisdom and its correlation with
+modern scientific findings. By employing advanced image processing and
+machine learning techniques on imaging data obtained from the Living
+Laboratory at St.~Lawrence University, we aim to utilize a Histogram of
+Oriented Gradients (HOG) algorithm to enhance the methodology of data
+collection and measure the predominant direction in which grass lays
+after its growing season. This interdisciplinary approach not only
+deepens our comprehension of indigenous knowledge systems but also sheds
+light on environmental dynamics and climate change impacts in remote
+regions.
+
+\bookmarksetup{startatroot}
+
+\hypertarget{methods}{%
+\chapter{Methods}\label{methods}}
+
+~~~~~~The HOG algorithm, introduced by Navneet Dalal and Bill Triggs in
+2005, is a popular technique for object detection in images. The
+algorithm can identify gradient magnitudes and angles at each pixel in
+an image. The preliminary steps involved using the `skimage' library
+from Python to preprocess the images of interest. This included loading,
+resizing, and converting the images to grayscale. Images were rescaled
+to standardize their resolutions and preserve their aspect ratios to
+prevent distortion that could affect the accuracy of angle
+identification. Converting the images to grayscale was necessary because
+it allowed for focusing on a single channel to represent pixel
+intensity, rather than three channels (red, green, and blue).\\
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}The
+HOG features were then computed for the resized images, which involved
+calculating the gradient magnitudes and angles at each pixel. The
+gradient magnitude at each pixel is comprised of the gradients in the
+`x' and `y' directions. The gradient in the x-direction is computed by
+subtracting the pixel value to the left of pixel of interest is
+subtracted from the pixel value to its right. Similarly, the gradient in
+the y-direction is calculated by pixel value below the pixel of interest
+is subtracted from the pixel value above the pixel of interest. Now to
+calculate the gradient magnitude at the pixel of interest, the
+Pythagorean Theorem can be utilized where the gradient magnitude is
+equal to the square root of the x-gradient squared plus the y-gradient
+squared. The angle at a given pixel can be calculated by taking the
+inverse tangent of its y-gradient divided by its x-gradient. It is
+important to note all angles produced by this algorithm are between zero
+and one hundred eighty degrees. This occurs, because the inverse tangent
+function used for calculating a given pixel's angle cannot distinguish
+between all four quadrants. OR:
+
+\(Magnitude(\mu)=\sqrt{G_{x}^{2} + G_{y}^{2}}\)
+
+\(Angle(\Theta)=\arctan({\frac{G_{y}^{2}}{G_{x}^{2}}})\)
+
+~~~~~~Next, histograms are constructed to visualize the distribution of
+gradient magnitudes and angles. Two different techniques for creating
+gradient angle histograms were implemented. The second scheme uses the
+same number of bins, but factors in a pixel's gradient magnitude and its
+allocation to its bordering bins. Here, the weight assigned to each bin
+is calculated by the angle's deviation from the center of its central
+bin. This approach allows for a more representative histogram which
+splits angles between bins and takes their magnitudes into account.
+
+~~~~~~Lastly, these histograms are converted to polar histograms so the
+primary angles can be visualized and compared to their original images.
+
+\bookmarksetup{startatroot}
+
+\hypertarget{results}{%
+\chapter{Results}\label{results}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{conclusion}{%
+\chapter{Conclusion}\label{conclusion}}
 
 
 
