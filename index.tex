@@ -145,7 +145,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, sharp corners, interior hidden, breakable, boxrule=0pt, enhanced, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, breakable, interior hidden, enhanced, sharp corners, frame hidden]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -238,9 +238,9 @@ and one hundred eighty degrees. This occurs, because the inverse tangent
 function used for calculating a given pixel's angle cannot distinguish
 between all four quadrants. OR:
 
-\(Magnitude(\mu)=\sqrt{G_{x}^{2} + G_{y}^{2}}\)
+\#\(Magnitude(\mu)=\sqrt{G_{x}^{2} + G_{y}^{2}}\)
 
-\(Angle(\Theta)=\arctan({\frac{G_{y}^{2}}{G_{x}^{2}}})\)
+\#\(Angle(\Theta)=\arctan({\frac{G_{y}^{2}}{G_{x}^{2}}})\)
 
 ~~~~~~Next, histograms are constructed to visualize the distribution of
 gradient magnitudes and angles. Two different techniques for creating
