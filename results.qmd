@@ -104,7 +104,7 @@ import numpy as np
 
 ```
 
-## Read, Grayscale, Resize Image
+## Collect HOG Feature
 
 ```{python}
 img_list = []
@@ -283,7 +283,8 @@ plt.savefig("mag.png", dpi=300)
 ```{r}
 
 diagonal_histogram_mag_plot <-
-  ggplot(standard_df_list[[1]], aes(x = mag)) +
+  ggplot(standard_df_list[[1]], 
+         aes(x = mag)) +
   geom_histogram(colour = "black", fill = "lightblue") +
   scale_x_continuous() + 
   labs(x = "Gradient Magnitude", 
@@ -302,7 +303,8 @@ ggsave("images/plots/diagonal_histogram_mag_plot.jpg", diagonal_histogram_mag_pl
 
 
 diagonal_histogram_theta_plot <-
-  ggplot(standard_df_list[[1]], aes(x = theta)) +
+  ggplot(standard_df_list[[1]], 
+         aes(x = theta)) +
   geom_histogram(colour = "black", fill = "lightblue") +
   scale_x_continuous() + 
   labs(x = "Gradient Angle", 
@@ -323,7 +325,8 @@ ggsave("images/plots/diagonal_histogram_theta_plot.jpg", diagonal_histogram_thet
 
 ```{r}
 sf_histogram_mag_plot <-
-  ggplot(standard_df_list[[2]], aes(x = mag)) +
+  ggplot(standard_df_list[[2]], 
+         aes(x = mag)) +
   geom_histogram(colour = "black", fill = "lightblue") +
   scale_x_continuous() + 
   labs(x = "Gradient Magnitude", 
@@ -342,7 +345,8 @@ ggsave("images/plots/sf_histogram_mag_plot.jpg", sf_histogram_mag_plot, width = 
 
 
 sf_histogram_theta_plot <-
-  ggplot(standard_df_list[[2]], aes(x = theta)) +
+  ggplot(standard_df_list[[2]], 
+         aes(x = theta)) +
   geom_histogram(colour = "black", fill = "lightblue") +
   scale_x_continuous() + 
   labs(x = "Gradient Angle", 
@@ -360,7 +364,8 @@ ggsave("images/plots/sf_histogram_theta_plot.jpg", sf_histogram_theta_plot, widt
 
 ```{r}
 internet_grass_histogram_mag_plot <-
-  ggplot(standard_df_list[[3]], aes(x = mag)) +
+  ggplot(standard_df_list[[3]], 
+         aes(x = mag)) +
   geom_histogram(colour = "black", fill = "lightblue") +
   scale_x_continuous() + 
   labs(x = "Gradient Magnitude", 
@@ -379,7 +384,8 @@ ggsave("images/plots/internet_grass_histogram_mag_plot.jpg", internet_grass_hist
 
 
 internet_grass_histogram_theta_plot <-
-  ggplot(standard_df_list[[3]], aes(x = theta)) +
+  ggplot(standard_df_list[[3]], 
+         aes(x = theta)) +
   geom_histogram(colour = "black", fill = "lightblue") +
   scale_x_continuous() + 
   labs(x = "Gradient Angle", 
@@ -397,7 +403,8 @@ ggsave("images/plots/internet_grass_histogram_theta_plot.jpg", internet_grass_hi
 
 ```{r}
 living_labs_histogram_mag_plot <-
-  ggplot(standard_df_list[[4]], aes(x = mag)) +
+  ggplot(standard_df_list[[4]], 
+         aes(x = mag)) +
   geom_histogram(colour = "black", fill = "lightblue") +
   scale_x_continuous() + 
   labs(x = "Gradient Magnitude", 
@@ -416,7 +423,8 @@ ggsave("images/plots/living_labs_histogram_mag_plot.jpg", living_labs_histogram_
 
 
 living_labs_histogram_theta_plot <-
-  ggplot(standard_df_list[[4]], aes(x = theta)) +
+  ggplot(standard_df_list[[4]], 
+         aes(x = theta)) +
   geom_histogram(colour = "black", fill = "lightblue") +
   scale_x_continuous() + 
   labs(x = "Gradient Angle", 
