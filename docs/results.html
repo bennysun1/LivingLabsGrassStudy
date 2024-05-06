@@ -182,7 +182,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#load-r-packages" id="toc-load-r-packages" class="nav-link active" data-scroll-target="#load-r-packages"><span class="header-section-number">4.1</span> Load R Packages</a></li>
   <li><a href="#download-aerial-city-images" id="toc-download-aerial-city-images" class="nav-link" data-scroll-target="#download-aerial-city-images"><span class="header-section-number">4.2</span> Download Aerial City Images</a></li>
   <li><a href="#load-python-libraries" id="toc-load-python-libraries" class="nav-link" data-scroll-target="#load-python-libraries"><span class="header-section-number">4.3</span> Load Python Libraries</a></li>
-  <li><a href="#collect-hog-feature" id="toc-collect-hog-feature" class="nav-link" data-scroll-target="#collect-hog-feature"><span class="header-section-number">4.4</span> Collect HOG Feature</a></li>
+  <li><a href="#collect-hog-features" id="toc-collect-hog-features" class="nav-link" data-scroll-target="#collect-hog-features"><span class="header-section-number">4.4</span> Collect HOG Features</a></li>
   <li><a href="#build-data-frames-for-each-image" id="toc-build-data-frames-for-each-image" class="nav-link" data-scroll-target="#build-data-frames-for-each-image"><span class="header-section-number">4.5</span> Build Data Frames for Each Image</a></li>
   <li><a href="#plot-magnitudes-as-image" id="toc-plot-magnitudes-as-image" class="nav-link" data-scroll-target="#plot-magnitudes-as-image"><span class="header-section-number">4.6</span> Plot Magnitudes as Image</a></li>
   <li><a href="#create-histogram-plots-of-gradient-magnitudes-and-angles" id="toc-create-histogram-plots-of-gradient-magnitudes-and-angles" class="nav-link" data-scroll-target="#create-histogram-plots-of-gradient-magnitudes-and-angles"><span class="header-section-number">4.7</span> Create Histogram Plots of Gradient Magnitudes and Angles</a></li>
@@ -340,8 +340,8 @@ Disabled features: fftw, ghostscript, x11</code></pre>
 <span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="collect-hog-feature" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="collect-hog-feature"><span class="header-section-number">4.4</span> Collect HOG Feature</h2>
+<section id="collect-hog-features" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="collect-hog-features"><span class="header-section-number">4.4</span> Collect HOG Features</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>img_list <span class="op">=</span> []</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>img_list.append(color.rgb2gray(io.imread(<span class="st">"images/diagnol_lines.jpg"</span>)))</span>
@@ -448,22 +448,22 @@ Disabled features: fftw, ghostscript, x11</code></pre>
 <pre><code>Aspect Ratio: 1.0
 Resized Width: 200
 &lt;Figure size 3000x1600 with 0 Axes&gt;
-&lt;matplotlib.image.AxesImage object at 0x29af4b250&gt;
+&lt;matplotlib.image.AxesImage object at 0x2b31466d0&gt;
 (-0.5, 199.5, 199.5, -0.5)
 Aspect Ratio: 0.6666666666666666
 Resized Width: 300
 &lt;Figure size 3000x1600 with 0 Axes&gt;
-&lt;matplotlib.image.AxesImage object at 0x2c657fd90&gt;
+&lt;matplotlib.image.AxesImage object at 0x2b30eb590&gt;
 (-0.5, 299.5, 199.5, -0.5)
 Aspect Ratio: 0.662751677852349
 Resized Width: 301
 &lt;Figure size 3000x1600 with 0 Axes&gt;
-&lt;matplotlib.image.AxesImage object at 0x2c6560d50&gt;
+&lt;matplotlib.image.AxesImage object at 0x2c809c950&gt;
 (-0.5, 300.5, 199.5, -0.5)
 Aspect Ratio: 0.4904214559386973
 Resized Width: 407
 &lt;Figure size 3000x1600 with 0 Axes&gt;
-&lt;matplotlib.image.AxesImage object at 0x2c8a80a50&gt;
+&lt;matplotlib.image.AxesImage object at 0x2c80a2ad0&gt;
 (-0.5, 406.5, 199.5, -0.5)</code></pre>
 </div>
 <div class="cell-output-display">

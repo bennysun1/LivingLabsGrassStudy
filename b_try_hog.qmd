@@ -4,7 +4,9 @@ author: "Ben Sunshine"
 editor_options: 
   chunk_output_type: console
 ---
+
 ## Load R Packages
+
 ```{r load_r_packages}
 library(reticulate)
 library(tidyverse)
@@ -12,6 +14,7 @@ Sys.which("python")
 ```
 
 ## Load Python Libraries
+
 ```{python load_python_modules}
 
 import matplotlib.pyplot as plt
@@ -37,8 +40,8 @@ import numpy as np
 
 ```
 
-
 ## Compute HOG Features
+
 ```{python}
 # TODO: DONT CHANGE HEIGHT AND WIDTH
 img = color.rgb2gray(io.imread("images/grass_image2.jpg"))
@@ -84,7 +87,6 @@ aspect_ratio = img.shape[0]/img.shape[1]
 
 height = 200
 width = int(height/aspect_ratio)
-width = 300
 
 # height = 128
 # width = 192
@@ -104,7 +106,9 @@ plt.imshow(img)
 print(img.shape)
 
 ```
+
 ## Plot Resized Gray Scale Image
+
 ```{python}
 plt.figure(figsize=(15, 8))
 plt.imshow(img, cmap="gray")
@@ -114,7 +118,6 @@ plt.show()
 img = np.array(img)
 
 ```
-
 
 ## Collect Feature Vectors
 
@@ -169,13 +172,13 @@ for i in range(height):
 
 ```
 
-
 ```{python}
 mag = np.array(mag)
 theta = np.array(theta)
 ```
 
 ## Make HOG DF
+
 ```{r}
 hist(py$mag)
 hist(py$theta)
@@ -187,8 +190,8 @@ hog_df <- data.frame(mag = as.vector(py$mag),
 
 ```
 
-
 ## Defining Function for Calculating HOG Neighbors
+
 ```{r}
 # Define the number of bins
 num_bins <- 9
@@ -290,8 +293,8 @@ polar_split_plot
 
 ```
 
-
 ## Create Histogram Plots of Gradient Magnitudes and Angles
+
 ```{r}
 
 histogram_mag_plot <-
@@ -323,21 +326,21 @@ ggsave("images/plots/grass2_angles_histogram.jpg", histogram_theta_plot, width =
 ```
 
 ## Plot Magnitudes as Image
+
 ```{python}
 import matplotlib.pyplot as plt
 
-plt.figure(figsize=(15, 8))
-# plt.title('Gradient Magnitudes by Pixel')  # Corrected line
-# plt.suptitle("Image 3", y=0.75, fontsize=18)
+plt.figure(figsize=(4,2))
+#plt.title('Gradient Magnitudes by Pixel')
+#plt.rcParams['figure.figsize'] = [1, 1]
 plt.imshow(mag, cmap="gray")
-plt.axis("off")
+plt.axis("on")
 plt.show()
 
-plt.savefig("mag.png", dpi=300)
+plt.savefig("images/plots/internet_grass_mag.png", dpi=300)
 
 
 ```
-
 
 ```{python}
 number_of_bins = 9
@@ -415,8 +418,8 @@ epsilon = 1e-05
 # print(len(feature_vectors[0][0]))
 ```
 
+## Generate HOG Image
 
-## Generate HOG Image 
 ```{python}
 img = imread("images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg")
 img = color.rgb2gray(io.imread("images/grass_image2.jpg"))
@@ -452,8 +455,8 @@ plt.savefig('images/plots/grass2_image_hog.jpg')
 
 ```
 
-
 ## Polar Plot of Angles from Standard HOG
+
 ```{r}
 grass2_polar_plot <-
 ggplot(hog_df %>% filter(mag >= 0.1), 
@@ -483,8 +486,8 @@ grass2_polar_plot
 
 ```
 
-
 ## HOG Image of Internet Grass
+
 ```{python}
 from skimage import color, io, exposure
 from skimage.transform import resize
@@ -534,7 +537,6 @@ plt.show()
 
 
 ```
-
 
 ```{python}
 from skimage import color, io, exposure
@@ -597,8 +599,42 @@ plt.show()
 
 ```
 
+```{python}
+# Load the image and preprocess it
+img = io.imread("images/grass_image2.jpg")
+# img = color.rgb2gray(io.imread("diagnol_lines_flipped.jpg"))
 
+aspect_ratio = img.shape[0] / img.shape[1]
+height = 200
+width = int(height / aspect_ratio)
+resized_img = resize(img, (height, width))
 
+bw_resized_image = color.rgb2gray(resized_img)
+
+plt.figure(figsize=(15, 5))  # Adjusted the figure size to accommodate the additional object
+plt.imshow(resized_img, cmap="gray")
+plt.axis("off")
+plt.show()
+
+# Compute HOG features
+# hog_features, hog_image = hog(bw_resized_image, orientations=9, pixels_per_cell=(8,8),
+#                               cells_per_block=(10, 10), visualize=True)
+
+# Plot the images
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(7, 2), sharex=True, sharey=True)  
+
+# Plot the img input image
+ax1.imshow(resized_img, cmap=plt.cm.gray)
+ax1.set_title('Input Image')
+
+# Plot the pixel magnitudes
+ax2.imshow(bw_resized_image, cmap=plt.cm.gray)  # Assuming mag is the object you want to insert
+ax2.set_title('Rescaled Greyscale Image')
+
+plt.savefig("images/plots/input_to_rescaled_plot.png", dpi=300)
+
+plt.show()
+```
 
 ## Titus Flip
 
@@ -630,7 +666,6 @@ plt.savefig("images/plots/titus_flip_example_hog.png", dpi=300)
 plt.show()
 ```
 
-
 ```{r}
 # hog_df <- py$hog_df
 
@@ -651,4 +686,3 @@ plt.show()
 #        x = "Theta (Degrees)",
 #        y = "Frequency") #+ theme_minimal()
 ```
-

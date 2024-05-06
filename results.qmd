@@ -104,7 +104,7 @@ import numpy as np
 
 ```
 
-## Collect HOG Feature
+## Collect HOG Features
 
 ```{python}
 img_list = []

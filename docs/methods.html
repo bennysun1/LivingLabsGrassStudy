@@ -171,13 +171,53 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The HOG algorithm, introduced by Navneet Dalal and Bill Triggs in 2005, is a popular technique for object detection in images. The algorithm can identify gradient magnitudes and angles at each pixel in an image. The preliminary steps involved using the ‘skimage’ library from Python to preprocess the images of interest. This included loading, resizing, and converting the images to grayscale. Images were rescaled to standardize their resolutions and preserve their aspect ratios to prevent distortion that could affect the accuracy of angle identification. Converting the images to grayscale was necessary because it allowed for focusing on a single channel to represent pixel intensity, rather than three channels (red, green, and blue).<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The HOG features were then computed for the resized images, which involved calculating the gradient magnitudes and angles at each pixel. The gradient magnitude at each pixel is comprised of the gradients in the ‘x’ and ‘y’ directions. The gradient in the x-direction is computed by subtracting the pixel value to the left of pixel of interest is subtracted from the pixel value to its right. Similarly, the gradient in the y-direction is calculated by pixel value below the pixel of interest is subtracted from the pixel value above the pixel of interest. Now to calculate the gradient magnitude at the pixel of interest, the Pythagorean Theorem can be utilized where the gradient magnitude is equal to the square root of the x-gradient squared plus the y-gradient squared. The angle at a given pixel can be calculated by taking the inverse tangent of its y-gradient divided by its x-gradient. It is important to note all angles produced by this algorithm are between zero and one hundred eighty degrees. This occurs, because the inverse tangent function used for calculating a given pixel’s angle cannot distinguish between all four quadrants.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The HOG algorithm, introduced by Navneet Dalal and Bill Triggs in 2005, is a popular technique for object detection in images. The algorithm can identify gradient magnitudes and angles at each pixel in an image. The preliminary steps involved using the ‘skimage’ library from Python to preprocess the images of interest. This included loading, resizing, and converting the images to grayscale. Images were rescaled to standardize their resolutions and preserve their aspect ratios to prevent distortion that could affect the accuracy of angle identification. Converting the images to grayscale was necessary because it allowed for focusing on a single channel to represent pixel intensity, rather than three channels (red, green, and blue).</p>
+<div id="fig-input_image" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 100.0%;justify-content: center;">
+<div id="fig-input_image_to_new" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/plots/input_to_rescaled_plot.png" class="img-fluid figure-img" data-ref-parent="fig-input_image"></p>
+<figcaption class="figure-caption">(a) Internet Grass Image</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.1: Rescaling and Converting Image to Greyscale</figcaption><p></p>
+</figure>
+</div>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The HOG features were then computed for the resized images, which involved calculating the gradient magnitudes and angles at each pixel. The gradient magnitude at each pixel is comprised of the gradients in the ‘x’ and ‘y’ directions. The gradient in the x-direction is computed by subtracting the pixel value to the left of pixel of interest is subtracted from the pixel value to its right. Similarly, the gradient in the y-direction is calculated by pixel value below the pixel of interest is subtracted from the pixel value above the pixel of interest.</p>
 <div align="center">
-<p><span class="math inline">\(Magnitude(\mu)=\sqrt{G_{x}^{2} + G_{y}^{2}}\)</span></p>
-<span class="math inline">\(Angle(\Theta)=\arctan({\frac{G_{y}^{2}}{G_{x}^{2}}})\)</span>
+<p><span class="math inline">\(𝐺_𝑥=𝐼(𝑟,𝑐+1)−𝐼(𝑟,𝑐−1)\)</span></p>
+<p><span class="math inline">\(𝐺_𝑦=𝐼(𝑟+1,𝑐)−𝐼(𝑟−1,𝑐)\)</span></p>
+<div align="left">
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Now to calculate the gradient magnitude at the pixel of interest, the Pythagorean Theorem can be utilized where the gradient magnitude is equal to the square root of the x-gradient squared plus the y-gradient squared. The angle at a given pixel can be calculated by taking the inverse tangent of its y-gradient divided by its x-gradient. It is important to note all angles produced by this algorithm are between zero and one hundred eighty degrees. This occurs, because the inverse tangent function used for calculating a given pixel’s angle cannot distinguish between all four quadrants.</p>
 <div>
 
+<div align="center">
+<p><span class="math inline">\(Magnitude(\mu)=\sqrt{G_{x}^{2} + G_{y}^{2}}\)</span></p>
+<span class="math inline">\(Angle(𝜃)=𝑡𝑎𝑛^{−1} (\frac{𝐺_𝑦}{𝐺_𝑥})\)</span>
+<div>
+
+
+<div id="fig-mag_plot" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 100.0%;justify-content: center;">
+<div id="fig-magnitude_grass" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/plots/internet_grass_mag.png" class="img-fluid figure-img" data-ref-parent="fig-mag_plot"></p>
+<figcaption class="figure-caption">(a) Internet Grass Image</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.2: Plotting Gradient Magnitudes</figcaption><p></p>
+</figure>
+</div>
+<div>
 
 
 
@@ -192,7 +232,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-</div></div></div></div></main> <!-- /main -->
+</div></div></div></div></div></div></div></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
