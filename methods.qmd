@@ -17,8 +17,11 @@ Rescaling and Converting Image to Greyscale
 
 <div>
 
+<div align="left">
 
 |       The HOG features were then computed for the resized images, which involved calculating the gradient magnitudes and angles at each pixel. The gradient magnitude at each pixel is comprised of the gradients in the ‘x’ and ‘y’ directions. The gradient in the x-direction is computed by subtracting the pixel value to the left of pixel of interest is subtracted from the pixel value to its right. Similarly, the gradient in the y-direction is calculated by pixel value below the pixel of interest is subtracted from the pixel value above the pixel of interest. 
+
+<div>
 
 <div align="center">
 $𝐺_𝑥=𝐼(𝑟,𝑐+1)−𝐼(𝑟,𝑐−1)$
