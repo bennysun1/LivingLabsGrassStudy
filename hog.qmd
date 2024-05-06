@@ -14,7 +14,6 @@ library(magick)
 
 ```{r}
 key = "pk.eyJ1IjoiYmVubnlzdW4xIiwiYSI6ImNsczNuYTg2bjB6MWIybG11eWFsZWJrNjUifQ.8qFLlzNMxjmtULH1-NK3Nw"
-# mapboxapi::mb_access_token("pk.eyJ1IjoiYmVubnlzdW4xIiwiYSI6ImNsczNuYTg2bjB6MWIybG11eWFsZWJrNjUifQ.8qFLlzNMxjmtULH1-NK3Nw", install = TRUE)
 ```
 
 ## San Francisco, CA
@@ -44,7 +43,7 @@ map <- static_mapbox(
 
 map
 
-magick::image_write(map, "san_francisco_scale_zoom_12.png")
+magick::image_write(map, "images/san_francisco_scale_zoom_12.png")
 ```
 
 ## Salt Lake City, UT
@@ -76,7 +75,7 @@ map <- static_mapbox(
 
 map
 
-magick::image_write(map, "salt_lake_city_zoom_12.png")
+magick::image_write(map, "images/salt_lake_city_zoom_12.png")
 ```
 
 ## Detroit, MI
@@ -108,7 +107,7 @@ map <- static_mapbox(
 
 map
 
-magick::image_write(map, "detroit_zoom_12.png")
+magick::image_write(map, "images/detroit_zoom_12.png")
 ```
 
 ## HOG SF

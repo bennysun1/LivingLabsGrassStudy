@@ -3,9 +3,9 @@ project:
   output-dir: docs
 
 book:
-  title: "Living Labs Grass Study"
+  title: "Applying the Histogram of Oriented Gradients Algorithm for Detecting Grass Lay Direction"
   author: "Ben Sunshine"
-  date: "1/25/2024"
+  date: "5/10/2024"
   chapters:
     - index.qmd
     - introduction.qmd

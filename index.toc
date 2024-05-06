@@ -1,0 +1,19 @@
+\contentsline {chapter}{\numberline {1}Abstract}{3}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Introduction}{4}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Methods}{5}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Results}{6}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Load R Packages}{6}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Load Python Libraries}{6}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Read, Grayscale, Resize Image}{7}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Plot Resized Gray Scale Image}{9}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Collect Feature Vectors}{10}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Make HOG DF}{11}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Defining Function for Calculating HOG Neighbors}{13}{section.4.7}%
+\contentsline {section}{\numberline {4.8}Create Histogram Plots of Gradient Magnitudes and Angles}{16}{section.4.8}%
+\contentsline {section}{\numberline {4.9}Plot Magnitudes as Image}{18}{section.4.9}%
+\contentsline {section}{\numberline {4.10}Generate HOG Image}{21}{section.4.10}%
+\contentsline {section}{\numberline {4.11}Polar Plot of Angles from Standard HOG}{23}{section.4.11}%
+\contentsline {section}{\numberline {4.12}HOG Image of Internet Grass}{24}{section.4.12}%
+\contentsline {section}{\numberline {4.13}Titus Flip}{31}{section.4.13}%
+\contentsline {chapter}{\numberline {5}Conclusion}{34}{chapter.5}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

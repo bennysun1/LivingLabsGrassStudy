@@ -2,5 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
+map_box_key.txt
 
 /.quarto/
