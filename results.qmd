@@ -4,13 +4,81 @@ author: "Ben Sunshine"
 ---
 
 ## Load R Packages
+
 ```{r load_r_packages}
 library(reticulate)
 library(tidyverse)
+library(mapsapi)
+library(mapboxapi)
+library(magick)
 Sys.which("python")
 ```
 
+## Download Aerial City Images
+
+```{r}
+key <- Sys.getenv("mapbox_key")
+```
+
+```{r}
+map <- static_mapbox(
+  access_token = key,
+  style_url = "mapbox://styles/mapbox/satellite-v9",
+  width = 300,
+  height = 200, 
+  image = T, latitude = 37.792004, longitude = -122.428079, zoom = 12
+)
+
+magick::image_write(map, "images/san_francisco_scale_zoom_12.png")
+```
+
+```{r}
+points_of_interest <- tibble::tibble(
+  longitude = c(-112.065945, -111.853948, 
+                -111.852956, -112.023371),
+  
+  latitude = c(40.794275, 40.791516, 
+               40.502308, 40.502308)
+  )
+
+prepped_pois <- prep_overlay_markers(
+  data = points_of_interest,
+  marker_type = "pin-l",
+  label = 1:4,
+  color = "#fff", 
+)
+
+map <- static_mapbox(
+  access_token = key,
+  style_url = "mapbox://styles/mapbox/satellite-v9",
+  width = 800,
+  height = 1200, 
+  image = T, 
+  latitude = 40.7,
+  longitude = -111.876183, zoom = 12
+)
+
+magick::image_write(map, "images/salt_lake_city_zoom_12.png")
+
+```
+
+```{r}
+map <- static_mapbox(
+  access_token = key,
+  style_url = "mapbox://styles/mapbox/satellite-v9",
+  width = 1200,
+  height = 800, 
+  image = T, 
+  latitude = 42.336322,
+  longitude = -83.048705, zoom = 12
+)
+
+magick::image_write(map, "images/detroit_zoom_12.png")
+
+```
+
 ## Load Python Libraries
+
 ```{python load_python_modules}
 
 import matplotlib.pyplot as plt
@@ -36,11 +104,16 @@ import numpy as np
 
 ```
 
-
 ## Read, Grayscale, Resize Image
+
 ```{python}
-# TODO: DONT CHANGE HEIGHT AND WIDTH
-img = color.rgb2gray(io.imread("images/grass_image2.jpg"))
+img_list = []
+img_list.append(color.rgb2gray(io.imread("images/diagnol_lines.jpg")))
+img_list.append(color.rgb2gray(io.imread("images/san_francisco_scale_zoom_12.png")))
+img_list.append(color.rgb2gray(io.imread("images/grass_image2.jpg")))
+img_list.append(color.rgb2gray(io.imread("images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg")))
+
+#img = color.rgb2gray(io.imread("images/grass_image2.jpg"))
 
 # img = color.rgb2gray(io.imread("images/b_test_image_copy.jpg"))
 #img = color.rgb2gray(io.imread("images/long_grass_sample.jpeg"))
@@ -72,127 +145,302 @@ img = color.rgb2gray(io.imread("images/grass_image2.jpg"))
 # real one
 #img = color.rgb2gray(io.imread("images/living_labs_real_grass_image.jpg"))
 
+mag_list = []
+theta_list = []
 
 
-img.shape
-# height = img.shape[0]//5
-# width = img.shape[1]//5
+for x in range(len(img_list)):
+    img = img_list[x]
+    
+    aspect_ratio = img.shape[0] / img.shape[1]
+    print("Aspect Ratio:", aspect_ratio)
+    
+    height = 200
+    width = int(height / aspect_ratio)
+    print("Resized Width:", width)
+    
+    resized_img = resize(img, (height, width))
+    img_list[x] = resized_img
+    
+    plt.figure(figsize=(15, 8))
+    plt.imshow(resized_img, cmap="gray")
+    plt.axis("off")
+    plt.show()
+    
+    mag = []
+    theta = []
+    
+    for i in range(height):
+        magnitudeArray = []
+        angleArray = []
+        
+        for j in range(width):
+            if j - 1 < 0 or j + 1 >= width:
+                if j - 1 < 0:
+                    Gx = img[i][j + 1] - 0
+                elif j + 1 >= width:
+                    Gx = 0 - img[i][j - 1]
+            else:
+                Gx = img[i][j + 1] - img[i][j - 1]
+                
+            if i - 1 < 0 or i + 1 >= height:
+                if i - 1 < 0:
+                    Gy = 0 - img[i + 1][j]
+                elif i + 1 >= height:
+                    Gy = img[i - 1][j] - 0
+            else:
+                Gy = img[i + 1][j] - img[i - 1][j]
+                
+            magnitude = math.sqrt(pow(Gx, 2) + pow(Gy, 2))
+            magnitudeArray.append(round(magnitude, 9))
+            
+            if Gx == 0:
+                angle = math.degrees(0.0)
+            else:
+                angle = math.degrees(math.atan(Gy / Gx))
+                if angle < 0:
+                    angle += 180
+                    
+            angleArray.append(round(angle, 9))
+            
+        mag.append(magnitudeArray)
+        theta.append(angleArray)
+        
+    mag_list.append(mag)
+    theta_list.append(theta)
+    
+```
 
-# original image aspect ratio
-aspect_ratio = img.shape[0]/img.shape[1]
 
-height = 200
-width = int(height/aspect_ratio)
-width = 300
+## Build Data Frames for Each Image
 
-# height = 128
-# width = 192
-
-# make sure the resized is in sample ball park as the original aspect ratio, 
-# that way the angles don't get squished
-resized_ratio = height/width
+```{python}
+mag_diagonal = np.array(mag_list[0])
+theta_diagonal = np.array(theta_list[0])
 
 
-img = resize(img, (height, width))
-#img = resize(color.rgb2gray(io.imread("b_test_image_copy.jpg")), (height, width))
+mag_sf = np.array(mag_list[1])
+theta_sf = np.array(theta_list[1])
 
 
-#resized_img = resize(img, (height, width))
-plt.axis("off")
-plt.imshow(img)
-print(img.shape)
+mag_internet_grass = np.array(mag_list[2])
+theta_internet_grass = np.array(theta_list[2])
+
+
+mag_living_labs = np.array(mag_list[3])
+theta_living_labs = np.array(theta_list[3])
 
 ```
-## Plot Resized Gray Scale Image
+
+
+```{r}
+# Diagonal DF
+diagonal_hog_df <- data.frame(mag = as.vector(py$mag_diagonal),
+                              theta = as.vector((py$theta_diagonal))) %>%
+  mutate(radian = theta*(pi/180))
+
+# San Francisco DF
+sf_hog_df <- data.frame(mag = as.vector(py$mag_sf),
+                              theta = as.vector((py$theta_sf))) %>%
+  mutate(radian = theta*(pi/180))
+
+# Internet Grass DF
+internet_grass_hog_df <- data.frame(mag = as.vector(py$mag_internet_grass),
+                              theta = as.vector((py$theta_internet_grass))) %>%
+  mutate(radian = theta*(pi/180))
+
+# Living Labs DF
+living_labs_hog_df <- data.frame(mag = as.vector(py$mag_living_labs),
+                              theta = as.vector((py$theta_living_labs))) %>%
+  mutate(radian = theta*(pi/180))
+
+# List of all Data frames
+standard_df_list = list(diagonal_hog_df,
+                        sf_hog_df, 
+                        internet_grass_hog_df, 
+                        living_labs_hog_df)
+```
+
+
+## Plot Magnitudes as Image
+
 ```{python}
+
 plt.figure(figsize=(15, 8))
-plt.imshow(img, cmap="gray")
+plt.title('Gradient Magnitudes')
+plt.imshow(mag_list[0], cmap="gray")
 plt.axis("off")
 plt.show()
 
-img = np.array(img)
+plt.savefig("mag.png", dpi=300)
+
 
 ```
 
 
-## Collect Feature Vectors
+## Create Histogram Plots of Gradient Magnitudes and Angles
 
-```{python}
-import math
-
-mag = []
-theta = []
-
-for i in range(height):
-    magnitudeArray = []
-    angleArray = []
-    
-    for j in range(width):
-        # Condition for axis 0
-        if j - 1 < 0 or j + 1 >= width:
-            if j - 1 < 0:
-                # Condition if first element
-                Gx = img[i][j + 1] - 0
-            elif j + 1 >= width:
-                Gx = 0 - img[i][j - 1]
-        else:
-            Gx = img[i][j + 1] - img[i][j - 1]
-        
-        # Condition for edge case height
-        if i - 1 < 0 or i + 1 >= height:
-            if i - 1 < 0:
-                Gy = 0 - img[i + 1][j]
-            elif i + 1 >= height:
-                Gy = img[i - 1][j] - 0
-        else:
-            Gy = img[i + 1][j] - img[i - 1][j]
-
-        # Calculating magnitude
-        magnitude = math.sqrt(pow(Gx, 2) + pow(Gy, 2))
-        magnitudeArray.append(round(magnitude, 9))
-
-        # Calculating angle
-        if Gx == 0:
-            angle = math.degrees(0.0)
-        else:
-            angle = math.degrees(math.atan(Gy / Gx))
-            
-            # if the angle is negative, need to be between 0 and 360 degrees
-            if angle < 0:
-                angle += 180
-
-        angleArray.append(round(angle, 9))
-    
-    mag.append(magnitudeArray)
-    theta.append(angleArray)
-
-```
-
-
-```{python}
-mag = np.array(mag)
-theta = np.array(theta)
-```
-
-## Make HOG DF
 ```{r}
-hist(py$mag)
-hist(py$theta)
 
-#as.vector(py$theta)
-hog_df <- data.frame(mag = as.vector(py$mag),
-                     theta = as.vector((py$theta))) %>%
-  mutate(radian = theta*(pi/180))
+diagonal_histogram_mag_plot <-
+  ggplot(standard_df_list[[1]], aes(x = mag)) +
+  geom_histogram(colour = "black", fill = "lightblue") +
+  scale_x_continuous() + 
+  labs(x = "Gradient Magnitude", 
+       y = "Count", 
+       title = "Diagonal Line Image Histogram of Gradient Magnitudes"
+       ) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+diagonal_histogram_mag_plot
+
+diagonal_mag_filter <- 0.1
+
+ggsave("images/plots/diagonal_histogram_mag_plot.jpg", diagonal_histogram_mag_plot, width = 6, height = 4, dpi = 300)
+
+
+
+diagonal_histogram_theta_plot <-
+  ggplot(standard_df_list[[1]], aes(x = theta)) +
+  geom_histogram(colour = "black", fill = "lightblue") +
+  scale_x_continuous() + 
+  labs(x = "Gradient Angle", 
+       y = "Count", 
+       title = "Diagonal Line Image Histogram of Gradient Angles"
+       ) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+diagonal_histogram_theta_plot
+
+ggsave("images/plots/diagonal_histogram_theta_plot.jpg", diagonal_histogram_theta_plot, width = 6, height = 4, dpi = 300)
 
 ```
 
 
-## Defining Function for Calculating HOG Neighbors
+
+
+```{r}
+sf_histogram_mag_plot <-
+  ggplot(standard_df_list[[2]], aes(x = mag)) +
+  geom_histogram(colour = "black", fill = "lightblue") +
+  scale_x_continuous() + 
+  labs(x = "Gradient Magnitude", 
+       y = "Count", 
+       title = "San Francisco Image Histogram of Gradient Magnitudes"
+       ) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+sf_histogram_mag_plot
+
+sf_mag_filter <- 0.4
+
+ggsave("images/plots/sf_histogram_mag_plot.jpg", sf_histogram_mag_plot, width = 6, height = 4, dpi = 300)
+
+
+
+sf_histogram_theta_plot <-
+  ggplot(standard_df_list[[2]], aes(x = theta)) +
+  geom_histogram(colour = "black", fill = "lightblue") +
+  scale_x_continuous() + 
+  labs(x = "Gradient Angle", 
+       y = "Count", 
+       title = "San Francisco Image Histogram of Gradient Angles"
+       ) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+sf_histogram_theta_plot
+
+ggsave("images/plots/sf_histogram_theta_plot.jpg", sf_histogram_theta_plot, width = 6, height = 4, dpi = 300)
+```
+
+
+```{r}
+internet_grass_histogram_mag_plot <-
+  ggplot(standard_df_list[[3]], aes(x = mag)) +
+  geom_histogram(colour = "black", fill = "lightblue") +
+  scale_x_continuous() + 
+  labs(x = "Gradient Magnitude", 
+       y = "Count", 
+       title = "Internet Grass Image Histogram of Gradient Magnitudes"
+       ) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+internet_grass_histogram_mag_plot
+
+internet_grass_mag_filter <- 0.3
+
+ggsave("images/plots/internet_grass_histogram_mag_plot.jpg", internet_grass_histogram_mag_plot, width = 6, height = 4, dpi = 300)
+
+
+
+internet_grass_histogram_theta_plot <-
+  ggplot(standard_df_list[[3]], aes(x = theta)) +
+  geom_histogram(colour = "black", fill = "lightblue") +
+  scale_x_continuous() + 
+  labs(x = "Gradient Angle", 
+       y = "Count", 
+       title = "Internet Grass Image Histogram of Gradient Angles"
+       ) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+internet_grass_histogram_theta_plot
+
+ggsave("images/plots/internet_grass_histogram_theta_plot.jpg", internet_grass_histogram_theta_plot, width = 6, height = 4, dpi = 300)
+```
+
+
+```{r}
+living_labs_histogram_mag_plot <-
+  ggplot(standard_df_list[[4]], aes(x = mag)) +
+  geom_histogram(colour = "black", fill = "lightblue") +
+  scale_x_continuous() + 
+  labs(x = "Gradient Magnitude", 
+       y = "Count", 
+       title = "Living Labs Grass Image Histogram of Gradient Magnitudes"
+       ) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+living_labs_histogram_mag_plot
+
+living_labs__mag_filter <- 0.15
+
+ggsave("images/plots/living_labs_histogram_mag_plot.jpg", living_labs_histogram_mag_plot, width = 6, height = 4, dpi = 300)
+
+
+
+living_labs_histogram_theta_plot <-
+  ggplot(standard_df_list[[4]], aes(x = theta)) +
+  geom_histogram(colour = "black", fill = "lightblue") +
+  scale_x_continuous() + 
+  labs(x = "Gradient Angle", 
+       y = "Count", 
+       title = "Living Labs Grass Image Histogram of Gradient Angles"
+       ) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+living_labs_histogram_theta_plot
+
+ggsave("images/plots/living_labs_histogram_theta_plot.jpg", living_labs_histogram_theta_plot, width = 6, height = 4, dpi = 300)
+```
+
+
+
+
+## Build New Contribution Histograms for Each Data Frame
+
 ```{r}
 # Define the number of bins
 num_bins <- 9
 
-# Function to calculate the contributions to neighboring bins
+# function to calculate the contributions to neighboring bins
 calculate_bin_contributions <- function(angle, magnitude, num_bins) {
   bin_width <- 180 / num_bins
   contributions <- numeric(num_bins)
@@ -219,59 +467,247 @@ calculate_bin_contributions <- function(angle, magnitude, num_bins) {
          )
 }
 
+filtered_standard_df_list <-list(diagonal_hog_df %>%
+                                   filter(mag >= diagonal_mag_filter),
+                                 sf_hog_df %>%
+                                   filter(mag >= sf_mag_filter), 
+                                 internet_grass_hog_df %>%
+                                   filter(mag >= internet_grass_mag_filter), 
+                                 living_labs_hog_df %>%
+                                   filter(mag >= living_labs__mag_filter))
+contribution_df_list <- list()
 
-# test
-angle <- 170
-magnitude <- 1
-bin_contributions <- calculate_bin_contributions(angle, magnitude, num_bins)
-bin_contributions
-bin_contributions[9]
-bin_contributions[1]
+ 
+for (i in 1:length(filtered_standard_df_list)){
+  
+  contribution_hog_df <- 
+    filtered_standard_df_list[[i]] %>%
+    filter(mag > 0.1) %>%
+    rowwise() %>%
+    mutate(`0` = calculate_bin_contributions(theta, mag, 9)[[1]],
+           `20` = calculate_bin_contributions(theta, mag, 9)[[2]],
+           `40` = calculate_bin_contributions(theta, mag, 9)[[3]],
+           `60` = calculate_bin_contributions(theta, mag, 9)[[4]],
+           `80` = calculate_bin_contributions(theta, mag, 9)[[5]],
+           `100` = calculate_bin_contributions(theta, mag, 9)[[6]],
+           `120` = calculate_bin_contributions(theta, mag, 9)[[7]],
+           `140` = calculate_bin_contributions(theta, mag, 9)[[8]],
+           `160` = calculate_bin_contributions(theta, mag, 9)[[9]],
+           )
+  
+  split_histo_df <- 
+    contribution_hog_df %>%
+    pivot_longer(names_to = "bin", 
+                 values_to = "contribution", 
+                 cols = 4:ncol(contribution_hog_df)) %>%
+    mutate(bin = as.numeric(bin)) %>%
+    group_by(bin) %>%
+    summarise(contribution_sum = sum(contribution))
+  
+  
+  contribution_df_list[[i]] <- split_histo_df
+
+}
 
 
-contribution_hog_df <- data.frame(mag = as.vector(py$mag),
-                     theta = as.vector((py$theta))) %>%
-  mutate(radian = theta*(pi/180)) %>%
-  filter(mag > 0.1) %>%
-  rowwise() %>%
-  mutate(`0` = calculate_bin_contributions(theta, mag, 9)[[1]],
-         `20` = calculate_bin_contributions(theta, mag, 9)[[2]],
-         `40` = calculate_bin_contributions(theta, mag, 9)[[3]],
-         `60` = calculate_bin_contributions(theta, mag, 9)[[4]],
-         `80` = calculate_bin_contributions(theta, mag, 9)[[5]],
-         `100` = calculate_bin_contributions(theta, mag, 9)[[6]],
-         `120` = calculate_bin_contributions(theta, mag, 9)[[7]],
-         `140` = calculate_bin_contributions(theta, mag, 9)[[8]],
-         `160` = calculate_bin_contributions(theta, mag, 9)[[9]],
-         )
-
-# split_histo_df <- hog_df[4:ncol(hog_df)] %>%
-split_histo_df <- contribution_hog_df %>%
-  pivot_longer(names_to = "bin", values_to = "contribution", cols = 4:ncol(hog_df)) %>%
-  mutate(bin = as.numeric(bin))
-
-split_histo_df <-
-  split_histo_df %>%
-  group_by(bin) %>%
-  summarise(contribution_sum = sum(contribution))
+```
 
 
 
-polar_split_plot <-
-  ggplot(split_histo_df, #>% filter(mag >= 0.3), 
+
+## Generate Polar Plots for Standard Historgrams
+
+
+```{r}
+diagonal_plot <-
+  ggplot(filtered_standard_df_list[[1]], 
+         aes(x = theta)) +
+  geom_histogram(colour = "black", 
+                 fill = "lightblue", 
+                 breaks = seq(0, 360, length.out = 17.5),
+                 bins = 9) +
+  coord_polar(
+    theta = "x", 
+    start = 0, 
+    direction = 1) +
+  scale_x_continuous(limits = c(0,360),
+    breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
+    labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
+  )+
+  labs(title = "Polar Plot of Diagonal Line Image\nUsing Standard HOG Technique") +
+  theme_minimal() +
+  labs(x = "") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5))
+
+#diagonal_plot
+
+```
+
+
+```{r}
+sf_plot <-
+  ggplot(filtered_standard_df_list[[2]], 
+         aes(x = theta)) +
+  geom_histogram(colour = "black", 
+                 fill = "lightblue", 
+                 breaks = seq(0, 360, length.out = 17.5),
+                 bins = 9) +
+  coord_polar(
+    theta = "x", 
+    start = 0, 
+    direction = 1) +
+  scale_x_continuous(limits = c(0,360),
+    breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
+    labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
+  )+
+  labs(title = "Polar Plot of San Francisco Image\nUsing Standard HOG Technique") +
+  theme_minimal() +
+  labs(x = "") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5))
+
+#sf_plot
+```
+
+```{r}
+internet_grass_plot <-
+  ggplot(filtered_standard_df_list[[3]], 
+         aes(x = theta)) +
+  geom_histogram(colour = "black", 
+                 fill = "lightblue", 
+                 breaks = seq(0, 360, length.out = 17.5),
+                 bins = 9) +
+  coord_polar(
+    theta = "x", 
+    start = 0, 
+    direction = 1) +
+  scale_x_continuous(limits = c(0,360),
+    breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
+    labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
+  )+
+  labs(title = "Polar Plot of Internet Grass Image\nUsing Standard HOG Technique") +
+  theme_minimal() +
+  labs(x = "") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5))
+
+#internet_grass_plot
+```
+
+```{r}
+living_labs_plot <-
+  ggplot(filtered_standard_df_list[[4]], 
+         aes(x = theta)) +
+  geom_histogram(colour = "black", 
+                 fill = "lightblue", 
+                 breaks = seq(0, 360, length.out = 17.5),
+                 bins = 9) +
+  coord_polar(
+    theta = "x", 
+    start = 0, 
+    direction = 1) +
+  scale_x_continuous(limits = c(0,360),
+    breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
+    labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
+  )+
+  labs(title = "Polar Plot of Living Labs Grass Image\nUsing Standard HOG Technique") +
+  theme_minimal() +
+  labs(x = "") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5))
+
+#living_labs_plot
+```
+
+```{r}
+all_standard_plots <- ggpubr::ggarrange(diagonal_plot, 
+                                        sf_plot, 
+                                        internet_grass_plot, 
+                                        living_labs_plot)
+
+ggsave("images/plots/all_standard_polar_plots.jpg", 
+       all_standard_plots, width = 7, 
+       height = 7)
+
+all_standard_plots
+```
+
+
+
+
+
+
+## Generate Polar Plots for Contribution Historgrams
+
+```{r}
+diagonal_split_plot <-
+  ggplot(contribution_df_list[[1]], 
          aes(x = bin, y = contribution_sum)) +
-  # geom_histogram(stat = "identity", 
-  #                colour = "black", 
-  #                fill = "lightblue", 
-  #                breaks = seq(0, 360, length.out = 30),
-  #                bins = 9) +
   geom_histogram(stat = "identity",
                  colour = "black", 
                  fill = "lightblue", 
                  breaks = seq(0, 360, length.out = 17.5),
                  bins = 9) +
   coord_polar(
-    theta = "x", start = 0, direction = 1) +
+    theta = "x", 
+    start = 0, 
+    direction = 1) +
+  scale_x_continuous(limits = c(0,360),
+    breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
+    labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
+  )+
+  labs(title = "Polar Plot of Diagonal Line Image\nUsing Distributed HOG Technique") +
+  theme_minimal() +
+  labs(x = "") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5))
+
+#diagonal_split_plot
+
+```
+
+
+```{r}
+sf_split_plot <-
+  ggplot(contribution_df_list[[2]], 
+         aes(x = bin, y = contribution_sum)) +
+  geom_histogram(stat = "identity",
+                 colour = "black", 
+                 fill = "lightblue", 
+                 breaks = seq(0, 360, length.out = 17.5),
+                 bins = 9) +
+  coord_polar(
+    theta = "x", 
+    start = 0, 
+    direction = 1) +
+  scale_x_continuous(limits = c(0,360),
+    breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
+    labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
+  )+
+  labs(title = "Polar Plot of San Francisco Image\nUsing Distributed HOG Technique") +
+  theme_minimal() +
+  labs(x = "") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5))
+
+#sf_split_plot
+```
+
+
+```{r}
+internet_grass_split_plot <-
+  ggplot(contribution_df_list[[3]], 
+         aes(x = bin, y = contribution_sum)) +
+  geom_histogram(stat = "identity",
+                 colour = "black", 
+                 fill = "lightblue", 
+                 breaks = seq(0, 360, length.out = 17.5),
+                 bins = 9) +
+  coord_polar(
+    theta = "x", 
+    start = 0, 
+    direction = 1) +
   scale_x_continuous(limits = c(0,360),
     breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
@@ -282,60 +718,56 @@ polar_split_plot <-
   theme(axis.title.y = element_blank(),
         plot.title = element_text(hjust = 0.5))
 
-polar_split_plot
-
-
-
-
+#internet_grass_split_plot
 ```
 
 
-## Create Histogram Plots of Gradient Magnitudes and Angles
 ```{r}
-
-histogram_mag_plot <-
-  ggplot(hog_df, aes(x = mag)) +
-  geom_histogram(colour = "black", fill = "lightblue") +
-  scale_x_continuous() + 
-  labs(x = "Gradient Magnitude", y = "Count"#, title = "Histogram of Magnitudes of Gradients"
-       ) +
+living_labs_split_plot <-
+  ggplot(contribution_df_list[[4]], 
+         aes(x = bin, y = contribution_sum)) +
+  geom_histogram(stat = "identity",
+                 colour = "black", 
+                 fill = "lightblue", 
+                 breaks = seq(0, 360, length.out = 17.5),
+                 bins = 9) +
+  coord_polar(
+    theta = "x", 
+    start = 0, 
+    direction = 1) +
+  scale_x_continuous(limits = c(0,360),
+    breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
+    labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
+  )+
+  labs(title = "Polar Plot of Living Labs Aerial Image\nUsing Distributed HOG Technique") +
   theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5))
+  labs(x = "") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5))
 
-histogram_mag_plot
-
-ggsave("images/plots/grass2_magnitude_histogram.jpg", histogram_mag_plot, width = 6, height = 4, dpi = 300)
-
-histogram_theta_plot <-
-  ggplot(hog_df, aes(x = theta)) +
-  geom_histogram(binwidth = 10, colour = "black", fill = "lightblue") +
-  scale_x_continuous(breaks = c(0,20,40,60,80,100,120,140,160,180)) + 
-  labs(x = "Angle (Degrees)", y = "Count"#, title = "Simple Histogram of Oriented Gradients"
-       ) +
-  theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5))
-
-histogram_theta_plot
-
-ggsave("images/plots/grass2_angles_histogram.jpg", histogram_theta_plot, width = 6, height = 4, dpi = 300)
+#living_labs_split_plot
 
 ```
 
-## Plot Magnitudes as Image
-```{python}
-import matplotlib.pyplot as plt
 
-plt.figure(figsize=(15, 8))
-# plt.title('Gradient Magnitudes by Pixel')  # Corrected line
-# plt.suptitle("Image 3", y=0.75, fontsize=18)
-plt.imshow(mag, cmap="gray")
-plt.axis("off")
-plt.show()
+```{r}
+all_contribution_plots <- ggpubr::ggarrange(diagonal_split_plot, 
+                                            sf_split_plot, 
+                                            internet_grass_split_plot, 
+                                            living_labs_split_plot)
+ggsave("images/plots/all_contribution_polar_plots.jpg", 
+       all_contribution_plots, width = 7, 
+       height = 7)
 
-plt.savefig("mag.png", dpi=300)
-
+all_contribution_plots
 
 ```
+
+
+
+
+
+
 
 
 ```{python}
@@ -414,8 +846,8 @@ epsilon = 1e-05
 # print(len(feature_vectors[0][0]))
 ```
 
+## Generate HOG Image
 
-## Generate HOG Image 
 ```{python}
 img = imread("images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg")
 img = color.rgb2gray(io.imread("images/grass_image2.jpg"))
@@ -452,27 +884,26 @@ plt.savefig('images/plots/grass2_image_hog.jpg')
 ```
 
 
-## Polar Plot of Angles from Standard HOG
 ```{r}
-grass2_polar_plot <-
-ggplot(hog_df %>% filter(mag >= 0.1), 
-       aes(x = radian)) +
-  geom_histogram(colour = "black", fill = "lightblue", 
-                 breaks = seq(0, 2*pi, length.out = 17.5),
-                 bins = 9) +
-  coord_polar(
-    theta = "x", start = 0, direction = 1) +
-  scale_x_continuous(
-    breaks = c(0, pi/4, pi/2, 3*pi/4, pi, 5*pi/4, 3*pi/2, 7*pi/4), 
-    labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
-  )+
-  labs(title = "Polar Plot of Internet Grass Image") +
-    theme_minimal() +
-  labs(x = "") +
-  theme(axis.title.y = element_blank(),
-        plot.title = element_text(hjust = 0.5))
-
-grass2_polar_plot
+# grass2_polar_plot <-
+# ggplot(diagonal_hog_df, #%>% filter(mag >= 0.1), 
+#        aes(x = radian)) +
+#   geom_histogram(colour = "black", fill = "lightblue", 
+#                  breaks = seq(0, 2*pi, length.out = 17.5),
+#                  bins = 9) +
+#   coord_polar(
+#     theta = "x", start = 0, direction = 1) +
+#   scale_x_continuous(
+#     breaks = c(0, pi/4, pi/2, 3*pi/4, pi, 5*pi/4, 3*pi/2, 7*pi/4), 
+#     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
+#   )+
+#   labs(title = "Polar Plot of Internet Grass Image") +
+#     theme_minimal() +
+#   labs(x = "") +
+#   theme(axis.title.y = element_blank(),
+#         plot.title = element_text(hjust = 0.5))
+# 
+# grass2_polar_plot
 
 #ggsave("_polar_plot.jpg", polar_plot, width = 6, height = 4, dpi = 300)
 
@@ -482,8 +913,8 @@ grass2_polar_plot
 
 ```
 
-
 ## HOG Image of Internet Grass
+
 ```{python}
 from skimage import color, io, exposure
 from skimage.transform import resize
@@ -533,7 +964,6 @@ plt.show()
 
 
 ```
-
 
 ```{python}
 from skimage import color, io, exposure
@@ -596,9 +1026,6 @@ plt.show()
 
 ```
 
-
-
-
 ## Titus Flip
 
 ```{python}
@@ -629,7 +1056,6 @@ plt.savefig("images/plots/titus_flip_example_hog.png", dpi=300)
 plt.show()
 ```
 
-
 ```{r}
 # hog_df <- py$hog_df
 
@@ -650,4 +1076,3 @@ plt.show()
 #        x = "Theta (Degrees)",
 #        y = "Frequency") #+ theme_minimal()
 ```
-

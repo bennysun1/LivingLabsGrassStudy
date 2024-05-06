@@ -1,0 +1,22 @@
+---
+title: "Data"
+author: "Ben Sunshine"
+---
+
+|       To evaluate the algorithm's performance, we collected images with varying levels of complexity. Beginning with basic geometric shapes and diagonal lines sourced from Google Images, we established a foundational data set for initial testing. We incorporated aerial cityscapes including San Francisco, Salt Lake City, and Detroit from Mapbox, aiming to assess the algorithm's ability in identifying urban grid structures such as streets and highways. Additionally, we included images of grass sourced from both Google Images and Dr. Jon Rosales (Environmental Studies) at St. Lawrence University's Living Lab. The images sourced from Google Images were primarily The Living Lab images included aerial and close up shots, with special attention given to aerial images which featured a northern indicator line. To ensure consistent orientation, each aerial image was manually rotated to align north facing direction upwards before analysis, with the northern indicator subsequently removed to avoid introducing artificial lines in the image. 
+
+
+## Featured Images
+::: {#fig-images layout-ncol=2}
+
+![Diagnol Lines](images/diagnol_lines.jpg){#fig-lines}
+
+![Downtown San Francisco](images/san_francisco_scale_zoom_12.png){#fig-sf}
+
+![Internet Grass](images/grass_image2.jpg){#fig-grass_internet}
+
+![Aerial Living Labs](images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg){#fig-living_labs}
+
+Featured Images for Evaluation
+:::
+

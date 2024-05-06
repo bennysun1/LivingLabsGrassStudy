@@ -8,7 +8,7 @@ book:
   date: "5/10/2024"
   chapters:
     - index.qmd
-    - introduction.qmd
+    - data.qmd
     - methods.qmd
     - results.qmd
     - conclusion.qmd

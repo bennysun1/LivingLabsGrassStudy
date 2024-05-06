@@ -13,7 +13,7 @@ library(magick)
 ```
 
 ```{r}
-key <- Sys.getenv("mapbox_key")
+key = Sys.getenv("mapbox_key")
 ```
 
 ## San Francisco, CA
@@ -32,6 +32,7 @@ key <- Sys.getenv("mapbox_key")
 # )
 
 map <- static_mapbox(
+  access_token = key,
   style_url = "mapbox://styles/mapbox/satellite-v9",
   #username = "kwalkertcu",
   #overlay_markers = prepped_pois, 
@@ -62,6 +63,7 @@ prepped_pois <- prep_overlay_markers(
 )
 
 map <- static_mapbox(
+  access_token = key,
   style_url = "mapbox://styles/mapbox/satellite-v9",
   #username = "kwalkertcu",
   #overlay_markers = prepped_pois, 
@@ -81,19 +83,8 @@ magick::image_write(map, "images/salt_lake_city_zoom_12.png")
 ## Detroit, MI
 
 ```{r}
-# points_of_interest <- tibble::tibble(
-#   longitude = c(-112.065945, -111.853948, -111.852956, -112.023371),
-#   latitude = c(40.794275, 40.791516, 40.502308, 40.502308)
-#   )
-# 
-# prepped_pois <- prep_overlay_markers(
-#   data = points_of_interest,
-#   marker_type = "pin-l",
-#   label = 1:4,
-#   color = "#fff", 
-# )
-
 map <- static_mapbox(
+  access_token = key,
   style_url = "mapbox://styles/mapbox/satellite-v9",
   #username = "kwalkertcu",
   #overlay_markers = prepped_pois, 

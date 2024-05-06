@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Homebrew) (preloaded format=pdflatex 2024.3.20)  5 MAY 2024 19:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Homebrew) (preloaded format=pdflatex 2024.3.20)  6 MAY 2024 00:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1269,200 +1269,310 @@ Class scrreprt Warning: \float@addtolists detected!
 
 ]
 chapter 2.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 2
+36.
+(/opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Overfull \hbox (18.88737pt too wide) in paragraph at lines 256--256
+[]\T1/lmtt/m/n/10.95 Enabled features: cairo, fontconfig, freetype, heic, lcms,
+ pango, raw, rsvg, webp[] 
+ []
+
 [4
 
 ]
+<images/diagnol_lines.jpg, id=35, 1927.2pt x 1927.2pt>
+File: images/diagnol_lines.jpg Graphic file (type jpg)
+<use images/diagnol_lines.jpg>
+Package pdftex.def Info: images/diagnol_lines.jpg  used on input line 297.
+(pdftex.def)             Requested size: 223.37303pt x 223.37303pt.
+
+Overfull \hbox (7.293pt too wide) in paragraph at lines 293--298
+ [][] 
+ []
+
+<images/san_francisco_scale_zoom_12.png, id=36, 301.125pt x 200.75pt>
+File: images/san_francisco_scale_zoom_12.png Graphic file (type png)
+<use images/san_francisco_scale_zoom_12.png>
+Package pdftex.def Info: images/san_francisco_scale_zoom_12.png  used on input 
+line 312.
+(pdftex.def)             Requested size: 223.38956pt x 148.92638pt.
+
+Overfull \hbox (7.30952pt too wide) in paragraph at lines 308--313
+ [][] 
+ []
+
+<images/grass_image2.jpg, id=37, 598.235pt x 396.48125pt>
+File: images/grass_image2.jpg Graphic file (type jpg)
+<use images/grass_image2.jpg>
+Package pdftex.def Info: images/grass_image2.jpg  used on input line 327.
+(pdftex.def)             Requested size: 223.37909pt x 148.04486pt.
+
+Overfull \hbox (7.29906pt too wide) in paragraph at lines 323--328
+ [][] 
+ []
+
+<images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg, id=38, 785.93625
+pt x 385.44pt>
+File: images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg Graphic file
+ (type jpg)
+<use images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg>
+Package pdftex.def Info: images/living_lab_aerial/aerial_grass_living_lab_rotat
+ed.jpg  used on input line 342.
+(pdftex.def)             Requested size: 223.38254pt x 109.55159pt.
+
+Overfull \hbox (7.3025pt too wide) in paragraph at lines 338--343
+ [][] 
+ []
+
+[5 <./images/diagnol_lines.jpg> <./images/san_francisco_scale_zoom_12.png> <./i
+mages/grass_image2.jpg> <./images/living_lab_aerial/aerial_grass_living_lab_rot
+ated.jpg>]
 chapter 3.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 282.
+(Font)              <10.95> on input line 388.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 282.
+(Font)              <8> on input line 388.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 282.
-[5
+(Font)              <6> on input line 388.
+[6
 
 {/opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/fonts/enc/dvips/lm/lm-m
 athit.enc}{/opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/fonts/enc/dvi
 ps/lm/lm-rm.enc}{/opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/fonts/e
 nc/dvips/lm/lm-mathex.enc}]
 chapter 4.
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
-08.
-(/opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-Overfull \hbox (13.13864pt too wide) in paragraph at lines 315--315
+
+Overfull \hbox (13.13864pt too wide) in paragraph at lines 422--422
 []\T1/lmtt/m/n/10.95 -- Attaching core tidyverse packages ---------------------
 --- tidyverse 2.0.0 --[] 
  []
 
 
-Overfull \hbox (13.13864pt too wide) in paragraph at lines 321--321
+Overfull \hbox (13.13864pt too wide) in paragraph at lines 428--428
 []\T1/lmtt/m/n/10.95 -- Conflicts ------------------------------------------ ti
 dyverse_conflicts() --[] 
  []
 
 
-Overfull \hbox (133.86205pt too wide) in paragraph at lines 324--324
+Overfull \hbox (133.86205pt too wide) in paragraph at lines 431--431
 []\T1/lmtt/m/n/10.95 i Use the conflicted package (<http://conflicted.r-lib.org
 />) to force all conflicts to become errors[] 
  []
 
-[6
 
-] [7]
+Overfull \hbox (18.88737pt too wide) in paragraph at lines 454--454
+[]\T1/lmtt/m/n/10.95 Enabled features: cairo, fontconfig, freetype, heic, lcms,
+ pango, raw, rsvg, webp[] 
+ []
+
+[7
+
+]
+
+Package tcolorbox Warning: Using nobreak failed. Try to enlarge `lines before b
+reak' or set page breaks manually on input line 477.
+
+[8] [9] [10] [11]
+<results_files/figure-pdf/unnamed-chunk-5-1.pdf, id=90, 1084.05pt x 578.16pt>
+File: results_files/figure-pdf/unnamed-chunk-5-1.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-5-1.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-5-1.pdf  used o
+n input line 702.
+(pdftex.def)             Requested size: 446.76262pt x 238.27339pt.
+ [12]
+<results_files/figure-pdf/unnamed-chunk-5-2.pdf, id=95, 1084.05pt x 578.16pt>
+File: results_files/figure-pdf/unnamed-chunk-5-2.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-5-2.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-5-2.pdf  used o
+n input line 710.
+(pdftex.def)             Requested size: 446.76262pt x 238.27339pt.
+<results_files/figure-pdf/unnamed-chunk-5-3.pdf, id=96, 1084.05pt x 578.16pt>
+File: results_files/figure-pdf/unnamed-chunk-5-3.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-5-3.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-5-3.pdf  used o
+n input line 718.
+(pdftex.def)             Requested size: 446.76262pt x 238.27339pt.
+ [13 <./results_files/figure-pdf/unnamed-chunk-5-1.pdf> <./results_files/figure
+-pdf/unnamed-chunk-5-2.pdf>]
+<results_files/figure-pdf/unnamed-chunk-5-4.pdf, id=110, 1084.05pt x 578.16pt>
+File: results_files/figure-pdf/unnamed-chunk-5-4.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-5-4.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-5-4.pdf  used o
+n input line 726.
+(pdftex.def)             Requested size: 446.76262pt x 238.27339pt.
+ [14 <./results_files/figure-pdf/unnamed-chunk-5-3.pdf> <./results_files/figure
+-pdf/unnamed-chunk-5-4.pdf>]
+[15]
 LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
-431.
+791.
 
 (/opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-<results_files/figure-pdf/unnamed-chunk-1-1.pdf, id=63, 397.485pt x 252.945pt>
-File: results_files/figure-pdf/unnamed-chunk-1-1.pdf Graphic file (type pdf)
-<use results_files/figure-pdf/unnamed-chunk-1-1.pdf>
-Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-1-1.pdf  used o
-n input line 461.
-(pdftex.def)             Requested size: 397.49008pt x 252.94823pt.
- [8{/opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/fonts/enc/dvips/lm/l
-m-ts1.enc}]
-<results_files/figure-pdf/unnamed-chunk-2-3.pdf, id=69, 1084.05pt x 578.16pt>
-File: results_files/figure-pdf/unnamed-chunk-2-3.pdf Graphic file (type pdf)
-<use results_files/figure-pdf/unnamed-chunk-2-3.pdf>
-Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-2-3.pdf  used o
-n input line 491.
-(pdftex.def)             Requested size: 446.76262pt x 238.27339pt.
- [9 <./results_files/figure-pdf/unnamed-chunk-1-1.pdf>] [10 <./results_files/fi
-gure-pdf/unnamed-chunk-2-3.pdf>]
-<results_files/figure-pdf/unnamed-chunk-5-5.pdf, id=90, 352.31625pt x 213.79875
-pt>
-File: results_files/figure-pdf/unnamed-chunk-5-5.pdf Graphic file (type pdf)
-<use results_files/figure-pdf/unnamed-chunk-5-5.pdf>
-Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-5-5.pdf  used o
-n input line 577.
-(pdftex.def)             Requested size: 352.31538pt x 213.79822pt.
- [11]
-<results_files/figure-pdf/unnamed-chunk-5-6.pdf, id=97, 352.31625pt x 213.79875
-pt>
-File: results_files/figure-pdf/unnamed-chunk-5-6.pdf Graphic file (type pdf)
-<use results_files/figure-pdf/unnamed-chunk-5-6.pdf>
-Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-5-6.pdf  used o
-n input line 591.
-(pdftex.def)             Requested size: 352.31538pt x 213.79822pt.
- [12 <./results_files/figure-pdf/unnamed-chunk-5-5.pdf> <./results_files/figure
--pdf/unnamed-chunk-5-6.pdf>]
-[13] [14] [15]
-Overfull \hbox (30.38484pt too wide) in paragraph at lines 783--783
-[]\T1/lmtt/m/n/10.95 Warning: Removed 2 rows containing missing values or value
-s outside the scale range[] 
- []
-
-<results_files/figure-pdf/unnamed-chunk-6-1.pdf, id=135, 213.79875pt x 216.81pt
->
-File: results_files/figure-pdf/unnamed-chunk-6-1.pdf Graphic file (type pdf)
-<use results_files/figure-pdf/unnamed-chunk-6-1.pdf>
-Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-6-1.pdf  used o
-n input line 789.
-(pdftex.def)             Requested size: 213.79822pt x 216.80946pt.
-[16 <./results_files/figure-pdf/unnamed-chunk-6-1.pdf>]
-<results_files/figure-pdf/unnamed-chunk-7-1.pdf, id=151, 387.4475pt x 242.9075p
-t>
-File: results_files/figure-pdf/unnamed-chunk-7-1.pdf Graphic file (type pdf)
-<use results_files/figure-pdf/unnamed-chunk-7-1.pdf>
-Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-7-1.pdf  used o
-n input line 820.
-(pdftex.def)             Requested size: 387.44655pt x 242.90689pt.
- [17 <./results_files/figure-pdf/unnamed-chunk-7-1.pdf>]
-<results_files/figure-pdf/unnamed-chunk-7-2.pdf, id=164, 387.4475pt x 242.9075p
-t>
-File: results_files/figure-pdf/unnamed-chunk-7-2.pdf Graphic file (type pdf)
-<use results_files/figure-pdf/unnamed-chunk-7-2.pdf>
-Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-7-2.pdf  used o
-n input line 853.
-(pdftex.def)             Requested size: 387.44655pt x 242.90689pt.
-<results_files/figure-pdf/unnamed-chunk-8-1.pdf, id=165, 1084.05pt x 578.16pt>
+<results_files/figure-pdf/unnamed-chunk-8-1.pdf, id=129, 1084.05pt x 578.16pt>
 File: results_files/figure-pdf/unnamed-chunk-8-1.pdf Graphic file (type pdf)
 <use results_files/figure-pdf/unnamed-chunk-8-1.pdf>
 Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-8-1.pdf  used o
-n input line 892.
+n input line 809.
 (pdftex.def)             Requested size: 446.76262pt x 238.27339pt.
- [18 <./results_files/figure-pdf/unnamed-chunk-7-2.pdf>]
-<results_files/figure-pdf/unnamed-chunk-8-2.pdf, id=180, 397.485pt x 252.945pt>
+<results_files/figure-pdf/unnamed-chunk-8-2.pdf, id=130, 397.485pt x 252.945pt>
 
 File: results_files/figure-pdf/unnamed-chunk-8-2.pdf Graphic file (type pdf)
 <use results_files/figure-pdf/unnamed-chunk-8-2.pdf>
 Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-8-2.pdf  used o
-n input line 907.
+n input line 824.
 (pdftex.def)             Requested size: 397.49008pt x 252.94823pt.
- [19 <./results_files/figure-pdf/unnamed-chunk-8-1.pdf> <./results_files/figure
--pdf/unnamed-chunk-8-2.pdf>] [20] [21]
-<results_files/figure-pdf/unnamed-chunk-15-5.pdf, id=202, 397.485pt x 252.945pt
->
-File: results_files/figure-pdf/unnamed-chunk-15-5.pdf Graphic file (type pdf)
-<use results_files/figure-pdf/unnamed-chunk-15-5.pdf>
-Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-15-5.pdf  used 
-on input line 1066.
-(pdftex.def)             Requested size: 397.49008pt x 252.94823pt.
- [22 <./results_files/figure-pdf/unnamed-chunk-15-5.pdf>]
-<results_files/figure-pdf/unnamed-chunk-15-6.pdf, id=211, 397.485pt x 252.945pt
->
-File: results_files/figure-pdf/unnamed-chunk-15-6.pdf Graphic file (type pdf)
-<use results_files/figure-pdf/unnamed-chunk-15-6.pdf>
-Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-15-6.pdf  used 
-on input line 1080.
-(pdftex.def)             Requested size: 397.49008pt x 252.94823pt.
- [23 <./results_files/figure-pdf/unnamed-chunk-15-6.pdf>]
-<results_files/figure-pdf/unnamed-chunk-16-9.pdf, id=220, 224.84pt x 215.80624p
+ [16{/opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/fonts/enc/dvips/lm/
+lm-ts1.enc} <./results_files/figure-pdf/unnamed-chunk-8-1.pdf>]
+<results_files/figure-pdf/unnamed-chunk-9-5.pdf, id=159, 390.45876pt x 242.9075
+pt>
+File: results_files/figure-pdf/unnamed-chunk-9-5.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-9-5.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-9-5.pdf  used o
+n input line 857.
+(pdftex.def)             Requested size: 390.4578pt x 242.90689pt.
+ [17 <./results_files/figure-pdf/unnamed-chunk-8-2.pdf>]
+<results_files/figure-pdf/unnamed-chunk-9-6.pdf, id=169, 387.4475pt x 242.9075p
 t>
-File: results_files/figure-pdf/unnamed-chunk-16-9.pdf Graphic file (type pdf)
-<use results_files/figure-pdf/unnamed-chunk-16-9.pdf>
-Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-16-9.pdf  used 
-on input line 1116.
-(pdftex.def)             Requested size: 224.8463pt x 215.81229pt.
- [24 <./results_files/figure-pdf/unnamed-chunk-16-9.pdf>]
-<results_files/figure-pdf/unnamed-chunk-17-1.pdf, id=235, 578.16pt x 1445.4pt>
-File: results_files/figure-pdf/unnamed-chunk-17-1.pdf Graphic file (type pdf)
-<use results_files/figure-pdf/unnamed-chunk-17-1.pdf>
-Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-17-1.pdf  used 
-on input line 1170.
-(pdftex.def)             Requested size: 232.88315pt x 582.20789pt.
- [25] [26 <./results_files/figure-pdf/unnamed-chunk-17-1.pdf>]
-<results_files/figure-pdf/unnamed-chunk-17-2.pdf, id=249, 578.16pt x 1445.4pt>
-File: results_files/figure-pdf/unnamed-chunk-17-2.pdf Graphic file (type pdf)
-<use results_files/figure-pdf/unnamed-chunk-17-2.pdf>
-Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-17-2.pdf  used 
-on input line 1209.
-(pdftex.def)             Requested size: 232.88315pt x 582.20789pt.
- [27] [28 <./results_files/figure-pdf/unnamed-chunk-17-2.pdf>]
-<results_files/figure-pdf/unnamed-chunk-18-5.pdf, id=306, 1084.05pt x 361.35pt>
+File: results_files/figure-pdf/unnamed-chunk-9-6.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-9-6.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-9-6.pdf  used o
+n input line 898.
+(pdftex.def)             Requested size: 387.44655pt x 242.90689pt.
+ [18 <./results_files/figure-pdf/unnamed-chunk-9-5.pdf>]
+<results_files/figure-pdf/unnamed-chunk-10-1.pdf, id=182, 387.4475pt x 242.9075
+pt>
+File: results_files/figure-pdf/unnamed-chunk-10-1.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-10-1.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-10-1.pdf  used 
+on input line 937.
+(pdftex.def)             Requested size: 387.44655pt x 242.90689pt.
+ [19 <./results_files/figure-pdf/unnamed-chunk-9-6.pdf>]
+<results_files/figure-pdf/unnamed-chunk-10-2.pdf, id=196, 387.4475pt x 242.9075
+pt>
+File: results_files/figure-pdf/unnamed-chunk-10-2.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-10-2.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-10-2.pdf  used 
+on input line 978.
+(pdftex.def)             Requested size: 387.44655pt x 242.90689pt.
 
-File: results_files/figure-pdf/unnamed-chunk-18-5.pdf Graphic file (type pdf)
-<use results_files/figure-pdf/unnamed-chunk-18-5.pdf>
-Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-18-5.pdf  used 
-on input line 1251.
+[20 <./results_files/figure-pdf/unnamed-chunk-10-1.pdf>]
+<results_files/figure-pdf/unnamed-chunk-11-1.pdf, id=209, 387.4475pt x 242.9075
+pt>
+File: results_files/figure-pdf/unnamed-chunk-11-1.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-11-1.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-11-1.pdf  used 
+on input line 1017.
+(pdftex.def)             Requested size: 387.44655pt x 242.90689pt.
+ [21 <./results_files/figure-pdf/unnamed-chunk-10-2.pdf>]
+<results_files/figure-pdf/unnamed-chunk-11-2.pdf, id=222, 387.4475pt x 242.9075
+pt>
+File: results_files/figure-pdf/unnamed-chunk-11-2.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-11-2.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-11-2.pdf  used 
+on input line 1058.
+(pdftex.def)             Requested size: 387.44655pt x 242.90689pt.
+ [22 <./results_files/figure-pdf/unnamed-chunk-11-1.pdf>]
+<results_files/figure-pdf/unnamed-chunk-12-1.pdf, id=235, 388.45125pt x 242.907
+5pt>
+File: results_files/figure-pdf/unnamed-chunk-12-1.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-12-1.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-12-1.pdf  used 
+on input line 1097.
+(pdftex.def)             Requested size: 388.45029pt x 242.90689pt.
+ [23 <./results_files/figure-pdf/unnamed-chunk-11-2.pdf>]
+<results_files/figure-pdf/unnamed-chunk-12-2.pdf, id=248, 387.4475pt x 242.9075
+pt>
+File: results_files/figure-pdf/unnamed-chunk-12-2.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-12-2.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-12-2.pdf  used 
+on input line 1138.
+(pdftex.def)             Requested size: 387.44655pt x 242.90689pt.
+ [24 <./results_files/figure-pdf/unnamed-chunk-12-1.pdf>] [25 <./results_files/
+figure-pdf/unnamed-chunk-12-2.pdf>] [26] [27] [28]
+<results_files/figure-pdf/unnamed-chunk-18-1.pdf, id=290, 383.4325pt x 222.8325
+pt>
+File: results_files/figure-pdf/unnamed-chunk-18-1.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-18-1.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-18-1.pdf  used 
+on input line 1355.
+(pdftex.def)             Requested size: 383.43741pt x 222.83534pt.
+ [29] [30 <./results_files/figure-pdf/unnamed-chunk-18-1.pdf>] [31] [32]
+Overfull \hbox (24.63611pt too wide) in paragraph at lines 1519--1519
+[]\T1/lmtt/m/n/10.95 Warning: Removed 1 row containing missing values or values
+ outside the scale range[] 
+ []
+
+<results_files/figure-pdf/unnamed-chunk-23-1.pdf, id=319, 383.4325pt x 222.8325
+pt>
+File: results_files/figure-pdf/unnamed-chunk-23-1.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-23-1.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-23-1.pdf  used 
+on input line 1541.
+(pdftex.def)             Requested size: 383.43741pt x 222.83534pt.
+[33 <./results_files/figure-pdf/unnamed-chunk-23-1.pdf>] [34] [35]
+<results_files/figure-pdf/unnamed-chunk-30-1.pdf, id=342, 397.485pt x 252.945pt
+>
+File: results_files/figure-pdf/unnamed-chunk-30-1.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-30-1.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-30-1.pdf  used 
+on input line 1700.
+(pdftex.def)             Requested size: 397.49008pt x 252.94823pt.
+ [36 <./results_files/figure-pdf/unnamed-chunk-30-1.pdf>]
+<results_files/figure-pdf/unnamed-chunk-30-2.pdf, id=351, 397.485pt x 252.945pt
+>
+File: results_files/figure-pdf/unnamed-chunk-30-2.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-30-2.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-30-2.pdf  used 
+on input line 1714.
+(pdftex.def)             Requested size: 397.49008pt x 252.94823pt.
+ [37 <./results_files/figure-pdf/unnamed-chunk-30-2.pdf>]
+<results_files/figure-pdf/unnamed-chunk-32-1.pdf, id=359, 578.16pt x 1445.4pt>
+File: results_files/figure-pdf/unnamed-chunk-32-1.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-32-1.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-32-1.pdf  used 
+on input line 1788.
+(pdftex.def)             Requested size: 232.88315pt x 582.20789pt.
+ [38] [39 <./results_files/figure-pdf/unnamed-chunk-32-1.pdf>]
+<results_files/figure-pdf/unnamed-chunk-32-2.pdf, id=374, 578.16pt x 1445.4pt>
+File: results_files/figure-pdf/unnamed-chunk-32-2.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-32-2.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-32-2.pdf  used 
+on input line 1827.
+(pdftex.def)             Requested size: 232.88315pt x 582.20789pt.
+ [40] [41 <./results_files/figure-pdf/unnamed-chunk-32-2.pdf>]
+<results_files/figure-pdf/unnamed-chunk-33-5.pdf, id=431, 1084.05pt x 361.35pt>
+
+File: results_files/figure-pdf/unnamed-chunk-33-5.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-33-5.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-33-5.pdf  used 
+on input line 1869.
 (pdftex.def)             Requested size: 446.76262pt x 148.92087pt.
- [29 <./results_files/figure-pdf/unnamed-chunk-18-5.pdf>]
-<results_files/figure-pdf/unnamed-chunk-18-6.pdf, id=315, 1806.75pt x 361.35pt>
+ [42 <./results_files/figure-pdf/unnamed-chunk-33-5.pdf>]
+<results_files/figure-pdf/unnamed-chunk-33-6.pdf, id=440, 1806.75pt x 361.35pt>
 
-File: results_files/figure-pdf/unnamed-chunk-18-6.pdf Graphic file (type pdf)
-<use results_files/figure-pdf/unnamed-chunk-18-6.pdf>
-Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-18-6.pdf  used 
-on input line 1299.
+File: results_files/figure-pdf/unnamed-chunk-33-6.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-33-6.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-33-6.pdf  used 
+on input line 1917.
 (pdftex.def)             Requested size: 446.75159pt x 89.35031pt.
- [30 <./results_files/figure-pdf/unnamed-chunk-18-6.pdf>]
-<results_files/figure-pdf/unnamed-chunk-19-9.pdf, id=367, 1156.32pt x 505.89pt>
+ [43 <./results_files/figure-pdf/unnamed-chunk-33-6.pdf>]
+<results_files/figure-pdf/unnamed-chunk-34-9.pdf, id=492, 1156.32pt x 505.89pt>
 
-File: results_files/figure-pdf/unnamed-chunk-19-9.pdf Graphic file (type pdf)
-<use results_files/figure-pdf/unnamed-chunk-19-9.pdf>
-Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-19-9.pdf  used 
-on input line 1358.
+File: results_files/figure-pdf/unnamed-chunk-34-9.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-34-9.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-34-9.pdf  used 
+on input line 1976.
 (pdftex.def)             Requested size: 446.74608pt x 195.4514pt.
- [31]
-<results_files/figure-pdf/unnamed-chunk-19-10.pdf, id=374, 397.485pt x 252.945p
+ [44]
+<results_files/figure-pdf/unnamed-chunk-34-10.pdf, id=498, 397.485pt x 252.945p
 t>
-File: results_files/figure-pdf/unnamed-chunk-19-10.pdf Graphic file (type pdf)
-<use results_files/figure-pdf/unnamed-chunk-19-10.pdf>
-Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-19-10.pdf  used
- on input line 1366.
+File: results_files/figure-pdf/unnamed-chunk-34-10.pdf Graphic file (type pdf)
+<use results_files/figure-pdf/unnamed-chunk-34-10.pdf>
+Package pdftex.def Info: results_files/figure-pdf/unnamed-chunk-34-10.pdf  used
+ on input line 1984.
 (pdftex.def)             Requested size: 397.49008pt x 252.94823pt.
 
 
@@ -1473,7 +1583,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1386 ...abels = c("0", "π/4", "π/2", "3π/4")}
+l.2004 ...abels = c("0", "π/4", "π/2", "3π/4")}
                                                   
 ? H
 You may provide a definition with
@@ -1494,7 +1604,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1386 ...abels = c("0", "π/4", "π/2", "3π/4")}
+l.2004 ...abels = c("0", "π/4", "π/2", "3π/4")}
                                                   
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -1507,15 +1617,15 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1386 ...abels = c("0", "π/4", "π/2", "3π/4")}
+l.2004 ...abels = c("0", "π/4", "π/2", "3π/4")}
                                                   
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-[32 <./results_files/figure-pdf/unnamed-chunk-19-9.pdf> <./results_files/figure
--pdf/unnamed-chunk-19-10.pdf>] [33]
+[45 <./results_files/figure-pdf/unnamed-chunk-34-9.pdf> <./results_files/figure
+-pdf/unnamed-chunk-34-10.pdf>] [46]
 chapter 5.
-[34
+[47
 
 ] (./index.aux)
  ***********
@@ -1528,13 +1638,13 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 32648 strings out of 474116
- 664174 string characters out of 5733619
- 1939187 words of memory out of 5000000
- 54326 multiletter control sequences out of 15000+600000
- 604997 words of font info for 122 fonts, out of 8000000 for 9000
+ 32789 strings out of 474116
+ 669000 string characters out of 5733619
+ 1942187 words of memory out of 5000000
+ 54447 multiletter control sequences out of 15000+600000
+ 607821 words of font info for 121 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 108i,7n,107p,10900b,1035s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,9n,107p,10900b,1052s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/fonts/type1/public/lm
 /lmex10.pfb></opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/fonts/type1
 /public/lm/lmmi10.pfb></opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/f
@@ -1547,10 +1657,10 @@ w/Cellar/texlive/20240312/share/texmf-dist/fonts/type1/public/lm/lmr8.pfb></opt
 /homebrew/Cellar/texlive/20240312/share/texmf-dist/fonts/type1/public/lm/lmssbx
 10.pfb></opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/fonts/type1/publ
 ic/lm/lmtt10.pfb>
-Output written on index.pdf (34 pages, 2551253 bytes).
+Output written on index.pdf (47 pages, 4374230 bytes).
 PDF statistics:
- 566 PDF objects out of 1000 (max. 8388607)
- 359 compressed objects within 4 object streams
- 90 named destinations out of 1000 (max. 500000)
- 24823 words of extra memory for PDF output out of 24883 (max. 10000000)
+ 704 PDF objects out of 1000 (max. 8388607)
+ 450 compressed objects within 5 object streams
+ 114 named destinations out of 1000 (max. 500000)
+ 26937 words of extra memory for PDF output out of 29859 (max. 10000000)
 

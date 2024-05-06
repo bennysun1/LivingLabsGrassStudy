@@ -38,7 +38,7 @@ import numpy as np
 ```
 
 
-## Read, Grayscale, Resize Image
+## Compute HOG Features
 ```{python}
 # TODO: DONT CHANGE HEIGHT AND WIDTH
 img = color.rgb2gray(io.imread("images/grass_image2.jpg"))
