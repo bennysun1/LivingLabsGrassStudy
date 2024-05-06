@@ -6,6 +6,8 @@ author: "Ben Sunshine"
 |       The HOG algorithm, introduced by Navneet Dalal and Bill Triggs in 2005, is a popular technique for object detection in images. The algorithm can identify gradient magnitudes and angles at each pixel in an image. The preliminary steps involved using the ‘skimage’ library from Python to preprocess the images of interest. This included loading, resizing, and converting the images to grayscale. Images were rescaled to standardize their resolutions and preserve their aspect ratios to prevent distortion that could affect the accuracy of angle identification. Converting the images to grayscale was necessary because it allowed for focusing on a single channel to represent pixel intensity, rather than three channels (red, green, and blue).
 
 
+<div align="center">
+
 ::: {#fig-input_image layout-ncol=1}
 
 ![Internet Grass Image](images/plots/input_to_rescaled_plot.png){#fig-input_image_to_new}
@@ -13,6 +15,7 @@ author: "Ben Sunshine"
 Rescaling and Converting Image to Greyscale
 :::
 
+<div>
 
 
 |       The HOG features were then computed for the resized images, which involved calculating the gradient magnitudes and angles at each pixel. The gradient magnitude at each pixel is comprised of the gradients in the ‘x’ and ‘y’ directions. The gradient in the x-direction is computed by subtracting the pixel value to the left of pixel of interest is subtracted from the pixel value to its right. Similarly, the gradient in the y-direction is calculated by pixel value below the pixel of interest is subtracted from the pixel value above the pixel of interest. 

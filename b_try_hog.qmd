@@ -328,16 +328,16 @@ ggsave("images/plots/grass2_angles_histogram.jpg", histogram_theta_plot, width =
 ## Plot Magnitudes as Image
 
 ```{python}
-import matplotlib.pyplot as plt
-
-plt.figure(figsize=(4,2))
-#plt.title('Gradient Magnitudes by Pixel')
-#plt.rcParams['figure.figsize'] = [1, 1]
-plt.imshow(mag, cmap="gray")
-plt.axis("on")
-plt.show()
-
-plt.savefig("images/plots/internet_grass_mag.png", dpi=300)
+# import matplotlib.pyplot as plt
+# 
+# plt.figure(figsize=(4,2))
+# #plt.title('Gradient Magnitudes by Pixel')
+# #plt.rcParams['figure.figsize'] = [1, 1]
+# plt.imshow(mag, cmap="gray")
+# plt.axis("on")
+# plt.show()
+# 
+# plt.savefig("images/plots/internet_grass_mag.png", dpi=300)
 
 
 ```
