@@ -10,13 +10,18 @@ book:
     - index.qmd
     - data.qmd
     - methods.qmd
-    - results.qmd
+    - part: "Results"
+      chapters:
+        - aerial_images_results.qmd
+        - grass_images_results.qmd
+        - backflip_image_results.qmd
     - conclusion.qmd
 
 bibliography: references.bib
 
 format:
   html:
+    number-depth: 0
     code-fold: true
     code-tools: true
     code-line-numbers: true
@@ -25,6 +30,7 @@ format:
       light: cosmo
       dark: darkly
   pdf:
+    toc: true
     documentclass: scrreprt
   
 editor: visual

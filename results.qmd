@@ -23,10 +23,9 @@ Sys.which("python")
 ## Download Aerial City Images
 
 ```{r, warning=FALSE, message=FALSE}
-key <- Sys.getenv("mapbox_key") #<1>
+#| code-summary: "Read in Mapbox Key from System Enviroment" 
+key <- Sys.getenv("mapbox_key") 
 ```
-
-1. Read in Mapbox Key from System Environment
 
 ```{r, warning=FALSE, message=FALSE}
 map <- static_mapbox( #<2>
@@ -40,7 +39,6 @@ map <- static_mapbox( #<2>
 magick::image_write(map, "images/san_francisco_scale_zoom_12.png")
 ```
 
-2. Using Mapbox API Download Image of downtown San Francisco, CA
 ```{r, warning=FALSE, message=FALSE}
 points_of_interest <- tibble::tibble( #<3>
   longitude = c(-112.065945, -111.853948, 
@@ -2312,6 +2310,7 @@ ggsave("images/plots/backflip/backflip_contribution_polar_plot.jpg", flip_split_
 ::: {#fig-flip-distributed-and-standard-polar layout-ncol=2}
 
 ![Skiing Backflip Image Standard HOG Method](images/plots/backflip/backflip_standard_polar_plot.jpg){group="flip-standard-and-dist-polar-gallery"}
+
 ![Skiing Backflip Image Distributed HOG Method](images/plots/backflip/backflip_contribution_polar_plot.jpg){group="flip-standard-and-dist-polar-gallery"}
 
 

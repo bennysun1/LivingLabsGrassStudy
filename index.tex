@@ -5,7 +5,8 @@
 %
 \documentclass[
   letterpaper,
-]{report}
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
 
 \usepackage{amsmath,amssymb}
 \usepackage{iftex}
@@ -107,8 +108,7 @@
 \def\fps@figure{htbp}
 \makeatother
 
-\makeatletter
-\makeatother
+\KOMAoption{captions}{tableheading}
 \makeatletter
 \@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
 \makeatother
@@ -148,23 +148,16 @@
 \newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
 \makeatother
 \makeatletter
+\makeatother
+\makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
-\makeatother
-\makeatletter
-\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
-\makeatother
-\makeatletter
-\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
-\makeatother
-\makeatletter
-\makeatother
-\makeatletter
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
+
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
@@ -184,7 +177,6 @@ Detecting Grass Lay Direction}
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, sharp corners, interior hidden, breakable, frame hidden, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -194,8 +186,7 @@ Detecting Grass Lay Direction}
 }
 \bookmarksetup{startatroot}
 
-\hypertarget{abstract}{%
-\chapter{Abstract}\label{abstract}}
+\chapter{Abstract}\label{abstract}
 
 ~~~~~~Subsistence-oriented indigenous communities across Alaska rely
 heavily on Traditional Ecological Knowledge (TEK), a holistic
@@ -225,8 +216,7 @@ Laboratory to test its viability.
 
 \bookmarksetup{startatroot}
 
-\hypertarget{data}{%
-\chapter{Data}\label{data}}
+\chapter{Data}\label{data}
 
 ~~~~~~To evaluate the algorithm's performance, we collected images with
 varying levels of complexity. Beginning with basic geometric shapes and
@@ -246,74 +236,63 @@ removed to avoid introducing artificial lines in the image.
 
 \begin{figure}
 
-\begin{minipage}[t]{0.50\linewidth}
+\begin{minipage}{0.50\linewidth}
 
-{\centering 
-
-\raisebox{-\height}{
+\centering{
 
 \includegraphics{images/diagnol_lines.jpg}
 
 }
 
-}
-
 \subcaption{\label{fig-lines}Diagnol Lines}
+
 \end{minipage}%
 %
-\begin{minipage}[t]{0.50\linewidth}
+\begin{minipage}{0.50\linewidth}
 
-{\centering 
+\centering{
 
-\raisebox{-\height}{
+\includegraphics{images/TitusFlip.jpg}
+
+}
+
+\subcaption{\label{fig-grass_internet}Skiing Backflip(St.~Lawrence
+University)}
+
+\end{minipage}%
+\newline
+\begin{minipage}{0.50\linewidth}
+
+\centering{
 
 \includegraphics{images/san_francisco_scale_zoom_12.png}
 
 }
 
-}
+\subcaption{\label{fig-sf}Downtown San Francisco, CA}
 
-\subcaption{\label{fig-sf}Downtown San Francisco}
-\end{minipage}%
-\newline
-\begin{minipage}[t]{0.50\linewidth}
-
-{\centering 
-
-\raisebox{-\height}{
-
-\includegraphics{images/grass_image2.jpg}
-
-}
-
-}
-
-\subcaption{\label{fig-grass_internet}Internet Grass}
 \end{minipage}%
 %
-\begin{minipage}[t]{0.50\linewidth}
+\begin{minipage}{0.50\linewidth}
 
-{\centering 
-
-\raisebox{-\height}{
+\centering{
 
 \includegraphics{images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg}
 
 }
 
-}
+\subcaption{\label{fig-living_labs}Aerial Grass Image(St.~Lawrence
+University Living Laboratory)}
 
-\subcaption{\label{fig-living_labs}Aerial Living Labs}
 \end{minipage}%
 
-\caption{\label{fig-images}Featured Images for Evaluation}
+\caption{\label{fig-images}Sample of Images for Evaluation}
 
-\end{figure}
+\end{figure}%
 
 \bookmarksetup{startatroot}
 
-\hypertarget{methods}{%
-\chapter{Methods}\label{methods}}
+\chapter{Methods}\label{methods}
 
 ~~~~~~The HOG algorithm, introduced by Navneet Dalal and Bill Triggs in
 2005, is a popular technique for object detection in images. The
@@ -329,25 +308,23 @@ intensity, rather than three channels (red, green, and blue).
 
 \begin{figure}
 
-\begin{minipage}[t]{\linewidth}
+\begin{minipage}{\linewidth}
 
-{\centering 
-
-\raisebox{-\height}{
+\centering{
 
 \includegraphics{images/plots/input_to_rescaled_plot.png}
 
 }
 
-}
+\subcaption{\label{fig-input_image_to_new}Colored Image with Diagonal
+Lines}
 
-\subcaption{\label{fig-input_image_to_new}Internet Grass Image}
 \end{minipage}%
 
 \caption{\label{fig-input_image}Rescaling and Converting Image to
 Greyscale}
 
-\end{figure}
+\end{figure}%
 
 ~~~~~~The HOG features were then computed for the resized images, which
 involved calculating the gradient magnitudes and angles at each pixel.
@@ -378,24 +355,25 @@ between all four quadrants.
 
 \begin{figure}
 
-\begin{minipage}[t]{\linewidth}
+\begin{minipage}{\linewidth}
+\end{minipage}%
+\newline
+\begin{minipage}{\linewidth}
 
-{\centering 
+\centering{
 
-\raisebox{-\height}{
-
-\includegraphics{images/plots/internet_grass_mag.png}
+\includegraphics{images/plots/diagonal_lines_mag.png}
 
 }
 
-}
+\subcaption{\label{fig-magnitude_grass}Gradient Magnitudes of Diagonal
+Lines Image}
 
-\subcaption{\label{fig-magnitude_grass}Internet Grass Image}
 \end{minipage}%
 
-\caption{\label{fig-mag_plot}Plotting Gradient Magnitudes}
+\caption{\label{fig-mag_plot}Plotting Gradient Magnitudes as Image}
 
-\end{figure}
+\end{figure}%
 
 \hfill\break
 ~~~~~~Next, histograms are constructed to visualize the distribution of
@@ -410,60 +388,82 @@ splits angles between bins and takes their magnitudes into account.
 Lastly, these histograms are converted to polar histograms so the
 primary angles can be visualized and compared to their original images.
 
-\bookmarksetup{startatroot}
+\begin{figure}
 
-\hypertarget{results}{%
-\chapter{Results}\label{results}}
+\begin{minipage}{0.25\linewidth}
 
-\hypertarget{load-r-packages}{%
-\section{Load R Packages}\label{load-r-packages}}
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/diagonal/diag_histogram_mag_plot.jpg}
+
+}
+
+\subcaption{Histograms of Gradient Magnitudes}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.25\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/diagonal/diag_histogram_theta_plot.jpg}
+
+}
+
+\subcaption{Histograms of Gradient Angles}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.25\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/diagonal/diag_standard_polar_plot.jpg}
+
+}
+
+\subcaption{Polar Plot Using Standard Histogram Technique}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.25\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/diagonal/diag_contribution_polar_plot.jpg}
+
+}
+
+\subcaption{Polar Plot Using Distributed Histogram Technique}
+
+\end{figure}%
+
+\end{minipage}%
+
+\caption{\label{fig-histograms-plot-diag-line}Plotting Histograms of
+Gradients}
+
+\end{figure}%
+
+\part{Results}
+
+\chapter{Aerial Cityscapes}\label{aerial-cityscapes}
+
+\section{Load R Packages}\label{load-r-packages}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(reticulate)}
 \FunctionTok{library}\NormalTok{(tidyverse)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
--- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
-v dplyr     1.1.2     v readr     2.1.4
-v forcats   1.0.0     v stringr   1.5.0
-v ggplot2   3.5.0     v tibble    3.2.1
-v lubridate 1.9.2     v tidyr     1.3.0
-v purrr     1.0.2     
--- Conflicts ------------------------------------------ tidyverse_conflicts() --
-x dplyr::filter() masks stats::filter()
-x dplyr::lag()    masks stats::lag()
-i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(mapsapi)}
 \FunctionTok{library}\NormalTok{(mapboxapi)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-Usage of the Mapbox APIs is governed by the Mapbox Terms of Service.
-Please visit https://www.mapbox.com/legal/tos/ for more information.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(magick)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-Linking to ImageMagick 6.9.12.93
-Enabled features: cairo, fontconfig, freetype, heic, lcms, pango, raw, rsvg, webp
-Disabled features: fftw, ghostscript, x11
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{Sys.which}\NormalTok{(}\StringTok{"python"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -473,13 +473,11 @@ Disabled features: fftw, ghostscript, x11
 "/Users/bensunshine/.virtualenvs/r-reticulate/bin/python" 
 \end{verbatim}
 
-\hypertarget{download-aerial-city-images}{%
-\section{Download Aerial City
-Images}\label{download-aerial-city-images}}
+\section{Download Aerial City Images}\label{download-aerial-city-images}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{key }\OtherTok{\textless{}{-}} \FunctionTok{Sys.getenv}\NormalTok{(}\StringTok{"mapbox\_key"}\NormalTok{)}
+\NormalTok{key }\OtherTok{\textless{}{-}} \FunctionTok{Sys.getenv}\NormalTok{(}\StringTok{"mapbox\_key"}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -544,8 +542,55 @@ Images}\label{download-aerial-city-images}}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{load-python-libraries}{%
-\section{Load Python Libraries}\label{load-python-libraries}}
+\begin{figure}
+
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/san_francisco_scale_zoom_12.png}
+
+}
+
+\subcaption{San Francisco Cityscape}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/salt_lake_city_zoom_12.png}
+
+}
+
+\subcaption{Salt Lake City Cityscape}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/detroit_zoom_12.png}
+
+}
+
+\subcaption{Detroit Cityscape}
+
+\end{figure}%
+
+\end{minipage}%
+
+\caption{\label{fig-city-images}Aerial Cityscape Images}
+
+\end{figure}%
+
+\section{Load Python Libraries}\label{load-python-libraries}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -572,16 +617,23 @@ Images}\label{download-aerial-city-images}}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{collect-hog-features}{%
-\section{Collect HOG Features}\label{collect-hog-features}}
+\section{Collect HOG Features for Aerial
+Cityscapes}\label{collect-hog-features-for-aerial-cityscapes}
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# List for storing images}
 \NormalTok{img\_list }\OperatorTok{=}\NormalTok{ []}
-\NormalTok{img\_list.append(color.rgb2gray(io.imread(}\StringTok{"images/diagnol\_lines.jpg"}\NormalTok{)))}
+
+\CommentTok{\# SF aerial}
 \NormalTok{img\_list.append(color.rgb2gray(io.imread(}\StringTok{"images/san\_francisco\_scale\_zoom\_12.png"}\NormalTok{)))}
-\NormalTok{img\_list.append(color.rgb2gray(io.imread(}\StringTok{"images/grass\_image2.jpg"}\NormalTok{)))}
-\NormalTok{img\_list.append(color.rgb2gray(io.imread(}\StringTok{"images/living\_lab\_aerial/aerial\_grass\_living\_lab\_rotated.jpg"}\NormalTok{)))}
+
+\CommentTok{\# Salt Lake City Aerial}
+\NormalTok{img\_list.append(color.rgb2gray(io.imread(}\StringTok{"images/salt\_lake\_city\_zoom\_12.png"}\NormalTok{)))}
+
+\CommentTok{\# Detroit Aerial}
+\NormalTok{img\_list.append(color.rgb2gray(io.imread(}\StringTok{"images/detroit\_zoom\_12.png"}\NormalTok{)))}
+
 
 \CommentTok{\#img = color.rgb2gray(io.imread("images/grass\_image2.jpg"))}
 
@@ -615,397 +667,1210 @@ Images}\label{download-aerial-city-images}}
 \CommentTok{\# real one}
 \CommentTok{\#img = color.rgb2gray(io.imread("images/living\_labs\_real\_grass\_image.jpg"))}
 
+\CommentTok{\# List to store magnitudes for each image}
 \NormalTok{mag\_list }\OperatorTok{=}\NormalTok{ []}
+
+\CommentTok{\# List to store angles for each image}
 \NormalTok{theta\_list }\OperatorTok{=}\NormalTok{ []}
 
 
 \ControlFlowTok{for}\NormalTok{ x }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\BuiltInTok{len}\NormalTok{(img\_list)):}
+    \CommentTok{\# Get image of interest}
 \NormalTok{    img }\OperatorTok{=}\NormalTok{ img\_list[x]}
     
+\NormalTok{    rescaled\_file\_path }\OperatorTok{=} \SpecialStringTok{f"images/plots/aerial\_cities/}\SpecialCharTok{\{}\NormalTok{x}\SpecialCharTok{\}}\SpecialStringTok{.jpg"}
+    
+    \CommentTok{\# Determine aspect Ratio}
 \NormalTok{    aspect\_ratio }\OperatorTok{=}\NormalTok{ img.shape[}\DecValTok{0}\NormalTok{] }\OperatorTok{/}\NormalTok{ img.shape[}\DecValTok{1}\NormalTok{]}
     \BuiltInTok{print}\NormalTok{(}\StringTok{"Aspect Ratio:"}\NormalTok{, aspect\_ratio)}
     
+    \CommentTok{\# Hard{-}Code height to 200 pixels}
 \NormalTok{    height }\OperatorTok{=} \DecValTok{200}
+    
+    \CommentTok{\# Calculate witdth to maintain same aspect ratio}
 \NormalTok{    width }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(height }\OperatorTok{/}\NormalTok{ aspect\_ratio)}
     \BuiltInTok{print}\NormalTok{(}\StringTok{"Resized Width:"}\NormalTok{, width)}
     
+    \CommentTok{\# Resize the image}
 \NormalTok{    resized\_img }\OperatorTok{=}\NormalTok{ resize(img, (height, width))}
+    
+    \CommentTok{\# Replace the original image with the resized image}
 \NormalTok{    img\_list[x] }\OperatorTok{=}\NormalTok{ resized\_img}
     
-\NormalTok{    plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{15}\NormalTok{, }\DecValTok{8}\NormalTok{))}
-\NormalTok{    plt.imshow(resized\_img, cmap}\OperatorTok{=}\StringTok{"gray"}\NormalTok{)}
-\NormalTok{    plt.axis(}\StringTok{"off"}\NormalTok{)}
-\NormalTok{    plt.show()}
+    \CommentTok{\# if (x == 1):}
+    \CommentTok{\#   plot\_width = 8}
+    \CommentTok{\#   plot\_height = 15}
+    \CommentTok{\# else:}
+    \CommentTok{\#   plot\_width = 15}
+    \CommentTok{\#   plot\_height = 9}
+    \CommentTok{\# }
+    \CommentTok{\# plt.figure(figsize=(plot\_width, plot\_height))}
+    \CommentTok{\# plt.imshow(resized\_img, cmap="gray")}
+    \CommentTok{\# plt.axis("on")}
+    \CommentTok{\# plt.tight\_layout()}
+    \CommentTok{\# plt.savefig(rescaled\_file\_path, dpi=300)}
+    \CommentTok{\# plt.show()}
+
     
+    \CommentTok{\# list for storing all magnitudes for image[x]}
 \NormalTok{    mag }\OperatorTok{=}\NormalTok{ []}
+    
+    \CommentTok{\# list for storing all angles for image[x]}
 \NormalTok{    theta }\OperatorTok{=}\NormalTok{ []}
     
     \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(height):}
 \NormalTok{        magnitudeArray }\OperatorTok{=}\NormalTok{ []}
 \NormalTok{        angleArray }\OperatorTok{=}\NormalTok{ []}
-        
+
         \ControlFlowTok{for}\NormalTok{ j }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(width):}
             \ControlFlowTok{if}\NormalTok{ j }\OperatorTok{{-}} \DecValTok{1} \OperatorTok{\textless{}} \DecValTok{0} \KeywordTok{or}\NormalTok{ j }\OperatorTok{+} \DecValTok{1} \OperatorTok{\textgreater{}=}\NormalTok{ width:}
                 \ControlFlowTok{if}\NormalTok{ j }\OperatorTok{{-}} \DecValTok{1} \OperatorTok{\textless{}} \DecValTok{0}\NormalTok{:}
-\NormalTok{                    Gx }\OperatorTok{=}\NormalTok{ img[i][j }\OperatorTok{+} \DecValTok{1}\NormalTok{] }\OperatorTok{{-}} \DecValTok{0}
+\NormalTok{                    Gx }\OperatorTok{=}\NormalTok{ resized\_img[i][j }\OperatorTok{+} \DecValTok{1}\NormalTok{] }\OperatorTok{{-}} \DecValTok{0}
                 \ControlFlowTok{elif}\NormalTok{ j }\OperatorTok{+} \DecValTok{1} \OperatorTok{\textgreater{}=}\NormalTok{ width:}
-\NormalTok{                    Gx }\OperatorTok{=} \DecValTok{0} \OperatorTok{{-}}\NormalTok{ img[i][j }\OperatorTok{{-}} \DecValTok{1}\NormalTok{]}
+\NormalTok{                    Gx }\OperatorTok{=} \DecValTok{0} \OperatorTok{{-}}\NormalTok{ resized\_img[i][j }\OperatorTok{{-}} \DecValTok{1}\NormalTok{]}
             \ControlFlowTok{else}\NormalTok{:}
-\NormalTok{                Gx }\OperatorTok{=}\NormalTok{ img[i][j }\OperatorTok{+} \DecValTok{1}\NormalTok{] }\OperatorTok{{-}}\NormalTok{ img[i][j }\OperatorTok{{-}} \DecValTok{1}\NormalTok{]}
-                
+\NormalTok{                Gx }\OperatorTok{=}\NormalTok{ resized\_img[i][j }\OperatorTok{+} \DecValTok{1}\NormalTok{] }\OperatorTok{{-}}\NormalTok{ resized\_img[i][j }\OperatorTok{{-}} \DecValTok{1}\NormalTok{]}
+
             \ControlFlowTok{if}\NormalTok{ i }\OperatorTok{{-}} \DecValTok{1} \OperatorTok{\textless{}} \DecValTok{0} \KeywordTok{or}\NormalTok{ i }\OperatorTok{+} \DecValTok{1} \OperatorTok{\textgreater{}=}\NormalTok{ height:}
                 \ControlFlowTok{if}\NormalTok{ i }\OperatorTok{{-}} \DecValTok{1} \OperatorTok{\textless{}} \DecValTok{0}\NormalTok{:}
-\NormalTok{                    Gy }\OperatorTok{=} \DecValTok{0} \OperatorTok{{-}}\NormalTok{ img[i }\OperatorTok{+} \DecValTok{1}\NormalTok{][j]}
+\NormalTok{                    Gy }\OperatorTok{=} \DecValTok{0} \OperatorTok{{-}}\NormalTok{ resized\_img[i }\OperatorTok{+} \DecValTok{1}\NormalTok{][j]}
                 \ControlFlowTok{elif}\NormalTok{ i }\OperatorTok{+} \DecValTok{1} \OperatorTok{\textgreater{}=}\NormalTok{ height:}
-\NormalTok{                    Gy }\OperatorTok{=}\NormalTok{ img[i }\OperatorTok{{-}} \DecValTok{1}\NormalTok{][j] }\OperatorTok{{-}} \DecValTok{0}
+\NormalTok{                    Gy }\OperatorTok{=}\NormalTok{ resized\_img[i }\OperatorTok{{-}} \DecValTok{1}\NormalTok{][j] }\OperatorTok{{-}} \DecValTok{0}
             \ControlFlowTok{else}\NormalTok{:}
-\NormalTok{                Gy }\OperatorTok{=}\NormalTok{ img[i }\OperatorTok{+} \DecValTok{1}\NormalTok{][j] }\OperatorTok{{-}}\NormalTok{ img[i }\OperatorTok{{-}} \DecValTok{1}\NormalTok{][j]}
-                
+\NormalTok{                Gy }\OperatorTok{=}\NormalTok{ resized\_img[i }\OperatorTok{+} \DecValTok{1}\NormalTok{][j] }\OperatorTok{{-}}\NormalTok{ resized\_img[i }\OperatorTok{{-}} \DecValTok{1}\NormalTok{][j]}
+
 \NormalTok{            magnitude }\OperatorTok{=}\NormalTok{ math.sqrt(}\BuiltInTok{pow}\NormalTok{(Gx, }\DecValTok{2}\NormalTok{) }\OperatorTok{+} \BuiltInTok{pow}\NormalTok{(Gy, }\DecValTok{2}\NormalTok{))}
 \NormalTok{            magnitudeArray.append(}\BuiltInTok{round}\NormalTok{(magnitude, }\DecValTok{9}\NormalTok{))}
-            
+
             \ControlFlowTok{if}\NormalTok{ Gx }\OperatorTok{==} \DecValTok{0}\NormalTok{:}
 \NormalTok{                angle }\OperatorTok{=}\NormalTok{ math.degrees(}\FloatTok{0.0}\NormalTok{)}
             \ControlFlowTok{else}\NormalTok{:}
 \NormalTok{                angle }\OperatorTok{=}\NormalTok{ math.degrees(math.atan(Gy }\OperatorTok{/}\NormalTok{ Gx))}
                 \ControlFlowTok{if}\NormalTok{ angle }\OperatorTok{\textless{}} \DecValTok{0}\NormalTok{:}
 \NormalTok{                    angle }\OperatorTok{+=} \DecValTok{180}
-                    
+
 \NormalTok{            angleArray.append(}\BuiltInTok{round}\NormalTok{(angle, }\DecValTok{9}\NormalTok{))}
-            
+
 \NormalTok{        mag.append(magnitudeArray)}
 \NormalTok{        theta.append(angleArray)}
-        
+
+    \CommentTok{\# add list of magnitudes to list[x]}
 \NormalTok{    mag\_list.append(mag)}
+
+    \CommentTok{\# add list of angles to angle list[x]}
 \NormalTok{    theta\_list.append(theta)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-Aspect Ratio: 1.0
-Resized Width: 200
-<Figure size 3000x1600 with 0 Axes>
-<matplotlib.image.AxesImage object at 0x292a43250>
-(-0.5, 199.5, 199.5, -0.5)
 Aspect Ratio: 0.6666666666666666
 Resized Width: 300
-<Figure size 3000x1600 with 0 Axes>
-<matplotlib.image.AxesImage object at 0x2c418b850>
-(-0.5, 299.5, 199.5, -0.5)
-Aspect Ratio: 0.662751677852349
-Resized Width: 301
-<Figure size 3000x1600 with 0 Axes>
-<matplotlib.image.AxesImage object at 0x2c874af90>
-(-0.5, 300.5, 199.5, -0.5)
-Aspect Ratio: 0.4904214559386973
-Resized Width: 407
-<Figure size 3000x1600 with 0 Axes>
-<matplotlib.image.AxesImage object at 0x2dcc55690>
-(-0.5, 406.5, 199.5, -0.5)
+Aspect Ratio: 1.5
+Resized Width: 133
+Aspect Ratio: 0.6666666666666666
+Resized Width: 300
 \end{verbatim}
 
-\begin{figure}[H]
+\begin{figure}
 
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-5-1.pdf}
-
-}
-
-\end{figure}
+\begin{minipage}{0.33\linewidth}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-5-2.pdf}
+{\centering \includegraphics{images/plots/aerial_cities/0.jpg}
 
 }
 
-\end{figure}
+\subcaption{San Francisco, CA}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-5-3.pdf}
+{\centering \includegraphics{images/plots/aerial_cities/1.jpg}
 
 }
 
-\end{figure}
+\subcaption{Salt Lake City, UT}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-5-4.pdf}
+{\centering \includegraphics{images/plots/aerial_cities/2.jpg}
 
 }
 
-\end{figure}
+\subcaption{Detroit, MI}
 
-\hypertarget{build-data-frames-for-each-image}{%
-\section{Build Data Frames for Each
-Image}\label{build-data-frames-for-each-image}}
+\end{figure}%
+
+\end{minipage}%
+
+\caption{\label{fig-city-images}Aerial Cityscape Images Rescaled and
+Converted to Greyscale}
+
+\end{figure}%
+
+\section{Build Data Frames for Each Aerial
+Cityscape}\label{build-data-frames-for-each-aerial-cityscape}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mag\_diagonal }\OperatorTok{=}\NormalTok{ np.array(mag\_list[}\DecValTok{0}\NormalTok{])}
-\NormalTok{theta\_diagonal }\OperatorTok{=}\NormalTok{ np.array(theta\_list[}\DecValTok{0}\NormalTok{])}
+\NormalTok{mag\_sf }\OperatorTok{=}\NormalTok{ np.array(mag\_list[}\DecValTok{0}\NormalTok{])}
+\NormalTok{theta\_sf }\OperatorTok{=}\NormalTok{ np.array(theta\_list[}\DecValTok{0}\NormalTok{])}
 
 
-\NormalTok{mag\_sf }\OperatorTok{=}\NormalTok{ np.array(mag\_list[}\DecValTok{1}\NormalTok{])}
-\NormalTok{theta\_sf }\OperatorTok{=}\NormalTok{ np.array(theta\_list[}\DecValTok{1}\NormalTok{])}
+\NormalTok{mag\_salt\_lake }\OperatorTok{=}\NormalTok{ np.array(mag\_list[}\DecValTok{1}\NormalTok{])}
+\NormalTok{theta\_salt\_lake }\OperatorTok{=}\NormalTok{ np.array(theta\_list[}\DecValTok{1}\NormalTok{])}
 
 
-\NormalTok{mag\_internet\_grass }\OperatorTok{=}\NormalTok{ np.array(mag\_list[}\DecValTok{2}\NormalTok{])}
-\NormalTok{theta\_internet\_grass }\OperatorTok{=}\NormalTok{ np.array(theta\_list[}\DecValTok{2}\NormalTok{])}
+\NormalTok{mag\_detroit }\OperatorTok{=}\NormalTok{ np.array(mag\_list[}\DecValTok{2}\NormalTok{])}
+\NormalTok{theta\_detroit }\OperatorTok{=}\NormalTok{ np.array(theta\_list[}\DecValTok{2}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
 
+\section{Plot Magnitudes as Image for each Aerial
+Cityscape}\label{plot-magnitudes-as-image-for-each-aerial-cityscape}
 
-\NormalTok{mag\_living\_labs }\OperatorTok{=}\NormalTok{ np.array(mag\_list[}\DecValTok{3}\NormalTok{])}
-\NormalTok{theta\_living\_labs }\OperatorTok{=}\NormalTok{ np.array(theta\_list[}\DecValTok{3}\NormalTok{])}
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{\# plt.figure(figsize=(15, 8))}
+\CommentTok{\# \#plt.title(\textquotesingle{}San Francisco, CA Gradient Magnitudes\textquotesingle{})}
+\CommentTok{\# plt.imshow(mag\_list[0], cmap="gray")}
+\CommentTok{\# plt.axis("on")}
+\CommentTok{\# \#plt.show()}
+\CommentTok{\# plt.tight\_layout()}
+\CommentTok{\# plt.savefig("images/plots/aerial\_cities/sf\_mag.png", dpi=300)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Diagonal DF}
-\NormalTok{diagonal\_hog\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{mag =} \FunctionTok{as.vector}\NormalTok{(py}\SpecialCharTok{$}\NormalTok{mag\_diagonal),}
-                              \AttributeTok{theta =} \FunctionTok{as.vector}\NormalTok{((py}\SpecialCharTok{$}\NormalTok{theta\_diagonal))) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{radian =}\NormalTok{ theta}\SpecialCharTok{*}\NormalTok{(pi}\SpecialCharTok{/}\DecValTok{180}\NormalTok{))}
+\CommentTok{\# plt.figure(figsize=(8, 15))}
+\CommentTok{\# \#plt.title(\textquotesingle{}Salt Lake City, UT Gradient Magnitudes\textquotesingle{})}
+\CommentTok{\# plt.imshow(mag\_list[1], cmap="gray")}
+\CommentTok{\# plt.axis("on")}
+\CommentTok{\# \#plt.show()}
+\CommentTok{\# plt.tight\_layout()}
+\CommentTok{\# plt.savefig("images/plots/aerial\_cities/salt\_lake\_mag.png", dpi=300)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# plt.figure(figsize=(15, 8))}
+\CommentTok{\# \#plt.title(\textquotesingle{}Detroit, MI Gradient Magnitudes\textquotesingle{})}
+\CommentTok{\# plt.imshow(mag\_list[2], cmap="gray")}
+\CommentTok{\# plt.axis("on")}
+\CommentTok{\# \#plt.show()}
+\CommentTok{\# plt.tight\_layout()}
+\CommentTok{\# plt.savefig("images/plots/aerial\_cities/detroit\_mag.png", dpi=300)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/aerial_cities/sf_mag.png}
+
+}
+
+\subcaption{San Francisco, CA}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/aerial_cities/salt_lake_mag.png}
+
+}
+
+\subcaption{Salt Lake City, UT}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/aerial_cities/detroit_mag.png}
+
+}
+
+\subcaption{Detroit, MI}
+
+\end{figure}%
+
+\end{minipage}%
+
+\caption{\label{fig-city-mags}Aerial Cityscape Magnitudes}
+
+\end{figure}%
+
+\section{Create Data Frame for Each
+Image}\label{create-data-frame-for-each-image}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# San Francisco DF}
 \NormalTok{sf\_hog\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{mag =} \FunctionTok{as.vector}\NormalTok{(py}\SpecialCharTok{$}\NormalTok{mag\_sf),}
                               \AttributeTok{theta =} \FunctionTok{as.vector}\NormalTok{((py}\SpecialCharTok{$}\NormalTok{theta\_sf))) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{radian =}\NormalTok{ theta}\SpecialCharTok{*}\NormalTok{(pi}\SpecialCharTok{/}\DecValTok{180}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
-\CommentTok{\# Internet Grass DF}
-\NormalTok{internet\_grass\_hog\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{mag =} \FunctionTok{as.vector}\NormalTok{(py}\SpecialCharTok{$}\NormalTok{mag\_internet\_grass),}
-                              \AttributeTok{theta =} \FunctionTok{as.vector}\NormalTok{((py}\SpecialCharTok{$}\NormalTok{theta\_internet\_grass))) }\SpecialCharTok{\%\textgreater{}\%}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Salt Lake City DF}
+\NormalTok{salt\_lake\_hog\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{mag =} \FunctionTok{as.vector}\NormalTok{(py}\SpecialCharTok{$}\NormalTok{mag\_salt\_lake),}
+                              \AttributeTok{theta =} \FunctionTok{as.vector}\NormalTok{((py}\SpecialCharTok{$}\NormalTok{theta\_salt\_lake))) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{radian =}\NormalTok{ theta}\SpecialCharTok{*}\NormalTok{(pi}\SpecialCharTok{/}\DecValTok{180}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
-\CommentTok{\# Living Labs DF}
-\NormalTok{living\_labs\_hog\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{mag =} \FunctionTok{as.vector}\NormalTok{(py}\SpecialCharTok{$}\NormalTok{mag\_living\_labs),}
-                              \AttributeTok{theta =} \FunctionTok{as.vector}\NormalTok{((py}\SpecialCharTok{$}\NormalTok{theta\_living\_labs))) }\SpecialCharTok{\%\textgreater{}\%}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Detroit DF}
+\NormalTok{detroit\_hog\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{mag =} \FunctionTok{as.vector}\NormalTok{(py}\SpecialCharTok{$}\NormalTok{mag\_detroit),}
+                              \AttributeTok{theta =} \FunctionTok{as.vector}\NormalTok{((py}\SpecialCharTok{$}\NormalTok{theta\_detroit))) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{radian =}\NormalTok{ theta}\SpecialCharTok{*}\NormalTok{(pi}\SpecialCharTok{/}\DecValTok{180}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# List of all Data frames}
-\NormalTok{standard\_df\_list }\OtherTok{=} \FunctionTok{list}\NormalTok{(diagonal\_hog\_df,}
-\NormalTok{                        sf\_hog\_df, }
-\NormalTok{                        internet\_grass\_hog\_df, }
-\NormalTok{                        living\_labs\_hog\_df)}
+\NormalTok{standard\_df\_list }\OtherTok{=} \FunctionTok{list}\NormalTok{(sf\_hog\_df,}
+\NormalTok{                        salt\_lake\_hog\_df, }
+\NormalTok{                        detroit\_hog\_df)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{plot-magnitudes-as-image}{%
-\section{Plot Magnitudes as Image}\label{plot-magnitudes-as-image}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{15}\NormalTok{, }\DecValTok{8}\NormalTok{))}
-\NormalTok{plt.title(}\StringTok{\textquotesingle{}Gradient Magnitudes\textquotesingle{}}\NormalTok{)}
-\NormalTok{plt.imshow(mag\_list[}\DecValTok{0}\NormalTok{], cmap}\OperatorTok{=}\StringTok{"gray"}\NormalTok{)}
-\NormalTok{plt.axis(}\StringTok{"off"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-(-0.5, 199.5, 199.5, -0.5)
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{plt.show()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[H]
-
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-8-1.pdf}
-
-}
-
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-
-\NormalTok{plt.savefig(}\StringTok{"mag.png"}\NormalTok{, dpi}\OperatorTok{=}\DecValTok{300}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[H]
-
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-8-2.pdf}
-
-}
-
-\end{figure}
-
-\hypertarget{create-histogram-plots-of-gradient-magnitudes-and-angles}{%
-\section{Create Histogram Plots of Gradient Magnitudes and
-Angles}\label{create-histogram-plots-of-gradient-magnitudes-and-angles}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{diagonal\_histogram\_mag\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{1}\NormalTok{]], }
-         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mag)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Magnitude"}\NormalTok{, }
-       \AttributeTok{y =} \StringTok{"Count"}\NormalTok{, }
-       \AttributeTok{title =} \StringTok{"Diagonal Line Image Histogram of Gradient Magnitudes"}
-\NormalTok{       ) }\SpecialCharTok{+}
-  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
-
-\NormalTok{diagonal\_histogram\_mag\_plot}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-\end{verbatim}
-
-\begin{figure}[H]
-
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-9-5.pdf}
-
-}
-
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{diagonal\_mag\_filter }\OtherTok{\textless{}{-}} \FloatTok{0.1}
-
-\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/diagonal\_histogram\_mag\_plot.jpg"}\NormalTok{, diagonal\_histogram\_mag\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{diagonal\_histogram\_theta\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{1}\NormalTok{]], }
-         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Angle"}\NormalTok{, }
-       \AttributeTok{y =} \StringTok{"Count"}\NormalTok{, }
-       \AttributeTok{title =} \StringTok{"Diagonal Line Image Histogram of Gradient Angles"}
-\NormalTok{       ) }\SpecialCharTok{+}
-  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
-
-\NormalTok{diagonal\_histogram\_theta\_plot}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-\end{verbatim}
-
-\begin{figure}[H]
-
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-9-6.pdf}
-
-}
-
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/diagonal\_histogram\_theta\_plot.jpg"}\NormalTok{, diagonal\_histogram\_theta\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-\end{verbatim}
+\section{Create Histograms of Gradient Magnitudes and Angles for Aerial
+Cityscapes}\label{create-histograms-of-gradient-magnitudes-and-angles-for-aerial-cityscapes}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{sf\_histogram\_mag\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{1}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mag)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Magnitude"}\NormalTok{, }
+       \AttributeTok{y =} \StringTok{"Count"}\NormalTok{, }
+       \AttributeTok{title =} \StringTok{"San Francisco Cityscape Image Histogram of Gradient Magnitudes"}
+\NormalTok{       ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\CommentTok{\#sf\_histogram\_mag\_plot}
+
+\NormalTok{sf\_mag\_filter }\OtherTok{\textless{}{-}} \FloatTok{0.4}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/aerial\_cities/sf\_histogram\_mag\_plot.jpg"}\NormalTok{, sf\_histogram\_mag\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sf\_histogram\_theta\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{1}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Angle"}\NormalTok{, }
+       \AttributeTok{y =} \StringTok{"Count"}\NormalTok{, }
+       \AttributeTok{title =} \StringTok{"San Francisco Cityscape Image Histogram of Gradient Angles"}
+\NormalTok{       ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\CommentTok{\#sf\_histogram\_theta\_plot}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/aerial\_cities/sf\_histogram\_theta\_plot.jpg"}\NormalTok{, sf\_histogram\_theta\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{salt\_lake\_histogram\_mag\_plot }\OtherTok{\textless{}{-}}
   \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{2}\NormalTok{]], }
          \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mag)) }\SpecialCharTok{+}
   \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Magnitude"}\NormalTok{, }
        \AttributeTok{y =} \StringTok{"Count"}\NormalTok{, }
-       \AttributeTok{title =} \StringTok{"San Francisco Image Histogram of Gradient Magnitudes"}
+       \AttributeTok{title =} \StringTok{"Salt Lake City Image Histogram of Gradient Magnitudes"}
 \NormalTok{       ) }\SpecialCharTok{+}
   \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
 
-\NormalTok{sf\_histogram\_mag\_plot}
+\CommentTok{\#salt\_lake\_histogram\_mag\_plot}
+
+\NormalTok{salt\_lake\_mag\_filter }\OtherTok{\textless{}{-}} \FloatTok{0.12}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/aerial\_cities/salt\_lake\_histogram\_mag\_plot.jpg"}\NormalTok{, salt\_lake\_histogram\_mag\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-\end{verbatim}
-
-\begin{figure}[H]
-
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-10-1.pdf}
-
-}
-
-\end{figure}
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sf\_mag\_filter }\OtherTok{\textless{}{-}} \FloatTok{0.4}
-
-\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/sf\_histogram\_mag\_plot.jpg"}\NormalTok{, sf\_histogram\_mag\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{sf\_histogram\_theta\_plot }\OtherTok{\textless{}{-}}
+\NormalTok{salt\_lake\_histogram\_theta\_plot }\OtherTok{\textless{}{-}}
   \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{2}\NormalTok{]], }
          \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
   \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Angle"}\NormalTok{, }
        \AttributeTok{y =} \StringTok{"Count"}\NormalTok{, }
-       \AttributeTok{title =} \StringTok{"San Francisco Image Histogram of Gradient Angles"}
+       \AttributeTok{title =} \StringTok{"Salt Lake City Image Histogram of Gradient Angles"}
 \NormalTok{       ) }\SpecialCharTok{+}
   \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
 
-\NormalTok{sf\_histogram\_theta\_plot}
+\CommentTok{\#salt\_lake\_histogram\_theta\_plot}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/aerial\_cities/salt\_lake\_histogram\_theta\_plot.jpg"}\NormalTok{, salt\_lake\_histogram\_theta\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-\end{verbatim}
-
-\begin{figure}[H]
-
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-10-2.pdf}
-
-}
-
-\end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/sf\_histogram\_theta\_plot.jpg"}\NormalTok{, sf\_histogram\_theta\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\NormalTok{detroit\_histogram\_mag\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{3}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mag)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Magnitude"}\NormalTok{, }
+       \AttributeTok{y =} \StringTok{"Count"}\NormalTok{, }
+       \AttributeTok{title =} \StringTok{"Detroit Image Histogram of Gradient Magnitudes"}
+\NormalTok{       ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\CommentTok{\#detroit\_histogram\_mag\_plot}
+
+\NormalTok{detroit\_mag\_filter }\OtherTok{\textless{}{-}} \FloatTok{0.15}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/aerial\_cities/detroit\_histogram\_mag\_plot.jpg"}\NormalTok{, detroit\_histogram\_mag\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{detroit\_histogram\_theta\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{3}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Angle"}\NormalTok{, }
+       \AttributeTok{y =} \StringTok{"Count"}\NormalTok{, }
+       \AttributeTok{title =} \StringTok{"Detroit, MI Image Histogram of Gradient Angles"}
+\NormalTok{       ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\CommentTok{\#detroit\_histogram\_theta\_plot}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/aerial\_cities/detroit\_histogram\_theta\_plot.jpg"}\NormalTok{, detroit\_histogram\_theta\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+\begin{minipage}{0.33\linewidth}
+\includegraphics{images/plots/aerial_cities/sf_histogram_mag_plot.jpg}
+\includegraphics{images/plots/aerial_cities/sf_histogram_theta_plot.jpg}\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
+\includegraphics{images/plots/aerial_cities/salt_lake_histogram_mag_plot.jpg}
+\includegraphics{images/plots/aerial_cities/salt_lake_histogram_theta_plot.jpg}\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
+\includegraphics{images/plots/aerial_cities/detroit_histogram_mag_plot.jpg}
+\includegraphics{images/plots/aerial_cities/detroit_histogram_theta_plot.jpg}\end{minipage}%
+
+\caption{\label{fig-city-histograms}Aerial Cityscape Magnitudes and
+Angles}
+
+\end{figure}%
+
+\section{Build New Distributed Histogram Data
+Frames}\label{build-new-distributed-histogram-data-frames}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# function to calculate the contributions to neighboring bins}
+\NormalTok{calculate\_bin\_contributions }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(angle, magnitude, num\_bins) \{}
+\NormalTok{  bin\_width }\OtherTok{\textless{}{-}} \DecValTok{180} \SpecialCharTok{/}\NormalTok{ num\_bins}
+\NormalTok{  contributions }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(num\_bins)}
+  
+  \CommentTok{\# get the central bin}
+\NormalTok{  central\_bin }\OtherTok{\textless{}{-}} \FunctionTok{floor}\NormalTok{(angle }\SpecialCharTok{/}\NormalTok{ bin\_width) }\SpecialCharTok{\%\%}\NormalTok{ num\_bins}
+\NormalTok{  next\_bin }\OtherTok{\textless{}{-}}\NormalTok{ (central\_bin }\SpecialCharTok{+} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\%}\NormalTok{ num\_bins}
+  
+  \CommentTok{\# get contributions to neighboring bins}
+\NormalTok{  weight }\OtherTok{\textless{}{-}}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{abs}\NormalTok{((angle }\SpecialCharTok{\%\%}\NormalTok{ bin\_width) }\SpecialCharTok{/}\NormalTok{ bin\_width)) }\SpecialCharTok{*}\NormalTok{ magnitude}
+  
+\NormalTok{  contributions[central\_bin }\SpecialCharTok{+} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ weight}
+\NormalTok{  contributions[next\_bin }\SpecialCharTok{+} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ magnitude }\SpecialCharTok{{-}}\NormalTok{ weight}
+  
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(contributions[}\DecValTok{1}\NormalTok{],}
+\NormalTok{         contributions[}\DecValTok{2}\NormalTok{],}
+\NormalTok{         contributions[}\DecValTok{3}\NormalTok{],}
+\NormalTok{         contributions[}\DecValTok{4}\NormalTok{],}
+\NormalTok{         contributions[}\DecValTok{5}\NormalTok{],}
+\NormalTok{         contributions[}\DecValTok{6}\NormalTok{],}
+\NormalTok{         contributions[}\DecValTok{7}\NormalTok{],}
+\NormalTok{         contributions[}\DecValTok{8}\NormalTok{],}
+\NormalTok{         contributions[}\DecValTok{9}\NormalTok{])}
+\NormalTok{         )}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{filtered\_aerial\_standard\_df\_list }\OtherTok{\textless{}{-}}\FunctionTok{list}\NormalTok{(sf\_hog\_df }\SpecialCharTok{\%\textgreater{}\%}
+                                   \FunctionTok{filter}\NormalTok{(mag }\SpecialCharTok{\textgreater{}=}\NormalTok{ sf\_mag\_filter),}
+\NormalTok{                                 salt\_lake\_hog\_df }\SpecialCharTok{\%\textgreater{}\%}
+                                   \FunctionTok{filter}\NormalTok{(mag }\SpecialCharTok{\textgreater{}=}\NormalTok{ salt\_lake\_mag\_filter), }
+\NormalTok{                                 detroit\_hog\_df }\SpecialCharTok{\%\textgreater{}\%}
+                                   \FunctionTok{filter}\NormalTok{(mag }\SpecialCharTok{\textgreater{}=}\NormalTok{ detroit\_mag\_filter))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{aerial\_contribution\_df\_list }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+
+\CommentTok{\# Define the number of bins}
+\NormalTok{num\_bins }\OtherTok{\textless{}{-}} \DecValTok{9}
+ 
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(filtered\_aerial\_standard\_df\_list))\{}
+  
+\NormalTok{  aerial\_contribution\_hog\_df }\OtherTok{\textless{}{-}} 
+\NormalTok{    filtered\_aerial\_standard\_df\_list[[i]] }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{0}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{1}\NormalTok{]],}
+           \StringTok{\textasciigrave{}}\AttributeTok{20}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{2}\NormalTok{]],}
+           \StringTok{\textasciigrave{}}\AttributeTok{40}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{3}\NormalTok{]],}
+           \StringTok{\textasciigrave{}}\AttributeTok{60}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{4}\NormalTok{]],}
+           \StringTok{\textasciigrave{}}\AttributeTok{80}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{5}\NormalTok{]],}
+           \StringTok{\textasciigrave{}}\AttributeTok{100}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{6}\NormalTok{]],}
+           \StringTok{\textasciigrave{}}\AttributeTok{120}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{7}\NormalTok{]],}
+           \StringTok{\textasciigrave{}}\AttributeTok{140}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{8}\NormalTok{]],}
+           \StringTok{\textasciigrave{}}\AttributeTok{160}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{9}\NormalTok{]],}
+\NormalTok{           )}
+  
+\NormalTok{  aerial\_split\_histo\_df }\OtherTok{\textless{}{-}} 
+\NormalTok{    aerial\_contribution\_hog\_df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{names\_to =} \StringTok{"bin"}\NormalTok{, }
+                 \AttributeTok{values\_to =} \StringTok{"contribution"}\NormalTok{, }
+                 \AttributeTok{cols =} \DecValTok{4}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(aerial\_contribution\_hog\_df)) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{bin =} \FunctionTok{as.numeric}\NormalTok{(bin)) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{group\_by}\NormalTok{(bin) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{summarise}\NormalTok{(}\AttributeTok{contribution\_sum =} \FunctionTok{sum}\NormalTok{(contribution))}
+  
+  
+\NormalTok{  aerial\_contribution\_df\_list[[i]] }\OtherTok{\textless{}{-}}\NormalTok{ aerial\_split\_histo\_df}
+
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Generate Polar Plots for Standard
+Historgrams}\label{generate-polar-plots-for-standard-historgrams}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sf\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(filtered\_aerial\_standard\_df\_list[[}\DecValTok{1}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }
+                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
+                 \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
+                 \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_polar}\NormalTok{(}
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
+    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
+\NormalTok{  )}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of San Francisco, CA Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Standard HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/aerial\_cities/sf\_standard\_polar\_plot.jpg"}\NormalTok{, sf\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{salt\_lake\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(filtered\_aerial\_standard\_df\_list[[}\DecValTok{2}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }
+                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
+                 \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
+                 \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_polar}\NormalTok{(}
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
+    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
+\NormalTok{  )}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of Salt Lake City, UT Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Standard HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/aerial\_cities/salt\_lake\_standard\_polar\_plot.jpg"}\NormalTok{, salt\_lake\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{detroit\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(filtered\_aerial\_standard\_df\_list[[}\DecValTok{3}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }
+                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
+                 \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
+                 \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_polar}\NormalTok{(}
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
+    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
+\NormalTok{  )}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of Detroit, MI Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Standard HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/aerial\_cities/detroit\_standard\_polar\_plot.jpg"}\NormalTok{, detroit\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{all\_standard\_city\_plots }\OtherTok{\textless{}{-}}\NormalTok{ ggpubr}\SpecialCharTok{::}\FunctionTok{ggarrange}\NormalTok{(sf\_plot, }
+\NormalTok{                                             salt\_lake\_plot, }
+\NormalTok{                                             detroit\_plot)}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/aerial\_cities/all\_standard\_polar\_plots.jpg"}\NormalTok{, }
+\NormalTok{       all\_standard\_city\_plots, }
+       \AttributeTok{width =} \DecValTok{7}\NormalTok{, }
+       \AttributeTok{height =} \DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/aerial_cities/sf_standard_polar_plot.jpg}
+
+}
+
+\subcaption{San Francisco, CA}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/aerial_cities/salt_lake_standard_polar_plot.jpg}
+
+}
+
+\subcaption{Salt Lake City, UT}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/aerial_cities/detroit_standard_polar_plot.jpg}
+
+}
+
+\subcaption{Detroit, MI}
+
+\end{figure}%
+
+\end{minipage}%
+
+\caption{\label{fig-city-standard-polar}Aerial Cityscape Standard Polar
+Plots}
+
+\end{figure}%
+
+\section{Generate Polar Plots for Distributed
+Historgrams}\label{generate-polar-plots-for-distributed-historgrams}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sf\_split\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(aerial\_contribution\_df\_list[[}\DecValTok{1}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ bin, }\AttributeTok{y =}\NormalTok{ contribution\_sum)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{,}
+                 \AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }
+                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
+                 \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
+                 \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_polar}\NormalTok{(}
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
+    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
+\NormalTok{  )}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of San Francisco, CA Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Distributed HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/aerial\_cities/sf\_contribution\_polar\_plot.jpg"}\NormalTok{, sf\_split\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{salt\_lake\_split\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(aerial\_contribution\_df\_list[[}\DecValTok{2}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ bin, }\AttributeTok{y =}\NormalTok{ contribution\_sum)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{,}
+                 \AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }
+                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
+                 \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
+                 \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_polar}\NormalTok{(}
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
+    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
+\NormalTok{  )}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of Salt Lake City, UT Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Distributed HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/aerial\_cities/salt\_lake\_contribution\_polar\_plot.jpg"}\NormalTok{, salt\_lake\_split\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{detroit\_split\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(aerial\_contribution\_df\_list[[}\DecValTok{3}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ bin, }\AttributeTok{y =}\NormalTok{ contribution\_sum)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{,}
+                 \AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }
+                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
+                 \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
+                 \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_polar}\NormalTok{(}
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
+    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
+\NormalTok{  )}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of Detroit, MI Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Distributed HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/aerial\_cities/detroit\_contribution\_polar\_plot.jpg"}\NormalTok{, detroit\_split\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{all\_aerial\_contribution\_plots }\OtherTok{\textless{}{-}}\NormalTok{ ggpubr}\SpecialCharTok{::}\FunctionTok{ggarrange}\NormalTok{(sf\_split\_plot, }
+\NormalTok{                                                   salt\_lake\_split\_plot, }
+\NormalTok{                                                   detroit\_split\_plot)}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/aerial\_cities/all\_aerial\_contribution\_plots.jpg"}\NormalTok{, }
+\NormalTok{       all\_aerial\_contribution\_plots, }
+       \AttributeTok{width =} \DecValTok{7}\NormalTok{, }
+       \AttributeTok{height =} \DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/aerial_cities/sf_contribution_polar_plot.jpg}
+
+}
+
+\subcaption{San Francisco, CA}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/aerial_cities/salt_lake_contribution_polar_plot.jpg}
+
+}
+
+\subcaption{Salt Lake City, UT}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/aerial_cities/detroit_contribution_polar_plot.jpg}
+
+}
+
+\subcaption{Detroit, MI}
+
+\end{figure}%
+
+\end{minipage}%
+
+\caption{\label{fig-city-distributed-polar}Aerial Cityscape Distributed
+Method Polar Plots}
+
+\end{figure}%
+
+\chapter{Grass Images}\label{grass-images}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(reticulate)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(mapsapi)}
+\FunctionTok{library}\NormalTok{(mapboxapi)}
+\FunctionTok{library}\NormalTok{(magick)}
+\FunctionTok{Sys.which}\NormalTok{(}\StringTok{"python"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+                                                   python 
+"/Users/bensunshine/.virtualenvs/r-reticulate/bin/python" 
 \end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# jupyter only inline output command}
+\CommentTok{\#\%matplotlib inline}
+
+\ImportTok{from}\NormalTok{ skimage.io }\ImportTok{import}\NormalTok{ imread, imshow}
+\ImportTok{from}\NormalTok{ skimage.transform }\ImportTok{import}\NormalTok{ resize}
+\ImportTok{from}\NormalTok{ skimage.feature }\ImportTok{import}\NormalTok{ hog}
+\ImportTok{from}\NormalTok{ skimage }\ImportTok{import}\NormalTok{ data, exposure}
+
+
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{from}\NormalTok{ skimage }\ImportTok{import}\NormalTok{ io}
+\ImportTok{from}\NormalTok{ skimage }\ImportTok{import}\NormalTok{ color}
+\ImportTok{from}\NormalTok{ skimage.transform }\ImportTok{import}\NormalTok{ resize}
+\ImportTok{import}\NormalTok{ math}
+\ImportTok{from}\NormalTok{ skimage.feature }\ImportTok{import}\NormalTok{ hog}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Collect HOG Features for Grass
+Images}\label{collect-hog-features-for-grass-images}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# List for storing images}
+\NormalTok{img\_list }\OperatorTok{=}\NormalTok{ []}
+
+\CommentTok{\# Internet Grass Image}
+\NormalTok{img\_list.append(color.rgb2gray(io.imread(}\StringTok{"images/grass\_image2.jpg"}\NormalTok{)))}
+
+\CommentTok{\# Living Labs Rotated Aerial Grass}
+\NormalTok{img\_list.append(color.rgb2gray(io.imread(}\StringTok{"images/living\_lab\_aerial/aerial\_grass\_living\_lab\_rotated.jpg"}\NormalTok{)))}
+
+\CommentTok{\# Living Labs Grass Close{-}up}
+\NormalTok{img\_list.append(color.rgb2gray(io.imread(}\StringTok{"images/living\_lab\_aerial/LL\_zoomed\_in\_12.jpg"}\NormalTok{)))}
+
+
+\CommentTok{\#img = color.rgb2gray(io.imread("images/grass\_image2.jpg"))}
+
+\CommentTok{\# img = color.rgb2gray(io.imread("images/b\_test\_image\_copy.jpg"))}
+\CommentTok{\#img = color.rgb2gray(io.imread("images/long\_grass\_sample.jpeg"))}
+\CommentTok{\#img = color.rgb2gray(io.imread("images/diagnol\_lines.jpg"))}
+
+\CommentTok{\#img = color.rgb2gray(io.imread("images/san\_francisco\_scale\_zoom\_12.png"))}
+
+\CommentTok{\#img = color.rgb2gray(io.imread("images/diagnol\_lines\_flipped.jpg"))}
+\CommentTok{\#img = color.rgb2gray(io.imread("images/long\_grass\_sample\_cropped.jpg"))}
+
+\CommentTok{\# aerial rotated image}
+\CommentTok{\#img = color.rgb2gray(io.imread("images/living\_lab\_aerial/aerial\_grass\_living\_lab\_rotated.jpg"))}
+
+\CommentTok{\# zoomed internet photo}
+\CommentTok{\#img = color.rgb2gray(io.imread("images/dead\_grass\_zoom.jpeg"))}
+
+
+\CommentTok{\# zoomed in 11}
+\CommentTok{\#img = color.rgb2gray(io.imread("images/living\_lab\_aerial/LL\_zoomed\_in\_11.jpg"))}
+
+\CommentTok{\# zoomed in 12}
+\CommentTok{\#img = color.rgb2gray(io.imread("images/living\_lab\_aerial/LL\_zoomed\_in\_12.jpg"))}
+
+\CommentTok{\# zoomed in 16}
+\CommentTok{\#img = color.rgb2gray(io.imread("images/living\_lab\_aerial/LL\_zoomed\_in\_16\_side.jpg"))}
+
+
+
+\CommentTok{\# real one}
+\CommentTok{\#img = color.rgb2gray(io.imread("images/living\_labs\_real\_grass\_image.jpg"))}
+
+\CommentTok{\# List to store magnitudes for each image}
+\NormalTok{mag\_list }\OperatorTok{=}\NormalTok{ []}
+
+\CommentTok{\# List to store angles for each image}
+\NormalTok{theta\_list }\OperatorTok{=}\NormalTok{ []}
+
+
+\ControlFlowTok{for}\NormalTok{ x }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\BuiltInTok{len}\NormalTok{(img\_list)):}
+    \CommentTok{\# Get image of interest}
+\NormalTok{    img }\OperatorTok{=}\NormalTok{ img\_list[x]}
+    
+\NormalTok{    rescaled\_file\_path }\OperatorTok{=} \SpecialStringTok{f"images/plots/grass/}\SpecialCharTok{\{}\NormalTok{x}\SpecialCharTok{\}}\SpecialStringTok{.jpg"}
+    
+    \CommentTok{\# Determine aspect Ratio}
+\NormalTok{    aspect\_ratio }\OperatorTok{=}\NormalTok{ img.shape[}\DecValTok{0}\NormalTok{] }\OperatorTok{/}\NormalTok{ img.shape[}\DecValTok{1}\NormalTok{]}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Aspect Ratio:"}\NormalTok{, aspect\_ratio)}
+    
+    \CommentTok{\# Hard{-}Code height to 200 pixels}
+\NormalTok{    height }\OperatorTok{=} \DecValTok{200}
+    
+    \CommentTok{\# Calculate witdth to maintain same aspect ratio}
+\NormalTok{    width }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(height }\OperatorTok{/}\NormalTok{ aspect\_ratio)}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Resized Width:"}\NormalTok{, width)}
+    
+    \CommentTok{\# Resize the image}
+\NormalTok{    resized\_img }\OperatorTok{=}\NormalTok{ resize(img, (height, width))}
+    
+    \CommentTok{\# Replace the original image with the resized image}
+\NormalTok{    img\_list[x] }\OperatorTok{=}\NormalTok{ resized\_img}
+    
+    \CommentTok{\# plt.figure(figsize=(plot\_width, plot\_height))}
+    \CommentTok{\# plt.imshow(resized\_img, cmap="gray")}
+    \CommentTok{\# plt.axis("on")}
+    \CommentTok{\# plt.tight\_layout()}
+    \CommentTok{\# plt.savefig(rescaled\_file\_path, dpi=300)}
+    \CommentTok{\# plt.show()}
+
+    
+    \CommentTok{\# list for storing all magnitudes for image[x]}
+\NormalTok{    mag }\OperatorTok{=}\NormalTok{ []}
+    
+    \CommentTok{\# list for storing all angles for image[x]}
+\NormalTok{    theta }\OperatorTok{=}\NormalTok{ []}
+    
+    \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(height):}
+\NormalTok{        magnitudeArray }\OperatorTok{=}\NormalTok{ []}
+\NormalTok{        angleArray }\OperatorTok{=}\NormalTok{ []}
+
+        \ControlFlowTok{for}\NormalTok{ j }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(width):}
+            \ControlFlowTok{if}\NormalTok{ j }\OperatorTok{{-}} \DecValTok{1} \OperatorTok{\textless{}} \DecValTok{0} \KeywordTok{or}\NormalTok{ j }\OperatorTok{+} \DecValTok{1} \OperatorTok{\textgreater{}=}\NormalTok{ width:}
+                \ControlFlowTok{if}\NormalTok{ j }\OperatorTok{{-}} \DecValTok{1} \OperatorTok{\textless{}} \DecValTok{0}\NormalTok{:}
+\NormalTok{                    Gx }\OperatorTok{=}\NormalTok{ resized\_img[i][j }\OperatorTok{+} \DecValTok{1}\NormalTok{] }\OperatorTok{{-}} \DecValTok{0}
+                \ControlFlowTok{elif}\NormalTok{ j }\OperatorTok{+} \DecValTok{1} \OperatorTok{\textgreater{}=}\NormalTok{ width:}
+\NormalTok{                    Gx }\OperatorTok{=} \DecValTok{0} \OperatorTok{{-}}\NormalTok{ resized\_img[i][j }\OperatorTok{{-}} \DecValTok{1}\NormalTok{]}
+            \ControlFlowTok{else}\NormalTok{:}
+\NormalTok{                Gx }\OperatorTok{=}\NormalTok{ resized\_img[i][j }\OperatorTok{+} \DecValTok{1}\NormalTok{] }\OperatorTok{{-}}\NormalTok{ resized\_img[i][j }\OperatorTok{{-}} \DecValTok{1}\NormalTok{]}
+
+            \ControlFlowTok{if}\NormalTok{ i }\OperatorTok{{-}} \DecValTok{1} \OperatorTok{\textless{}} \DecValTok{0} \KeywordTok{or}\NormalTok{ i }\OperatorTok{+} \DecValTok{1} \OperatorTok{\textgreater{}=}\NormalTok{ height:}
+                \ControlFlowTok{if}\NormalTok{ i }\OperatorTok{{-}} \DecValTok{1} \OperatorTok{\textless{}} \DecValTok{0}\NormalTok{:}
+\NormalTok{                    Gy }\OperatorTok{=} \DecValTok{0} \OperatorTok{{-}}\NormalTok{ resized\_img[i }\OperatorTok{+} \DecValTok{1}\NormalTok{][j]}
+                \ControlFlowTok{elif}\NormalTok{ i }\OperatorTok{+} \DecValTok{1} \OperatorTok{\textgreater{}=}\NormalTok{ height:}
+\NormalTok{                    Gy }\OperatorTok{=}\NormalTok{ resized\_img[i }\OperatorTok{{-}} \DecValTok{1}\NormalTok{][j] }\OperatorTok{{-}} \DecValTok{0}
+            \ControlFlowTok{else}\NormalTok{:}
+\NormalTok{                Gy }\OperatorTok{=}\NormalTok{ resized\_img[i }\OperatorTok{+} \DecValTok{1}\NormalTok{][j] }\OperatorTok{{-}}\NormalTok{ resized\_img[i }\OperatorTok{{-}} \DecValTok{1}\NormalTok{][j]}
+
+\NormalTok{            magnitude }\OperatorTok{=}\NormalTok{ math.sqrt(}\BuiltInTok{pow}\NormalTok{(Gx, }\DecValTok{2}\NormalTok{) }\OperatorTok{+} \BuiltInTok{pow}\NormalTok{(Gy, }\DecValTok{2}\NormalTok{))}
+\NormalTok{            magnitudeArray.append(}\BuiltInTok{round}\NormalTok{(magnitude, }\DecValTok{9}\NormalTok{))}
+
+            \ControlFlowTok{if}\NormalTok{ Gx }\OperatorTok{==} \DecValTok{0}\NormalTok{:}
+\NormalTok{                angle }\OperatorTok{=}\NormalTok{ math.degrees(}\FloatTok{0.0}\NormalTok{)}
+            \ControlFlowTok{else}\NormalTok{:}
+\NormalTok{                angle }\OperatorTok{=}\NormalTok{ math.degrees(math.atan(Gy }\OperatorTok{/}\NormalTok{ Gx))}
+                \ControlFlowTok{if}\NormalTok{ angle }\OperatorTok{\textless{}} \DecValTok{0}\NormalTok{:}
+\NormalTok{                    angle }\OperatorTok{+=} \DecValTok{180}
+
+\NormalTok{            angleArray.append(}\BuiltInTok{round}\NormalTok{(angle, }\DecValTok{9}\NormalTok{))}
+
+\NormalTok{        mag.append(magnitudeArray)}
+\NormalTok{        theta.append(angleArray)}
+
+    \CommentTok{\# add list of magnitudes to list[x]}
+\NormalTok{    mag\_list.append(mag)}
+
+    \CommentTok{\# add list of angles to angle list[x]}
+\NormalTok{    theta\_list.append(theta)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Aspect Ratio: 0.662751677852349
+Resized Width: 301
+Aspect Ratio: 0.4904214559386973
+Resized Width: 407
+Aspect Ratio: 0.5625
+Resized Width: 355
+\end{verbatim}
+
+\begin{figure}
+
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/grass/0.jpg}
+
+}
+
+\subcaption{Internet Grass Image}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/grass/1.jpg}
+
+}
+
+\subcaption{Living Labs Aerial Image}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/grass/2.jpg}
+
+}
+
+\subcaption{Living Labs Close-Up Image}
+
+\end{figure}%
+
+\end{minipage}%
+
+\caption{\label{fig-grass-images}Grass Images Rescaled and Converted to
+Greyscale}
+
+\end{figure}%
+
+\section{Build Data Frames for Each Grass
+Image}\label{build-data-frames-for-each-grass-image}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mag\_internet\_grass }\OperatorTok{=}\NormalTok{ np.array(mag\_list[}\DecValTok{0}\NormalTok{])}
+\NormalTok{theta\_internet\_grass }\OperatorTok{=}\NormalTok{ np.array(theta\_list[}\DecValTok{0}\NormalTok{])}
+
+
+\NormalTok{mag\_aerial\_living\_lab }\OperatorTok{=}\NormalTok{ np.array(mag\_list[}\DecValTok{1}\NormalTok{])}
+\NormalTok{theta\_aerial\_living\_lab }\OperatorTok{=}\NormalTok{ np.array(theta\_list[}\DecValTok{1}\NormalTok{])}
+
+
+\NormalTok{mag\_close\_up\_living\_lab }\OperatorTok{=}\NormalTok{ np.array(mag\_list[}\DecValTok{2}\NormalTok{])}
+\NormalTok{theta\_close\_up\_living\_lab }\OperatorTok{=}\NormalTok{ np.array(theta\_list[}\DecValTok{2}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Plot Magnitudes as Image for each Grass
+Images}\label{plot-magnitudes-as-image-for-each-grass-images}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# plt.figure(figsize=(15, 8))}
+\CommentTok{\# \#plt.title(\textquotesingle{}San Francisco, CA Gradient Magnitudes\textquotesingle{})}
+\CommentTok{\# plt.imshow(mag\_list[0], cmap="gray")}
+\CommentTok{\# plt.axis("on")}
+\CommentTok{\# \#plt.show()}
+\CommentTok{\# plt.tight\_layout()}
+\CommentTok{\# plt.savefig("images/plots/grass/internet\_grass\_mag.png", dpi=300)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# plt.figure(figsize=(15, 8))}
+\CommentTok{\# \#plt.title(\textquotesingle{}Salt Lake City, UT Gradient Magnitudes\textquotesingle{})}
+\CommentTok{\# plt.imshow(mag\_list[1], cmap="gray")}
+\CommentTok{\# plt.axis("on")}
+\CommentTok{\# \#plt.show()}
+\CommentTok{\# plt.tight\_layout()}
+\CommentTok{\# plt.savefig("images/plots/grass/aerial\_living\_lab\_grass\_mag.png", dpi=300)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# plt.figure(figsize=(15, 8))}
+\CommentTok{\# \#plt.title(\textquotesingle{}Detroit, MI Gradient Magnitudes\textquotesingle{})}
+\CommentTok{\# plt.imshow(mag\_list[2], cmap="gray")}
+\CommentTok{\# plt.axis("on")}
+\CommentTok{\# \#plt.show()}
+\CommentTok{\# plt.tight\_layout()}
+\CommentTok{\# plt.savefig("images/plots/grass/close\_up\_living\_lab\_grass\_mag.png", dpi=300)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/grass/internet_grass_mag.png}
+
+}
+
+\subcaption{Internet Grass}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/grass/aerial_living_lab_grass_mag.png}
+
+}
+
+\subcaption{Aerial Living Labs}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/grass/close_up_living_lab_grass_mag.png}
+
+}
+
+\subcaption{Close-Up Living Labs}
+
+\end{figure}%
+
+\end{minipage}%
+
+\caption{\label{fig-grass-mags}Grass Image Magnitudes}
+
+\end{figure}%
+
+\section{Create Data Frame for Each
+Image}\label{create-data-frame-for-each-image-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Diagonal DF}
+\NormalTok{internet\_grass\_hog\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{mag =} \FunctionTok{as.vector}\NormalTok{(py}\SpecialCharTok{$}\NormalTok{mag\_internet\_grass),}
+                              \AttributeTok{theta =} \FunctionTok{as.vector}\NormalTok{((py}\SpecialCharTok{$}\NormalTok{theta\_internet\_grass))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{radian =}\NormalTok{ theta}\SpecialCharTok{*}\NormalTok{(pi}\SpecialCharTok{/}\DecValTok{180}\NormalTok{))}
+
+\CommentTok{\# San Francisco DF}
+\NormalTok{aerial\_living\_lab\_hog\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{mag =} \FunctionTok{as.vector}\NormalTok{(py}\SpecialCharTok{$}\NormalTok{mag\_aerial\_living\_lab),}
+                              \AttributeTok{theta =} \FunctionTok{as.vector}\NormalTok{((py}\SpecialCharTok{$}\NormalTok{theta\_aerial\_living\_lab))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{radian =}\NormalTok{ theta}\SpecialCharTok{*}\NormalTok{(pi}\SpecialCharTok{/}\DecValTok{180}\NormalTok{))}
+
+\CommentTok{\# Internet Grass DF}
+\NormalTok{close\_up\_living\_lab\_hog\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{mag =} \FunctionTok{as.vector}\NormalTok{(py}\SpecialCharTok{$}\NormalTok{mag\_close\_up\_living\_lab),}
+                              \AttributeTok{theta =} \FunctionTok{as.vector}\NormalTok{((py}\SpecialCharTok{$}\NormalTok{theta\_close\_up\_living\_lab))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{radian =}\NormalTok{ theta}\SpecialCharTok{*}\NormalTok{(pi}\SpecialCharTok{/}\DecValTok{180}\NormalTok{))}
+
+
+\CommentTok{\# List of all Data frames}
+\NormalTok{grass\_standard\_df\_list }\OtherTok{=} \FunctionTok{list}\NormalTok{(internet\_grass\_hog\_df,}
+\NormalTok{                        aerial\_living\_lab\_hog\_df, }
+\NormalTok{                        close\_up\_living\_lab\_hog\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Create Histograms of Gradient Magnitudes and Angles for Grass
+Images}\label{create-histograms-of-gradient-magnitudes-and-angles-for-grass-images}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{internet\_grass\_histogram\_mag\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{3}\NormalTok{]], }
+  \FunctionTok{ggplot}\NormalTok{(grass\_standard\_df\_list[[}\DecValTok{1}\NormalTok{]], }
          \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mag)) }\SpecialCharTok{+}
   \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
@@ -1016,38 +1881,16 @@ Angles}\label{create-histogram-plots-of-gradient-magnitudes-and-angles}}
   \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
 
-\NormalTok{internet\_grass\_histogram\_mag\_plot}
-\end{Highlighting}
-\end{Shaded}
+\CommentTok{\#internet\_grass\_histogram\_mag\_plot}
 
-\begin{verbatim}
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-\end{verbatim}
-
-\begin{figure}[H]
-
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-11-1.pdf}
-
-}
-
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{internet\_grass\_mag\_filter }\OtherTok{\textless{}{-}} \FloatTok{0.3}
 
-\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/internet\_grass\_histogram\_mag\_plot.jpg"}\NormalTok{, internet\_grass\_histogram\_mag\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/grass/internet\_grass\_histogram\_mag\_plot.jpg"}\NormalTok{, internet\_grass\_histogram\_mag\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
 
-\begin{verbatim}
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-\end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
+
 \NormalTok{internet\_grass\_histogram\_theta\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{3}\NormalTok{]], }
+  \FunctionTok{ggplot}\NormalTok{(grass\_standard\_df\_list[[}\DecValTok{1}\NormalTok{]], }
          \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
   \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
@@ -1058,117 +1901,809 @@ Angles}\label{create-histogram-plots-of-gradient-magnitudes-and-angles}}
   \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
 
-\NormalTok{internet\_grass\_histogram\_theta\_plot}
+\CommentTok{\#internet\_grass\_histogram\_theta\_plot}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/grass/internet\_grass\_histogram\_theta\_plot.jpg"}\NormalTok{, internet\_grass\_histogram\_theta\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-\end{verbatim}
-
-\begin{figure}[H]
-
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-11-2.pdf}
-
-}
-
-\end{figure}
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/internet\_grass\_histogram\_theta\_plot.jpg"}\NormalTok{, internet\_grass\_histogram\_theta\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{living\_labs\_histogram\_mag\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{4}\NormalTok{]], }
+\NormalTok{aerial\_living\_lab\_histogram\_mag\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(grass\_standard\_df\_list[[}\DecValTok{2}\NormalTok{]], }
          \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mag)) }\SpecialCharTok{+}
   \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Magnitude"}\NormalTok{, }
        \AttributeTok{y =} \StringTok{"Count"}\NormalTok{, }
-       \AttributeTok{title =} \StringTok{"Living Labs Grass Image Histogram of Gradient Magnitudes"}
+       \AttributeTok{title =} \StringTok{"Aerial Living Labs Image Histogram of Gradient Magnitudes"}
 \NormalTok{       ) }\SpecialCharTok{+}
   \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
 
-\NormalTok{living\_labs\_histogram\_mag\_plot}
-\end{Highlighting}
-\end{Shaded}
+\CommentTok{\#aerial\_living\_lab\_histogram\_mag\_plot}
 
-\begin{verbatim}
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-\end{verbatim}
+\NormalTok{aerial\_living\_lab\_mag\_filter }\OtherTok{\textless{}{-}} \FloatTok{0.08}
 
-\begin{figure}[H]
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/grass/aerial\_living\_lab\_histogram\_mag\_plot.jpg"}\NormalTok{, }
+\NormalTok{       aerial\_living\_lab\_histogram\_mag\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
 
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-12-1.pdf}
 
-}
 
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{living\_labs\_\_mag\_filter }\OtherTok{\textless{}{-}} \FloatTok{0.15}
-
-\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/living\_labs\_histogram\_mag\_plot.jpg"}\NormalTok{, living\_labs\_histogram\_mag\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{living\_labs\_histogram\_theta\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{4}\NormalTok{]], }
+\NormalTok{aerial\_living\_lab\_histogram\_theta\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(grass\_standard\_df\_list[[}\DecValTok{2}\NormalTok{]], }
          \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
   \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Angle"}\NormalTok{, }
        \AttributeTok{y =} \StringTok{"Count"}\NormalTok{, }
-       \AttributeTok{title =} \StringTok{"Living Labs Grass Image Histogram of Gradient Angles"}
+       \AttributeTok{title =} \StringTok{"Aerial Living Labs Image Histogram of Gradient Angles"}
 \NormalTok{       ) }\SpecialCharTok{+}
   \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
 
-\NormalTok{living\_labs\_histogram\_theta\_plot}
+\CommentTok{\#aerial\_living\_lab\_histogram\_theta\_plot}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/grass/aerial\_living\_lab\_histogram\_theta\_plot.jpg"}\NormalTok{, }
+\NormalTok{       aerial\_living\_lab\_histogram\_theta\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-\end{verbatim}
-
-\begin{figure}[H]
-
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-12-2.pdf}
-
-}
-
-\end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/living\_labs\_histogram\_theta\_plot.jpg"}\NormalTok{, living\_labs\_histogram\_theta\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\NormalTok{close\_up\_living\_lab\_histogram\_mag\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(grass\_standard\_df\_list[[}\DecValTok{3}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mag)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Magnitude"}\NormalTok{, }
+       \AttributeTok{y =} \StringTok{"Count"}\NormalTok{, }
+       \AttributeTok{title =} \StringTok{"Close{-}Up Living Labs Histogram of Gradient Magnitudes"}
+\NormalTok{       ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\CommentTok{\#close\_up\_living\_lab\_histogram\_mag\_plot}
+
+\NormalTok{close\_up\_living\_lab\_mag\_filter }\OtherTok{\textless{}{-}} \FloatTok{0.12}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/grass/close\_up\_living\_lab\_histogram\_mag\_plot.jpg"}\NormalTok{, close\_up\_living\_lab\_histogram\_mag\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+
+
+
+\NormalTok{close\_up\_living\_lab\_histogram\_theta\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(grass\_standard\_df\_list[[}\DecValTok{3}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Angle"}\NormalTok{, }
+       \AttributeTok{y =} \StringTok{"Count"}\NormalTok{, }
+       \AttributeTok{title =} \StringTok{"Close{-}Up Living Labs Image Histogram of Gradient Angles"}
+\NormalTok{       ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\CommentTok{\#close\_up\_living\_lab\_histogram\_theta\_plot}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/grass/close\_up\_living\_lab\_histogram\_theta\_plot.jpg"}\NormalTok{, close\_up\_living\_lab\_histogram\_theta\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+\begin{minipage}{0.33\linewidth}
+\includegraphics{images/plots/grass/internet_grass_histogram_mag_plot.jpg}
+\includegraphics{images/plots/grass/internet_grass_histogram_theta_plot.jpg}\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
+\includegraphics{images/plots/grass/aerial_living_lab_histogram_mag_plot.jpg}
+\includegraphics{images/plots/grass/aerial_living_lab_histogram_theta_plot.jpg}\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
+\includegraphics{images/plots/grass/close_up_living_lab_histogram_mag_plot.jpg}
+\includegraphics{images/plots/grass/close_up_living_lab_histogram_theta_plot.jpg}\end{minipage}%
+
+\caption{\label{fig-grass-histograms}Grass Image Magnitudes and Angles}
+
+\end{figure}%
+
+\section{Build New Distributed Histogram Data Frames for Grass
+Images}\label{build-new-distributed-histogram-data-frames-for-grass-images}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Define the number of bins}
+\NormalTok{num\_bins }\OtherTok{\textless{}{-}} \DecValTok{9}
+
+\NormalTok{filtered\_grass\_standard\_df\_list }\OtherTok{\textless{}{-}}\FunctionTok{list}\NormalTok{(internet\_grass\_hog\_df }\SpecialCharTok{\%\textgreater{}\%}
+                                          \FunctionTok{filter}\NormalTok{(mag }\SpecialCharTok{\textgreater{}=}\NormalTok{ internet\_grass\_mag\_filter),}
+\NormalTok{                                        aerial\_living\_lab\_hog\_df }\SpecialCharTok{\%\textgreater{}\%}
+                                          \FunctionTok{filter}\NormalTok{(mag }\SpecialCharTok{\textgreater{}=}\NormalTok{ aerial\_living\_lab\_mag\_filter), }
+\NormalTok{                                        close\_up\_living\_lab\_hog\_df }\SpecialCharTok{\%\textgreater{}\%}
+                                          \FunctionTok{filter}\NormalTok{(mag }\SpecialCharTok{\textgreater{}=}\NormalTok{ close\_up\_living\_lab\_mag\_filter))}
+\NormalTok{grass\_contribution\_df\_list }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+
+
+\NormalTok{calculate\_bin\_contributions }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(angle, magnitude, num\_bins) \{}
+\NormalTok{  bin\_width }\OtherTok{\textless{}{-}} \DecValTok{180} \SpecialCharTok{/}\NormalTok{ num\_bins}
+\NormalTok{  contributions }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(num\_bins)}
+  
+  \CommentTok{\# get the central bin}
+\NormalTok{  central\_bin }\OtherTok{\textless{}{-}} \FunctionTok{floor}\NormalTok{(angle }\SpecialCharTok{/}\NormalTok{ bin\_width) }\SpecialCharTok{\%\%}\NormalTok{ num\_bins}
+\NormalTok{  next\_bin }\OtherTok{\textless{}{-}}\NormalTok{ (central\_bin }\SpecialCharTok{+} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\%}\NormalTok{ num\_bins}
+  
+  \CommentTok{\# get contributions to neighboring bins}
+\NormalTok{  weight }\OtherTok{\textless{}{-}}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{abs}\NormalTok{((angle }\SpecialCharTok{\%\%}\NormalTok{ bin\_width) }\SpecialCharTok{/}\NormalTok{ bin\_width)) }\SpecialCharTok{*}\NormalTok{ magnitude}
+  
+\NormalTok{  contributions[central\_bin }\SpecialCharTok{+} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ weight}
+\NormalTok{  contributions[next\_bin }\SpecialCharTok{+} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ magnitude }\SpecialCharTok{{-}}\NormalTok{ weight}
+  
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(contributions[}\DecValTok{1}\NormalTok{],}
+\NormalTok{         contributions[}\DecValTok{2}\NormalTok{],}
+\NormalTok{         contributions[}\DecValTok{3}\NormalTok{],}
+\NormalTok{         contributions[}\DecValTok{4}\NormalTok{],}
+\NormalTok{         contributions[}\DecValTok{5}\NormalTok{],}
+\NormalTok{         contributions[}\DecValTok{6}\NormalTok{],}
+\NormalTok{         contributions[}\DecValTok{7}\NormalTok{],}
+\NormalTok{         contributions[}\DecValTok{8}\NormalTok{],}
+\NormalTok{         contributions[}\DecValTok{9}\NormalTok{])}
+\NormalTok{         )}
+\NormalTok{\}}
+ 
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(filtered\_grass\_standard\_df\_list))\{}
+  
+\NormalTok{  grass\_contribution\_hog\_df }\OtherTok{\textless{}{-}} 
+\NormalTok{    filtered\_grass\_standard\_df\_list[[i]] }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{0}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{1}\NormalTok{]],}
+           \StringTok{\textasciigrave{}}\AttributeTok{20}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{2}\NormalTok{]],}
+           \StringTok{\textasciigrave{}}\AttributeTok{40}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{3}\NormalTok{]],}
+           \StringTok{\textasciigrave{}}\AttributeTok{60}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{4}\NormalTok{]],}
+           \StringTok{\textasciigrave{}}\AttributeTok{80}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{5}\NormalTok{]],}
+           \StringTok{\textasciigrave{}}\AttributeTok{100}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{6}\NormalTok{]],}
+           \StringTok{\textasciigrave{}}\AttributeTok{120}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{7}\NormalTok{]],}
+           \StringTok{\textasciigrave{}}\AttributeTok{140}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{8}\NormalTok{]],}
+           \StringTok{\textasciigrave{}}\AttributeTok{160}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{9}\NormalTok{]],}
+\NormalTok{           )}
+  
+\NormalTok{  grass\_split\_histo\_df }\OtherTok{\textless{}{-}} 
+\NormalTok{    grass\_contribution\_hog\_df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{names\_to =} \StringTok{"bin"}\NormalTok{, }
+                 \AttributeTok{values\_to =} \StringTok{"contribution"}\NormalTok{, }
+                 \AttributeTok{cols =} \DecValTok{4}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(grass\_contribution\_hog\_df)) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{bin =} \FunctionTok{as.numeric}\NormalTok{(bin)) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{group\_by}\NormalTok{(bin) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{summarise}\NormalTok{(}\AttributeTok{contribution\_sum =} \FunctionTok{sum}\NormalTok{(contribution))}
+  
+  
+\NormalTok{  grass\_contribution\_df\_list[[i]] }\OtherTok{\textless{}{-}}\NormalTok{ grass\_split\_histo\_df}
+
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Generate Grass Image Polar Plots for Standard
+Historgrams}\label{generate-grass-image-polar-plots-for-standard-historgrams}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{internet\_grass\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(filtered\_grass\_standard\_df\_list[[}\DecValTok{1}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }
+                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
+                 \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
+                 \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_polar}\NormalTok{(}
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
+    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
+\NormalTok{  )}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of Internet Grass Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Standard HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/grass/internet\_grass\_standard\_polar\_plot.jpg"}\NormalTok{, internet\_grass\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{aerial\_living\_lab\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(filtered\_grass\_standard\_df\_list[[}\DecValTok{2}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }
+                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
+                 \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
+                 \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_polar}\NormalTok{(}
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
+    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
+\NormalTok{  )}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of Aerial Living Labs Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Standard HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/grass/aerial\_living\_lab\_standard\_polar\_plot.jpg"}\NormalTok{, aerial\_living\_lab\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{close\_up\_living\_lab\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(filtered\_grass\_standard\_df\_list[[}\DecValTok{3}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }
+                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
+                 \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
+                 \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_polar}\NormalTok{(}
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
+    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
+\NormalTok{  )}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of Close{-}Up Living Lab Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Standard HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/grass/close\_up\_living\_lab\_standard\_polar\_plot.jpg"}\NormalTok{, close\_up\_living\_lab\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{all\_standard\_grass\_plots }\OtherTok{\textless{}{-}}\NormalTok{ ggpubr}\SpecialCharTok{::}\FunctionTok{ggarrange}\NormalTok{(internet\_grass\_plot, }
+\NormalTok{                                             aerial\_living\_lab\_plot, }
+\NormalTok{                                             close\_up\_living\_lab\_plot)}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/grass/all\_grass\_standard\_polar\_plots.jpg"}\NormalTok{, }
+\NormalTok{       all\_standard\_grass\_plots, }
+       \AttributeTok{width =} \DecValTok{7}\NormalTok{, }
+       \AttributeTok{height =} \DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/grass/internet_grass_standard_polar_plot.jpg}
+
+}
+
+\subcaption{Internet Grass Image}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/grass/aerial_living_lab_standard_polar_plot.jpg}
+
+}
+
+\subcaption{Aerial Living Labs Image}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/grass/close_up_living_lab_standard_polar_plot.jpg}
+
+}
+
+\subcaption{Close-Up Living Labs Image}
+
+\end{figure}%
+
+\end{minipage}%
+
+\caption{\label{fig-grass-standard-polar}Aerial Cityscape Standard Polar
+Plots}
+
+\end{figure}%
+
+\section{Generate Grass Image Polar Plots for Distributed
+Historgrams}\label{generate-grass-image-polar-plots-for-distributed-historgrams}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{internet\_grass\_split\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(grass\_contribution\_df\_list[[}\DecValTok{1}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ bin, }\AttributeTok{y =}\NormalTok{ contribution\_sum)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{,}
+                 \AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }
+                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
+                 \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
+                 \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_polar}\NormalTok{(}
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
+    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
+\NormalTok{  )}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of Internet Grass Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Distributed HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/grass/internet\_grass\_contribution\_polar\_plot.jpg"}\NormalTok{, internet\_grass\_split\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{aerial\_living\_lab\_split\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(grass\_contribution\_df\_list[[}\DecValTok{2}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ bin, }\AttributeTok{y =}\NormalTok{ contribution\_sum)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{,}
+                 \AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }
+                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
+                 \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
+                 \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_polar}\NormalTok{(}
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
+    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
+\NormalTok{  )}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of Aerial Living Lab Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Distributed HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/grass/aerial\_living\_lab\_contribution\_polar\_plot.jpg"}\NormalTok{, aerial\_living\_lab\_split\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{close\_up\_living\_lab\_split\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(grass\_contribution\_df\_list[[}\DecValTok{3}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ bin, }\AttributeTok{y =}\NormalTok{ contribution\_sum)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{,}
+                 \AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }
+                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
+                 \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
+                 \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_polar}\NormalTok{(}
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
+    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
+\NormalTok{  )}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of Close{-}Up Living Lab Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Distributed HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/grass/close\_up\_living\_lab\_contribution\_polar\_plot.jpg"}\NormalTok{, close\_up\_living\_lab\_split\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{all\_grass\_contribution\_plots }\OtherTok{\textless{}{-}}\NormalTok{ ggpubr}\SpecialCharTok{::}\FunctionTok{ggarrange}\NormalTok{(internet\_grass\_split\_plot, }
+\NormalTok{                                                  aerial\_living\_lab\_split\_plot, }
+\NormalTok{                                                  close\_up\_living\_lab\_split\_plot)}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/grass/all\_grass\_contribution\_plots.jpg"}\NormalTok{, }
+\NormalTok{       all\_grass\_contribution\_plots, }
+       \AttributeTok{width =} \DecValTok{7}\NormalTok{, }
+       \AttributeTok{height =} \DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/grass/internet_grass_contribution_polar_plot.jpg}
+
+}
+
+\subcaption{Internet Grass Image}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/grass/aerial_living_lab_contribution_polar_plot.jpg}
+
+}
+
+\subcaption{Aerial Living Labs Image}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.33\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/grass/close_up_living_lab_contribution_polar_plot.jpg}
+
+}
+
+\subcaption{Close-Up Living Labs Grass Image}
+
+\end{figure}%
+
+\end{minipage}%
+
+\caption{\label{fig-grass-distributed-polar}Distributed Method Polar
+Plots for Grass Images}
+
+\end{figure}%
+
+\chapter{Backflip Image}\label{backflip-image}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(reticulate)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(mapsapi)}
+\FunctionTok{library}\NormalTok{(mapboxapi)}
+\FunctionTok{library}\NormalTok{(magick)}
+\FunctionTok{Sys.which}\NormalTok{(}\StringTok{"python"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+                                                   python 
+"/Users/bensunshine/.virtualenvs/r-reticulate/bin/python" 
 \end{verbatim}
 
-\hypertarget{build-new-contribution-histograms-for-each-data-frame}{%
-\section{Build New Contribution Histograms for Each Data
-Frame}\label{build-new-contribution-histograms-for-each-data-frame}}
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# jupyter only inline output command}
+\CommentTok{\#\%matplotlib inline}
+
+\ImportTok{from}\NormalTok{ skimage.io }\ImportTok{import}\NormalTok{ imread, imshow}
+\ImportTok{from}\NormalTok{ skimage.transform }\ImportTok{import}\NormalTok{ resize}
+\ImportTok{from}\NormalTok{ skimage.feature }\ImportTok{import}\NormalTok{ hog}
+\ImportTok{from}\NormalTok{ skimage }\ImportTok{import}\NormalTok{ data, exposure}
+
+
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{from}\NormalTok{ skimage }\ImportTok{import}\NormalTok{ io}
+\ImportTok{from}\NormalTok{ skimage }\ImportTok{import}\NormalTok{ color}
+\ImportTok{from}\NormalTok{ skimage.transform }\ImportTok{import}\NormalTok{ resize}
+\ImportTok{import}\NormalTok{ math}
+\ImportTok{from}\NormalTok{ skimage.feature }\ImportTok{import}\NormalTok{ hog}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Collect HOG Features for Backflip
+Image}\label{collect-hog-features-for-backflip-image}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# List for storing images}
+\NormalTok{img\_list }\OperatorTok{=}\NormalTok{ []}
+
+\CommentTok{\# SF aerial}
+\NormalTok{img\_list.append(color.rgb2gray(io.imread(}\StringTok{"images/TitusFlip.jpg"}\NormalTok{)))}
+
+
+\CommentTok{\#img = color.rgb2gray(io.imread("images/grass\_image2.jpg"))}
+
+\CommentTok{\# img = color.rgb2gray(io.imread("images/b\_test\_image\_copy.jpg"))}
+\CommentTok{\#img = color.rgb2gray(io.imread("images/long\_grass\_sample.jpeg"))}
+\CommentTok{\#img = color.rgb2gray(io.imread("images/diagnol\_lines.jpg"))}
+
+\CommentTok{\#img = color.rgb2gray(io.imread("images/san\_francisco\_scale\_zoom\_12.png"))}
+
+\CommentTok{\#img = color.rgb2gray(io.imread("images/diagnol\_lines\_flipped.jpg"))}
+\CommentTok{\#img = color.rgb2gray(io.imread("images/long\_grass\_sample\_cropped.jpg"))}
+
+\CommentTok{\# aerial rotated image}
+\CommentTok{\#img = color.rgb2gray(io.imread("images/living\_lab\_aerial/aerial\_grass\_living\_lab\_rotated.jpg"))}
+
+\CommentTok{\# zoomed internet photo}
+\CommentTok{\#img = color.rgb2gray(io.imread("images/dead\_grass\_zoom.jpeg"))}
+
+
+\CommentTok{\# zoomed in 11}
+\CommentTok{\#img = color.rgb2gray(io.imread("images/living\_lab\_aerial/LL\_zoomed\_in\_11.jpg"))}
+
+\CommentTok{\# zoomed in 12}
+\CommentTok{\#img = color.rgb2gray(io.imread("images/living\_lab\_aerial/LL\_zoomed\_in\_12.jpg"))}
+
+\CommentTok{\# zoomed in 16}
+\CommentTok{\#img = color.rgb2gray(io.imread("images/living\_lab\_aerial/LL\_zoomed\_in\_16\_side.jpg"))}
+
+
+
+\CommentTok{\# real one}
+\CommentTok{\#img = color.rgb2gray(io.imread("images/living\_labs\_real\_grass\_image.jpg"))}
+
+\CommentTok{\# List to store magnitudes for each image}
+\NormalTok{mag\_list }\OperatorTok{=}\NormalTok{ []}
+
+\CommentTok{\# List to store angles for each image}
+\NormalTok{theta\_list }\OperatorTok{=}\NormalTok{ []}
+
+
+\ControlFlowTok{for}\NormalTok{ x }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\BuiltInTok{len}\NormalTok{(img\_list)):}
+    \CommentTok{\# Get image of interest}
+\NormalTok{    img }\OperatorTok{=}\NormalTok{ img\_list[x]}
+
+\NormalTok{    rescaled\_file\_path }\OperatorTok{=} \SpecialStringTok{f"images/plots/backflip/}\SpecialCharTok{\{}\NormalTok{x}\SpecialCharTok{\}}\SpecialStringTok{.jpg"}
+
+    \CommentTok{\# Determine aspect Ratio}
+\NormalTok{    aspect\_ratio }\OperatorTok{=}\NormalTok{ img.shape[}\DecValTok{0}\NormalTok{] }\OperatorTok{/}\NormalTok{ img.shape[}\DecValTok{1}\NormalTok{]}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Aspect Ratio:"}\NormalTok{, aspect\_ratio)}
+
+    \CommentTok{\# Hard{-}Code height to 200 pixels}
+\NormalTok{    height }\OperatorTok{=} \DecValTok{200}
+
+    \CommentTok{\# Calculate witdth to maintain same aspect ratio}
+\NormalTok{    width }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(height }\OperatorTok{/}\NormalTok{ aspect\_ratio)}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Resized Width:"}\NormalTok{, width)}
+
+    \CommentTok{\# Resize the image}
+\NormalTok{    resized\_img }\OperatorTok{=}\NormalTok{ resize(img, (height, width))}
+
+    \CommentTok{\# Replace the original image with the resized image}
+\NormalTok{    img\_list[x] }\OperatorTok{=}\NormalTok{ resized\_img}
+
+    \CommentTok{\# if (x == 1):}
+    \CommentTok{\#   plot\_width = 8}
+    \CommentTok{\#   plot\_height = 15}
+    \CommentTok{\# else:}
+    \CommentTok{\#   plot\_width = 15}
+    \CommentTok{\#   plot\_height = 8}
+
+    \CommentTok{\# plt.figure(figsize=(15, 8))}
+    \CommentTok{\# plt.imshow(resized\_img, cmap="gray")}
+    \CommentTok{\# plt.axis("on")}
+    \CommentTok{\# plt.tight\_layout()}
+    \CommentTok{\# plt.savefig(rescaled\_file\_path, dpi=300)}
+    \CommentTok{\# plt.show()}
+
+    \CommentTok{\# list for storing all magnitudes for image[x]}
+\NormalTok{    mag }\OperatorTok{=}\NormalTok{ []}
+
+    \CommentTok{\# list for storing all angles for image[x]}
+\NormalTok{    theta }\OperatorTok{=}\NormalTok{ []}
+
+    \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(height):}
+\NormalTok{        magnitudeArray }\OperatorTok{=}\NormalTok{ []}
+\NormalTok{        angleArray }\OperatorTok{=}\NormalTok{ []}
+
+        \ControlFlowTok{for}\NormalTok{ j }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(width):}
+            \ControlFlowTok{if}\NormalTok{ j }\OperatorTok{{-}} \DecValTok{1} \OperatorTok{\textless{}} \DecValTok{0} \KeywordTok{or}\NormalTok{ j }\OperatorTok{+} \DecValTok{1} \OperatorTok{\textgreater{}=}\NormalTok{ width:}
+                \ControlFlowTok{if}\NormalTok{ j }\OperatorTok{{-}} \DecValTok{1} \OperatorTok{\textless{}} \DecValTok{0}\NormalTok{:}
+\NormalTok{                    Gx }\OperatorTok{=}\NormalTok{ resized\_img[i][j }\OperatorTok{+} \DecValTok{1}\NormalTok{] }\OperatorTok{{-}} \DecValTok{0}
+                \ControlFlowTok{elif}\NormalTok{ j }\OperatorTok{+} \DecValTok{1} \OperatorTok{\textgreater{}=}\NormalTok{ width:}
+\NormalTok{                    Gx }\OperatorTok{=} \DecValTok{0} \OperatorTok{{-}}\NormalTok{ resized\_img[i][j }\OperatorTok{{-}} \DecValTok{1}\NormalTok{]}
+            \ControlFlowTok{else}\NormalTok{:}
+\NormalTok{                Gx }\OperatorTok{=}\NormalTok{ resized\_img[i][j }\OperatorTok{+} \DecValTok{1}\NormalTok{] }\OperatorTok{{-}}\NormalTok{ resized\_img[i][j }\OperatorTok{{-}} \DecValTok{1}\NormalTok{]}
+
+            \ControlFlowTok{if}\NormalTok{ i }\OperatorTok{{-}} \DecValTok{1} \OperatorTok{\textless{}} \DecValTok{0} \KeywordTok{or}\NormalTok{ i }\OperatorTok{+} \DecValTok{1} \OperatorTok{\textgreater{}=}\NormalTok{ height:}
+                \ControlFlowTok{if}\NormalTok{ i }\OperatorTok{{-}} \DecValTok{1} \OperatorTok{\textless{}} \DecValTok{0}\NormalTok{:}
+\NormalTok{                    Gy }\OperatorTok{=} \DecValTok{0} \OperatorTok{{-}}\NormalTok{ resized\_img[i }\OperatorTok{+} \DecValTok{1}\NormalTok{][j]}
+                \ControlFlowTok{elif}\NormalTok{ i }\OperatorTok{+} \DecValTok{1} \OperatorTok{\textgreater{}=}\NormalTok{ height:}
+\NormalTok{                    Gy }\OperatorTok{=}\NormalTok{ resized\_img[i }\OperatorTok{{-}} \DecValTok{1}\NormalTok{][j] }\OperatorTok{{-}} \DecValTok{0}
+            \ControlFlowTok{else}\NormalTok{:}
+\NormalTok{                Gy }\OperatorTok{=}\NormalTok{ resized\_img[i }\OperatorTok{+} \DecValTok{1}\NormalTok{][j] }\OperatorTok{{-}}\NormalTok{ resized\_img[i }\OperatorTok{{-}} \DecValTok{1}\NormalTok{][j]}
+
+\NormalTok{            magnitude }\OperatorTok{=}\NormalTok{ math.sqrt(}\BuiltInTok{pow}\NormalTok{(Gx, }\DecValTok{2}\NormalTok{) }\OperatorTok{+} \BuiltInTok{pow}\NormalTok{(Gy, }\DecValTok{2}\NormalTok{))}
+\NormalTok{            magnitudeArray.append(}\BuiltInTok{round}\NormalTok{(magnitude, }\DecValTok{9}\NormalTok{))}
+
+            \ControlFlowTok{if}\NormalTok{ Gx }\OperatorTok{==} \DecValTok{0}\NormalTok{:}
+\NormalTok{                angle }\OperatorTok{=}\NormalTok{ math.degrees(}\FloatTok{0.0}\NormalTok{)}
+            \ControlFlowTok{else}\NormalTok{:}
+\NormalTok{                angle }\OperatorTok{=}\NormalTok{ math.degrees(math.atan(Gy }\OperatorTok{/}\NormalTok{ Gx))}
+                \ControlFlowTok{if}\NormalTok{ angle }\OperatorTok{\textless{}} \DecValTok{0}\NormalTok{:}
+\NormalTok{                    angle }\OperatorTok{+=} \DecValTok{180}
+
+\NormalTok{            angleArray.append(}\BuiltInTok{round}\NormalTok{(angle, }\DecValTok{9}\NormalTok{))}
+
+\NormalTok{        mag.append(magnitudeArray)}
+\NormalTok{        theta.append(angleArray)}
+
+    \CommentTok{\# add list of magnitudes to list[x]}
+\NormalTok{    mag\_list.append(mag)}
+
+    \CommentTok{\# add list of angles to angle list[x]}
+\NormalTok{    theta\_list.append(theta)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Aspect Ratio: 1.25
+Resized Width: 160
+\end{verbatim}
+
+\begin{figure}
+
+\begin{minipage}{\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/backflip/0.jpg}
+
+}
+
+\subcaption{Skiing Backflip}
+
+\end{figure}%
+
+\end{minipage}%
+
+\caption{\label{fig-flip}Skiing Backflip Image Rescaled and Converted to
+Greyscale}
+
+\end{figure}%
+
+\section{Build Data Frames for Backflip
+Image}\label{build-data-frames-for-backflip-image}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mag\_flip }\OperatorTok{=}\NormalTok{ np.array(mag\_list[}\DecValTok{0}\NormalTok{])}
+\NormalTok{theta\_flip }\OperatorTok{=}\NormalTok{ np.array(theta\_list[}\DecValTok{0}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Plot Magnitudes as Image for Diagonal
+Lines}\label{plot-magnitudes-as-image-for-diagonal-lines}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# plt.figure(figsize=(15, 8))}
+\CommentTok{\# \#plt.title(\textquotesingle{}San Francisco, CA Gradient Magnitudes\textquotesingle{})}
+\CommentTok{\# plt.imshow(mag\_list[0], cmap="gray")}
+\CommentTok{\# plt.axis("on")}
+\CommentTok{\# \#plt.show()}
+\CommentTok{\# plt.tight\_layout()}
+\CommentTok{\# plt.savefig("images/plots/backflip/backflip\_mag.png", dpi=300)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+\begin{minipage}{\linewidth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/plots/backflip/backflip_mag.png}
+
+}
+
+\subcaption{Skiing Backflip Image}
+
+\end{figure}%
+
+\end{minipage}%
+
+\caption{\label{fig-backflip-mags}Skiing Backflip Cityscape Magnitudes
+as Image}
+
+\end{figure}%
+
+\section{Create Data Frame for Backflip
+Image}\label{create-data-frame-for-backflip-image}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Flip DF}
+\NormalTok{backflip\_hog\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{mag =} \FunctionTok{as.vector}\NormalTok{(py}\SpecialCharTok{$}\NormalTok{mag\_flip),}
+                              \AttributeTok{theta =} \FunctionTok{as.vector}\NormalTok{((py}\SpecialCharTok{$}\NormalTok{theta\_flip))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{radian =}\NormalTok{ theta}\SpecialCharTok{*}\NormalTok{(pi}\SpecialCharTok{/}\DecValTok{180}\NormalTok{))}
+
+\CommentTok{\# List of all Data frames}
+\NormalTok{flip\_standard\_df\_list }\OtherTok{=} \FunctionTok{list}\NormalTok{(backflip\_hog\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Create Histograms of Gradient Magnitudes and Angles for
+Backflip
+Image}\label{create-histograms-of-gradient-magnitudes-and-angles-for-backflip-image}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flip\_histogram\_mag\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(flip\_standard\_df\_list[[}\DecValTok{1}\NormalTok{]],}
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mag)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Magnitude"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Count"}\NormalTok{,}
+       \AttributeTok{title =} \StringTok{"Skiing Backflip Image Histogram of Gradient Magnitudes"}
+\NormalTok{       ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\CommentTok{\#flip\_histogram\_mag\_plot}
+
+\NormalTok{flip\_mag\_filter }\OtherTok{\textless{}{-}} \FloatTok{0.2}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/backflip/backflip\_histogram\_mag\_plot.jpg"}\NormalTok{, flip\_histogram\_mag\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+
+
+
+\NormalTok{flip\_histogram\_theta\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(flip\_standard\_df\_list[[}\DecValTok{1}\NormalTok{]],}
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Angle"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Count"}\NormalTok{,}
+       \AttributeTok{title =} \StringTok{"Skiing Backflip Image Histogram of Gradient Angles"}
+\NormalTok{       ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\CommentTok{\#flip\_histogram\_theta\_plot}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/backflip/backflip\_histogram\_theta\_plot.jpg"}\NormalTok{, flip\_histogram\_theta\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+\begin{minipage}{0.50\linewidth}
+
+\includegraphics{images/plots/backflip/backflip_histogram_mag_plot.jpg}
+
+\end{minipage}%
+
+\caption{\label{fig-flip-histograms}Skiing Backflip Magnitudes and
+Angles}
+
+\end{figure}%
+
+\section{Build New Distributed Histogram Data Frame for Backflip
+Image}\label{build-new-distributed-histogram-data-frame-for-backflip-image}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1202,22 +2737,16 @@ Frame}\label{build-new-contribution-histograms-for-each-data-frame}}
 \NormalTok{         )}
 \NormalTok{\}}
 
-\NormalTok{filtered\_standard\_df\_list }\OtherTok{\textless{}{-}}\FunctionTok{list}\NormalTok{(diagonal\_hog\_df }\SpecialCharTok{\%\textgreater{}\%}
-                                   \FunctionTok{filter}\NormalTok{(mag }\SpecialCharTok{\textgreater{}=}\NormalTok{ diagonal\_mag\_filter),}
-\NormalTok{                                 sf\_hog\_df }\SpecialCharTok{\%\textgreater{}\%}
-                                   \FunctionTok{filter}\NormalTok{(mag }\SpecialCharTok{\textgreater{}=}\NormalTok{ sf\_mag\_filter), }
-\NormalTok{                                 internet\_grass\_hog\_df }\SpecialCharTok{\%\textgreater{}\%}
-                                   \FunctionTok{filter}\NormalTok{(mag }\SpecialCharTok{\textgreater{}=}\NormalTok{ internet\_grass\_mag\_filter), }
-\NormalTok{                                 living\_labs\_hog\_df }\SpecialCharTok{\%\textgreater{}\%}
-                                   \FunctionTok{filter}\NormalTok{(mag }\SpecialCharTok{\textgreater{}=}\NormalTok{ living\_labs\_\_mag\_filter))}
-\NormalTok{contribution\_df\_list }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+\NormalTok{filtered\_flip\_standard\_df\_list }\OtherTok{\textless{}{-}}\FunctionTok{list}\NormalTok{(backflip\_hog\_df }\SpecialCharTok{\%\textgreater{}\%}
+                                        \FunctionTok{filter}\NormalTok{(mag }\SpecialCharTok{\textgreater{}=}\NormalTok{ flip\_mag\_filter))}
 
- 
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(filtered\_standard\_df\_list))\{}
-  
-\NormalTok{  contribution\_hog\_df }\OtherTok{\textless{}{-}} 
-\NormalTok{    filtered\_standard\_df\_list[[i]] }\SpecialCharTok{\%\textgreater{}\%}
-    \FunctionTok{filter}\NormalTok{(mag }\SpecialCharTok{\textgreater{}} \FloatTok{0.1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{flip\_contribution\_df\_list }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(filtered\_flip\_standard\_df\_list))\{}
+
+\NormalTok{  flip\_contribution\_hog\_df }\OtherTok{\textless{}{-}}
+\NormalTok{    filtered\_flip\_standard\_df\_list[[i]] }\SpecialCharTok{\%\textgreater{}\%}
     \FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
     \FunctionTok{mutate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{0}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{1}\NormalTok{]],}
            \StringTok{\textasciigrave{}}\AttributeTok{20}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{2}\NormalTok{]],}
@@ -1229,822 +2758,122 @@ Frame}\label{build-new-contribution-histograms-for-each-data-frame}}
            \StringTok{\textasciigrave{}}\AttributeTok{140}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{8}\NormalTok{]],}
            \StringTok{\textasciigrave{}}\AttributeTok{160}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{calculate\_bin\_contributions}\NormalTok{(theta, mag, }\DecValTok{9}\NormalTok{)[[}\DecValTok{9}\NormalTok{]],}
 \NormalTok{           )}
-  
-\NormalTok{  split\_histo\_df }\OtherTok{\textless{}{-}} 
-\NormalTok{    contribution\_hog\_df }\SpecialCharTok{\%\textgreater{}\%}
-    \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{names\_to =} \StringTok{"bin"}\NormalTok{, }
-                 \AttributeTok{values\_to =} \StringTok{"contribution"}\NormalTok{, }
-                 \AttributeTok{cols =} \DecValTok{4}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(contribution\_hog\_df)) }\SpecialCharTok{\%\textgreater{}\%}
+
+\NormalTok{  flip\_split\_histo\_df }\OtherTok{\textless{}{-}}
+\NormalTok{    flip\_contribution\_hog\_df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{names\_to =} \StringTok{"bin"}\NormalTok{,}
+                 \AttributeTok{values\_to =} \StringTok{"contribution"}\NormalTok{,}
+                 \AttributeTok{cols =} \DecValTok{4}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(flip\_contribution\_hog\_df)) }\SpecialCharTok{\%\textgreater{}\%}
     \FunctionTok{mutate}\NormalTok{(}\AttributeTok{bin =} \FunctionTok{as.numeric}\NormalTok{(bin)) }\SpecialCharTok{\%\textgreater{}\%}
     \FunctionTok{group\_by}\NormalTok{(bin) }\SpecialCharTok{\%\textgreater{}\%}
     \FunctionTok{summarise}\NormalTok{(}\AttributeTok{contribution\_sum =} \FunctionTok{sum}\NormalTok{(contribution))}
-  
-  
-\NormalTok{  contribution\_df\_list[[i]] }\OtherTok{\textless{}{-}}\NormalTok{ split\_histo\_df}
+
+
+\NormalTok{  flip\_contribution\_df\_list[[i]] }\OtherTok{\textless{}{-}}\NormalTok{ flip\_split\_histo\_df}
 
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{generate-polar-plots-for-standard-historgrams}{%
-\section{Generate Polar Plots for Standard
-Historgrams}\label{generate-polar-plots-for-standard-historgrams}}
+\section{Generate Polar Plots for Standard Historgrams for Backflip
+Image}\label{generate-polar-plots-for-standard-historgrams-for-backflip-image}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{diagonal\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(filtered\_standard\_df\_list[[}\DecValTok{1}\NormalTok{]], }
+\NormalTok{flip\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(filtered\_flip\_standard\_df\_list[[}\DecValTok{1}\NormalTok{]],}
          \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }
-                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{,}
+                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{,}
                  \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
                  \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{coord\_polar}\NormalTok{(}
-    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
-    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{,}
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{,}
     \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
-    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
+    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{),}
     \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
 \NormalTok{  )}\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of Diagonal Line Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Standard HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of Skiing Backflip Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Standard HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
         \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
 
-\CommentTok{\#diagonal\_plot}
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/backflip/backflip\_standard\_polar\_plot.jpg"}\NormalTok{, flip\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{sf\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(filtered\_standard\_df\_list[[}\DecValTok{2}\NormalTok{]], }
-         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }
-                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
-                 \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
-                 \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{coord\_polar}\NormalTok{(}
-    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
-    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
-    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
-    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
-    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
-\NormalTok{  )}\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of San Francisco Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Standard HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
-        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
-
-\CommentTok{\#sf\_plot}
-\end{Highlighting}
-\end{Shaded}
+\section{Generate Polar Plots for Distributed Historgrams of Diagonal
+Image}\label{generate-polar-plots-for-distributed-historgrams-of-diagonal-image}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{internet\_grass\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(filtered\_standard\_df\_list[[}\DecValTok{3}\NormalTok{]], }
-         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }
-                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
-                 \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
-                 \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{coord\_polar}\NormalTok{(}
-    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
-    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
-    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
-    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
-    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
-\NormalTok{  )}\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of Internet Grass Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Standard HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
-        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
-
-\CommentTok{\#internet\_grass\_plot}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{living\_labs\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(filtered\_standard\_df\_list[[}\DecValTok{4}\NormalTok{]], }
-         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }
-                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
-                 \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
-                 \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{coord\_polar}\NormalTok{(}
-    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
-    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
-    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
-    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
-    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
-\NormalTok{  )}\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of Living Labs Grass Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Standard HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
-        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
-
-\CommentTok{\#living\_labs\_plot}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{all\_standard\_plots }\OtherTok{\textless{}{-}}\NormalTok{ ggpubr}\SpecialCharTok{::}\FunctionTok{ggarrange}\NormalTok{(diagonal\_plot, }
-\NormalTok{                                        sf\_plot, }
-\NormalTok{                                        internet\_grass\_plot, }
-\NormalTok{                                        living\_labs\_plot)}
-
-\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/all\_standard\_polar\_plots.jpg"}\NormalTok{, }
-\NormalTok{       all\_standard\_plots, }\AttributeTok{width =} \DecValTok{7}\NormalTok{, }
-       \AttributeTok{height =} \DecValTok{7}\NormalTok{)}
-
-\NormalTok{all\_standard\_plots}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[H]
-
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-18-1.pdf}
-
-}
-
-\end{figure}
-
-\hypertarget{generate-polar-plots-for-contribution-historgrams}{%
-\section{Generate Polar Plots for Contribution
-Historgrams}\label{generate-polar-plots-for-contribution-historgrams}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{diagonal\_split\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(contribution\_df\_list[[}\DecValTok{1}\NormalTok{]], }
+\NormalTok{flip\_split\_plot }\OtherTok{\textless{}{-}}
+  \FunctionTok{ggplot}\NormalTok{(flip\_contribution\_df\_list[[}\DecValTok{1}\NormalTok{]],}
          \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ bin, }\AttributeTok{y =}\NormalTok{ contribution\_sum)) }\SpecialCharTok{+}
   \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{,}
-                 \AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }
-                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
+                 \AttributeTok{colour =} \StringTok{"black"}\NormalTok{,}
+                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{,}
                  \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
                  \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{coord\_polar}\NormalTok{(}
-    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
-    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{,}
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{,}
     \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
-    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
+    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{),}
     \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
 \NormalTok{  )}\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of Diagonal Line Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Distributed HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of Skiing Backflip Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Distributed HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
         \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/backflip/backflip\_contribution\_polar\_plot.jpg"}\NormalTok{, flip\_split\_plot, }\AttributeTok{width =} \DecValTok{6}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-Warning in geom_histogram(stat = "identity", colour = "black", fill =
-"lightblue", : Ignoring unknown parameters: `binwidth`, `bins`, `pad`, and
-`breaks`
-\end{verbatim}
+\begin{figure}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#diagonal\_split\_plot}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{sf\_split\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(contribution\_df\_list[[}\DecValTok{2}\NormalTok{]], }
-         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ bin, }\AttributeTok{y =}\NormalTok{ contribution\_sum)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{,}
-                 \AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }
-                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
-                 \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
-                 \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{coord\_polar}\NormalTok{(}
-    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
-    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
-    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
-    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
-    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
-\NormalTok{  )}\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of San Francisco Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Distributed HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
-        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-Warning in geom_histogram(stat = "identity", colour = "black", fill =
-"lightblue", : Ignoring unknown parameters: `binwidth`, `bins`, `pad`, and
-`breaks`
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#sf\_split\_plot}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{internet\_grass\_split\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(contribution\_df\_list[[}\DecValTok{3}\NormalTok{]], }
-         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ bin, }\AttributeTok{y =}\NormalTok{ contribution\_sum)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{,}
-                 \AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }
-                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
-                 \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
-                 \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{coord\_polar}\NormalTok{(}
-    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
-    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
-    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
-    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
-    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
-\NormalTok{  )}\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of Internet Grass Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Distributed HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
-        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-Warning in geom_histogram(stat = "identity", colour = "black", fill =
-"lightblue", : Ignoring unknown parameters: `binwidth`, `bins`, `pad`, and
-`breaks`
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#internet\_grass\_split\_plot}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{living\_labs\_split\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(contribution\_df\_list[[}\DecValTok{4}\NormalTok{]], }
-         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ bin, }\AttributeTok{y =}\NormalTok{ contribution\_sum)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{,}
-                 \AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }
-                 \AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
-                 \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
-                 \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{coord\_polar}\NormalTok{(}
-    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
-    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
-    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
-    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
-    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
-\NormalTok{  )}\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Polar Plot of Living Labs Aerial Image}\SpecialCharTok{\textbackslash{}n}\StringTok{Using Distributed HOG Technique"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(),}
-        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-Warning in geom_histogram(stat = "identity", colour = "black", fill =
-"lightblue", : Ignoring unknown parameters: `binwidth`, `bins`, `pad`, and
-`breaks`
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#living\_labs\_split\_plot}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{all\_contribution\_plots }\OtherTok{\textless{}{-}}\NormalTok{ ggpubr}\SpecialCharTok{::}\FunctionTok{ggarrange}\NormalTok{(diagonal\_split\_plot, }
-\NormalTok{                                            sf\_split\_plot, }
-\NormalTok{                                            internet\_grass\_split\_plot, }
-\NormalTok{                                            living\_labs\_split\_plot)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-Warning: Removed 1 row containing missing values or values outside the scale range
-(`geom_bar()`).
-Removed 1 row containing missing values or values outside the scale range
-(`geom_bar()`).
-Removed 1 row containing missing values or values outside the scale range
-(`geom_bar()`).
-Removed 1 row containing missing values or values outside the scale range
-(`geom_bar()`).
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggsave}\NormalTok{(}\StringTok{"images/plots/all\_contribution\_polar\_plots.jpg"}\NormalTok{, }
-\NormalTok{       all\_contribution\_plots, }\AttributeTok{width =} \DecValTok{7}\NormalTok{, }
-       \AttributeTok{height =} \DecValTok{7}\NormalTok{)}
-
-\NormalTok{all\_contribution\_plots}
-\end{Highlighting}
-\end{Shaded}
+\begin{minipage}{0.50\linewidth}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-23-1.pdf}
+{\centering \includegraphics{images/plots/backflip/backflip_standard_polar_plot.jpg}
 
 }
 
-\end{figure}
+\subcaption{Skiing Backflip Image Standard HOG Method}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{number\_of\_bins }\OperatorTok{=} \DecValTok{9}
-\NormalTok{step\_size }\OperatorTok{=} \DecValTok{180} \OperatorTok{/}\NormalTok{ number\_of\_bins}
-\end{Highlighting}
-\end{Shaded}
+\end{figure}%
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#Function to calculate the value of centre of jth bin}
-\KeywordTok{def}\NormalTok{ calculate\_j(angle):}
-\NormalTok{  temp }\OperatorTok{=}\NormalTok{ (angle }\OperatorTok{/}\NormalTok{ step\_size) }\OperatorTok{{-}} \FloatTok{0.5}
-\NormalTok{  j }\OperatorTok{=}\NormalTok{ math.floor(temp)}
-  \ControlFlowTok{return}\NormalTok{ j}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Function to calculate the value of jth bin}
-\KeywordTok{def}\NormalTok{ calculate\_Cj(j):}
-\NormalTok{  Cj }\OperatorTok{=}\NormalTok{ step\_size }\OperatorTok{*}\NormalTok{ (j }\OperatorTok{+} \FloatTok{0.5}\NormalTok{)}
-  \ControlFlowTok{return} \BuiltInTok{round}\NormalTok{(Cj, }\DecValTok{9}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# }
-\KeywordTok{def}\NormalTok{ calculate\_value\_j(magnitude, angle, j):}
-\NormalTok{  Cj }\OperatorTok{=}\NormalTok{ calculate\_Cj(j}\OperatorTok{+}\DecValTok{1}\NormalTok{)}
-\NormalTok{  Vj }\OperatorTok{=}\NormalTok{ magnitude }\OperatorTok{*}\NormalTok{ ((Cj }\OperatorTok{{-}}\NormalTok{ angle) }\OperatorTok{/}\NormalTok{ step\_size)}
-  \ControlFlowTok{return} \BuiltInTok{round}\NormalTok{(Vj, }\DecValTok{9}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{histogram\_points\_nine }\OperatorTok{=}\NormalTok{ []}
-\NormalTok{high\_val }\OperatorTok{=} \DecValTok{10}
-\CommentTok{\# for i in range(0, height, high\_val):}
-\CommentTok{\#   temp = []}
-\CommentTok{\#   for j in range(0, width, high\_val):}
-\CommentTok{\#     magnitude\_values = [[mag[i][x] for x in range(j, j+high\_val)] for i in range(i,i+high\_val)]}
-\CommentTok{\#     angle\_values = [[theta[i][x] for x in range(j, j+high\_val)] for i in range(i, i+high\_val)]}
-\CommentTok{\#     for k in range(len(magnitude\_values)):}
-\CommentTok{\#       for l in range(len(magnitude\_values[0])):}
-\CommentTok{\#         bins = [0.0 for \_ in range(number\_of\_bins)]}
-\CommentTok{\#         value\_j = calculate\_j(angle\_values[k][l])}
-\CommentTok{\#         Vj = calculate\_value\_j(magnitude\_values[k][l], angle\_values[k][l], value\_j)}
-\CommentTok{\#         Vj\_1 = magnitude\_values[k][l] {-} Vj}
-\CommentTok{\#         bins[value\_j]+=Vj}
-\CommentTok{\#         bins[value\_j+1]+=Vj\_1}
-\CommentTok{\#         bins = [round(x, 9) for x in bins]}
-\CommentTok{\#     temp.append(bins)}
-\CommentTok{\#   histogram\_points\_nine.append(temp)}
-\CommentTok{\# }
-\CommentTok{\# print(len(histogram\_points\_nine))}
-\CommentTok{\# print(len(histogram\_points\_nine[0]))}
-\CommentTok{\# print(len(histogram\_points\_nine[0][0]))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{epsilon }\OperatorTok{=} \FloatTok{1e{-}05}
-
-\CommentTok{\# feature\_vectors = []}
-\CommentTok{\# for i in range(0, len(histogram\_points\_nine) {-} 1, 1):}
-\CommentTok{\#   temp = []}
-\CommentTok{\#   for j in range(0, len(histogram\_points\_nine[0]) {-} 1, 1):}
-\CommentTok{\#     values = [[histogram\_points\_nine[i][x] for x in range(j, j+2)] for i in range(i, i+2)]}
-\CommentTok{\#     final\_vector = []}
-\CommentTok{\#     for k in values:}
-\CommentTok{\#       for l in k:}
-\CommentTok{\#         for m in l:}
-\CommentTok{\#           final\_vector.append(m)}
-\CommentTok{\#     k = round(math.sqrt(sum([pow(x, 2) for x in final\_vector])), 9)}
-\CommentTok{\#     final\_vector = [round(x/(k + epsilon), 9) for x in final\_vector]}
-\CommentTok{\#     temp.append(final\_vector)}
-\CommentTok{\#   feature\_vectors.append(temp)}
-\CommentTok{\#   }
-\CommentTok{\# print(len(feature\_vectors))}
-\CommentTok{\# print(len(feature\_vectors[0]))}
-\CommentTok{\# print(len(feature\_vectors[0][0]))}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{generate-hog-image}{%
-\section{Generate HOG Image}\label{generate-hog-image}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{img }\OperatorTok{=}\NormalTok{ imread(}\StringTok{"images/living\_lab\_aerial/aerial\_grass\_living\_lab\_rotated.jpg"}\NormalTok{)}
-\NormalTok{img }\OperatorTok{=}\NormalTok{ color.rgb2gray(io.imread(}\StringTok{"images/grass\_image2.jpg"}\NormalTok{))}
-
-\NormalTok{aspect\_ratio }\OperatorTok{=}\NormalTok{ img.shape[}\DecValTok{0}\NormalTok{]}\OperatorTok{/}\NormalTok{img.shape[}\DecValTok{1}\NormalTok{]}
-
-\NormalTok{height }\OperatorTok{=} \DecValTok{200}
-\NormalTok{width }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(height}\OperatorTok{/}\NormalTok{aspect\_ratio)}
-
-\CommentTok{\# height = 128}
-\CommentTok{\# width = 192}
-
-\CommentTok{\# make sure the resized is in sample ball park as the original aspect ratio, }
-\CommentTok{\# that way the angles don\textquotesingle{}t get squished}
-\NormalTok{resized\_ratio }\OperatorTok{=}\NormalTok{ height}\OperatorTok{/}\NormalTok{width}
-
-
-\NormalTok{resized\_img }\OperatorTok{=}\NormalTok{ resize(img, (height, width))}
-
-\NormalTok{plt.axis(}\StringTok{"off"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-(0.0, 1.0, 0.0, 1.0)
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{plt.imshow(resized\_img)}
-\BuiltInTok{print}\NormalTok{(resized\_img.shape)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-(200, 301)
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{fd, hog\_image }\OperatorTok{=}\NormalTok{ hog(resized\_img, orientations}\OperatorTok{=}\DecValTok{9}\NormalTok{, pixels\_per\_cell}\OperatorTok{=}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{8}\NormalTok{),}
-\NormalTok{                    cells\_per\_block}\OperatorTok{=}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{), visualize}\OperatorTok{=}\VariableTok{True}\CommentTok{\#, channel\_axis = 2 }
-                    \CommentTok{\#multichannel=True}
-\NormalTok{                    )}
-\NormalTok{plt.axis(}\StringTok{"off"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-(-0.5, 300.5, 199.5, -0.5)
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{plt.imshow(hog\_image, cmap}\OperatorTok{=}\StringTok{"gray"}\NormalTok{)}
-\NormalTok{plt.show()}
-\end{Highlighting}
-\end{Shaded}
+\end{minipage}%
+%
+\begin{minipage}{0.50\linewidth}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-30-1.pdf}
+{\centering \includegraphics{images/plots/backflip/backflip_contribution_polar_plot.jpg}
 
 }
 
-\end{figure}
+\subcaption{Skiing Backflip Image Distributed HOG Method}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{plt.savefig(}\StringTok{\textquotesingle{}images/plots/grass2\_image\_hog.jpg\textquotesingle{}}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\end{figure}%
 
-\begin{figure}[H]
+\end{minipage}%
 
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-30-2.pdf}
+\caption{\label{fig-flip-distributed-and-standard-polar}Skiing Backflip
+Image Distributed Method Polar Plot}
 
-}
-
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# grass2\_polar\_plot \textless{}{-}}
-\CommentTok{\# ggplot(diagonal\_hog\_df, \#\%\textgreater{}\% filter(mag \textgreater{}= 0.1), }
-\CommentTok{\#        aes(x = radian)) +}
-\CommentTok{\#   geom\_histogram(colour = "black", fill = "lightblue", }
-\CommentTok{\#                  breaks = seq(0, 2*pi, length.out = 17.5),}
-\CommentTok{\#                  bins = 9) +}
-\CommentTok{\#   coord\_polar(}
-\CommentTok{\#     theta = "x", start = 0, direction = 1) +}
-\CommentTok{\#   scale\_x\_continuous(}
-\CommentTok{\#     breaks = c(0, pi/4, pi/2, 3*pi/4, pi, 5*pi/4, 3*pi/2, 7*pi/4), }
-\CommentTok{\#     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")}
-\CommentTok{\#   )+}
-\CommentTok{\#   labs(title = "Polar Plot of Internet Grass Image") +}
-\CommentTok{\#     theme\_minimal() +}
-\CommentTok{\#   labs(x = "") +}
-\CommentTok{\#   theme(axis.title.y = element\_blank(),}
-\CommentTok{\#         plot.title = element\_text(hjust = 0.5))}
-\CommentTok{\# }
-\CommentTok{\# grass2\_polar\_plot}
-
-\CommentTok{\#ggsave("\_polar\_plot.jpg", polar\_plot, width = 6, height = 4, dpi = 300)}
-
-\CommentTok{\#all\_plots \textless{}{-} ggpubr::ggarrange(diaganol\_polar\_plot, sf\_polar\_plot, grass2\_polar\_plot, aerial\_ll\_polar\_plot)}
-
-\CommentTok{\#ggsave("images/plots/results\_all\_plots.jpg", all\_plots, width = 7, height = 7)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{hog-image-of-internet-grass}{%
-\section{HOG Image of Internet
-Grass}\label{hog-image-of-internet-grass}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{from}\NormalTok{ skimage }\ImportTok{import}\NormalTok{ color, io, exposure}
-\ImportTok{from}\NormalTok{ skimage.transform }\ImportTok{import}\NormalTok{ resize}
-\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
-\ImportTok{from}\NormalTok{ skimage.feature }\ImportTok{import}\NormalTok{ hog}
-
-\CommentTok{\# Load the image and preprocess it}
-\NormalTok{img }\OperatorTok{=}\NormalTok{ color.rgb2gray(io.imread(}\StringTok{"images/grass\_image2.jpg"}\NormalTok{))}
-\CommentTok{\# img = color.rgb2gray(io.imread("diagnol\_lines\_flipped.jpg"))}
-
-\NormalTok{aspect\_ratio }\OperatorTok{=}\NormalTok{ img.shape[}\DecValTok{0}\NormalTok{] }\OperatorTok{/}\NormalTok{ img.shape[}\DecValTok{1}\NormalTok{]}
-\NormalTok{height }\OperatorTok{=} \DecValTok{200}
-\NormalTok{width }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(height }\OperatorTok{/}\NormalTok{ aspect\_ratio)}
-\NormalTok{resized\_img }\OperatorTok{=}\NormalTok{ resize(img, (height, width))}
-
-\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{20}\NormalTok{))  }\CommentTok{\# Adjusted the figure size to accommodate the additional object}
-\NormalTok{plt.imshow(resized\_img, cmap}\OperatorTok{=}\StringTok{"gray"}\NormalTok{)}
-\NormalTok{plt.axis(}\StringTok{"off"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-(-0.5, 300.5, 199.5, -0.5)
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{plt.show()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[H]
-
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-32-1.pdf}
-
-}
-
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Compute HOG features}
-\NormalTok{hog\_features, hog\_image }\OperatorTok{=}\NormalTok{ hog(resized\_img, orientations}\OperatorTok{=}\DecValTok{9}\NormalTok{, pixels\_per\_cell}\OperatorTok{=}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{),}
-\NormalTok{                              cells\_per\_block}\OperatorTok{=}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{10}\NormalTok{), visualize}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
-
-\CommentTok{\# Plot the images}
-\NormalTok{fig, (ax1, ax2, ax3) }\OperatorTok{=}\NormalTok{ plt.subplots(}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{20}\NormalTok{), sharex}\OperatorTok{=}\VariableTok{True}\NormalTok{, sharey}\OperatorTok{=}\VariableTok{True}\NormalTok{)  }\CommentTok{\# Changed 1, 2 to 3, 1}
-
-\CommentTok{\# Plot the rescaled black and white image}
-\NormalTok{ax1.imshow(resized\_img, cmap}\OperatorTok{=}\NormalTok{plt.cm.gray)}
-\NormalTok{ax1.set\_title(}\StringTok{\textquotesingle{}Rescaled Black and White Image\textquotesingle{}}\NormalTok{)}
-
-\CommentTok{\# Plot the mag object}
-\NormalTok{ax2.imshow(mag, cmap}\OperatorTok{=}\NormalTok{plt.cm.gray)  }\CommentTok{\# Assuming mag is the object you want to insert}
-\CommentTok{\#ax2.axis("off")}
-\NormalTok{ax2.set\_title(}\StringTok{\textquotesingle{}Pixel Magnitudes\textquotesingle{}}\NormalTok{)}
-
-\CommentTok{\# rescale HOG for better viewing:}
-\NormalTok{hog\_color\_rescaled }\OperatorTok{=}\NormalTok{ exposure.rescale\_intensity(hog\_image, in\_range}\OperatorTok{=}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{))}
-
-\CommentTok{\# Plot the histogram of oriented gradients}
-\NormalTok{ax3.imshow(hog\_color\_rescaled, cmap}\OperatorTok{=}\NormalTok{plt.cm.gray)}
-\NormalTok{ax3.set\_title(}\StringTok{\textquotesingle{}Histogram of Oriented Gradients (HOG)\textquotesingle{}}\NormalTok{)}
-
-\NormalTok{plt.savefig(}\StringTok{"images/plots/rescaled\_grass2\_image\_hog.png"}\NormalTok{, dpi}\OperatorTok{=}\DecValTok{300}\NormalTok{)}
-
-\NormalTok{plt.show()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[H]
-
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-32-2.pdf}
-
-}
-
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{from}\NormalTok{ skimage }\ImportTok{import}\NormalTok{ color, io, exposure}
-\ImportTok{from}\NormalTok{ skimage.transform }\ImportTok{import}\NormalTok{ resize}
-\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
-\ImportTok{from}\NormalTok{ skimage.feature }\ImportTok{import}\NormalTok{ hog}
-
-\CommentTok{\# Load the image and preprocess it}
-\NormalTok{img }\OperatorTok{=}\NormalTok{ io.imread(}\StringTok{"images/grass\_image2.jpg"}\NormalTok{)}
-\CommentTok{\# img = color.rgb2gray(io.imread("diagnol\_lines\_flipped.jpg"))}
-
-\NormalTok{aspect\_ratio }\OperatorTok{=}\NormalTok{ img.shape[}\DecValTok{0}\NormalTok{] }\OperatorTok{/}\NormalTok{ img.shape[}\DecValTok{1}\NormalTok{]}
-\NormalTok{height }\OperatorTok{=} \DecValTok{200}
-\NormalTok{width }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(height }\OperatorTok{/}\NormalTok{ aspect\_ratio)}
-\NormalTok{resized\_img }\OperatorTok{=}\NormalTok{ resize(img, (height, width))}
-
-\NormalTok{bw\_resized\_image }\OperatorTok{=}\NormalTok{ color.rgb2gray(resized\_img)}
-
-\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{15}\NormalTok{, }\DecValTok{5}\NormalTok{))  }\CommentTok{\# Adjusted the figure size to accommodate the additional object}
-\NormalTok{plt.imshow(resized\_img, cmap}\OperatorTok{=}\StringTok{"gray"}\NormalTok{)}
-\NormalTok{plt.axis(}\StringTok{"off"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-(-0.5, 300.5, 199.5, -0.5)
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{plt.show()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[H]
-
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-33-5.pdf}
-
-}
-
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Compute HOG features}
-\NormalTok{hog\_features, hog\_image }\OperatorTok{=}\NormalTok{ hog(bw\_resized\_image, orientations}\OperatorTok{=}\DecValTok{9}\NormalTok{, pixels\_per\_cell}\OperatorTok{=}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{),}
-\NormalTok{                              cells\_per\_block}\OperatorTok{=}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{10}\NormalTok{), visualize}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
-
-\CommentTok{\# Plot the images}
-\NormalTok{fig, (ax1, ax2, ax3) }\OperatorTok{=}\NormalTok{ plt.subplots(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{25}\NormalTok{, }\DecValTok{5}\NormalTok{), sharex}\OperatorTok{=}\VariableTok{True}\NormalTok{, sharey}\OperatorTok{=}\VariableTok{True}\NormalTok{)  }\CommentTok{\# Changed 3, 1 to 1, 5}
-
-\CommentTok{\# Plot the rescaled input image}
-\NormalTok{ax1.imshow(resized\_img, cmap}\OperatorTok{=}\NormalTok{plt.cm.gray)}
-\NormalTok{ax1.set\_title(}\StringTok{\textquotesingle{}Rescaled Input Image\textquotesingle{}}\NormalTok{)}
-
-\CommentTok{\# Plot the pixel magnitudes}
-\NormalTok{ax2.imshow(mag, cmap}\OperatorTok{=}\NormalTok{plt.cm.gray)  }\CommentTok{\# Assuming mag is the object you want to insert}
-\NormalTok{ax2.set\_title(}\StringTok{\textquotesingle{}Pixel Magnitudes\textquotesingle{}}\NormalTok{)}
-
-\CommentTok{\# Plot the histogram of oriented gradients}
-\NormalTok{hog\_color\_rescaled }\OperatorTok{=}\NormalTok{ exposure.rescale\_intensity(hog\_image, in\_range}\OperatorTok{=}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{))}
-\NormalTok{ax3.imshow(hog\_color\_rescaled, cmap}\OperatorTok{=}\NormalTok{plt.cm.gray)}
-\NormalTok{ax3.set\_title(}\StringTok{\textquotesingle{}Histogram of Oriented Gradients (HOG) Image\textquotesingle{}}\NormalTok{)}
-
-\CommentTok{\# Plot the histogram of oriented gradients}
-\CommentTok{\# angle\_hist = io.imread("images/grass2\_angles\_histogram.jpg")}
-\CommentTok{\# resized\_hist = resize(angle\_hist, (height, width))}
-\CommentTok{\# ax4.imshow(resized\_hist, cmap=plt.cm.gray)}
-\CommentTok{\# ax4.set\_title(\textquotesingle{}Angle Histogram\textquotesingle{})}
-\CommentTok{\# }
-\CommentTok{\# \# Plot the polar plot}
-\CommentTok{\# polar\_plot = io.imread("images/grass2\_polar\_plot.jpg")}
-\CommentTok{\# resized\_polar = resize(polar\_plot, (height, width))}
-\CommentTok{\# ax5.imshow(resized\_polar, cmap=plt.cm.gray)}
-\CommentTok{\# ax5.set\_title(\textquotesingle{}Polar Plot\textquotesingle{})}
-
-\NormalTok{plt.savefig(}\StringTok{"images/plots/rescaled\_grass2\_image\_hog.png"}\NormalTok{, dpi}\OperatorTok{=}\DecValTok{300}\NormalTok{)}
-
-\NormalTok{plt.show()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[H]
-
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-33-6.pdf}
-
-}
-
-\end{figure}
-
-\hypertarget{titus-flip}{%
-\section{Titus Flip}\label{titus-flip}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{image }\OperatorTok{=}\NormalTok{ imread(}\StringTok{\textquotesingle{}images/TitusFlip.jpg\textquotesingle{}}\NormalTok{)}
-\NormalTok{imshow(image)}
-\BuiltInTok{print}\NormalTok{(image.shape)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-(1350, 1080, 3)
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{resized\_image }\OperatorTok{=}\NormalTok{ resize(image, (}\DecValTok{300}\NormalTok{, }\DecValTok{400}\NormalTok{))}
-\CommentTok{\#resized\_image = image}
-\NormalTok{imshow(resized\_image)}
-\BuiltInTok{print}\NormalTok{(resized\_image.shape)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-(300, 400, 3)
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{fig, hog\_image }\OperatorTok{=}\NormalTok{ hog(resized\_image, orientations}\OperatorTok{=}\DecValTok{9}\NormalTok{, pixels\_per\_cell}\OperatorTok{=}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{),}
-\NormalTok{                     cells\_per\_block}\OperatorTok{=}\NormalTok{(}\DecValTok{15}\NormalTok{, }\DecValTok{15}\NormalTok{), visualize}\OperatorTok{=}\VariableTok{True}\NormalTok{, channel\_axis}\OperatorTok{=}\DecValTok{2} \CommentTok{\#multichannel=True}
-\NormalTok{                     )}
-\NormalTok{fig, (ax1, ax2) }\OperatorTok{=}\NormalTok{ plt.subplots(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{16}\NormalTok{, }\DecValTok{7}\NormalTok{), sharex}\OperatorTok{=}\VariableTok{True}\NormalTok{, sharey}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
-
-\NormalTok{ax1.imshow(resized\_image, cmap}\OperatorTok{=}\NormalTok{plt.cm.gray)}
-\NormalTok{ax1.set\_title(}\StringTok{\textquotesingle{}Input image\textquotesingle{}}\NormalTok{)}
-
-\CommentTok{\# Rescale histogram for better display }
-\NormalTok{hog\_color\_rescaled }\OperatorTok{=}\NormalTok{ exposure.rescale\_intensity(hog\_image, in\_range}\OperatorTok{=}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{))}
-
-\NormalTok{ax2.imshow(hog\_color\_rescaled, cmap}\OperatorTok{=}\NormalTok{plt.cm.gray)}
-\NormalTok{ax2.set\_title(}\StringTok{\textquotesingle{}Histogram of Oriented Gradients (HOG)\textquotesingle{}}\NormalTok{)}
-
-\CommentTok{\# store to file}
-\NormalTok{plt.savefig(}\StringTok{"images/plots/titus\_flip\_example\_hog.png"}\NormalTok{, dpi}\OperatorTok{=}\DecValTok{300}\NormalTok{)}
-
-\NormalTok{plt.show()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[H]
-
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-34-9.pdf}
-
-}
-
-\end{figure}
-
-\begin{figure}[H]
-
-{\centering \includegraphics{results_files/figure-pdf/unnamed-chunk-34-10.pdf}
-
-}
-
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# hog\_df \textless{}{-} py$hog\_df}
-
-
-\CommentTok{\# ggplot(hog\_df \%\textgreater{}\% filter(mag \textgreater{}= 0.4), }
-\CommentTok{\#        aes(x = radian)) +}
-\CommentTok{\#   geom\_histogram(\#binwidth = 5\#, boundary = 0, closed = "right") +}
-\CommentTok{\#   )+}
-\CommentTok{\#   \#scale\_x\_continuous(limits = c(0, 360), breaks = seq(0, 360, by = 45)) +}
-\CommentTok{\#   \#coord\_polar(start = 0, direction = 1, ) +}
-\CommentTok{\#   coord\_radial(start = 0, end = pi, expand = F, clip = "on") +}
-\CommentTok{\#   scale\_x\_continuous(}
-\CommentTok{\#     breaks = c(0, pi/4, pi/2, 3*pi/4), }
-\CommentTok{\#     labels = c("0", "π/4", "π/2", "3π/4")}
-\CommentTok{\#   ) +}
-\CommentTok{\#   theme(plot.title = element\_text(hjust = 0.5)) +}
-\CommentTok{\#   labs(title = "Polar Histogram of Theta",}
-\CommentTok{\#        x = "Theta (Degrees)",}
-\CommentTok{\#        y = "Frequency") \#+ theme\_minimal()}
-\end{Highlighting}
-\end{Shaded}
+\end{figure}%
 
 \bookmarksetup{startatroot}
 
-\hypertarget{conclusion}{%
-\chapter{Conclusion}\label{conclusion}}
+\chapter{Conclusion}\label{conclusion}
 
 
 

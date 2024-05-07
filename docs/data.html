@@ -167,16 +167,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Methods</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Results</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./results.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Results</span></span></a>
+  <a href="./aerial_images_results.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Aerial Cityscapes</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./grass_images_results.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Grass Images</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./backflip_image_results.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Backflip Image</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./conclusion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
   </div>
 </li>
     </ul>
@@ -216,6 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="line-block">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To evaluate the algorithm’s performance, we collected images with varying levels of complexity. Beginning with basic geometric shapes and diagonal lines sourced from Google Images, we established a foundational data set for initial testing. We incorporated aerial cityscapes including San Francisco, Salt Lake City, and Detroit from Mapbox, aiming to assess the algorithm’s ability in identifying urban grid structures such as streets and highways. Additionally, we included images of grass sourced from both Google Images and Dr.&nbsp;Jon Rosales (Environmental Studies) at St.&nbsp;Lawrence University’s Living Lab. The images sourced from Google Images were primarily The Living Lab images included aerial and close up shots, with special attention given to aerial images which featured a northern indicator line. To ensure consistent orientation, each aerial image was manually rotated to align north facing direction upwards before analysis, with the northern indicator subsequently removed to avoid introducing artificial lines in the image.</div>
+<p><br></p>
 <div align="center">
 
 <div id="fig-images" class="quarto-layout-panel">
@@ -235,13 +259,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-images" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-sf" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-grass_internet" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
-<div aria-describedby="fig-sf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/san_francisco_scale_zoom_12.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="fig-images"><img src="images/san_francisco_scale_zoom_12.png" class="img-fluid figure-img" data-ref-parent="fig-images"></a>
+<div aria-describedby="fig-grass_internet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/TitusFlip.jpg" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="fig-images"><img src="images/TitusFlip.jpg" class="img-fluid figure-img" data-ref-parent="fig-images"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(b) Downtown San Francisco, CA
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-grass_internet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Skiing Backflip<br>(St.&nbsp;Lawrence University)
 </figcaption>
 </figure>
 </div>
@@ -249,13 +273,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-images" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-grass_internet" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-sf" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
-<div aria-describedby="fig-grass_internet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/grass_image2.jpg" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="fig-images"><img src="images/grass_image2.jpg" class="img-fluid figure-img" data-ref-parent="fig-images"></a>
+<div aria-describedby="fig-sf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/san_francisco_scale_zoom_12.png" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="fig-images"><img src="images/san_francisco_scale_zoom_12.png" class="img-fluid figure-img" data-ref-parent="fig-images"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-grass_internet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(c) Internet Grass
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) Downtown San Francisco, CA
 </figcaption>
 </figure>
 </div>
@@ -267,7 +291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <a href="images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg" class="lightbox" data-glightbox="description: .lightbox-desc-4" data-gallery="fig-images"><img src="images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg" class="img-fluid figure-img" data-ref-parent="fig-images"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-living_labs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(d) Aerial Living Laboratory
+(d) Aerial Grass Image<br>(St.&nbsp;Lawrence University Living Laboratory)
 </figcaption>
 </figure>
 </div>
@@ -275,7 +299,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-images-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.1: Featured Images for Evaluation
+Figure&nbsp;2.1: Sample of Images for Evaluation
 </figcaption>
 </figure>
 </div>
@@ -290,9 +314,9 @@ Figure&nbsp;2.1: Featured Images for Evaluation
 
 <div class="hidden" aria-hidden="true">
 <span class="glightbox-desc lightbox-desc-1">Figure&nbsp;2.1&nbsp;(a): Diagnol Lines</span>
-<span class="glightbox-desc lightbox-desc-2">Figure&nbsp;2.1&nbsp;(b): Downtown San Francisco, CA</span>
-<span class="glightbox-desc lightbox-desc-3">Figure&nbsp;2.1&nbsp;(c): Internet Grass</span>
-<span class="glightbox-desc lightbox-desc-4">Figure&nbsp;2.1&nbsp;(d): Aerial Living Laboratory</span>
+<span class="glightbox-desc lightbox-desc-2">Figure&nbsp;2.1&nbsp;(b): Skiing Backflip<br>(St.&nbsp;Lawrence University)</span>
+<span class="glightbox-desc lightbox-desc-3">Figure&nbsp;2.1&nbsp;(c): Downtown San Francisco, CA</span>
+<span class="glightbox-desc lightbox-desc-4">Figure&nbsp;2.1&nbsp;(d): Aerial Grass Image<br>(St.&nbsp;Lawrence University Living Laboratory)</span>
 </div>
 
 </div></div></main> <!-- /main -->
@@ -923,24 +947,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-9"><a href="#cb1-9"></a></span>
 <span id="cb1-10"><a href="#cb1-10"></a>|       To evaluate the algorithm's performance, we collected images with varying levels of complexity. Beginning with basic geometric shapes and diagonal lines sourced from Google Images, we established a foundational data set for initial testing. We incorporated aerial cityscapes including San Francisco, Salt Lake City, and Detroit from Mapbox, aiming to assess the algorithm's ability in identifying urban grid structures such as streets and highways. Additionally, we included images of grass sourced from both Google Images and Dr. Jon Rosales (Environmental Studies) at St. Lawrence University's Living Lab. The images sourced from Google Images were primarily The Living Lab images included aerial and close up shots, with special attention given to aerial images which featured a northern indicator line. To ensure consistent orientation, each aerial image was manually rotated to align north facing direction upwards before analysis, with the northern indicator subsequently removed to avoid introducing artificial lines in the image. </span>
 <span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a>&lt;div align="center"&gt;</span>
+<span id="cb1-12"><a href="#cb1-12"></a>&lt;br /&gt;</span>
 <span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a>::: {#fig-images layout-ncol=2}</span>
+<span id="cb1-14"><a href="#cb1-14"></a>&lt;div align="center"&gt;</span>
 <span id="cb1-15"><a href="#cb1-15"></a></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="al">![Diagnol Lines](images/diagnol_lines.jpg)</span>{#fig-lines}</span>
+<span id="cb1-16"><a href="#cb1-16"></a>::: {#fig-images layout-ncol=2}</span>
 <span id="cb1-17"><a href="#cb1-17"></a></span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="al">![Downtown San Francisco, CA](images/san_francisco_scale_zoom_12.png)</span>{#fig-sf}</span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="al">![Diagnol Lines](images/diagnol_lines.jpg)</span>{#fig-lines}</span>
 <span id="cb1-19"><a href="#cb1-19"></a></span>
-<span id="cb1-20"><a href="#cb1-20"></a><span class="al">![Internet Grass](images/grass_image2.jpg)</span>{#fig-grass_internet}</span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="al">![Skiing Backflip&lt;br /&gt;(St. Lawrence University)](images/TitusFlip.jpg)</span>{#fig-grass_internet}</span>
 <span id="cb1-21"><a href="#cb1-21"></a></span>
-<span id="cb1-22"><a href="#cb1-22"></a><span class="al">![Aerial Living Laboratory](images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg)</span>{#fig-living_labs}</span>
+<span id="cb1-22"><a href="#cb1-22"></a><span class="al">![Downtown San Francisco, CA](images/san_francisco_scale_zoom_12.png)</span>{#fig-sf}</span>
 <span id="cb1-23"><a href="#cb1-23"></a></span>
-<span id="cb1-24"><a href="#cb1-24"></a>Featured Images for Evaluation</span>
-<span id="cb1-25"><a href="#cb1-25"></a>:::</span>
-<span id="cb1-26"><a href="#cb1-26"></a>&lt;div&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-24"><a href="#cb1-24"></a></span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="al">![Aerial Grass Image&lt;br /&gt;(St. Lawrence University Living Laboratory)](images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg)</span>{#fig-living_labs}</span>
+<span id="cb1-26"><a href="#cb1-26"></a></span>
+<span id="cb1-27"><a href="#cb1-27"></a>Sample of Images for Evaluation</span>
+<span id="cb1-28"><a href="#cb1-28"></a>:::</span>
+<span id="cb1-29"><a href="#cb1-29"></a></span>
+<span id="cb1-30"><a href="#cb1-30"></a>&lt;div&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","loop":false});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"descPosition":"bottom","openEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
