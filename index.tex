@@ -5,8 +5,7 @@
 %
 \documentclass[
   letterpaper,
-  DIV=11,
-  numbers=noendperiod]{scrreprt}
+]{report}
 
 \usepackage{amsmath,amssymb}
 \usepackage{iftex}
@@ -108,7 +107,6 @@
 \def\fps@figure{htbp}
 \makeatother
 
-\KOMAoption{captions}{tableheading}
 \makeatletter
 \makeatother
 \makeatletter
@@ -186,7 +184,7 @@ Detecting Grass Lay Direction}
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, frame hidden, breakable, borderline west={3pt}{0pt}{shadecolor}, sharp corners, enhanced, interior hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, sharp corners, interior hidden, breakable, frame hidden, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -199,17 +197,31 @@ Detecting Grass Lay Direction}
 \hypertarget{abstract}{%
 \chapter{Abstract}\label{abstract}}
 
-~~~~~~In Alaska, indigenous hunters and gatherers have long observed the
-alignment of grass and plants after the growing season as indicative of
-prevailing wind directions and shifts. Due to the remote and harsh
-conditions, traditional weather stations are absent to measure shifts in
-historically predominant wind directions. In a previous study Dr.~Jon
-Rosales (Environmental Studies) and his team collected images of grass
-lay from St.~Lawrence Island, Alaska, and manually attempted to measure
-grass lay angles. This project investigated the Histogram of Oriented
-Gradients (HOG) algorithm to automate this process. We applied the
-algorithm to various images of grass fields sampled from the internet to
-test its viability.
+~~~~~~Subsistence-oriented indigenous communities across Alaska rely
+heavily on Traditional Ecological Knowledge (TEK), a holistic
+understanding of their environment acquired through generations of
+observation and cultural transmission. Among the Anishinaabek tradition,
+sweetgrass symbolizes wisdom and knowledge, passed down from elders to
+younger generations. Indigenous hunters and gatherers have long observed
+the alignment of grass and plants after the growing season as indicative
+of prevailing wind directions. Predominant wind direction serves a
+crucial role to subsistence practitioners when hunting, fishing,
+settling, and keeping track of changing weather. Due to the remote and
+harsh conditions, traditional weather stations are absent to measure
+shifts in historically predominant wind directions. On islands like
+St.~Lawrence Island in Savoonga, AK, natives have observed a shift from
+historically predominant northerly wind patterns to southerly and
+easterly and dominated winds. In a previous study Dr.~Jon Rosales
+(Environmental Studies) and his team collected images of grass lay from
+St.~Lawrence University's Living Laboratory and manually attempted to
+measure grass lay angles and relate them with wind data. This research
+project seeks to reinforce Traditional Ecological Knowledge (TEK) with
+Scientific Ecological Knowledge (SEK) to develop our understanding of
+Alaskan indigenous wisdom and its relation with modern scientific
+findings. We investigated the Histogram of Oriented Gradients (HOG)
+algorithm to automate the measurement of grass lay angles. We applied
+the algorithm to various images sampled from the internet and the Living
+Laboratory to test its viability.
 
 \bookmarksetup{startatroot}
 
@@ -231,58 +243,6 @@ featured a northern indicator line. To ensure consistent orientation,
 each aerial image was manually rotated to align north facing direction
 upwards before analysis, with the northern indicator subsequently
 removed to avoid introducing artificial lines in the image.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(reticulate)}
-\FunctionTok{library}\NormalTok{(mapsapi)}
-\FunctionTok{library}\NormalTok{(mapboxapi)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-Usage of the Mapbox APIs is governed by the Mapbox Terms of Service.
-Please visit https://www.mapbox.com/legal/tos/ for more information.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(magick)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-Linking to ImageMagick 6.9.12.93
-Enabled features: cairo, fontconfig, freetype, heic, lcms, pango, raw, rsvg, webp
-Disabled features: fftw, ghostscript, x11
-\end{verbatim}
-
-\hypertarget{download-aerial-city-images}{%
-\section{Download Aerial City
-Images}\label{download-aerial-city-images}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{key }\OtherTok{\textless{}{-}} \FunctionTok{Sys.getenv}\NormalTok{(}\StringTok{"mapbox\_key"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{sf\_map }\OtherTok{\textless{}{-}} \FunctionTok{static\_mapbox}\NormalTok{(}
-  \AttributeTok{access\_token =}\NormalTok{ key,}
-  \AttributeTok{style\_url =} \StringTok{"mapbox://styles/mapbox/satellite{-}v9"}\NormalTok{,}
-  \AttributeTok{width =} \DecValTok{300}\NormalTok{,}
-  \AttributeTok{height =} \DecValTok{200}\NormalTok{, }
-  \AttributeTok{image =}\NormalTok{ T, }\AttributeTok{latitude =} \FloatTok{37.792004}\NormalTok{, }\AttributeTok{longitude =} \SpecialCharTok{{-}}\FloatTok{122.428079}\NormalTok{, }\AttributeTok{zoom =} \DecValTok{12}
-\NormalTok{)}
-
-\NormalTok{magick}\SpecialCharTok{::}\FunctionTok{image\_write}\NormalTok{(sf\_map, }\StringTok{"images/san\_francisco\_scale\_zoom\_12.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{featured-images}{%
-\section{Featured Images}\label{featured-images}}
 
 \begin{figure}
 
@@ -365,43 +325,90 @@ to standardize their resolutions and preserve their aspect ratios to
 prevent distortion that could affect the accuracy of angle
 identification. Converting the images to grayscale was necessary because
 it allowed for focusing on a single channel to represent pixel
-intensity, rather than three channels (red, green, and blue).\\
-\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}The
-HOG features were then computed for the resized images, which involved
-calculating the gradient magnitudes and angles at each pixel. The
-gradient magnitude at each pixel is comprised of the gradients in the
-`x' and `y' directions. The gradient in the x-direction is computed by
-subtracting the pixel value to the left of pixel of interest is
+intensity, rather than three channels (red, green, and blue).
+
+\begin{figure}
+
+\begin{minipage}[t]{\linewidth}
+
+{\centering 
+
+\raisebox{-\height}{
+
+\includegraphics{images/plots/input_to_rescaled_plot.png}
+
+}
+
+}
+
+\subcaption{\label{fig-input_image_to_new}Internet Grass Image}
+\end{minipage}%
+
+\caption{\label{fig-input_image}Rescaling and Converting Image to
+Greyscale}
+
+\end{figure}
+
+~~~~~~The HOG features were then computed for the resized images, which
+involved calculating the gradient magnitudes and angles at each pixel.
+The gradient magnitude at each pixel is comprised of the gradients in
+the `x' and `y' directions. The gradient in the x-direction is computed
+by subtracting the pixel value to the left of pixel of interest is
 subtracted from the pixel value to its right. Similarly, the gradient in
 the y-direction is calculated by pixel value below the pixel of interest
-is subtracted from the pixel value above the pixel of interest. Now to
-calculate the gradient magnitude at the pixel of interest, the
-Pythagorean Theorem can be utilized where the gradient magnitude is
+is subtracted from the pixel value above the pixel of interest.
+
+\(G_x=I(r,c+1)−I(r,c-1)\)
+
+\(G_y=I(r+1,c)−I(r-1,c)\)
+
+~~~~~~Now to calculate the gradient magnitude at the pixel of interest,
+the Pythagorean Theorem can be utilized where the gradient magnitude is
 equal to the square root of the x-gradient squared plus the y-gradient
 squared. The angle at a given pixel can be calculated by taking the
 inverse tangent of its y-gradient divided by its x-gradient. It is
 important to note all angles produced by this algorithm are between zero
 and one hundred eighty degrees. This occurs, because the inverse tangent
 function used for calculating a given pixel's angle cannot distinguish
-between all four quadrants. OR:
+between all four quadrants.
 
 \(Magnitude(\mu)=\sqrt{G_{x}^{2} + G_{y}^{2}}\)
 
-\(Angle(\Theta)=\arctan({\frac{G_{y}^{2}}{G_{x}^{2}}})\)
+\(Angle(\Theta)=tan^{−1} (\frac{G_y}{G_x})\)
+
+\begin{figure}
+
+\begin{minipage}[t]{\linewidth}
+
+{\centering 
+
+\raisebox{-\height}{
+
+\includegraphics{images/plots/internet_grass_mag.png}
+
+}
+
+}
+
+\subcaption{\label{fig-magnitude_grass}Internet Grass Image}
+\end{minipage}%
+
+\caption{\label{fig-mag_plot}Plotting Gradient Magnitudes}
+
+\end{figure}
 
 \hfill\break
 ~~~~~~Next, histograms are constructed to visualize the distribution of
 gradient magnitudes and angles. Two different techniques for creating
 gradient angle histograms were implemented. The first histogram was
 created by counting the number of angles that fell into their respective
-bins. The second scheme uses the same number of bins, but factors in a
-pixel's gradient magnitude and its allocation to its bordering bins.
-Here, the weight assigned to each bin is calculated by the angle's
-deviation from the center of its central bin. This approach allows for a
-more representative histogram which splits angles between bins and takes
-their magnitudes into account. Lastly, these histograms are converted to
-polar histograms so the primary angles can be visualized and compared to
-their original images.
+bins. The second scheme factors in a pixel's gradient magnitude and its
+allocation to its bordering bins. Here, the weight assigned to each bin
+is calculated by the angle's deviation from the center of its central
+bin. This approach allows for a more representative histogram which
+splits angles between bins and takes their magnitudes into account.
+Lastly, these histograms are converted to polar histograms so the
+primary angles can be visualized and compared to their original images.
 
 \bookmarksetup{startatroot}
 
@@ -466,9 +473,9 @@ Disabled features: fftw, ghostscript, x11
 "/Users/bensunshine/.virtualenvs/r-reticulate/bin/python" 
 \end{verbatim}
 
-\hypertarget{download-aerial-city-images-1}{%
+\hypertarget{download-aerial-city-images}{%
 \section{Download Aerial City
-Images}\label{download-aerial-city-images-1}}
+Images}\label{download-aerial-city-images}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -565,9 +572,8 @@ Images}\label{download-aerial-city-images-1}}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{read-grayscale-resize-image}{%
-\section{Read, Grayscale, Resize
-Image}\label{read-grayscale-resize-image}}
+\hypertarget{collect-hog-features}{%
+\section{Collect HOG Features}\label{collect-hog-features}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -608,6 +614,7 @@ Image}\label{read-grayscale-resize-image}}
 
 \CommentTok{\# real one}
 \CommentTok{\#img = color.rgb2gray(io.imread("images/living\_labs\_real\_grass\_image.jpg"))}
+
 \NormalTok{mag\_list }\OperatorTok{=}\NormalTok{ []}
 \NormalTok{theta\_list }\OperatorTok{=}\NormalTok{ []}
 
@@ -678,22 +685,22 @@ Image}\label{read-grayscale-resize-image}}
 Aspect Ratio: 1.0
 Resized Width: 200
 <Figure size 3000x1600 with 0 Axes>
-<matplotlib.image.AxesImage object at 0x168a3b250>
+<matplotlib.image.AxesImage object at 0x292a43250>
 (-0.5, 199.5, 199.5, -0.5)
 Aspect Ratio: 0.6666666666666666
 Resized Width: 300
 <Figure size 3000x1600 with 0 Axes>
-<matplotlib.image.AxesImage object at 0x2bdd4bf50>
+<matplotlib.image.AxesImage object at 0x2c418b850>
 (-0.5, 299.5, 199.5, -0.5)
 Aspect Ratio: 0.662751677852349
 Resized Width: 301
 <Figure size 3000x1600 with 0 Axes>
-<matplotlib.image.AxesImage object at 0x2bdd31010>
+<matplotlib.image.AxesImage object at 0x2c874af90>
 (-0.5, 300.5, 199.5, -0.5)
 Aspect Ratio: 0.4904214559386973
 Resized Width: 407
 <Figure size 3000x1600 with 0 Axes>
-<matplotlib.image.AxesImage object at 0x2d74f5b10>
+<matplotlib.image.AxesImage object at 0x2dcc55690>
 (-0.5, 406.5, 199.5, -0.5)
 \end{verbatim}
 
@@ -834,7 +841,8 @@ Angles}\label{create-histogram-plots-of-gradient-magnitudes-and-angles}}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{diagonal\_histogram\_mag\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{1}\NormalTok{]], }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mag)) }\SpecialCharTok{+}
+  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{1}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mag)) }\SpecialCharTok{+}
   \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Magnitude"}\NormalTok{, }
@@ -875,7 +883,8 @@ Angles}\label{create-histogram-plots-of-gradient-magnitudes-and-angles}}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{diagonal\_histogram\_theta\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{1}\NormalTok{]], }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
+  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{1}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
   \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Angle"}\NormalTok{, }
@@ -914,7 +923,8 @@ Angles}\label{create-histogram-plots-of-gradient-magnitudes-and-angles}}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{sf\_histogram\_mag\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{2}\NormalTok{]], }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mag)) }\SpecialCharTok{+}
+  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{2}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mag)) }\SpecialCharTok{+}
   \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Magnitude"}\NormalTok{, }
@@ -955,7 +965,8 @@ Angles}\label{create-histogram-plots-of-gradient-magnitudes-and-angles}}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{sf\_histogram\_theta\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{2}\NormalTok{]], }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
+  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{2}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
   \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Angle"}\NormalTok{, }
@@ -994,7 +1005,8 @@ Angles}\label{create-histogram-plots-of-gradient-magnitudes-and-angles}}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{internet\_grass\_histogram\_mag\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{3}\NormalTok{]], }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mag)) }\SpecialCharTok{+}
+  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{3}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mag)) }\SpecialCharTok{+}
   \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Magnitude"}\NormalTok{, }
@@ -1035,7 +1047,8 @@ Angles}\label{create-histogram-plots-of-gradient-magnitudes-and-angles}}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{internet\_grass\_histogram\_theta\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{3}\NormalTok{]], }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
+  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{3}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
   \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Angle"}\NormalTok{, }
@@ -1074,7 +1087,8 @@ Angles}\label{create-histogram-plots-of-gradient-magnitudes-and-angles}}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{living\_labs\_histogram\_mag\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{4}\NormalTok{]], }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mag)) }\SpecialCharTok{+}
+  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{4}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mag)) }\SpecialCharTok{+}
   \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Magnitude"}\NormalTok{, }
@@ -1115,7 +1129,8 @@ Angles}\label{create-histogram-plots-of-gradient-magnitudes-and-angles}}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{living\_labs\_histogram\_theta\_plot }\OtherTok{\textless{}{-}}
-  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{4}\NormalTok{]], }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
+  \FunctionTok{ggplot}\NormalTok{(standard\_df\_list[[}\DecValTok{4}\NormalTok{]], }
+         \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ theta)) }\SpecialCharTok{+}
   \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{() }\SpecialCharTok{+} 
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Gradient Angle"}\NormalTok{, }
@@ -1245,7 +1260,9 @@ Historgrams}\label{generate-polar-plots-for-standard-historgrams}}
                  \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
                  \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{coord\_polar}\NormalTok{(}
-    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }\AttributeTok{start =} \DecValTok{0}\NormalTok{, }\AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
     \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
     \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
@@ -1270,7 +1287,9 @@ Historgrams}\label{generate-polar-plots-for-standard-historgrams}}
                  \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
                  \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{coord\_polar}\NormalTok{(}
-    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }\AttributeTok{start =} \DecValTok{0}\NormalTok{, }\AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
     \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
     \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
@@ -1295,7 +1314,9 @@ Historgrams}\label{generate-polar-plots-for-standard-historgrams}}
                  \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
                  \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{coord\_polar}\NormalTok{(}
-    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }\AttributeTok{start =} \DecValTok{0}\NormalTok{, }\AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
     \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
     \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
@@ -1320,7 +1341,9 @@ Historgrams}\label{generate-polar-plots-for-standard-historgrams}}
                  \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
                  \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{coord\_polar}\NormalTok{(}
-    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }\AttributeTok{start =} \DecValTok{0}\NormalTok{, }\AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
     \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
     \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
@@ -1373,7 +1396,9 @@ Historgrams}\label{generate-polar-plots-for-contribution-historgrams}}
                  \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
                  \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{coord\_polar}\NormalTok{(}
-    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }\AttributeTok{start =} \DecValTok{0}\NormalTok{, }\AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
     \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
     \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
@@ -1409,7 +1434,9 @@ Warning in geom_histogram(stat = "identity", colour = "black", fill =
                  \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
                  \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{coord\_polar}\NormalTok{(}
-    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }\AttributeTok{start =} \DecValTok{0}\NormalTok{, }\AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
     \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
     \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
@@ -1445,7 +1472,9 @@ Warning in geom_histogram(stat = "identity", colour = "black", fill =
                  \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
                  \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{coord\_polar}\NormalTok{(}
-    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }\AttributeTok{start =} \DecValTok{0}\NormalTok{, }\AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
     \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
     \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}
@@ -1481,7 +1510,9 @@ Warning in geom_histogram(stat = "identity", colour = "black", fill =
                  \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{360}\NormalTok{, }\AttributeTok{length.out =} \FloatTok{17.5}\NormalTok{),}
                  \AttributeTok{bins =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{coord\_polar}\NormalTok{(}
-    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }\AttributeTok{start =} \DecValTok{0}\NormalTok{, }\AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+    \AttributeTok{theta =} \StringTok{"x"}\NormalTok{, }
+    \AttributeTok{start =} \DecValTok{0}\NormalTok{, }
+    \AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{360}\NormalTok{),}
     \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{135}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{225}\NormalTok{, }\DecValTok{270}\NormalTok{, }\DecValTok{315}\NormalTok{), }
     \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"NE"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"SE"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"SW"}\NormalTok{, }\StringTok{"W"}\NormalTok{, }\StringTok{"NW"}\NormalTok{)}

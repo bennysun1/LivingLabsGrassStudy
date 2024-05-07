@@ -44,7 +44,7 @@ import numpy as np
 
 ```{python}
 # TODO: DONT CHANGE HEIGHT AND WIDTH
-img = color.rgb2gray(io.imread("images/grass_image2.jpg"))
+#img = color.rgb2gray(io.imread("images/grass_image2.jpg"))
 
 # img = color.rgb2gray(io.imread("images/b_test_image_copy.jpg"))
 #img = color.rgb2gray(io.imread("images/long_grass_sample.jpeg"))
@@ -52,7 +52,7 @@ img = color.rgb2gray(io.imread("images/grass_image2.jpg"))
 
 #img = color.rgb2gray(io.imread("images/san_francisco_scale_zoom_12.png"))
 
-#img = color.rgb2gray(io.imread("images/diagnol_lines_flipped.jpg"))
+img = color.rgb2gray(io.imread("images/diagnol_lines.jpg"))
 #img = color.rgb2gray(io.imread("images/long_grass_sample_cropped.jpg"))
 
 # aerial rotated image
@@ -337,8 +337,8 @@ ggsave("images/plots/grass2_angles_histogram.jpg", histogram_theta_plot, width =
 # plt.axis("on")
 # plt.show()
 # 
-# plt.savefig("images/plots/internet_grass_mag.png", dpi=300)
-
+# plt.savefig("images/plots/diagonal_lines_mag.png", dpi=300)
+# 
 
 ```
 
@@ -601,7 +601,7 @@ plt.show()
 
 ```{python}
 # Load the image and preprocess it
-img = io.imread("images/grass_image2.jpg")
+img = io.imread("images/diagnol_lines.jpg")
 # img = color.rgb2gray(io.imread("diagnol_lines_flipped.jpg"))
 
 aspect_ratio = img.shape[0] / img.shape[1]
