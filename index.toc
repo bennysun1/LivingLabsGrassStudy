@@ -1,0 +1,18 @@
+\contentsline {chapter}{\numberline {1}Abstract}{2}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Data}{3}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Methods}{5}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Results}{7}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Load R Packages}{7}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Download Aerial City Images}{8}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Load Python Libraries}{9}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Collect HOG Features}{10}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Build Data Frames for Each Image}{14}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Plot Magnitudes as Image}{15}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Create Histogram Plots of Gradient Magnitudes and Angles}{17}{section.4.7}%
+\contentsline {section}{\numberline {4.8}Build New Contribution Histograms for Each Data Frame}{24}{section.4.8}%
+\contentsline {section}{\numberline {4.9}Generate Polar Plots for Standard Historgrams}{26}{section.4.9}%
+\contentsline {section}{\numberline {4.10}Generate Polar Plots for Contribution Historgrams}{29}{section.4.10}%
+\contentsline {section}{\numberline {4.11}Generate HOG Image}{34}{section.4.11}%
+\contentsline {section}{\numberline {4.12}HOG Image of Internet Grass}{37}{section.4.12}%
+\contentsline {section}{\numberline {4.13}Titus Flip}{42}{section.4.13}%
+\contentsline {chapter}{\numberline {5}Conclusion}{45}{chapter.5}%

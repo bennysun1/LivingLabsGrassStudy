@@ -21,7 +21,6 @@ format:
     code-tools: true
     code-line-numbers: true
     toc: true
-    embed-resources: true
     theme: 
       light: cosmo
       dark: darkly

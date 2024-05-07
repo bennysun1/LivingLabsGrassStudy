@@ -5,6 +5,8 @@ lightbox:
   match: auto
   effect: zoom
   desc-position: bottom
+code-annotations: below
+
 ---
 
 ## Load R Packages
@@ -21,11 +23,13 @@ Sys.which("python")
 ## Download Aerial City Images
 
 ```{r, warning=FALSE, message=FALSE}
-key <- Sys.getenv("mapbox_key")
+key <- Sys.getenv("mapbox_key") #<1>
 ```
 
+1. Read in Mapbox Key from System Environment
+
 ```{r, warning=FALSE, message=FALSE}
-map <- static_mapbox(
+map <- static_mapbox( #<2>
   access_token = key,
   style_url = "mapbox://styles/mapbox/satellite-v9",
   width = 300,
@@ -36,8 +40,9 @@ map <- static_mapbox(
 magick::image_write(map, "images/san_francisco_scale_zoom_12.png")
 ```
 
+2. Using Mapbox API Download Image of downtown San Francisco, CA
 ```{r, warning=FALSE, message=FALSE}
-points_of_interest <- tibble::tibble(
+points_of_interest <- tibble::tibble( #<3>
   longitude = c(-112.065945, -111.853948, 
                 -111.852956, -112.023371),
   
@@ -66,6 +71,8 @@ magick::image_write(map, "images/salt_lake_city_zoom_12.png")
 
 ```
 
+3. Using Mapbox API Download Image of downtown Salt Lake City, UT
+
 ```{r, warning=FALSE, message=FALSE}
 map <- static_mapbox(
   access_token = key,
@@ -81,7 +88,9 @@ magick::image_write(map, "images/detroit_zoom_12.png")
 
 ```
 
-::: {#fig-city-images layout-ncol="3" width="30%"}
+<div align="center">
+
+::: {#fig-city-images layout-ncol=3 width="30%"}
 ![San Francisco Cityscape](images/san_francisco_scale_zoom_12.png){group="cityscape-gallery"}
 
 ![Salt Lake City Cityscape](images/salt_lake_city_zoom_12.png){group="cityscape-gallery"}
@@ -90,6 +99,8 @@ magick::image_write(map, "images/detroit_zoom_12.png")
 
 Aerial Cityscape Images
 :::
+
+<div>
 
 ## Load Python Libraries
 
@@ -117,6 +128,430 @@ import numpy as np
 
 
 ```
+
+
+
+
+
+
+
+
+<!-- ## Collect HOG Features for Diagonal Line Image -->
+
+<!-- ```{python} -->
+<!-- # List for storing images -->
+<!-- img_list = [] -->
+
+<!-- # SF aerial -->
+<!-- img_list.append(color.rgb2gray(io.imread("images/diagnol_lines.jpg"))) -->
+
+
+<!-- #img = color.rgb2gray(io.imread("images/grass_image2.jpg")) -->
+
+<!-- # img = color.rgb2gray(io.imread("images/b_test_image_copy.jpg")) -->
+<!-- #img = color.rgb2gray(io.imread("images/long_grass_sample.jpeg")) -->
+<!-- #img = color.rgb2gray(io.imread("images/diagnol_lines.jpg")) -->
+
+<!-- #img = color.rgb2gray(io.imread("images/san_francisco_scale_zoom_12.png")) -->
+
+<!-- #img = color.rgb2gray(io.imread("images/diagnol_lines_flipped.jpg")) -->
+<!-- #img = color.rgb2gray(io.imread("images/long_grass_sample_cropped.jpg")) -->
+
+<!-- # aerial rotated image -->
+<!-- #img = color.rgb2gray(io.imread("images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg")) -->
+
+<!-- # zoomed internet photo -->
+<!-- #img = color.rgb2gray(io.imread("images/dead_grass_zoom.jpeg")) -->
+
+
+<!-- # zoomed in 11 -->
+<!-- #img = color.rgb2gray(io.imread("images/living_lab_aerial/LL_zoomed_in_11.jpg")) -->
+
+<!-- # zoomed in 12 -->
+<!-- #img = color.rgb2gray(io.imread("images/living_lab_aerial/LL_zoomed_in_12.jpg")) -->
+
+<!-- # zoomed in 16 -->
+<!-- #img = color.rgb2gray(io.imread("images/living_lab_aerial/LL_zoomed_in_16_side.jpg")) -->
+
+
+
+<!-- # real one -->
+<!-- #img = color.rgb2gray(io.imread("images/living_labs_real_grass_image.jpg")) -->
+
+<!-- # List to store magnitudes for each image -->
+<!-- mag_list = [] -->
+
+<!-- # List to store angles for each image -->
+<!-- theta_list = [] -->
+
+
+<!-- for x in range(len(img_list)): -->
+<!--     # Get image of interest -->
+<!--     img = img_list[x] -->
+
+<!--     rescaled_file_path = f"images/plots/diagonal/{x}.jpg" -->
+
+<!--     # Determine aspect Ratio -->
+<!--     aspect_ratio = img.shape[0] / img.shape[1] -->
+<!--     print("Aspect Ratio:", aspect_ratio) -->
+
+<!--     # Hard-Code height to 200 pixels -->
+<!--     height = 200 -->
+
+<!--     # Calculate witdth to maintain same aspect ratio -->
+<!--     width = int(height / aspect_ratio) -->
+<!--     print("Resized Width:", width) -->
+
+<!--     # Resize the image -->
+<!--     resized_img = resize(img, (height, width)) -->
+
+<!--     # Replace the original image with the resized image -->
+<!--     img_list[x] = resized_img -->
+
+<!--     if (x == 1): -->
+<!--       plot_width = 8 -->
+<!--       plot_height = 15 -->
+<!--     else: -->
+<!--       plot_width = 15 -->
+<!--       plot_height = 9 -->
+
+<!--     # plt.figure(figsize=(plot_width, plot_height)) -->
+<!--     # plt.imshow(resized_img, cmap="gray") -->
+<!--     # plt.axis("on") -->
+<!--     # plt.tight_layout() -->
+<!--     # plt.savefig(rescaled_file_path, dpi=300) -->
+<!--     #plt.show() -->
+
+
+<!--     # list for storing all magnitudes for image[x] -->
+<!--     mag = [] -->
+
+<!--     # list for storing all angles for image[x] -->
+<!--     theta = [] -->
+
+<!--     for i in range(height): -->
+<!--         magnitudeArray = [] -->
+<!--         angleArray = [] -->
+
+<!--         for j in range(width): -->
+<!--             if j - 1 < 0 or j + 1 >= width: -->
+<!--                 if j - 1 < 0: -->
+<!--                     Gx = img[i][j + 1] - 0 -->
+<!--                 elif j + 1 >= width: -->
+<!--                     Gx = 0 - img[i][j - 1] -->
+<!--             else: -->
+<!--                 Gx = img[i][j + 1] - img[i][j - 1] -->
+
+<!--             if i - 1 < 0 or i + 1 >= height: -->
+<!--                 if i - 1 < 0: -->
+<!--                     Gy = 0 - img[i + 1][j] -->
+<!--                 elif i + 1 >= height: -->
+<!--                     Gy = img[i - 1][j] - 0 -->
+<!--             else: -->
+<!--                 Gy = img[i + 1][j] - img[i - 1][j] -->
+
+<!--             magnitude = math.sqrt(pow(Gx, 2) + pow(Gy, 2)) -->
+<!--             magnitudeArray.append(round(magnitude, 9)) -->
+
+<!--             if Gx == 0: -->
+<!--                 angle = math.degrees(0.0) -->
+<!--             else: -->
+<!--                 angle = math.degrees(math.atan(Gy / Gx)) -->
+<!--                 if angle < 0: -->
+<!--                     angle += 180 -->
+
+<!--             angleArray.append(round(angle, 9)) -->
+
+<!--         mag.append(magnitudeArray) -->
+<!--         theta.append(angleArray) -->
+
+<!--     # add list of magnitudes to list[x] -->
+<!--     mag_list.append(mag) -->
+
+<!--     # add list of angles to angle list[x] -->
+<!--     theta_list.append(theta) -->
+
+<!-- ``` -->
+
+<!-- ::: {#fig-city-images layout-valign="top" layout-ncol=3} -->
+<!-- ![Diagonal Line](images/plots/aerial_cities/0.jpg){group="cityscape-rescale-gallery"} -->
+
+<!-- ![Salt Lake City, UT](images/plots/aerial_cities/1.jpg){group="cityscape-rescale-gallery"} -->
+
+<!-- ![Detroit, MI](images/plots/aerial_cities/2.jpg){group="cityscape-rescale-gallery"} -->
+
+<!-- Aerial Cityscape Images Rescaled and Converted to Greyscale -->
+<!-- ::: -->
+
+<!-- ## Build Data Frames for Diag -->
+
+<!-- ```{python} -->
+<!-- mag_diag = np.array(mag_list[0]) -->
+<!-- theta_diag = np.array(theta_list[0]) -->
+
+<!-- ``` -->
+
+<!-- ## Plot Magnitudes as Image for Diagonal Lines -->
+
+<!-- ```{python} -->
+<!-- #  -->
+<!-- # plt.figure(figsize=(15, 8)) -->
+<!-- # #plt.title('San Francisco, CA Gradient Magnitudes') -->
+<!-- # plt.imshow(mag_list[0], cmap="gray") -->
+<!-- # plt.axis("on") -->
+<!-- # #plt.show() -->
+<!-- # plt.tight_layout() -->
+<!-- # plt.savefig("images/plots/diagonal/diag_mag.png", dpi=300) -->
+<!-- ``` -->
+
+<!-- ```{python} -->
+
+<!-- #plt.figure(figsize=(8, 15)) -->
+<!-- #plt.title('Salt Lake City, UT Gradient Magnitudes') -->
+<!-- # plt.imshow(mag_list[1], cmap="gray") -->
+<!-- # plt.axis("on") -->
+<!-- # #plt.show() -->
+<!-- # plt.tight_layout() -->
+<!-- # plt.savefig("images/plots/aerial_cities/salt_lake_mag.png", dpi=300) -->
+
+
+<!-- ``` -->
+
+<!-- ```{python} -->
+<!-- #  -->
+<!-- # plt.figure(figsize=(15, 8)) -->
+<!-- # #plt.title('Detroit, MI Gradient Magnitudes') -->
+<!-- # plt.imshow(mag_list[2], cmap="gray") -->
+<!-- # plt.axis("on") -->
+<!-- # #plt.show() -->
+<!-- # plt.tight_layout() -->
+<!-- # plt.savefig("images/plots/aerial_cities/detroit_mag.png", dpi=300) -->
+<!-- ``` -->
+
+
+<!-- ## Create Data Frame for Each Image -->
+<!-- ```{r, warning=FALSE, message=FALSE} -->
+<!-- # Diagonal DF -->
+<!-- diag_hog_df <- data.frame(mag = as.vector(py$mag_diag), -->
+<!--                               theta = as.vector((py$theta_diag))) %>% -->
+<!--   mutate(radian = theta*(pi/180)) -->
+
+<!-- # List of all Data frames -->
+<!-- diag_standard_df_list = list(diag_hog_df) -->
+<!-- ``` -->
+
+<!-- ## Create Histograms of Gradient Magnitudes and Angles for Aerial Cityscapes -->
+
+<!-- ```{r, warning=FALSE, message=FALSE} -->
+
+<!-- diag_histogram_mag_plot <- -->
+<!--   ggplot(diag_standard_df_list[[1]],  -->
+<!--          aes(x = mag)) + -->
+<!--   geom_histogram(colour = "black", fill = "lightblue") + -->
+<!--   scale_x_continuous() +  -->
+<!--   labs(x = "Gradient Magnitude",  -->
+<!--        y = "Count",  -->
+<!--        title = "Diagonal Lines Image Histogram of Gradient Magnitudes" -->
+<!--        ) + -->
+<!--   theme_minimal() + -->
+<!--   theme(plot.title = element_text(hjust = 0.5)) -->
+
+<!-- diag_histogram_mag_plot -->
+
+<!-- diag_mag_filter <- 0.1 -->
+
+<!-- ggsave("images/plots/diagonal/diag_histogram_mag_plot.jpg", diag_histogram_mag_plot, width = 6, height = 4, dpi = 300) -->
+
+
+
+<!-- diag_histogram_theta_plot <- -->
+<!--   ggplot(diag_standard_df_list[[1]],  -->
+<!--          aes(x = theta)) + -->
+<!--   geom_histogram(colour = "black", fill = "lightblue") + -->
+<!--   scale_x_continuous() +  -->
+<!--   labs(x = "Gradient Angle",  -->
+<!--        y = "Count",  -->
+<!--        title = "Diagonal Lines Image Histogram of Gradient Angles" -->
+<!--        ) + -->
+<!--   theme_minimal() + -->
+<!--   theme(plot.title = element_text(hjust = 0.5)) -->
+
+<!-- diag_histogram_theta_plot -->
+
+<!-- ggsave("images/plots/diagonal/diag_histogram_theta_plot.jpg", diag_histogram_theta_plot, width = 6, height = 4, dpi = 300) -->
+
+<!-- ``` -->
+
+<!-- ## Build New Distributed Histogram Data Frame for Diagonal Lines Image -->
+
+<!-- ```{r, warning=FALSE, message=FALSE} -->
+<!-- # Define the number of bins -->
+<!-- num_bins <- 9 -->
+
+<!-- # function to calculate the contributions to neighboring bins -->
+<!-- calculate_bin_contributions <- function(angle, magnitude, num_bins) { -->
+<!--   bin_width <- 180 / num_bins -->
+<!--   contributions <- numeric(num_bins) -->
+
+<!--   # get the central bin -->
+<!--   central_bin <- floor(angle / bin_width) %% num_bins -->
+<!--   next_bin <- (central_bin + 1) %% num_bins -->
+
+<!--   # get contributions to neighboring bins -->
+<!--   weight <- (1 - abs((angle %% bin_width) / bin_width)) * magnitude -->
+
+<!--   contributions[central_bin + 1] <- weight -->
+<!--   contributions[next_bin + 1] <- magnitude - weight -->
+
+<!--   return(list(contributions[1], -->
+<!--          contributions[2], -->
+<!--          contributions[3], -->
+<!--          contributions[4], -->
+<!--          contributions[5], -->
+<!--          contributions[6], -->
+<!--          contributions[7], -->
+<!--          contributions[8], -->
+<!--          contributions[9]) -->
+<!--          ) -->
+<!-- } -->
+
+<!-- filtered_diag_standard_df_list <-list(diag_hog_df %>% -->
+<!--                                    filter(mag >= diag_mag_filter)) -->
+
+<!-- diag_contribution_df_list <- list() -->
+
+
+<!-- for (i in 1:length(filtered_diag_standard_df_list)){ -->
+
+<!--   diag_contribution_hog_df <-  -->
+<!--     filtered_diag_standard_df_list[[i]] %>% -->
+<!--     rowwise() %>% -->
+<!--     mutate(`0` = calculate_bin_contributions(theta, mag, 9)[[1]], -->
+<!--            `20` = calculate_bin_contributions(theta, mag, 9)[[2]], -->
+<!--            `40` = calculate_bin_contributions(theta, mag, 9)[[3]], -->
+<!--            `60` = calculate_bin_contributions(theta, mag, 9)[[4]], -->
+<!--            `80` = calculate_bin_contributions(theta, mag, 9)[[5]], -->
+<!--            `100` = calculate_bin_contributions(theta, mag, 9)[[6]], -->
+<!--            `120` = calculate_bin_contributions(theta, mag, 9)[[7]], -->
+<!--            `140` = calculate_bin_contributions(theta, mag, 9)[[8]], -->
+<!--            `160` = calculate_bin_contributions(theta, mag, 9)[[9]], -->
+<!--            ) -->
+
+<!--   diag_split_histo_df <-  -->
+<!--     diag_contribution_hog_df %>% -->
+<!--     pivot_longer(names_to = "bin",  -->
+<!--                  values_to = "contribution",  -->
+<!--                  cols = 4:ncol(diag_contribution_hog_df)) %>% -->
+<!--     mutate(bin = as.numeric(bin)) %>% -->
+<!--     group_by(bin) %>% -->
+<!--     summarise(contribution_sum = sum(contribution)) -->
+
+
+<!--   diag_contribution_df_list[[i]] <- diag_split_histo_df -->
+
+<!-- } -->
+
+
+<!-- ``` -->
+
+<!-- ## Generate Polar Plots for Standard Historgrams -->
+
+<!-- ```{r, warning=FALSE, message=FALSE} -->
+<!-- diag_plot <- -->
+<!--   ggplot(filtered_diag_standard_df_list[[1]],  -->
+<!--          aes(x = theta)) + -->
+<!--   geom_histogram(colour = "black",  -->
+<!--                  fill = "lightblue",  -->
+<!--                  breaks = seq(0, 360, length.out = 17.5), -->
+<!--                  bins = 9) + -->
+<!--   coord_polar( -->
+<!--     theta = "x",  -->
+<!--     start = 0,  -->
+<!--     direction = 1) + -->
+<!--   scale_x_continuous(limits = c(0,360), -->
+<!--     breaks = c(0, 45, 90, 135, 180, 225, 270, 315),  -->
+<!--     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW") -->
+<!--   )+ -->
+<!--   labs(title = "Polar Plot of Diagonal Image\nUsing Standard HOG Technique") + -->
+<!--   theme_minimal() + -->
+<!--   labs(x = "") + -->
+<!--   theme(axis.title.y = element_blank(), -->
+<!--         plot.title = element_text(hjust = 0.5)) -->
+
+<!-- ggsave("images/plots/diagonal/diag_standard_polar_plot.jpg", diag_plot, width = 6, height = 4, dpi = 300) -->
+
+<!-- ``` -->
+
+
+
+
+<!-- ## Generate Polar Plots for Distributed Historgrams of Diagonal Image -->
+
+<!-- ```{r, warning=FALSE, message=FALSE} -->
+<!-- diag_split_plot <- -->
+<!--   ggplot(diag_contribution_df_list[[1]],  -->
+<!--          aes(x = bin, y = contribution_sum)) + -->
+<!--   geom_histogram(stat = "identity", -->
+<!--                  colour = "black",  -->
+<!--                  fill = "lightblue",  -->
+<!--                  breaks = seq(0, 360, length.out = 17.5), -->
+<!--                  bins = 9) + -->
+<!--   coord_polar( -->
+<!--     theta = "x",  -->
+<!--     start = 0,  -->
+<!--     direction = 1) + -->
+<!--   scale_x_continuous(limits = c(0,360), -->
+<!--     breaks = c(0, 45, 90, 135, 180, 225, 270, 315),  -->
+<!--     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW") -->
+<!--   )+ -->
+<!--   labs(title = "Polar Plot of Diagonal Image\nUsing Distributed HOG Technique") + -->
+<!--   theme_minimal() + -->
+<!--   labs(x = "") + -->
+<!--   theme(axis.title.y = element_blank(), -->
+<!--         plot.title = element_text(hjust = 0.5)) -->
+
+<!-- ggsave("images/plots/diagonal/diag_contribution_polar_plot.jpg", diag_split_plot, width = 6, height = 4, dpi = 300) -->
+
+
+<!-- ``` -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Collect HOG Features for Aerial Cityscapes
 
@@ -196,19 +631,19 @@ for x in range(len(img_list)):
     # Replace the original image with the resized image
     img_list[x] = resized_img
     
-    if (x == 1):
-      plot_width = 8
-      plot_height = 15
-    else:
-      plot_width = 15
-      plot_height = 9
-    
+    # if (x == 1):
+    #   plot_width = 8
+    #   plot_height = 15
+    # else:
+    #   plot_width = 15
+    #   plot_height = 9
+    # 
     # plt.figure(figsize=(plot_width, plot_height))
     # plt.imshow(resized_img, cmap="gray")
     # plt.axis("on")
     # plt.tight_layout()
     # plt.savefig(rescaled_file_path, dpi=300)
-    #plt.show()
+    # plt.show()
 
     
     # list for storing all magnitudes for image[x]
@@ -220,48 +655,49 @@ for x in range(len(img_list)):
     for i in range(height):
         magnitudeArray = []
         angleArray = []
-        
+
         for j in range(width):
             if j - 1 < 0 or j + 1 >= width:
                 if j - 1 < 0:
-                    Gx = img[i][j + 1] - 0
+                    Gx = resized_img[i][j + 1] - 0
                 elif j + 1 >= width:
-                    Gx = 0 - img[i][j - 1]
+                    Gx = 0 - resized_img[i][j - 1]
             else:
-                Gx = img[i][j + 1] - img[i][j - 1]
-                
+                Gx = resized_img[i][j + 1] - resized_img[i][j - 1]
+
             if i - 1 < 0 or i + 1 >= height:
                 if i - 1 < 0:
-                    Gy = 0 - img[i + 1][j]
+                    Gy = 0 - resized_img[i + 1][j]
                 elif i + 1 >= height:
-                    Gy = img[i - 1][j] - 0
+                    Gy = resized_img[i - 1][j] - 0
             else:
-                Gy = img[i + 1][j] - img[i - 1][j]
-                
+                Gy = resized_img[i + 1][j] - resized_img[i - 1][j]
+
             magnitude = math.sqrt(pow(Gx, 2) + pow(Gy, 2))
             magnitudeArray.append(round(magnitude, 9))
-            
+
             if Gx == 0:
                 angle = math.degrees(0.0)
             else:
                 angle = math.degrees(math.atan(Gy / Gx))
                 if angle < 0:
                     angle += 180
-                    
+
             angleArray.append(round(angle, 9))
-            
+
         mag.append(magnitudeArray)
         theta.append(angleArray)
-    
+
     # add list of magnitudes to list[x]
     mag_list.append(mag)
-    
+
     # add list of angles to angle list[x]
     theta_list.append(theta)
     
 ```
+<div align="center">
 
-::: {#fig-city-images layout-valign="top" layout-ncol="3"}
+::: {#fig-city-images layout-valign="top" layout-ncol=3}
 ![San Francisco, CA](images/plots/aerial_cities/0.jpg){group="cityscape-rescale-gallery"}
 
 ![Salt Lake City, UT](images/plots/aerial_cities/1.jpg){group="cityscape-rescale-gallery"}
@@ -270,6 +706,8 @@ for x in range(len(img_list)):
 
 Aerial Cityscape Images Rescaled and Converted to Greyscale
 :::
+
+<div>
 
 ## Build Data Frames for Each Aerial Cityscape
 
@@ -301,9 +739,8 @@ theta_detroit = np.array(theta_list[2])
 ```
 
 ```{python}
-
-#plt.figure(figsize=(8, 15))
-#plt.title('Salt Lake City, UT Gradient Magnitudes')
+# plt.figure(figsize=(8, 15))
+# #plt.title('Salt Lake City, UT Gradient Magnitudes')
 # plt.imshow(mag_list[1], cmap="gray")
 # plt.axis("on")
 # #plt.show()
@@ -314,7 +751,6 @@ theta_detroit = np.array(theta_list[2])
 ```
 
 ```{python}
-
 # plt.figure(figsize=(15, 8))
 # #plt.title('Detroit, MI Gradient Magnitudes')
 # plt.imshow(mag_list[2], cmap="gray")
@@ -323,8 +759,9 @@ theta_detroit = np.array(theta_list[2])
 # plt.tight_layout()
 # plt.savefig("images/plots/aerial_cities/detroit_mag.png", dpi=300)
 ```
+<div align="center">
 
-::: {#fig-city-mags layout-ncol="3"}
+::: {#fig-city-mags layout-ncol=3}
 ![San Francisco, CA](images/plots/aerial_cities/sf_mag.png){group="cityscape-mag-gallery"}
 
 ![Salt Lake City, UT](images/plots/aerial_cities/salt_lake_mag.png){group="cityscape-mag-gallery"}
@@ -333,6 +770,8 @@ theta_detroit = np.array(theta_list[2])
 
 Aerial Cityscape Magnitudes
 :::
+
+<div>
 
 ## Create Data Frame for Each Image
 ```{r, warning=FALSE, message=FALSE}
@@ -415,7 +854,7 @@ salt_lake_histogram_mag_plot <-
 
 #salt_lake_histogram_mag_plot
 
-salt_lake_mag_filter <- 0.4
+salt_lake_mag_filter <- 0.12
 
 ggsave("images/plots/aerial_cities/salt_lake_histogram_mag_plot.jpg", salt_lake_histogram_mag_plot, width = 6, height = 4, dpi = 300)
 
@@ -453,7 +892,7 @@ detroit_histogram_mag_plot <-
 
 #detroit_histogram_mag_plot
 
-detroit_mag_filter <- 0.2
+detroit_mag_filter <- 0.15
 
 ggsave("images/plots/aerial_cities/detroit_histogram_mag_plot.jpg", detroit_histogram_mag_plot, width = 6, height = 4, dpi = 300)
 
@@ -475,8 +914,9 @@ detroit_histogram_theta_plot <-
 
 ggsave("images/plots/aerial_cities/detroit_histogram_theta_plot.jpg", detroit_histogram_theta_plot, width = 6, height = 4, dpi = 300)
 ```
+<div align="center">
 
-::: {#fig-city-histograms layout-ncol="3"}
+::: {#fig-city-histograms layout-ncol=3}
 ![San Francisco, CA Histogram of Gradient Magnitudes](images/plots/aerial_cities/sf_histogram_mag_plot.jpg){group="cityscape-hist-gallery"} 
 ![San Francisco, CA Histogram of Gradient Angles](images/plots/aerial_cities/sf_histogram_theta_plot.jpg){group="cityscape-hist-gallery"}
 
@@ -487,6 +927,8 @@ ggsave("images/plots/aerial_cities/detroit_histogram_theta_plot.jpg", detroit_hi
 
 Aerial Cityscape Magnitudes and Angles
 :::
+
+<div>
 
 ## Build New Distributed Histogram Data Frames
 
@@ -656,7 +1098,8 @@ ggsave("images/plots/aerial_cities/all_standard_polar_plots.jpg",
 
 ```
 
-::: {#fig-city-standard-polar layout-ncol="3"}
+<div align="center">
+::: {#fig-city-standard-polar layout-ncol=3}
 
 ![San Francisco, CA](images/plots/aerial_cities/sf_standard_polar_plot.jpg){group="cityscape-standard-polar-gallery"}
 
@@ -668,6 +1111,7 @@ ggsave("images/plots/aerial_cities/all_standard_polar_plots.jpg",
 Aerial Cityscape Standard Polar Plots
 :::
 
+<div>
 
 
 ## Generate Polar Plots for Distributed Historgrams
@@ -766,7 +1210,9 @@ ggsave("images/plots/aerial_cities/all_aerial_contribution_plots.jpg",
 
 ```
 
-::: {#fig-city-distributed-polar layout-ncol="3"}
+<div align="center">
+
+::: {#fig-city-distributed-polar layout-ncol=3}
 
 ![San Francisco, CA](images/plots/aerial_cities/sf_contribution_polar_plot.jpg){group="cityscape-distributed-polar-gallery"}
 
@@ -778,6 +1224,7 @@ ggsave("images/plots/aerial_cities/all_aerial_contribution_plots.jpg",
 Aerial Cityscape Distributed Method Polar Plots
 :::
 
+<div align="center">
 
 
 
@@ -906,48 +1353,49 @@ for x in range(len(img_list)):
     for i in range(height):
         magnitudeArray = []
         angleArray = []
-        
+
         for j in range(width):
             if j - 1 < 0 or j + 1 >= width:
                 if j - 1 < 0:
-                    Gx = img[i][j + 1] - 0
+                    Gx = resized_img[i][j + 1] - 0
                 elif j + 1 >= width:
-                    Gx = 0 - img[i][j - 1]
+                    Gx = 0 - resized_img[i][j - 1]
             else:
-                Gx = img[i][j + 1] - img[i][j - 1]
-                
+                Gx = resized_img[i][j + 1] - resized_img[i][j - 1]
+
             if i - 1 < 0 or i + 1 >= height:
                 if i - 1 < 0:
-                    Gy = 0 - img[i + 1][j]
+                    Gy = 0 - resized_img[i + 1][j]
                 elif i + 1 >= height:
-                    Gy = img[i - 1][j] - 0
+                    Gy = resized_img[i - 1][j] - 0
             else:
-                Gy = img[i + 1][j] - img[i - 1][j]
-                
+                Gy = resized_img[i + 1][j] - resized_img[i - 1][j]
+
             magnitude = math.sqrt(pow(Gx, 2) + pow(Gy, 2))
             magnitudeArray.append(round(magnitude, 9))
-            
+
             if Gx == 0:
                 angle = math.degrees(0.0)
             else:
                 angle = math.degrees(math.atan(Gy / Gx))
                 if angle < 0:
                     angle += 180
-                    
+
             angleArray.append(round(angle, 9))
-            
+
         mag.append(magnitudeArray)
         theta.append(angleArray)
-    
+
     # add list of magnitudes to list[x]
     mag_list.append(mag)
-    
+
     # add list of angles to angle list[x]
     theta_list.append(theta)
     
 ```
+<div align="center">
 
-::: {#fig-grass-images layout-valign="top" layout-ncol="3"}
+::: {#fig-grass-images layout-valign="top" layout-ncol=3}
 ![Internet Grass Image](images/plots/grass/0.jpg){group="grass-rescale-gallery"}
 
 ![Living Labs Aerial Image](images/plots/grass/1.jpg){group="grass-rescale-gallery"}
@@ -956,6 +1404,8 @@ for x in range(len(img_list)):
 
 Grass Images Rescaled and Converted to Greyscale
 :::
+
+<div>
 
 ## Build Data Frames for Each Grass Image
 
@@ -976,7 +1426,6 @@ theta_close_up_living_lab = np.array(theta_list[2])
 ## Plot Magnitudes as Image for each Grass Images
 
 ```{python}
-
 # plt.figure(figsize=(15, 8))
 # #plt.title('San Francisco, CA Gradient Magnitudes')
 # plt.imshow(mag_list[0], cmap="gray")
@@ -1006,8 +1455,9 @@ theta_close_up_living_lab = np.array(theta_list[2])
 # plt.tight_layout()
 # plt.savefig("images/plots/grass/close_up_living_lab_grass_mag.png", dpi=300)
 ```
+<div align="center">
 
-::: {#fig-grass-mags layout-ncol="3"}
+::: {#fig-grass-mags layout-ncol=3}
 ![Internet Grass](images/plots/grass/internet_grass_mag.png){group="grass-mag-gallery"}
 
 ![Aerial Living Labs](images/plots/grass/aerial_living_lab_grass_mag.png){group="grass-mag-gallery"}
@@ -1016,6 +1466,8 @@ theta_close_up_living_lab = np.array(theta_list[2])
 
 Grass Image Magnitudes
 :::
+
+<div>
 
 ## Create Data Frame for Each Image
 ```{r, warning=FALSE, message=FALSE}
@@ -1098,9 +1550,10 @@ aerial_living_lab_histogram_mag_plot <-
 
 #aerial_living_lab_histogram_mag_plot
 
-aerial_living_lab_mag_filter <- 0.2
+aerial_living_lab_mag_filter <- 0.08
 
-ggsave("images/plots/grass/aerial_living_lab_histogram_mag_plot.jpg", aerial_living_lab_histogram_mag_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/grass/aerial_living_lab_histogram_mag_plot.jpg", 
+       aerial_living_lab_histogram_mag_plot, width = 6, height = 4, dpi = 300)
 
 
 
@@ -1118,7 +1571,8 @@ aerial_living_lab_histogram_theta_plot <-
 
 #aerial_living_lab_histogram_theta_plot
 
-ggsave("images/plots/grass/aerial_living_lab_histogram_theta_plot.jpg", aerial_living_lab_histogram_theta_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/grass/aerial_living_lab_histogram_theta_plot.jpg", 
+       aerial_living_lab_histogram_theta_plot, width = 6, height = 4, dpi = 300)
 ```
 
 ```{r, warning=FALSE, message=FALSE}
@@ -1136,7 +1590,7 @@ close_up_living_lab_histogram_mag_plot <-
 
 #close_up_living_lab_histogram_mag_plot
 
-close_up_living_lab_mag_filter <- 0.2
+close_up_living_lab_mag_filter <- 0.12
 
 ggsave("images/plots/grass/close_up_living_lab_histogram_mag_plot.jpg", close_up_living_lab_histogram_mag_plot, width = 6, height = 4, dpi = 300)
 
@@ -1159,7 +1613,9 @@ close_up_living_lab_histogram_theta_plot <-
 ggsave("images/plots/grass/close_up_living_lab_histogram_theta_plot.jpg", close_up_living_lab_histogram_theta_plot, width = 6, height = 4, dpi = 300)
 ```
 
-::: {#fig-grass-histograms layout-ncol="3"}
+<div align="center">
+
+::: {#fig-grass-histograms layout-ncol=3}
 ![Internet Grass Image Histogram of Gradient Magnitudes](images/plots/grass/internet_grass_histogram_mag_plot.jpg){group="grass-hist-gallery"} 
 ![Internet Grass Image Histogram of Gradient Angles](images/plots/grass/internet_grass_histogram_theta_plot.jpg){group="grass-hist-gallery"}
 
@@ -1170,6 +1626,8 @@ ggsave("images/plots/grass/close_up_living_lab_histogram_theta_plot.jpg", close_
 
 Grass Image Magnitudes and Angles
 :::
+
+<div>
 
 ## Build New Distributed Histogram Data Frames for Grass Images
 
@@ -1312,7 +1770,9 @@ ggsave("images/plots/grass/all_grass_standard_polar_plots.jpg",
 
 ```
 
-::: {#fig-grass-standard-polar layout-ncol="3"}
+<div align="center">
+
+::: {#fig-grass-standard-polar layout-ncol=3}
 
 ![Internet Grass Image](images/plots/grass/internet_grass_standard_polar_plot.jpg){group="grass-standard-polar-gallery"}
 
@@ -1323,6 +1783,8 @@ ggsave("images/plots/grass/all_grass_standard_polar_plots.jpg",
 
 Aerial Cityscape Standard Polar Plots
 :::
+
+<div>
 
 
 
@@ -1422,7 +1884,10 @@ ggsave("images/plots/grass/all_grass_contribution_plots.jpg",
 
 ```
 
-::: {#fig-grass-distributed-polar layout-ncol="3"}
+
+<div align="center">
+
+::: {#fig-grass-distributed-polar layout-ncol=3}
 
 ![Internet Grass Image](images/plots/grass/internet_grass_contribution_polar_plot.jpg){group="grass-distributed-polar-gallery"}
 
@@ -1433,6 +1898,441 @@ ggsave("images/plots/grass/all_grass_contribution_plots.jpg",
 
 Distributed Method Polar Plots for Grass Images
 :::
+
+<div align="center">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Collect HOG Features for Backflip Image
+
+```{python}
+# List for storing images
+img_list = []
+
+# SF aerial
+img_list.append(color.rgb2gray(io.imread("images/TitusFlip.jpg")))
+
+
+#img = color.rgb2gray(io.imread("images/grass_image2.jpg"))
+
+# img = color.rgb2gray(io.imread("images/b_test_image_copy.jpg"))
+#img = color.rgb2gray(io.imread("images/long_grass_sample.jpeg"))
+#img = color.rgb2gray(io.imread("images/diagnol_lines.jpg"))
+
+#img = color.rgb2gray(io.imread("images/san_francisco_scale_zoom_12.png"))
+
+#img = color.rgb2gray(io.imread("images/diagnol_lines_flipped.jpg"))
+#img = color.rgb2gray(io.imread("images/long_grass_sample_cropped.jpg"))
+
+# aerial rotated image
+#img = color.rgb2gray(io.imread("images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg"))
+
+# zoomed internet photo
+#img = color.rgb2gray(io.imread("images/dead_grass_zoom.jpeg"))
+
+
+# zoomed in 11
+#img = color.rgb2gray(io.imread("images/living_lab_aerial/LL_zoomed_in_11.jpg"))
+
+# zoomed in 12
+#img = color.rgb2gray(io.imread("images/living_lab_aerial/LL_zoomed_in_12.jpg"))
+
+# zoomed in 16
+#img = color.rgb2gray(io.imread("images/living_lab_aerial/LL_zoomed_in_16_side.jpg"))
+
+
+
+# real one
+#img = color.rgb2gray(io.imread("images/living_labs_real_grass_image.jpg"))
+
+# List to store magnitudes for each image
+mag_list = []
+
+# List to store angles for each image
+theta_list = []
+
+
+for x in range(len(img_list)):
+    # Get image of interest
+    img = img_list[x]
+
+    rescaled_file_path = f"images/plots/backflip/{x}.jpg"
+
+    # Determine aspect Ratio
+    aspect_ratio = img.shape[0] / img.shape[1]
+    print("Aspect Ratio:", aspect_ratio)
+
+    # Hard-Code height to 200 pixels
+    height = 200
+
+    # Calculate witdth to maintain same aspect ratio
+    width = int(height / aspect_ratio)
+    print("Resized Width:", width)
+
+    # Resize the image
+    resized_img = resize(img, (height, width))
+
+    # Replace the original image with the resized image
+    img_list[x] = resized_img
+
+    # if (x == 1):
+    #   plot_width = 8
+    #   plot_height = 15
+    # else:
+    #   plot_width = 15
+    #   plot_height = 8
+
+    # plt.figure(figsize=(15, 8))
+    # plt.imshow(resized_img, cmap="gray")
+    # plt.axis("on")
+    # plt.tight_layout()
+    # plt.savefig(rescaled_file_path, dpi=300)
+    # plt.show()
+
+
+    # list for storing all magnitudes for image[x]
+    mag = []
+
+    # list for storing all angles for image[x]
+    theta = []
+
+    for i in range(height):
+        magnitudeArray = []
+        angleArray = []
+
+        for j in range(width):
+            if j - 1 < 0 or j + 1 >= width:
+                if j - 1 < 0:
+                    Gx = resized_img[i][j + 1] - 0
+                elif j + 1 >= width:
+                    Gx = 0 - resized_img[i][j - 1]
+            else:
+                Gx = resized_img[i][j + 1] - resized_img[i][j - 1]
+
+            if i - 1 < 0 or i + 1 >= height:
+                if i - 1 < 0:
+                    Gy = 0 - resized_img[i + 1][j]
+                elif i + 1 >= height:
+                    Gy = resized_img[i - 1][j] - 0
+            else:
+                Gy = resized_img[i + 1][j] - resized_img[i - 1][j]
+
+            magnitude = math.sqrt(pow(Gx, 2) + pow(Gy, 2))
+            magnitudeArray.append(round(magnitude, 9))
+
+            if Gx == 0:
+                angle = math.degrees(0.0)
+            else:
+                angle = math.degrees(math.atan(Gy / Gx))
+                if angle < 0:
+                    angle += 180
+
+            angleArray.append(round(angle, 9))
+
+        mag.append(magnitudeArray)
+        theta.append(angleArray)
+
+    # add list of magnitudes to list[x]
+    mag_list.append(mag)
+
+    # add list of angles to angle list[x]
+    theta_list.append(theta)
+
+```
+
+<div align="center">
+
+::: {#fig-flip layout-valign="top" layout-ncol=1}
+![Skiing Backflip](images/plots/backflip/0.jpg){group="flip-rescale-gallery"}
+
+Skiing Backflip Image Rescaled and Converted to Greyscale
+:::
+
+<div>
+
+## Build Data Frames for Backflip Image
+
+```{python}
+mag_flip = np.array(mag_list[0])
+theta_flip = np.array(theta_list[0])
+
+```
+
+## Plot Magnitudes as Image for Diagonal Lines
+
+```{python}
+# plt.figure(figsize=(15, 8))
+# #plt.title('San Francisco, CA Gradient Magnitudes')
+# plt.imshow(mag_list[0], cmap="gray")
+# plt.axis("on")
+# #plt.show()
+# plt.tight_layout()
+# plt.savefig("images/plots/backflip/backflip_mag.png", dpi=300)
+```
+
+<div align="center">
+
+::: {#fig-backflip-mags layout-ncol=1}
+![Skiing Backflip Image](images/plots/backflip/backflip_mag.png){group="backflip-mag-gallery"}
+
+Skiing Backflip Cityscape Magnitudes as Image
+:::
+
+<div>
+
+
+## Create Data Frame for Backflip Image
+```{r, warning=FALSE, message=FALSE}
+# Flip DF
+backflip_hog_df <- data.frame(mag = as.vector(py$mag_flip),
+                              theta = as.vector((py$theta_flip))) %>%
+  mutate(radian = theta*(pi/180))
+
+# List of all Data frames
+flip_standard_df_list = list(backflip_hog_df)
+```
+
+## Create Histograms of Gradient Magnitudes and Angles for Backflip Image
+
+```{r, warning=FALSE, message=FALSE}
+
+flip_histogram_mag_plot <-
+  ggplot(flip_standard_df_list[[1]],
+         aes(x = mag)) +
+  geom_histogram(colour = "black", fill = "lightblue") +
+  scale_x_continuous() +
+  labs(x = "Gradient Magnitude",
+       y = "Count",
+       title = "Skiing Backflip Image Histogram of Gradient Magnitudes"
+       ) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+#flip_histogram_mag_plot
+
+flip_mag_filter <- 0.2
+
+ggsave("images/plots/backflip/backflip_histogram_mag_plot.jpg", flip_histogram_mag_plot, width = 6, height = 4, dpi = 300)
+
+
+
+flip_histogram_theta_plot <-
+  ggplot(flip_standard_df_list[[1]],
+         aes(x = theta)) +
+  geom_histogram(colour = "black", fill = "lightblue") +
+  scale_x_continuous() +
+  labs(x = "Gradient Angle",
+       y = "Count",
+       title = "Skiing Backflip Image Histogram of Gradient Angles"
+       ) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+#flip_histogram_theta_plot
+
+ggsave("images/plots/backflip/backflip_histogram_theta_plot.jpg", flip_histogram_theta_plot, width = 6, height = 4, dpi = 300)
+
+```
+
+
+
+<div align="center">
+
+::: {#fig-flip-histograms layout-ncol=2}
+![Skiing Backflip Histogram of Gradient Magnitudes](images/plots/backflip/backflip_histogram_mag_plot.jpg){group="flip-hist-gallery"} 
+![Skiing Backflip Histogram of Gradient Angles](images/plots/backflip/backflip_histogram_theta_plot.jpg){group="flip-hist-gallery"}
+
+Skiing Backflip Magnitudes and Angles
+:::
+
+<div>
+
+
+
+
+
+
+
+## Build New Distributed Histogram Data Frame for Backflip Image
+
+```{r, warning=FALSE, message=FALSE}
+# Define the number of bins
+num_bins <- 9
+
+filtered_flip_standard_df_list <-list(backflip_hog_df %>%
+                                        filter(mag >= flip_mag_filter))
+
+flip_contribution_df_list <- list()
+
+
+for (i in 1:length(filtered_flip_standard_df_list)){
+
+  flip_contribution_hog_df <-
+    filtered_flip_standard_df_list[[i]] %>%
+    rowwise() %>%
+    mutate(`0` = calculate_bin_contributions(theta, mag, 9)[[1]],
+           `20` = calculate_bin_contributions(theta, mag, 9)[[2]],
+           `40` = calculate_bin_contributions(theta, mag, 9)[[3]],
+           `60` = calculate_bin_contributions(theta, mag, 9)[[4]],
+           `80` = calculate_bin_contributions(theta, mag, 9)[[5]],
+           `100` = calculate_bin_contributions(theta, mag, 9)[[6]],
+           `120` = calculate_bin_contributions(theta, mag, 9)[[7]],
+           `140` = calculate_bin_contributions(theta, mag, 9)[[8]],
+           `160` = calculate_bin_contributions(theta, mag, 9)[[9]],
+           )
+
+  flip_split_histo_df <-
+    flip_contribution_hog_df %>%
+    pivot_longer(names_to = "bin",
+                 values_to = "contribution",
+                 cols = 4:ncol(flip_contribution_hog_df)) %>%
+    mutate(bin = as.numeric(bin)) %>%
+    group_by(bin) %>%
+    summarise(contribution_sum = sum(contribution))
+
+
+  flip_contribution_df_list[[i]] <- flip_split_histo_df
+
+}
+
+
+```
+
+## Generate Polar Plots for Standard Historgrams for Backflip Image
+
+```{r, warning=FALSE, message=FALSE}
+flip_plot <-
+  ggplot(filtered_flip_standard_df_list[[1]],
+         aes(x = theta)) +
+  geom_histogram(colour = "black",
+                 fill = "lightblue",
+                 breaks = seq(0, 360, length.out = 17.5),
+                 bins = 9) +
+  coord_polar(
+    theta = "x",
+    start = 0,
+    direction = 1) +
+  scale_x_continuous(limits = c(0,360),
+    breaks = c(0, 45, 90, 135, 180, 225, 270, 315),
+    labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
+  )+
+  labs(title = "Polar Plot of Skiing Backflip Image\nUsing Standard HOG Technique") +
+  theme_minimal() +
+  labs(x = "") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5))
+
+ggsave("images/plots/backflip/backflip_standard_polar_plot.jpg", flip_plot, width = 6, height = 4, dpi = 300)
+
+```
+
+
+
+
+
+## Generate Polar Plots for Distributed Historgrams of Diagonal Image
+
+```{r, warning=FALSE, message=FALSE}
+flip_split_plot <-
+  ggplot(flip_contribution_df_list[[1]],
+         aes(x = bin, y = contribution_sum)) +
+  geom_histogram(stat = "identity",
+                 colour = "black",
+                 fill = "lightblue",
+                 breaks = seq(0, 360, length.out = 17.5),
+                 bins = 9) +
+  coord_polar(
+    theta = "x",
+    start = 0,
+    direction = 1) +
+  scale_x_continuous(limits = c(0,360),
+    breaks = c(0, 45, 90, 135, 180, 225, 270, 315),
+    labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
+  )+
+  labs(title = "Polar Plot of Skiing Backflip Image\nUsing Distributed HOG Technique") +
+  theme_minimal() +
+  labs(x = "") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5))
+
+ggsave("images/plots/backflip/backflip_contribution_polar_plot.jpg", flip_split_plot, width = 6, height = 4, dpi = 300)
+
+
+```
+
+
+
+
+
+<div align="center">
+
+::: {#fig-flip-distributed-and-standard-polar layout-ncol=2}
+
+![Skiing Backflip Image Standard HOG Method](images/plots/backflip/backflip_standard_polar_plot.jpg){group="flip-standard-and-dist-polar-gallery"}
+![Skiing Backflip Image Distributed HOG Method](images/plots/backflip/backflip_contribution_polar_plot.jpg){group="flip-standard-and-dist-polar-gallery"}
+
+
+Skiing Backflip Image Distributed Method Polar Plot
+:::
+
+<div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- ## Collect HOG Features -->
 
