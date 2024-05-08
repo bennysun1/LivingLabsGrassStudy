@@ -968,6 +968,7 @@ filtered_aerial_standard_df_list <-list(sf_hog_df %>%
 ```
 
 ```{r, warning=FALSE, message=FALSE}
+#| code-summary: "For each image calculate the contribution to each bin for the disttribued histogram"
 aerial_contribution_df_list <- list()
 
 # Define the number of bins
@@ -1009,6 +1010,7 @@ for (i in 1:length(filtered_aerial_standard_df_list)){
 ## Generate Polar Plots for Standard Historgrams
 
 ```{r, warning=FALSE, message=FALSE}
+#| code-summary: "Polar plot of San Francisco, CA histogram of gradient angles using standard binning technique"
 sf_plot <-
   ggplot(filtered_aerial_standard_df_list[[1]], 
          aes(x = theta)) +
@@ -1035,6 +1037,8 @@ ggsave("images/plots/aerial_cities/sf_standard_polar_plot.jpg", sf_plot, width =
 ```
 
 ```{r, warning=FALSE, message=FALSE}
+#| code-summary: "Polar plot of Salt Lake City, UT histogram of gradient angles using standard binning technique"
+
 salt_lake_plot <-
   ggplot(filtered_aerial_standard_df_list[[2]], 
          aes(x = theta)) +
@@ -1062,6 +1066,8 @@ ggsave("images/plots/aerial_cities/salt_lake_standard_polar_plot.jpg", salt_lake
 ```
 
 ```{r, warning=FALSE, message=FALSE}
+#| code-summary: "Polar plot of Detroit, MI histogram of gradient angles using standard binning technique"
+
 detroit_plot <-
   ggplot(filtered_aerial_standard_df_list[[3]], 
          aes(x = theta)) +
@@ -1088,6 +1094,7 @@ ggsave("images/plots/aerial_cities/detroit_standard_polar_plot.jpg", detroit_plo
 ```
 
 ```{r, warning=FALSE, message=FALSE}
+#| code-summary: "Save an arranged image of the 3 standard-binned polar plots side-by-side"
 all_standard_city_plots <- ggpubr::ggarrange(sf_plot, 
                                              salt_lake_plot, 
                                              detroit_plot)
@@ -1118,6 +1125,8 @@ Aerial Cityscape Standard Polar Plots
 ## Generate Polar Plots for Distributed Historgrams
 
 ```{r, warning=FALSE, message=FALSE}
+#| code-summary: "Polar plot of San Francisco, CA histogram of gradient angles using distributed binning technique"
+
 sf_split_plot <-
   ggplot(aerial_contribution_df_list[[1]], 
          aes(x = bin, y = contribution_sum)) +
@@ -1146,6 +1155,8 @@ ggsave("images/plots/aerial_cities/sf_contribution_polar_plot.jpg", sf_split_plo
 ```
 
 ```{r, warning=FALSE, message=FALSE}
+#| code-summary: "Polar plot of Salt Lake City, UT histogram of gradient angles using distributed binning technique"
+
 salt_lake_split_plot <-
   ggplot(aerial_contribution_df_list[[2]], 
          aes(x = bin, y = contribution_sum)) +
@@ -1173,6 +1184,8 @@ ggsave("images/plots/aerial_cities/salt_lake_contribution_polar_plot.jpg", salt_
 ```
 
 ```{r, warning=FALSE, message=FALSE}
+#| code-summary: "Polar plot of Detroit, MI histogram of gradient angles using distributed binning technique"
+
 detroit_split_plot <-
   ggplot(aerial_contribution_df_list[[3]], 
          aes(x = bin, y = contribution_sum)) +
@@ -1200,6 +1213,7 @@ ggsave("images/plots/aerial_cities/detroit_contribution_polar_plot.jpg", detroit
 ```
 
 ```{r, warning=FALSE, message=FALSE}
+#| code-summary: "Save an arranged image of the 3 distributed-binned polar plots side-by-side"
 all_aerial_contribution_plots <- ggpubr::ggarrange(sf_split_plot, 
                                                    salt_lake_split_plot, 
                                                    detroit_split_plot)

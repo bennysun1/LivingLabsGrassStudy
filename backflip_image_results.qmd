@@ -192,6 +192,8 @@ Skiing Backflip Cityscape Magnitudes as Image
 
 ## Create Data Frame for Backflip Image
 ```{r, warning=FALSE, message=FALSE}
+#| code-summary: "Make Data Frame for backflip image magnitudes and angles and store it in a list"
+
 # Flip DF
 backflip_hog_df <- data.frame(mag = as.vector(py$mag_flip),
                               theta = as.vector((py$theta_flip))) %>%
@@ -204,6 +206,7 @@ flip_standard_df_list = list(backflip_hog_df)
 ## Create Histograms of Gradient Magnitudes and Angles for Backflip Image
 
 ```{r, warning=FALSE, message=FALSE}
+#| code-summary: "Plot histogram of backflip image gradient magnitudes and define the magnitude level for later filtering"
 
 flip_histogram_mag_plot <-
   ggplot(flip_standard_df_list[[1]],
@@ -223,7 +226,11 @@ flip_mag_filter <- 0.2
 
 ggsave("images/plots/backflip/backflip_histogram_mag_plot.jpg", flip_histogram_mag_plot, width = 6, height = 4, dpi = 300)
 
+```
 
+
+```{r, warning=FALSE, message=FALSE}
+#| code-summary: "Plot histogram of backflip image gradient angles"
 
 flip_histogram_theta_plot <-
   ggplot(flip_standard_df_list[[1]],
@@ -248,10 +255,13 @@ ggsave("images/plots/backflip/backflip_histogram_theta_plot.jpg", flip_histogram
 <div align="center">
 
 ::: {#fig-flip-histograms layout-ncol=2}
+
 ![Skiing Backflip Histogram of Gradient Magnitudes](images/plots/backflip/backflip_histogram_mag_plot.jpg){group="flip-hist-gallery"} 
+
 ![Skiing Backflip Histogram of Gradient Angles](images/plots/backflip/backflip_histogram_theta_plot.jpg){group="flip-hist-gallery"}
 
 Skiing Backflip Magnitudes and Angles
+
 :::
 
 <div>
@@ -265,8 +275,7 @@ Skiing Backflip Magnitudes and Angles
 ## Build New Distributed Histogram Data Frame for Backflip Image
 
 ```{r, warning=FALSE, message=FALSE}
-# Define the number of bins
-num_bins <- 9
+#| code-summary: "Function for calculating values for each bin of distributed histogram"
 
 # function to calculate the contributions to neighboring bins
 calculate_bin_contributions <- function(angle, magnitude, num_bins) {
@@ -295,9 +304,23 @@ calculate_bin_contributions <- function(angle, magnitude, num_bins) {
          )
 }
 
+```
+
+
+
+```{r, warning=FALSE, message=FALSE}
+#| code-summary: "Filter data frame of gradients and angles to only contain observations with magnitudes greater than or equal to the respective magnitude levels determined above"
 filtered_flip_standard_df_list <-list(backflip_hog_df %>%
                                         filter(mag >= flip_mag_filter))
+```
 
+
+
+```{r, warning=FALSE, message=FALSE}
+#| code-summary: "Calculate the contribution to each bin for the distribued histogram"
+
+# Define the number of bins
+num_bins <- 9
 flip_contribution_df_list <- list()
 
 
@@ -337,6 +360,8 @@ for (i in 1:length(filtered_flip_standard_df_list)){
 ## Generate Polar Plots for Standard Historgrams for Backflip Image
 
 ```{r, warning=FALSE, message=FALSE}
+#| code-summary: "Polar plot of backflip image histogram of gradient angles using standard binning technique"
+
 flip_plot <-
   ggplot(filtered_flip_standard_df_list[[1]],
          aes(x = theta)) +
@@ -369,6 +394,8 @@ ggsave("images/plots/backflip/backflip_standard_polar_plot.jpg", flip_plot, widt
 ## Generate Polar Plots for Distributed Historgrams of Diagonal Image
 
 ```{r, warning=FALSE, message=FALSE}
+#| code-summary: "Polar plot of backflip image histogram of gradient angles using distributed binning technique"
+
 flip_split_plot <-
   ggplot(flip_contribution_df_list[[1]],
          aes(x = bin, y = contribution_sum)) +
