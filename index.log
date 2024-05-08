@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Homebrew) (preloaded format=pdflatex 2024.3.20)  7 MAY 2024 18:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Homebrew) (preloaded format=pdflatex 2024.3.20)  8 MAY 2024 09:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1049,369 +1049,352 @@ Package scrkbase Info: You've told me to use the font selection of the element
 ]
 chapter 4.
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 4
-61.
+62.
 (/opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [9
 
-]
+] [10]
 File: images/san_francisco_scale_zoom_12.png Graphic file (type png)
 <use images/san_francisco_scale_zoom_12.png>
 Package pdftex.def Info: images/san_francisco_scale_zoom_12.png  used on input 
-line 551.
+line 571.
 (pdftex.def)             Requested size: 147.43767pt x 98.29176pt.
-<images/salt_lake_city_zoom_12.png, id=82, 803.0pt x 1204.5pt>
+<images/salt_lake_city_zoom_12.png, id=86, 803.0pt x 1204.5pt>
 File: images/salt_lake_city_zoom_12.png Graphic file (type png)
 <use images/salt_lake_city_zoom_12.png>
 Package pdftex.def Info: images/salt_lake_city_zoom_12.png  used on input line 
-565.
+585.
 (pdftex.def)             Requested size: 147.42542pt x 221.13812pt.
-<images/detroit_zoom_12.png, id=83, 1204.5pt x 803.0pt>
+<images/detroit_zoom_12.png, id=87, 1204.5pt x 803.0pt>
 File: images/detroit_zoom_12.png Graphic file (type png)
 <use images/detroit_zoom_12.png>
-Package pdftex.def Info: images/detroit_zoom_12.png  used on input line 579.
+Package pdftex.def Info: images/detroit_zoom_12.png  used on input line 599.
 (pdftex.def)             Requested size: 147.4193pt x 98.27953pt.
- [10] [11 <./images/salt_lake_city_zoom_12.png> <./images/detroit_zoom_12.png>]
- [12]
-Overfull \vbox (2.43335pt too high) detected at line 763
+ [11 <./images/salt_lake_city_zoom_12.png> <./images/detroit_zoom_12.png>]
+Underfull \vbox (badness 10000) detected at line 723
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 723
+ []
+
+[12]
+Underfull \vbox (badness 10000) detected at line 723
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 723
  []
 
 [13]
-Underfull \vbox (badness 10000) detected at line 763
- []
-
-
-Underfull \vbox (badness 10000) detected at line 763
- []
-
-[14]
-<images/plots/aerial_cities/0.jpg, id=111, 1084.05pt x 650.43pt>
+<images/plots/aerial_cities/0.jpg, id=106, 1084.05pt x 650.43pt>
 File: images/plots/aerial_cities/0.jpg Graphic file (type jpg)
 <use images/plots/aerial_cities/0.jpg>
 Package pdftex.def Info: images/plots/aerial_cities/0.jpg  used on input line 7
-80.
+40.
 (pdftex.def)             Requested size: 147.41562pt x 88.44936pt.
-<images/plots/aerial_cities/1.jpg, id=112, 561.0561pt x 831.3459pt>
+<images/plots/aerial_cities/1.jpg, id=107, 561.0561pt x 831.3459pt>
 File: images/plots/aerial_cities/1.jpg Graphic file (type jpg)
 <use images/plots/aerial_cities/1.jpg>
 Package pdftex.def Info: images/plots/aerial_cities/1.jpg  used on input line 7
-94.
+54.
 (pdftex.def)             Requested size: 147.42924pt x 218.45355pt.
-<images/plots/aerial_cities/2.jpg, id=113, 1084.05pt x 650.43pt>
+<images/plots/aerial_cities/2.jpg, id=108, 1084.05pt x 650.43pt>
 File: images/plots/aerial_cities/2.jpg Graphic file (type jpg)
 <use images/plots/aerial_cities/2.jpg>
-Package pdftex.def Info: images/plots/aerial_cities/2.jpg  used on input line 8
-08.
+Package pdftex.def Info: images/plots/aerial_cities/2.jpg  used on input line 7
+68.
 (pdftex.def)             Requested size: 147.41562pt x 88.44936pt.
- [15 <./images/plots/aerial_cities/0.jpg> <./images/plots/aerial_cities/1.jpg> 
+ [14 <./images/plots/aerial_cities/0.jpg> <./images/plots/aerial_cities/1.jpg> 
 <./images/plots/aerial_cities/2.jpg>]
 LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
-848.
+810.
 
 (/opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-<images/plots/aerial_cities/sf_mag.png, id=122, 1084.05pt x 578.16pt>
+) [15{/opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/fonts/enc/dvips/lm
+/lm-ts1.enc}]
+<images/plots/aerial_cities/sf_mag.png, id=124, 1084.05pt x 578.16pt>
 File: images/plots/aerial_cities/sf_mag.png Graphic file (type png)
 <use images/plots/aerial_cities/sf_mag.png>
 Package pdftex.def Info: images/plots/aerial_cities/sf_mag.png  used on input l
-ine 887.
+ine 853.
 (pdftex.def)             Requested size: 147.41562pt x 78.62166pt.
-<images/plots/aerial_cities/salt_lake_mag.png, id=123, 560.0925pt x 833.7549pt>
+<images/plots/aerial_cities/salt_lake_mag.png, id=125, 560.0925pt x 833.7549pt>
 
 File: images/plots/aerial_cities/salt_lake_mag.png Graphic file (type png)
 <use images/plots/aerial_cities/salt_lake_mag.png>
 Package pdftex.def Info: images/plots/aerial_cities/salt_lake_mag.png  used on 
-input line 901.
+input line 867.
 (pdftex.def)             Requested size: 147.43243pt x 219.46823pt.
-<images/plots/aerial_cities/detroit_mag.png, id=124, 1084.05pt x 578.16pt>
+<images/plots/aerial_cities/detroit_mag.png, id=126, 1084.05pt x 578.16pt>
 File: images/plots/aerial_cities/detroit_mag.png Graphic file (type png)
 <use images/plots/aerial_cities/detroit_mag.png>
 Package pdftex.def Info: images/plots/aerial_cities/detroit_mag.png  used on in
-put line 915.
+put line 881.
 (pdftex.def)             Requested size: 147.41562pt x 78.62166pt.
- [16{/opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/fonts/enc/dvips/lm/
-lm-ts1.enc}] [17 <./images/plots/aerial_cities/sf_mag.png> <./images/plots/aeri
-al_cities/salt_lake_mag.png> <./images/plots/aerial_cities/detroit_mag.png>]
-[18] [19]
-<images/plots/aerial_cities/sf_histogram_mag_plot.jpg, id=154, 1806.75pt x 1204
+
+Overfull \vbox (0.68127pt too high) detected at line 914
+ []
+
+[16 <./images/plots/aerial_cities/sf_mag.png> <./images/plots/aerial_cities/sal
+t_lake_mag.png> <./images/plots/aerial_cities/detroit_mag.png>] [17] [18]
+<images/plots/aerial_cities/sf_histogram_mag_plot.jpg, id=148, 1806.75pt x 1204
 .5pt>
 File: images/plots/aerial_cities/sf_histogram_mag_plot.jpg Graphic file (type j
 pg)
 <use images/plots/aerial_cities/sf_histogram_mag_plot.jpg>
 Package pdftex.def Info: images/plots/aerial_cities/sf_histogram_mag_plot.jpg  
-used on input line 1100.
+used on input line 1068.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
-<images/plots/aerial_cities/sf_histogram_theta_plot.jpg, id=155, 1806.75pt x 12
+<images/plots/aerial_cities/sf_histogram_theta_plot.jpg, id=149, 1806.75pt x 12
 04.5pt>
 File: images/plots/aerial_cities/sf_histogram_theta_plot.jpg Graphic file (type
  jpg)
 <use images/plots/aerial_cities/sf_histogram_theta_plot.jpg>
 Package pdftex.def Info: images/plots/aerial_cities/sf_histogram_theta_plot.jpg
-  used on input line 1101.
+  used on input line 1069.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1100--1101
+Underfull \hbox (badness 10000) in paragraph at lines 1068--1069
 [][]
  []
 
-<images/plots/aerial_cities/salt_lake_histogram_mag_plot.jpg, id=156, 1806.75pt
+<images/plots/aerial_cities/salt_lake_histogram_mag_plot.jpg, id=150, 1806.75pt
  x 1204.5pt>
 File: images/plots/aerial_cities/salt_lake_histogram_mag_plot.jpg Graphic file 
 (type jpg)
 <use images/plots/aerial_cities/salt_lake_histogram_mag_plot.jpg>
 Package pdftex.def Info: images/plots/aerial_cities/salt_lake_histogram_mag_plo
-t.jpg  used on input line 1104.
+t.jpg  used on input line 1072.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
-<images/plots/aerial_cities/salt_lake_histogram_theta_plot.jpg, id=157, 1806.75
+<images/plots/aerial_cities/salt_lake_histogram_theta_plot.jpg, id=151, 1806.75
 pt x 1204.5pt>
 File: images/plots/aerial_cities/salt_lake_histogram_theta_plot.jpg Graphic fil
 e (type jpg)
 <use images/plots/aerial_cities/salt_lake_histogram_theta_plot.jpg>
 Package pdftex.def Info: images/plots/aerial_cities/salt_lake_histogram_theta_p
-lot.jpg  used on input line 1105.
+lot.jpg  used on input line 1073.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1104--1105
+Underfull \hbox (badness 10000) in paragraph at lines 1072--1073
 [][]
  []
 
-<images/plots/aerial_cities/detroit_histogram_mag_plot.jpg, id=158, 1806.75pt x
+<images/plots/aerial_cities/detroit_histogram_mag_plot.jpg, id=152, 1806.75pt x
  1204.5pt>
 File: images/plots/aerial_cities/detroit_histogram_mag_plot.jpg Graphic file (t
 ype jpg)
 <use images/plots/aerial_cities/detroit_histogram_mag_plot.jpg>
 Package pdftex.def Info: images/plots/aerial_cities/detroit_histogram_mag_plot.
-jpg  used on input line 1108.
+jpg  used on input line 1076.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
-<images/plots/aerial_cities/detroit_histogram_theta_plot.jpg, id=159, 1806.75pt
+<images/plots/aerial_cities/detroit_histogram_theta_plot.jpg, id=153, 1806.75pt
  x 1204.5pt>
 File: images/plots/aerial_cities/detroit_histogram_theta_plot.jpg Graphic file 
 (type jpg)
 <use images/plots/aerial_cities/detroit_histogram_theta_plot.jpg>
 Package pdftex.def Info: images/plots/aerial_cities/detroit_histogram_theta_plo
-t.jpg  used on input line 1109.
+t.jpg  used on input line 1077.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1108--1109
+Underfull \hbox (badness 10000) in paragraph at lines 1076--1077
 [][]
  []
 
-[20] [21 <./images/plots/aerial_cities/sf_histogram_mag_plot.jpg> <./images/plo
+[19] [20 <./images/plots/aerial_cities/sf_histogram_mag_plot.jpg> <./images/plo
 ts/aerial_cities/sf_histogram_theta_plot.jpg> <./images/plots/aerial_cities/sal
 t_lake_histogram_mag_plot.jpg> <./images/plots/aerial_cities/salt_lake_histogra
 m_theta_plot.jpg> <./images/plots/aerial_cities/detroit_histogram_mag_plot.jpg>
- <./images/plots/aerial_cities/detroit_histogram_theta_plot.jpg>] [22] [23]
-<images/plots/aerial_cities/sf_standard_polar_plot.jpg, id=180, 1806.75pt x 120
+ <./images/plots/aerial_cities/detroit_histogram_theta_plot.jpg>] [21] [22]
+[23]
+<images/plots/aerial_cities/sf_standard_polar_plot.jpg, id=179, 1806.75pt x 120
 4.5pt>
 File: images/plots/aerial_cities/sf_standard_polar_plot.jpg Graphic file (type 
 jpg)
 <use images/plots/aerial_cities/sf_standard_polar_plot.jpg>
 Package pdftex.def Info: images/plots/aerial_cities/sf_standard_polar_plot.jpg 
- used on input line 1303.
+ used on input line 1283.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
-<images/plots/aerial_cities/salt_lake_standard_polar_plot.jpg, id=181, 1806.75p
+<images/plots/aerial_cities/salt_lake_standard_polar_plot.jpg, id=180, 1806.75p
 t x 1204.5pt>
 File: images/plots/aerial_cities/salt_lake_standard_polar_plot.jpg Graphic file
  (type jpg)
 <use images/plots/aerial_cities/salt_lake_standard_polar_plot.jpg>
 Package pdftex.def Info: images/plots/aerial_cities/salt_lake_standard_polar_pl
-ot.jpg  used on input line 1317.
+ot.jpg  used on input line 1297.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
-<images/plots/aerial_cities/detroit_standard_polar_plot.jpg, id=182, 1806.75pt 
+<images/plots/aerial_cities/detroit_standard_polar_plot.jpg, id=181, 1806.75pt 
 x 1204.5pt>
 File: images/plots/aerial_cities/detroit_standard_polar_plot.jpg Graphic file (
 type jpg)
 <use images/plots/aerial_cities/detroit_standard_polar_plot.jpg>
 Package pdftex.def Info: images/plots/aerial_cities/detroit_standard_polar_plot
-.jpg  used on input line 1331.
+.jpg  used on input line 1311.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
-
-[24]
-Underfull \vbox (badness 1028) detected at line 1403
- []
-
-[25 <./images/plots/aerial_cities/sf_standard_polar_plot.jpg> <./images/plots/a
-erial_cities/salt_lake_standard_polar_plot.jpg> <./images/plots/aerial_cities/d
-etroit_standard_polar_plot.jpg>] [26]
-<images/plots/aerial_cities/sf_contribution_polar_plot.jpg, id=201, 1806.75pt x
+ [24 <./images/plots/aerial_cities/sf_standard_polar_plot.jpg> <./images/plots/
+aerial_cities/salt_lake_standard_polar_plot.jpg> <./images/plots/aerial_cities/
+detroit_standard_polar_plot.jpg>] [25]
+<images/plots/aerial_cities/sf_contribution_polar_plot.jpg, id=196, 1806.75pt x
  1204.5pt>
 File: images/plots/aerial_cities/sf_contribution_polar_plot.jpg Graphic file (t
 ype jpg)
 <use images/plots/aerial_cities/sf_contribution_polar_plot.jpg>
 Package pdftex.def Info: images/plots/aerial_cities/sf_contribution_polar_plot.
-jpg  used on input line 1452.
+jpg  used on input line 1440.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
-<images/plots/aerial_cities/salt_lake_contribution_polar_plot.jpg, id=202, 1806
+<images/plots/aerial_cities/salt_lake_contribution_polar_plot.jpg, id=197, 1806
 .75pt x 1204.5pt>
 File: images/plots/aerial_cities/salt_lake_contribution_polar_plot.jpg Graphic 
 file (type jpg)
 <use images/plots/aerial_cities/salt_lake_contribution_polar_plot.jpg>
 Package pdftex.def Info: images/plots/aerial_cities/salt_lake_contribution_pola
-r_plot.jpg  used on input line 1466.
+r_plot.jpg  used on input line 1454.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
-<images/plots/aerial_cities/detroit_contribution_polar_plot.jpg, id=203, 1806.7
+<images/plots/aerial_cities/detroit_contribution_polar_plot.jpg, id=198, 1806.7
 5pt x 1204.5pt>
 File: images/plots/aerial_cities/detroit_contribution_polar_plot.jpg Graphic fi
 le (type jpg)
 <use images/plots/aerial_cities/detroit_contribution_polar_plot.jpg>
 Package pdftex.def Info: images/plots/aerial_cities/detroit_contribution_polar_
-plot.jpg  used on input line 1480.
+plot.jpg  used on input line 1468.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
- [27 <./images/plots/aerial_cities/sf_contribution_polar_plot.jpg> <./images/pl
-ots/aerial_cities/salt_lake_contribution_polar_plot.jpg> <./images/plots/aerial
-_cities/detroit_contribution_polar_plot.jpg>]
+ [26] [27 <./images/plots/aerial_cities/sf_contribution_polar_plot.jpg> <./imag
+es/plots/aerial_cities/salt_lake_contribution_polar_plot.jpg> <./images/plots/a
+erial_cities/detroit_contribution_polar_plot.jpg>]
 chapter 5.
 [28
 
 ]
-Underfull \vbox (badness 10000) detected at line 1674
+Underfull \vbox (badness 10000) detected at line 1627
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1674
+Underfull \vbox (badness 10000) detected at line 1627
  []
 
 [29]
-Underfull \vbox (badness 10000) detected at line 1674
+Underfull \vbox (badness 10000) detected at line 1627
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1674
+Underfull \vbox (badness 10000) detected at line 1627
  []
 
 [30]
-Underfull \vbox (badness 10000) detected at line 1674
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1674
- []
-
-[31]
-<images/plots/grass/0.jpg, id=231, 1084.05pt x 650.43pt>
+<images/plots/grass/0.jpg, id=226, 1084.05pt x 650.43pt>
 File: images/plots/grass/0.jpg Graphic file (type jpg)
 <use images/plots/grass/0.jpg>
-Package pdftex.def Info: images/plots/grass/0.jpg  used on input line 1691.
+Package pdftex.def Info: images/plots/grass/0.jpg  used on input line 1644.
 (pdftex.def)             Requested size: 147.41562pt x 88.44936pt.
-<images/plots/grass/1.jpg, id=232, 1084.05pt x 650.43pt>
+<images/plots/grass/1.jpg, id=227, 1084.05pt x 650.43pt>
 File: images/plots/grass/1.jpg Graphic file (type jpg)
 <use images/plots/grass/1.jpg>
-Package pdftex.def Info: images/plots/grass/1.jpg  used on input line 1705.
+Package pdftex.def Info: images/plots/grass/1.jpg  used on input line 1658.
 (pdftex.def)             Requested size: 147.41562pt x 88.44936pt.
-<images/plots/grass/2.jpg, id=233, 1084.05pt x 650.43pt>
+<images/plots/grass/2.jpg, id=228, 1084.05pt x 650.43pt>
 File: images/plots/grass/2.jpg Graphic file (type jpg)
 <use images/plots/grass/2.jpg>
-Package pdftex.def Info: images/plots/grass/2.jpg  used on input line 1719.
+Package pdftex.def Info: images/plots/grass/2.jpg  used on input line 1672.
 (pdftex.def)             Requested size: 147.41562pt x 88.44936pt.
- [32 <./images/plots/grass/0.jpg> <./images/plots/grass/1.jpg> <./images/plots/
+ [31 <./images/plots/grass/0.jpg> <./images/plots/grass/1.jpg> <./images/plots/
 grass/2.jpg>]
-<images/plots/grass/internet_grass_mag.png, id=243, 1084.05pt x 578.16pt>
+<images/plots/grass/internet_grass_mag.png, id=239, 1084.05pt x 578.16pt>
 File: images/plots/grass/internet_grass_mag.png Graphic file (type png)
 <use images/plots/grass/internet_grass_mag.png>
 Package pdftex.def Info: images/plots/grass/internet_grass_mag.png  used on inp
-ut line 1797.
+ut line 1757.
 (pdftex.def)             Requested size: 147.41562pt x 78.62166pt.
-<images/plots/grass/aerial_living_lab_grass_mag.png, id=244, 1084.05pt x 578.16
+<images/plots/grass/aerial_living_lab_grass_mag.png, id=240, 1084.05pt x 578.16
 pt>
 File: images/plots/grass/aerial_living_lab_grass_mag.png Graphic file (type png
 )
 <use images/plots/grass/aerial_living_lab_grass_mag.png>
 Package pdftex.def Info: images/plots/grass/aerial_living_lab_grass_mag.png  us
-ed on input line 1811.
+ed on input line 1771.
 (pdftex.def)             Requested size: 147.41562pt x 78.62166pt.
-<images/plots/grass/close_up_living_lab_grass_mag.png, id=245, 1084.05pt x 578.
+<images/plots/grass/close_up_living_lab_grass_mag.png, id=241, 1084.05pt x 578.
 16pt>
 File: images/plots/grass/close_up_living_lab_grass_mag.png Graphic file (type p
 ng)
 <use images/plots/grass/close_up_living_lab_grass_mag.png>
 Package pdftex.def Info: images/plots/grass/close_up_living_lab_grass_mag.png  
-used on input line 1825.
+used on input line 1785.
 (pdftex.def)             Requested size: 147.41562pt x 78.62166pt.
- [33 <./images/plots/grass/internet_grass_mag.png> <./images/plots/grass/aerial
-_living_lab_grass_mag.png> <./images/plots/grass/close_up_living_lab_grass_mag.
-png>] [34] [35]
-Underfull \vbox (badness 2884) detected at line 1990
- []
-
-[36]
-<images/plots/grass/internet_grass_histogram_mag_plot.jpg, id=272, 1806.75pt x 
+ [32] [33 <./images/plots/grass/internet_grass_mag.png> <./images/plots/grass/a
+erial_living_lab_grass_mag.png> <./images/plots/grass/close_up_living_lab_grass
+_mag.png>] [34] [35]
+<images/plots/grass/internet_grass_histogram_mag_plot.jpg, id=268, 1806.75pt x 
 1204.5pt>
 File: images/plots/grass/internet_grass_histogram_mag_plot.jpg Graphic file (ty
 pe jpg)
 <use images/plots/grass/internet_grass_histogram_mag_plot.jpg>
 Package pdftex.def Info: images/plots/grass/internet_grass_histogram_mag_plot.j
-pg  used on input line 1995.
+pg  used on input line 1975.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
-<images/plots/grass/internet_grass_histogram_theta_plot.jpg, id=273, 1806.75pt 
+<images/plots/grass/internet_grass_histogram_theta_plot.jpg, id=269, 1806.75pt 
 x 1204.5pt>
 File: images/plots/grass/internet_grass_histogram_theta_plot.jpg Graphic file (
 type jpg)
 <use images/plots/grass/internet_grass_histogram_theta_plot.jpg>
 Package pdftex.def Info: images/plots/grass/internet_grass_histogram_theta_plot
-.jpg  used on input line 1996.
+.jpg  used on input line 1976.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1995--1996
+Underfull \hbox (badness 10000) in paragraph at lines 1975--1976
 [][]
  []
 
-<images/plots/grass/aerial_living_lab_histogram_mag_plot.jpg, id=274, 1806.75pt
+<images/plots/grass/aerial_living_lab_histogram_mag_plot.jpg, id=270, 1806.75pt
  x 1204.5pt>
 File: images/plots/grass/aerial_living_lab_histogram_mag_plot.jpg Graphic file 
 (type jpg)
 <use images/plots/grass/aerial_living_lab_histogram_mag_plot.jpg>
 Package pdftex.def Info: images/plots/grass/aerial_living_lab_histogram_mag_plo
-t.jpg  used on input line 1999.
+t.jpg  used on input line 1979.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
-<images/plots/grass/aerial_living_lab_histogram_theta_plot.jpg, id=275, 1806.75
+<images/plots/grass/aerial_living_lab_histogram_theta_plot.jpg, id=271, 1806.75
 pt x 1204.5pt>
 File: images/plots/grass/aerial_living_lab_histogram_theta_plot.jpg Graphic fil
 e (type jpg)
 <use images/plots/grass/aerial_living_lab_histogram_theta_plot.jpg>
 Package pdftex.def Info: images/plots/grass/aerial_living_lab_histogram_theta_p
-lot.jpg  used on input line 2000.
+lot.jpg  used on input line 1980.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1999--2000
+Underfull \hbox (badness 10000) in paragraph at lines 1979--1980
 [][]
  []
 
-<images/plots/grass/close_up_living_lab_histogram_mag_plot.jpg, id=276, 1806.75
+<images/plots/grass/close_up_living_lab_histogram_mag_plot.jpg, id=272, 1806.75
 pt x 1204.5pt>
 File: images/plots/grass/close_up_living_lab_histogram_mag_plot.jpg Graphic fil
 e (type jpg)
 <use images/plots/grass/close_up_living_lab_histogram_mag_plot.jpg>
 Package pdftex.def Info: images/plots/grass/close_up_living_lab_histogram_mag_p
-lot.jpg  used on input line 2003.
+lot.jpg  used on input line 1983.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
-<images/plots/grass/close_up_living_lab_histogram_theta_plot.jpg, id=277, 1806.
+<images/plots/grass/close_up_living_lab_histogram_theta_plot.jpg, id=273, 1806.
 75pt x 1204.5pt>
 File: images/plots/grass/close_up_living_lab_histogram_theta_plot.jpg Graphic f
 ile (type jpg)
 <use images/plots/grass/close_up_living_lab_histogram_theta_plot.jpg>
 Package pdftex.def Info: images/plots/grass/close_up_living_lab_histogram_theta
-_plot.jpg  used on input line 2004.
+_plot.jpg  used on input line 1984.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 2003--2004
+Underfull \hbox (badness 10000) in paragraph at lines 1983--1984
 [][]
  []
 
-[37 <./images/plots/grass/internet_grass_histogram_mag_plot.jpg> <./images/plot
+[36 <./images/plots/grass/internet_grass_histogram_mag_plot.jpg> <./images/plot
 s/grass/internet_grass_histogram_theta_plot.jpg> <./images/plots/grass/aerial_l
 iving_lab_histogram_mag_plot.jpg> <./images/plots/grass/aerial_living_lab_histo
 gram_theta_plot.jpg> <./images/plots/grass/close_up_living_lab_histogram_mag_pl
 ot.jpg> <./images/plots/grass/close_up_living_lab_histogram_theta_plot.jpg>]
-Underfull \vbox (badness 10000) detected at line 2083
- []
-
-
-Underfull \vbox (badness 10000) detected at line 2083
- []
-
-[38] [39] [40]
-<images/plots/grass/internet_grass_standard_polar_plot.jpg, id=298, 1806.75pt x
+[37] [38] [39]
+<images/plots/grass/internet_grass_standard_polar_plot.jpg, id=294, 1806.75pt x
  1204.5pt>
 File: images/plots/grass/internet_grass_standard_polar_plot.jpg Graphic file (t
 ype jpg)
@@ -1419,7 +1402,7 @@ ype jpg)
 Package pdftex.def Info: images/plots/grass/internet_grass_standard_polar_plot.
 jpg  used on input line 2188.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
-<images/plots/grass/aerial_living_lab_standard_polar_plot.jpg, id=299, 1806.75p
+<images/plots/grass/aerial_living_lab_standard_polar_plot.jpg, id=295, 1806.75p
 t x 1204.5pt>
 File: images/plots/grass/aerial_living_lab_standard_polar_plot.jpg Graphic file
  (type jpg)
@@ -1427,7 +1410,7 @@ File: images/plots/grass/aerial_living_lab_standard_polar_plot.jpg Graphic file
 Package pdftex.def Info: images/plots/grass/aerial_living_lab_standard_polar_pl
 ot.jpg  used on input line 2202.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
-<images/plots/grass/close_up_living_lab_standard_polar_plot.jpg, id=300, 1806.7
+<images/plots/grass/close_up_living_lab_standard_polar_plot.jpg, id=296, 1806.7
 5pt x 1204.5pt>
 File: images/plots/grass/close_up_living_lab_standard_polar_plot.jpg Graphic fi
 le (type jpg)
@@ -1435,16 +1418,16 @@ le (type jpg)
 Package pdftex.def Info: images/plots/grass/close_up_living_lab_standard_polar_
 plot.jpg  used on input line 2216.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
- [41 <./images/plots/grass/internet_grass_standard_polar_plot.jpg> <./images/pl
-ots/grass/aerial_living_lab_standard_polar_plot.jpg> <./images/plots/grass/clos
-e_up_living_lab_standard_polar_plot.jpg>] [42]
+ [40] [41 <./images/plots/grass/internet_grass_standard_polar_plot.jpg> <./imag
+es/plots/grass/aerial_living_lab_standard_polar_plot.jpg> <./images/plots/grass
+/close_up_living_lab_standard_polar_plot.jpg>] [42]
 <images/plots/grass/internet_grass_contribution_polar_plot.jpg, id=314, 1806.75
 pt x 1204.5pt>
 File: images/plots/grass/internet_grass_contribution_polar_plot.jpg Graphic fil
 e (type jpg)
 <use images/plots/grass/internet_grass_contribution_polar_plot.jpg>
 Package pdftex.def Info: images/plots/grass/internet_grass_contribution_polar_p
-lot.jpg  used on input line 2337.
+lot.jpg  used on input line 2345.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
 <images/plots/grass/aerial_living_lab_contribution_polar_plot.jpg, id=315, 1806
 .75pt x 1204.5pt>
@@ -1452,7 +1435,7 @@ File: images/plots/grass/aerial_living_lab_contribution_polar_plot.jpg Graphic
 file (type jpg)
 <use images/plots/grass/aerial_living_lab_contribution_polar_plot.jpg>
 Package pdftex.def Info: images/plots/grass/aerial_living_lab_contribution_pola
-r_plot.jpg  used on input line 2351.
+r_plot.jpg  used on input line 2359.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
 <images/plots/grass/close_up_living_lab_contribution_polar_plot.jpg, id=316, 18
 06.75pt x 1204.5pt>
@@ -1460,89 +1443,75 @@ File: images/plots/grass/close_up_living_lab_contribution_polar_plot.jpg Graphi
 c file (type jpg)
 <use images/plots/grass/close_up_living_lab_contribution_polar_plot.jpg>
 Package pdftex.def Info: images/plots/grass/close_up_living_lab_contribution_po
-lar_plot.jpg  used on input line 2365.
+lar_plot.jpg  used on input line 2373.
 (pdftex.def)             Requested size: 147.4101pt x 98.27339pt.
- [43] [44 <./images/plots/grass/internet_grass_contribution_polar_plot.jpg> <./
-images/plots/grass/aerial_living_lab_contribution_polar_plot.jpg> <./images/plo
-ts/grass/close_up_living_lab_contribution_polar_plot.jpg>]
+ [43 <./images/plots/grass/internet_grass_contribution_polar_plot.jpg> <./image
+s/plots/grass/aerial_living_lab_contribution_polar_plot.jpg> <./images/plots/gr
+ass/close_up_living_lab_contribution_polar_plot.jpg>]
 chapter 6.
-[45
+[44
 
 ]
-Underfull \vbox (badness 10000) detected at line 2559
+Underfull \vbox (badness 10000) detected at line 2519
  []
 
 
-Underfull \vbox (badness 10000) detected at line 2559
+Underfull \vbox (badness 10000) detected at line 2519
  []
 
-[46]
-Underfull \vbox (badness 10000) detected at line 2559
- []
-
-
-Underfull \vbox (badness 10000) detected at line 2559
- []
-
-[47]
-Underfull \vbox (badness 10000) detected at line 2559
- []
-
-
-Underfull \vbox (badness 10000) detected at line 2559
- []
-
-[48]
-<images/plots/backflip/0.jpg, id=349, 1084.05pt x 578.16pt>
+[45] [46]
+<images/plots/backflip/0.jpg, id=342, 1084.05pt x 578.16pt>
 File: images/plots/backflip/0.jpg Graphic file (type jpg)
 <use images/plots/backflip/0.jpg>
-Package pdftex.def Info: images/plots/backflip/0.jpg  used on input line 2572.
+Package pdftex.def Info: images/plots/backflip/0.jpg  used on input line 2532.
 (pdftex.def)             Requested size: 446.76262pt x 238.27339pt.
- [49 <./images/plots/backflip/0.jpg>]
-<images/plots/backflip/backflip_mag.png, id=358, 1084.05pt x 578.16pt>
+ [47 <./images/plots/backflip/0.jpg>]
+<images/plots/backflip/backflip_mag.png, id=351, 1084.05pt x 578.16pt>
 File: images/plots/backflip/backflip_mag.png Graphic file (type png)
 <use images/plots/backflip/backflip_mag.png>
 Package pdftex.def Info: images/plots/backflip/backflip_mag.png  used on input 
-line 2618.
+line 2581.
 (pdftex.def)             Requested size: 446.76262pt x 238.27339pt.
- [50 <./images/plots/backflip/backflip_mag.png>] [51]
-<images/plots/backflip/backflip_histogram_mag_plot.jpg, id=373, 1806.75pt x 120
+ [48 <./images/plots/backflip/backflip_mag.png>]
+<images/plots/backflip/backflip_histogram_mag_plot.jpg, id=360, 1806.75pt x 120
 4.5pt>
 File: images/plots/backflip/backflip_histogram_mag_plot.jpg Graphic file (type 
 jpg)
 <use images/plots/backflip/backflip_histogram_mag_plot.jpg>
 Package pdftex.def Info: images/plots/backflip/backflip_histogram_mag_plot.jpg 
- used on input line 2696.
+ used on input line 2664.
 (pdftex.def)             Requested size: 223.362pt x 148.908pt.
- [52 <./images/plots/backflip/backflip_histogram_mag_plot.jpg>]
-Underfull \vbox (badness 10000) detected at line 2776
- []
-
-
-Underfull \vbox (badness 10000) detected at line 2776
- []
-
-[53] [54]
-<images/plots/backflip/backflip_standard_polar_plot.jpg, id=390, 1806.75pt x 12
+<images/plots/backflip/backflip_histogram_theta_plot.jpg, id=361, 1806.75pt x 1
+204.5pt>
+File: images/plots/backflip/backflip_histogram_theta_plot.jpg Graphic file (typ
+e jpg)
+<use images/plots/backflip/backflip_histogram_theta_plot.jpg>
+Package pdftex.def Info: images/plots/backflip/backflip_histogram_theta_plot.jp
+g  used on input line 2678.
+(pdftex.def)             Requested size: 223.362pt x 148.908pt.
+ [49] [50 <./images/plots/backflip/backflip_histogram_mag_plot.jpg> <./images/p
+lots/backflip/backflip_histogram_theta_plot.jpg>] [51] [52]
+<images/plots/backflip/backflip_standard_polar_plot.jpg, id=386, 1806.75pt x 12
 04.5pt>
 File: images/plots/backflip/backflip_standard_polar_plot.jpg Graphic file (type
  jpg)
 <use images/plots/backflip/backflip_standard_polar_plot.jpg>
 Package pdftex.def Info: images/plots/backflip/backflip_standard_polar_plot.jpg
-  used on input line 2845.
+  used on input line 2846.
 (pdftex.def)             Requested size: 223.362pt x 148.908pt.
-<images/plots/backflip/backflip_contribution_polar_plot.jpg, id=391, 1806.75pt 
+<images/plots/backflip/backflip_contribution_polar_plot.jpg, id=387, 1806.75pt 
 x 1204.5pt>
 File: images/plots/backflip/backflip_contribution_polar_plot.jpg Graphic file (
 type jpg)
 <use images/plots/backflip/backflip_contribution_polar_plot.jpg>
 Package pdftex.def Info: images/plots/backflip/backflip_contribution_polar_plot
-.jpg  used on input line 2859.
+.jpg  used on input line 2860.
 (pdftex.def)             Requested size: 223.362pt x 148.908pt.
- [55 <./images/plots/backflip/backflip_standard_polar_plot.jpg> <./images/plots
-/backflip/backflip_contribution_polar_plot.jpg>]
+
+[53 <./images/plots/backflip/backflip_standard_polar_plot.jpg> <./images/plots/
+backflip/backflip_contribution_polar_plot.jpg>]
 chapter 7.
-[56
+[54
 
 ] (./index.aux)
  ***********
@@ -1555,10 +1524,10 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 19513 strings out of 474116
- 359521 string characters out of 5733619
- 1943187 words of memory out of 5000000
- 41367 multiletter control sequences out of 15000+600000
+ 19523 strings out of 474116
+ 360227 string characters out of 5733619
+ 1941187 words of memory out of 5000000
+ 41376 multiletter control sequences out of 15000+600000
  611040 words of font info for 127 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,10n,107p,10900b,681s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1574,10 +1543,10 @@ w/Cellar/texlive/20240312/share/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb><
 /opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/fonts/type1/public/lm/lm
 sy10.pfb></opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/fonts/type1/pu
 blic/lm/lmtt10.pfb>
-Output written on index.pdf (56 pages, 24680628 bytes).
+Output written on index.pdf (54 pages, 25059567 bytes).
 PDF statistics:
- 600 PDF objects out of 1000 (max. 8388607)
- 453 compressed objects within 5 object streams
- 147 named destinations out of 1000 (max. 500000)
- 29218 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 598 PDF objects out of 1000 (max. 8388607)
+ 452 compressed objects within 5 object streams
+ 148 named destinations out of 1000 (max. 500000)
+ 29231 words of extra memory for PDF output out of 29859 (max. 10000000)
 

@@ -3,34 +3,35 @@
 \contentsline {chapter}{\numberline {3}Methods}{6}{chapter.3}%
 \contentsline {part}{\numberline {I}Results}{8}{part.1}%
 \contentsline {chapter}{\numberline {4}Aerial Cityscapes}{9}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Load R Packages}{9}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Download Aerial City Images}{9}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Load Python Libraries}{10}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Collect HOG Features for Aerial Cityscapes}{12}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Build Data Frames for Each Aerial Cityscape}{16}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Plot Magnitudes as Image for each Aerial Cityscape}{16}{section.4.6}%
-\contentsline {section}{\numberline {4.7}Create Data Frame for Each Image}{17}{section.4.7}%
-\contentsline {section}{\numberline {4.8}Create Histograms of Gradient Magnitudes and Angles for Aerial Cityscapes}{18}{section.4.8}%
-\contentsline {section}{\numberline {4.9}Build New Distributed Histogram Data Frames}{20}{section.4.9}%
-\contentsline {section}{\numberline {4.10}Generate Polar Plots for Standard Historgrams}{22}{section.4.10}%
-\contentsline {section}{\numberline {4.11}Generate Polar Plots for Distributed Historgrams}{24}{section.4.11}%
+\contentsline {section}{\numberline {4.1}Load R Packages and Python Libraries}{9}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Download Aerial City Images from Mapbox}{9}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Collect HOG Features for Aerial Cityscapes}{11}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Build Data Frames for Each Aerial Cityscape}{15}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Extract Gradient Magnitudes and Angles from each Aerial Cityscape}{15}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Create Data Frame for Each Image}{16}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Create Histograms of Gradient Magnitudes and Angles for Aerial Cityscapes}{17}{section.4.7}%
+\contentsline {section}{\numberline {4.8}Build New Distributed Histogram Data Frames}{20}{section.4.8}%
+\contentsline {section}{\numberline {4.9}Generate Polar Plots for Images Using Standard Histogram Binning Technique}{22}{section.4.9}%
+\contentsline {section}{\numberline {4.10}Generate Polar Plots for Images Using Distributed Histogram Binning Technique}{24}{section.4.10}%
 \contentsline {chapter}{\numberline {5}Grass Images}{28}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Collect HOG Features for Grass Images}{28}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Build Data Frames for Each Grass Image}{32}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Plot Magnitudes as Image for each Grass Images}{33}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Create Data Frame for Each Image}{34}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Create Histograms of Gradient Magnitudes and Angles for Grass Images}{34}{section.5.5}%
-\contentsline {section}{\numberline {5.6}Build New Distributed Histogram Data Frames for Grass Images}{37}{section.5.6}%
-\contentsline {section}{\numberline {5.7}Generate Grass Image Polar Plots for Standard Historgrams}{39}{section.5.7}%
-\contentsline {section}{\numberline {5.8}Generate Grass Image Polar Plots for Distributed Historgrams}{41}{section.5.8}%
-\contentsline {chapter}{\numberline {6}Backflip Image}{45}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Collect HOG Features for Backflip Image}{45}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Build Data Frames for Backflip Image}{49}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Plot Magnitudes as Image for Diagonal Lines}{50}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Create Data Frame for Backflip Image}{50}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Create Histograms of Gradient Magnitudes and Angles for Backflip Image}{51}{section.6.5}%
-\contentsline {section}{\numberline {6.6}Build New Distributed Histogram Data Frame for Backflip Image}{52}{section.6.6}%
-\contentsline {section}{\numberline {6.7}Generate Polar Plots for Standard Historgrams for Backflip Image}{54}{section.6.7}%
-\contentsline {section}{\numberline {6.8}Generate Polar Plots for Distributed Historgrams of Diagonal Image}{54}{section.6.8}%
-\contentsline {chapter}{\numberline {7}Conclusion}{56}{chapter.7}%
+\contentsline {section}{\numberline {5.1}Load R Packages and Python Libraries}{28}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Collect HOG Features for Grass Images}{28}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Build Data Frames for Each Grass Image}{31}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Extract Gradient Magnitudes and Angles from each Grass Image}{32}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Create Data Frame for Each Image}{33}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Create Histograms of Gradient Magnitudes and Angles for Grass Images}{33}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Build New Distributed Histogram Data Frames for Grass Images}{37}{section.5.7}%
+\contentsline {section}{\numberline {5.8}Generate Polar Plots for Images Using Standard Histogram Binning Technique}{38}{section.5.8}%
+\contentsline {section}{\numberline {5.9}Generate Polar Plots for Images Using Distributed Histogram Binning Technique}{41}{section.5.9}%
+\contentsline {chapter}{\numberline {6}Backflip Image}{44}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Load R Packages and Python Libraries}{44}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Collect HOG Features for Backflip Image}{44}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Extract Gradient Magnitudes and Angles from Backflip Image}{47}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Plot Magnitudes as Image for Backflip Image}{47}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Create Data Frame for Backflip Image}{48}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Create Histograms of Gradient Magnitudes and Angles for Backflip Image}{49}{section.6.6}%
+\contentsline {section}{\numberline {6.7}Build New Distributed Histogram Data Frame for Backflip Image}{50}{section.6.7}%
+\contentsline {section}{\numberline {6.8}Generate Polar Plots for Standard Historgrams for Backflip Image}{52}{section.6.8}%
+\contentsline {section}{\numberline {6.9}Generate Polar Plots for Distributed Historgrams of Diagonal Image}{52}{section.6.9}%
+\contentsline {chapter}{\numberline {7}Conclusion}{54}{chapter.7}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

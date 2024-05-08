@@ -8,31 +8,28 @@ lightbox:
 code-annotations: below
 ---
 
+## Load R Packages and Python Libraries
 
 ```{r load_r_packages, message=FALSE}
+#| code-summary: "Load R Packages"
+# Load R Packages
 library(reticulate)
 library(tidyverse)
 library(mapsapi)
 library(mapboxapi)
 library(magick)
-Sys.which("python")
+
 ```
 
 
 ```{python load_python_modules}
-
+# Load Python Libraries
 import matplotlib.pyplot as plt
 import pandas as pd
-
-# jupyter only inline output command
-#%matplotlib inline
-
 from skimage.io import imread, imshow
 from skimage.transform import resize
 from skimage.feature import hog
 from skimage import data, exposure
-
-
 import matplotlib.pyplot as plt
 from skimage import io
 from skimage import color
@@ -40,7 +37,6 @@ from skimage.transform import resize
 import math
 from skimage.feature import hog
 import numpy as np
-
 
 ```
 
@@ -54,10 +50,18 @@ img_list = []
 img_list.append(color.rgb2gray(io.imread("images/grass_image2.jpg")))
 
 # Living Labs Rotated Aerial Grass
-img_list.append(color.rgb2gray(io.imread("images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg")))
+img_list.append(
+  color.rgb2gray(
+    io.imread("images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg")
+    )
+    )
 
 # Living Labs Grass Close-up
-img_list.append(color.rgb2gray(io.imread("images/living_lab_aerial/LL_zoomed_in_12.jpg")))
+img_list.append(
+  color.rgb2gray(
+    io.imread("images/living_lab_aerial/LL_zoomed_in_12.jpg")
+    )
+    )
 
 # List to store magnitudes for each image
 mag_list = []
@@ -163,22 +167,25 @@ Grass Images Rescaled and Converted to Greyscale
 ## Build Data Frames for Each Grass Image
 
 ```{python}
+# Internet grass DF of gradient magnitudes and angles
 mag_internet_grass = np.array(mag_list[0])
 theta_internet_grass = np.array(theta_list[0])
 
-
+# Aerial Living Labs DF of gradient magnitudes and angles
 mag_aerial_living_lab = np.array(mag_list[1])
 theta_aerial_living_lab = np.array(theta_list[1])
 
-
+# Close-up Living Labs DF of gradient magnitudes and angles
 mag_close_up_living_lab = np.array(mag_list[2])
 theta_close_up_living_lab = np.array(theta_list[2])
 
 ```
 
-## Plot Magnitudes as Image for each Grass Images
+## Extract Gradient Magnitudes and Angles from each Grass Image
 
 ```{python}
+# Save gradient magnitudes of Internet Grass in image form
+
 # plt.figure(figsize=(15, 8))
 # #plt.title('San Francisco, CA Gradient Magnitudes')
 # plt.imshow(mag_list[0], cmap="gray")
@@ -189,6 +196,8 @@ theta_close_up_living_lab = np.array(theta_list[2])
 ```
 
 ```{python}
+# Save gradient magnitudes of Aerial Living Labs in image form
+
 # plt.figure(figsize=(15, 8))
 # #plt.title('Salt Lake City, UT Gradient Magnitudes')
 # plt.imshow(mag_list[1], cmap="gray")
@@ -200,6 +209,8 @@ theta_close_up_living_lab = np.array(theta_list[2])
 ```
 
 ```{python}
+# Save gradient magnitudes of Close-Up Living Labs in image form
+
 # plt.figure(figsize=(15, 8))
 # #plt.title('Detroit, MI Gradient Magnitudes')
 # plt.imshow(mag_list[2], cmap="gray")
@@ -208,6 +219,7 @@ theta_close_up_living_lab = np.array(theta_list[2])
 # plt.tight_layout()
 # plt.savefig("images/plots/grass/close_up_living_lab_grass_mag.png", dpi=300)
 ```
+
 <div align="center">
 
 ::: {#fig-grass-mags layout-ncol=3}
@@ -225,7 +237,7 @@ Grass Image Magnitudes
 ## Create Data Frame for Each Image
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Make Data Frame for internet grass image magnitudes and angles"
-# Diagonal DF
+# Internet grass DF
 internet_grass_hog_df <- data.frame(mag = as.vector(py$mag_internet_grass),
                               theta = as.vector((py$theta_internet_grass))) %>%
   mutate(radian = theta*(pi/180))
@@ -235,7 +247,7 @@ internet_grass_hog_df <- data.frame(mag = as.vector(py$mag_internet_grass),
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Make Data Frame for aerial Living Labs image magnitudes and angles"
 
-# San Francisco DF
+# Aerial Living Labs DF
 aerial_living_lab_hog_df <- data.frame(mag = as.vector(py$mag_aerial_living_lab),
                               theta = as.vector((py$theta_aerial_living_lab))) %>%
   mutate(radian = theta*(pi/180))
@@ -247,7 +259,7 @@ aerial_living_lab_hog_df <- data.frame(mag = as.vector(py$mag_aerial_living_lab)
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Make Data Frame for close-up Living Lab image magnitudes and angles"
 
-# Internet Grass DF
+# Close-up Living Labs DF
 close_up_living_lab_hog_df <- data.frame(mag = as.vector(py$mag_close_up_living_lab),
                               theta = as.vector((py$theta_close_up_living_lab))) %>%
   mutate(radian = theta*(pi/180))
@@ -257,6 +269,7 @@ close_up_living_lab_hog_df <- data.frame(mag = as.vector(py$mag_close_up_living_
 
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Add the data frames created above to a list"
+
 # List of all Data frames
 grass_standard_df_list = list(internet_grass_hog_df,
                         aerial_living_lab_hog_df, 
@@ -267,6 +280,8 @@ grass_standard_df_list = list(internet_grass_hog_df,
 
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Plot histogram of internet grass gradient magnitudes and define the magnitude level for later filtering"
+
+# Internet grass image histogram of gradient mags
 internet_grass_histogram_mag_plot <-
   ggplot(grass_standard_df_list[[1]], 
          aes(x = mag)) +
@@ -279,10 +294,10 @@ internet_grass_histogram_mag_plot <-
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
 
-#internet_grass_histogram_mag_plot
-
+# Internet grass mag filter
 internet_grass_mag_filter <- 0.3
 
+# save image
 ggsave("images/plots/grass/internet_grass_histogram_mag_plot.jpg", internet_grass_histogram_mag_plot, width = 6, height = 4, dpi = 300)
 
 ```
@@ -291,6 +306,7 @@ ggsave("images/plots/grass/internet_grass_histogram_mag_plot.jpg", internet_gras
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Plot histogram of internet grass gradient angles"
 
+# Internet grass image histogram of gradient angles
 internet_grass_histogram_theta_plot <-
   ggplot(grass_standard_df_list[[1]], 
          aes(x = theta)) +
@@ -303,8 +319,7 @@ internet_grass_histogram_theta_plot <-
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
 
-#internet_grass_histogram_theta_plot
-
+# save image
 ggsave("images/plots/grass/internet_grass_histogram_theta_plot.jpg", internet_grass_histogram_theta_plot, width = 6, height = 4, dpi = 300)
 
 ```
@@ -312,6 +327,7 @@ ggsave("images/plots/grass/internet_grass_histogram_theta_plot.jpg", internet_gr
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Plot histogram of aerial Living Labs grass image gradient magnitudes and define the magnitude level for later filtering"
 
+# Aerial Living Labs image histogram of gradient mags
 aerial_living_lab_histogram_mag_plot <-
   ggplot(grass_standard_df_list[[2]], 
          aes(x = mag)) +
@@ -320,14 +336,14 @@ aerial_living_lab_histogram_mag_plot <-
   labs(x = "Gradient Magnitude", 
        y = "Count", 
        title = "Aerial Living Labs Image Histogram of Gradient Magnitudes"
-       ) +
+  ) +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
 
-#aerial_living_lab_histogram_mag_plot
-
+# Aerial Living Labs mag filter
 aerial_living_lab_mag_filter <- 0.08
 
+# save image
 ggsave("images/plots/grass/aerial_living_lab_histogram_mag_plot.jpg", 
        aerial_living_lab_histogram_mag_plot, width = 6, height = 4, dpi = 300)
 
@@ -338,6 +354,7 @@ ggsave("images/plots/grass/aerial_living_lab_histogram_mag_plot.jpg",
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Plot histogram of aerial Living Labs grass image gradient angles"
 
+# Aerial Living Labs image histogram of gradient angles
 aerial_living_lab_histogram_theta_plot <-
   ggplot(grass_standard_df_list[[2]], 
          aes(x = theta)) +
@@ -346,12 +363,11 @@ aerial_living_lab_histogram_theta_plot <-
   labs(x = "Gradient Angle", 
        y = "Count", 
        title = "Aerial Living Labs Image Histogram of Gradient Angles"
-       ) +
+  ) +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
 
-#aerial_living_lab_histogram_theta_plot
-
+# save image
 ggsave("images/plots/grass/aerial_living_lab_histogram_theta_plot.jpg", 
        aerial_living_lab_histogram_theta_plot, width = 6, height = 4, dpi = 300)
 ```
@@ -359,6 +375,7 @@ ggsave("images/plots/grass/aerial_living_lab_histogram_theta_plot.jpg",
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Plot histogram of close-up Living Labs grass image gradient magnitudes and define the magnitude level for later filtering"
 
+# Close-up Living Labs image histogram of gradient mags
 close_up_living_lab_histogram_mag_plot <-
   ggplot(grass_standard_df_list[[3]], 
          aes(x = mag)) +
@@ -371,10 +388,10 @@ close_up_living_lab_histogram_mag_plot <-
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
 
-#close_up_living_lab_histogram_mag_plot
-
+# Close-up mag filter
 close_up_living_lab_mag_filter <- 0.12
 
+# save image
 ggsave("images/plots/grass/close_up_living_lab_histogram_mag_plot.jpg", close_up_living_lab_histogram_mag_plot, width = 6, height = 4, dpi = 300)
 
 ```
@@ -383,6 +400,7 @@ ggsave("images/plots/grass/close_up_living_lab_histogram_mag_plot.jpg", close_up
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Plot histogram of close-up Living Labs grass image gradient angles"
 
+# Close-up Living Labs image histogram of gradient angles
 close_up_living_lab_histogram_theta_plot <-
   ggplot(grass_standard_df_list[[3]], 
          aes(x = theta)) +
@@ -395,8 +413,7 @@ close_up_living_lab_histogram_theta_plot <-
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
 
-#close_up_living_lab_histogram_theta_plot
-
+# save image
 ggsave("images/plots/grass/close_up_living_lab_histogram_theta_plot.jpg", close_up_living_lab_histogram_theta_plot, width = 6, height = 4, dpi = 300)
 ```
 
@@ -452,6 +469,8 @@ calculate_bin_contributions <- function(angle, magnitude, num_bins) {
 
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Filter each data set of grass image gradients and angles to only contain observations with magnitudes greater than or equal to the respective magnitude levels determined above"
+
+# Create filtered data frames using the filter levels for magnitudes defined above, store all in a list
 filtered_grass_standard_df_list <-list(internet_grass_hog_df %>%
                                           filter(mag >= internet_grass_mag_filter),
                                         aerial_living_lab_hog_df %>%
@@ -464,10 +483,13 @@ filtered_grass_standard_df_list <-list(internet_grass_hog_df %>%
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "For each image calculate the contribution to each bin for the distribued histogram"
 
+# empty list for storing new distributed histogram data frames
 grass_contribution_df_list <- list()
+
 # Define the number of bins
 num_bins <- 9
 
+# iterate through each filtered standard data frame
 for (i in 1:length(filtered_grass_standard_df_list)){
   
   grass_contribution_hog_df <- 
@@ -484,6 +506,7 @@ for (i in 1:length(filtered_grass_standard_df_list)){
            `160` = calculate_bin_contributions(theta, mag, 9)[[9]],
            )
   
+    # rearrange into same tidy format
   grass_split_histo_df <- 
     grass_contribution_hog_df %>%
     pivot_longer(names_to = "bin", 
@@ -493,17 +516,18 @@ for (i in 1:length(filtered_grass_standard_df_list)){
     group_by(bin) %>%
     summarise(contribution_sum = sum(contribution))
   
-  
+  # add to list for storage
   grass_contribution_df_list[[i]] <- grass_split_histo_df
 
 }
 ```
 
-## Generate Grass Image Polar Plots for Standard Historgrams
+## Generate Polar Plots for Images Using Standard Histogram Binning Technique
 
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Polar plot of internet grass histogram of gradient angles using standard binning technique"
 
+# Internet grass plot
 internet_grass_plot <-
   ggplot(filtered_grass_standard_df_list[[1]], 
          aes(x = theta)) +
@@ -525,6 +549,7 @@ internet_grass_plot <-
   theme(axis.title.y = element_blank(),
         plot.title = element_text(hjust = 0.5))
 
+# save image
 ggsave("images/plots/grass/internet_grass_standard_polar_plot.jpg", internet_grass_plot, width = 6, height = 4, dpi = 300)
 
 ```
@@ -532,6 +557,7 @@ ggsave("images/plots/grass/internet_grass_standard_polar_plot.jpg", internet_gra
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Polar plot of aerial Living Labs histogram of gradient angles using standard binning technique"
 
+# Aerial Living Labs plot
 aerial_living_lab_plot <-
   ggplot(filtered_grass_standard_df_list[[2]], 
          aes(x = theta)) +
@@ -553,6 +579,7 @@ aerial_living_lab_plot <-
   theme(axis.title.y = element_blank(),
         plot.title = element_text(hjust = 0.5))
 
+# save image
 ggsave("images/plots/grass/aerial_living_lab_standard_polar_plot.jpg", aerial_living_lab_plot, width = 6, height = 4, dpi = 300)
 
 
@@ -561,6 +588,7 @@ ggsave("images/plots/grass/aerial_living_lab_standard_polar_plot.jpg", aerial_li
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Polar plot of close-up Living Labs histogram of gradient angles using standard binning technique"
 
+# Close-up Living Labs plot
 close_up_living_lab_plot <-
   ggplot(filtered_grass_standard_df_list[[3]], 
          aes(x = theta)) +
@@ -582,12 +610,15 @@ close_up_living_lab_plot <-
   theme(axis.title.y = element_blank(),
         plot.title = element_text(hjust = 0.5))
 
+# save image
 ggsave("images/plots/grass/close_up_living_lab_standard_polar_plot.jpg", close_up_living_lab_plot, width = 6, height = 4, dpi = 300)
 
 ```
 
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Save an arranged image of the 3 plots side-by-side"
+
+# Save to an arranged image
 all_standard_grass_plots <- ggpubr::ggarrange(internet_grass_plot, 
                                              aerial_living_lab_plot, 
                                              close_up_living_lab_plot)
@@ -617,11 +648,12 @@ Aerial Cityscape Standard Polar Plots
 
 
 
-## Generate Grass Image Polar Plots for Distributed Historgrams
+## Generate Polar Plots for Images Using Distributed Histogram Binning Technique
 
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Polar plot of internet grass histogram of gradient angles using distributed binning technique"
 
+# Internet grass plot
 internet_grass_split_plot <-
   ggplot(grass_contribution_df_list[[1]], 
          aes(x = bin, y = contribution_sum)) +
@@ -644,6 +676,7 @@ internet_grass_split_plot <-
   theme(axis.title.y = element_blank(),
         plot.title = element_text(hjust = 0.5))
 
+# save image
 ggsave("images/plots/grass/internet_grass_contribution_polar_plot.jpg", internet_grass_split_plot, width = 6, height = 4, dpi = 300)
 
 
@@ -652,6 +685,7 @@ ggsave("images/plots/grass/internet_grass_contribution_polar_plot.jpg", internet
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Polar plot of aerial Living Labs histogram of gradient angles using distributed binning technique"
 
+# Aerial Living Labs plot
 aerial_living_lab_split_plot <-
   ggplot(grass_contribution_df_list[[2]], 
          aes(x = bin, y = contribution_sum)) +
@@ -674,6 +708,7 @@ aerial_living_lab_split_plot <-
   theme(axis.title.y = element_blank(),
         plot.title = element_text(hjust = 0.5))
 
+# save image
 ggsave("images/plots/grass/aerial_living_lab_contribution_polar_plot.jpg", aerial_living_lab_split_plot, width = 6, height = 4, dpi = 300)
 
 ```
@@ -681,6 +716,7 @@ ggsave("images/plots/grass/aerial_living_lab_contribution_polar_plot.jpg", aeria
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Polar plot of close-up Living Labs histogram of gradient angles using distributed binning technique"
 
+# Close-up Living Labs plot
 close_up_living_lab_split_plot <-
   ggplot(grass_contribution_df_list[[3]], 
          aes(x = bin, y = contribution_sum)) +
@@ -703,12 +739,15 @@ close_up_living_lab_split_plot <-
   theme(axis.title.y = element_blank(),
         plot.title = element_text(hjust = 0.5))
 
+# save image
 ggsave("images/plots/grass/close_up_living_lab_contribution_polar_plot.jpg", close_up_living_lab_split_plot, width = 6, height = 4, dpi = 300)
 
 ```
 
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Save an arranged image of the 3 distributed-binned polar plots side-by-side"
+
+# Save to an arranged image
 all_grass_contribution_plots <- ggpubr::ggarrange(internet_grass_split_plot, 
                                                   aerial_living_lab_split_plot, 
                                                   close_up_living_lab_split_plot)
