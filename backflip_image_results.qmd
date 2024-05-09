@@ -8,6 +8,24 @@ lightbox:
 code-annotations: below
 ---
 
+## Motivation
+
+Test the HOG algorithm's ability to identify dominant edges using an image of a skier. This scenario adds complexity with both a skier in the foreground and a crowd in the background, allowing us to observe how the algorithm deals with additional "noise".
+
+## Input Image
+
+<div align="center">
+
+::: {#fig-flip layout-valign="top" layout-ncol=1}
+![Skiing Backflip Image](images/TitusFlip.jpg){group="flip-rescale-gallery" height=10%}
+
+Input Image
+:::
+
+<div>
+
+
+
 ## Load R Packages and Python Libraries
 
 ```{r load_r_packages, message=FALSE}
@@ -37,7 +55,6 @@ from skimage.feature import hog
 import numpy as np
 
 ```
-
 
 ## Collect HOG Features for Backflip Image
 
@@ -139,9 +156,11 @@ for x in range(len(img_list)):
 <div align="center">
 
 ::: {#fig-flip layout-valign="top" layout-ncol=1}
+
 ![Skiing Backflip](images/plots/backflip/0.jpg){group="flip-rescale-gallery"}
 
-Skiing Backflip Image Rescaled and Converted to Greyscale
+Skiing Backflip Image Re-scaled and Converted to Grayscale
+
 :::
 
 <div>
@@ -255,9 +274,9 @@ ggsave("images/plots/backflip/backflip_histogram_theta_plot.jpg",
 
 ::: {#fig-flip-histograms layout-ncol=2}
 
-![Skiing Backflip Histogram of Gradient Magnitudes](images/plots/backflip/backflip_histogram_mag_plot.jpg){group="flip-hist-gallery"} 
+![Histogram of Gradient Magnitudes](images/plots/backflip/backflip_histogram_mag_plot.jpg){group="flip-hist-gallery"} 
 
-![Skiing Backflip Histogram of Gradient Angles](images/plots/backflip/backflip_histogram_theta_plot.jpg){group="flip-hist-gallery"}
+![Histogram of Gradient Angles](images/plots/backflip/backflip_histogram_theta_plot.jpg){group="flip-hist-gallery"}
 
 Skiing Backflip Magnitudes and Angles
 
@@ -381,8 +400,7 @@ flip_plot <-
     breaks = c(0, 45, 90, 135, 180, 225, 270, 315),
     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
   )+
-  labs(title = "Polar Plot of Skiing Backflip Image\n
-       Using Standard HOG Technique") +
+  labs(title = "Polar Plot of Skiing Backflip\nImage Using Standard HOG Technique") +
   theme_minimal() +
   labs(x = "") +
   theme(axis.title.y = element_blank(),
@@ -423,8 +441,7 @@ flip_split_plot <-
     breaks = c(0, 45, 90, 135, 180, 225, 270, 315),
     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
   )+
-  labs(title = "Polar Plot of Skiing Backflip Image\n
-       Using Distributed HOG Technique") +
+  labs(title = "Polar Plot of Skiing Backflip Image\nUsing Distributed HOG Technique") +
   theme_minimal() +
   labs(x = "") +
   theme(axis.title.y = element_blank(),
@@ -448,12 +465,21 @@ ggsave("images/plots/backflip/backflip_contribution_polar_plot.jpg",
 
 ::: {#fig-flip-distributed-and-standard-polar layout-ncol=2}
 
-![Skiing Backflip Image Standard HOG Method](images/plots/backflip/backflip_standard_polar_plot.jpg){group="flip-standard-and-dist-polar-gallery"}
+![Polar Plot Using Standard HOG Technique](images/plots/backflip/backflip_standard_polar_plot.jpg){group="flip-standard-and-dist-polar-gallery"}
 
-![Skiing Backflip Image Distributed HOG Method](images/plots/backflip/backflip_contribution_polar_plot.jpg){group="flip-standard-and-dist-polar-gallery"}
+![Polar Plot Using Distributed HOG Technique](images/plots/backflip/backflip_contribution_polar_plot.jpg){group="flip-standard-and-dist-polar-gallery"}
 
 
-Skiing Backflip Image Distributed Method Polar Plot
+Polar Plots using Standard and Distributed Binning Technique for Skiing Backflip Image
 :::
+
+<div>
+
+
+
+
+<div align="left">
+
+|       When looking at the gradient magnitudes in image form the most definitive lines occur where the snow from the jump is visible. This makes sense, because the snowy jump is a uniform white, resulting in minimal gradient magnitudes from one pixel to the next within this area. When the edge of the snow meets the crowd in the background, there is a great increase in gradient magnitude. Since the snowy jump in this image is mostly horizontal with some incline and decline, both polar plots identify the horizontal angle as being the most frequent. Interestingly, the distributed binning technique has a notably smaller frequency of vertical lines, likely due to the greater influence of magnitudes on their contribution to the histogram.
 
 <div>

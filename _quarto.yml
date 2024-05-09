@@ -1,6 +1,6 @@
 project:
   type: book
-  output-dir: docs
+  output-dir: docs 
 
 book:
   title: "Applying the Histogram of Oriented Gradients Algorithm for Detecting Grass Lay Direction"
@@ -16,11 +16,13 @@ book:
         - grass_images_results.qmd
         - backflip_image_results.qmd
     - conclusion.qmd
+    - references.bib
 
 bibliography: references.bib
 
 format:
   html:
+    number-sections: true
     number-depth: 0
     code-fold: true
     code-tools: true
@@ -32,5 +34,7 @@ format:
   pdf:
     toc: true
     documentclass: scrreprt
+    bibliography: references.bib
+    csl: apa-6th-edition.csl
   
 editor: visual

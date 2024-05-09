@@ -8,6 +8,10 @@ lightbox:
 code-annotations: below
 ---
 
+## Motivation
+
+Download aerial cityscape images from Mapbox's API of San Francisco, Salt Lake City, and Detroit to determine if the HOG algorithm is capable of identifying dominant angles of each city's grid layout.
+
 ## Load R Packages and Python Libraries
 
 ```{r load_r_packages, message=FALSE}
@@ -20,6 +24,7 @@ library(mapboxapi)
 library(magick)
 
 ```
+
 
 ```{python load_python_modules}
 # Load Python Libraries
@@ -38,6 +43,7 @@ from skimage.feature import hog
 import numpy as np
 
 ```
+
 
 ## Download Aerial City Images from Mapbox
 
@@ -804,7 +810,7 @@ for x in range(len(img_list)):
 
 ![Detroit, MI](images/plots/aerial_cities/2.jpg){group="cityscape-rescale-gallery"}
 
-Aerial Cityscape Images Rescaled and Converted to Greyscale
+Aerial Cityscape Images Re-scaled and Converted to Grayscale
 :::
 
 <div>
@@ -875,7 +881,7 @@ theta_detroit = np.array(theta_list[2])
 
 ![Detroit, MI](images/plots/aerial_cities/detroit_mag.png){group="cityscape-mag-gallery"}
 
-Aerial Cityscape Magnitudes
+Image of Aerial Cityscape Magnitudes
 :::
 
 <div>
@@ -1051,13 +1057,21 @@ ggsave("images/plots/aerial_cities/detroit_histogram_theta_plot.jpg", detroit_hi
 <div align="center">
 
 ::: {#fig-city-histograms layout-ncol="3"}
-![San Francisco, CA Histogram of Gradient Magnitudes](images/plots/aerial_cities/sf_histogram_mag_plot.jpg){group="cityscape-hist-gallery"} ![San Francisco, CA Histogram of Gradient Angles](images/plots/aerial_cities/sf_histogram_theta_plot.jpg){group="cityscape-hist-gallery"}
 
-![Salt Lake City, UT Histogram of Gradient Magnitudes](images/plots/aerial_cities/salt_lake_histogram_mag_plot.jpg){group="cityscape-hist-gallery"} ![Salt Lake City, UT Histogram of Gradient Angles](images/plots/aerial_cities/salt_lake_histogram_theta_plot.jpg){group="cityscape-hist-gallery"}
+![San Francisco, CA Gradient Magnitudes](images/plots/aerial_cities/sf_histogram_mag_plot.jpg){group="cityscape-hist-gallery"}
 
-![Detroit, MI Histogram of Gradient Magnitudes](images/plots/aerial_cities/detroit_histogram_mag_plot.jpg){group="cityscape-hist-gallery"} ![Detroit, MI Histogram of Gradient Angles](images/plots/aerial_cities/detroit_histogram_theta_plot.jpg){group="cityscape-hist-gallery"}
+![Salt Lake City, UT Gradient Magnitudes](images/plots/aerial_cities/salt_lake_histogram_mag_plot.jpg){group="cityscape-hist-gallery"} 
 
-Aerial Cityscape Magnitudes and Angles
+![Detroit, MI Gradient Magnitudes](images/plots/aerial_cities/detroit_histogram_mag_plot.jpg){group="cityscape-hist-gallery"}
+
+![San Francisco, CA Gradient Angles](images/plots/aerial_cities/sf_histogram_theta_plot.jpg){group="cityscape-hist-gallery"}
+
+![Salt Lake City, UT Gradient Angles](images/plots/aerial_cities/salt_lake_histogram_theta_plot.jpg){group="cityscape-hist-gallery"}
+
+![Detroit, MI Gradient Angles](images/plots/aerial_cities/detroit_histogram_theta_plot.jpg){group="cityscape-hist-gallery"}
+
+Aerial Cityscape Histograms of Magnitudes and Angles
+
 :::
 
 <div>
@@ -1268,7 +1282,7 @@ ggsave("images/plots/aerial_cities/all_standard_polar_plots.jpg",
 
 ![Detroit, MI](images/plots/aerial_cities/detroit_standard_polar_plot.jpg){group="cityscape-standard-polar-gallery"}
 
-Aerial Cityscape Standard Polar Plots
+Polar Plots using Standard Binning Technique for Aerial Cityscapes
 :::
 
 <div>
@@ -1392,7 +1406,16 @@ ggsave("images/plots/aerial_cities/all_aerial_contribution_plots.jpg",
 
 ![Detroit, MI](images/plots/aerial_cities/detroit_contribution_polar_plot.jpg){group="cityscape-distributed-polar-gallery"}
 
-Aerial Cityscape Distributed Method Polar Plots
+Polar Plots using Distributed Binning Technique for Aerial Cityscapes
 :::
 
-<div align="center">
+<div>
+
+
+## Discussion
+
+<div align="left">
+
+|       The San Francisco image delivered the most promising results due to its closer zoom level compared to the Salt Lake City and Detroit images. Angles in the seventy-degree range emerged as the most frequent, accurately reflecting the slightly diagonal west-east streets of downtown San Francisco. The layout of Salt Lake City significantly influenced the results of its polar plot. With its narrow vertical grid layout, the city exhibited a higher frequency of vertical angles and a smaller yet significant occurrence of horizontal gradient angles. For the images of San Francisco and Detroit, the outcomes between the Standard and Distributed binning techniques exhibited similar results. However, for Salt Lake City, the Distributed technique notably favored a higher frequency of both vertical and horizontal angles.
+
+<div>

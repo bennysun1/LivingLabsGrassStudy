@@ -56,7 +56,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -205,7 +225,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -241,11 +267,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="line-block">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subsistence-oriented indigenous communities across Alaska rely heavily on Traditional Ecological Knowledge (TEK), a holistic understanding of their environment acquired through generations of observation and cultural transmission. Among the Anishinaabek tradition, sweetgrass symbolizes wisdom and knowledge, passed down from elders to younger generations. Indigenous hunters and gatherers have long observed the alignment of grass and plants after the growing season as indicative of prevailing wind directions. Predominant wind direction serves a crucial role to subsistence practitioners when hunting, fishing, settling, and keeping track of changing weather. Due to the remote and harsh conditions, traditional weather stations are absent to measure shifts in historically predominant wind directions. On islands like St.&nbsp;Lawrence Island in Savoonga, AK, natives have observed a shift from historically predominant northerly wind patterns to southerly and easterly and dominated winds. In a previous study Dr.&nbsp;Jon Rosales (Environmental Studies) and his team collected images of grass lay from St.&nbsp;Lawrence University’s Living Laboratory and manually attempted to measure grass lay angles and relate them with wind data. This research project seeks to reinforce Traditional Ecological Knowledge (TEK) with Scientific Ecological Knowledge (SEK) to develop our understanding of Alaskan indigenous wisdom and its relation with modern scientific findings. We investigated the Histogram of Oriented Gradients (HOG) algorithm to automate the measurement of grass lay angles. We applied the algorithm to various images sampled from the internet and the Living Laboratory to test its viability.</div>
+<div class="line-block">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subsistence-oriented indigenous communities across Alaska rely heavily on Traditional Ecological Knowledge (TEK), a holistic understanding of their environment acquired through generations of observation and cultural transmission. Among the Anishinaabek tradition, sweet grass symbolizes wisdom and knowledge <span class="citation" data-cites="Kimmerer_2020">(<a href="#ref-Kimmerer_2020" role="doc-biblioref">Kimmerer 2020</a>)</span>, passed down from elders to younger generations. Indigenous hunters and gatherers have long observed the alignment of grass and plants after the growing season as indicative of prevailing wind directions. Predominant wind direction serves a crucial role to subsistence practitioners when hunting, fishing, settling, and keeping track of changing weather. Due to the remote and harsh conditions, traditional weather stations are absent to measure shifts in historically predominant wind directions. On islands like St.&nbsp;Lawrence Island in Savoonga, AK, natives have observed a shift from historically predominant northerly wind patterns to southerly and easterly and dominated winds. In a previous study Dr.&nbsp;Jon Rosales (Environmental Studies) and his team collected images of grass lay from St.&nbsp;Lawrence University’s Living Laboratory and manually attempted to measure grass lay angles and relate them with wind data. This research project seeks to reinforce Traditional Ecological Knowledge (TEK) with Scientific Ecological Knowledge (SEK) to develop our understanding of Alaskan indigenous wisdom and its relation with modern scientific findings. We investigated the Histogram of Oriented Gradients (HOG) algorithm to automate the measurement of grass lay angles. We applied the algorithm to various images sampled from the internet and the Living Laboratory to test its viability.</div>
+<p><br></p>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
 
 
 <!-- -->
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Kimmerer_2020" class="csl-entry" role="listitem">
+Kimmerer, Robin Wall. 2020. <em>Braiding Sweetgrass: Indigenous Wisdom, Scientific Knowledge, and the Teachings of Plants</em>. Milkweed Editions.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -867,7 +902,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-4"><a href="#cb1-4"></a><span class="an">indent:</span><span class="co"> true</span></span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="co">---</span></span>
 <span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a>|       Subsistence-oriented indigenous communities across Alaska rely heavily on Traditional Ecological Knowledge (TEK), a holistic understanding of their environment acquired through generations of observation and cultural transmission. Among the Anishinaabek tradition, sweetgrass symbolizes wisdom and knowledge, passed down from elders to younger generations. Indigenous hunters and gatherers have long observed the alignment of grass and plants after the growing season as indicative of prevailing wind directions. Predominant wind direction serves a crucial role to subsistence practitioners when hunting, fishing, settling, and keeping track of changing weather. Due to the remote and harsh conditions, traditional weather stations are absent to measure shifts in historically predominant wind directions. On islands like St. Lawrence Island in Savoonga, AK, natives have observed a shift from historically predominant northerly wind patterns to southerly and easterly and dominated winds. In a previous study Dr. Jon Rosales (Environmental Studies) and his team collected images of grass lay from St. Lawrence University's Living Laboratory and manually attempted to measure grass lay angles and relate them with wind data. This research project seeks to reinforce Traditional Ecological Knowledge (TEK) with Scientific Ecological Knowledge (SEK) to develop our understanding of Alaskan indigenous wisdom and its relation with modern scientific findings. We investigated the Histogram of Oriented Gradients (HOG) algorithm to automate the measurement of grass lay angles. We applied the algorithm to various images sampled from the internet and the Living Laboratory to test its viability. </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7"></a>|       Subsistence-oriented indigenous communities across Alaska rely heavily on Traditional Ecological Knowledge (TEK), a holistic understanding of their environment acquired through generations of observation and cultural transmission. Among the Anishinaabek tradition, sweet grass symbolizes wisdom and knowledge <span class="co">[</span><span class="ot">@Kimmerer_2020</span><span class="co">]</span>, passed down from elders to younger generations. Indigenous hunters and gatherers have long observed the alignment of grass and plants after the growing season as indicative of prevailing wind directions. Predominant wind direction serves a crucial role to subsistence practitioners when hunting, fishing, settling, and keeping track of changing weather. Due to the remote and harsh conditions, traditional weather stations are absent to measure shifts in historically predominant wind directions. On islands like St. Lawrence Island in Savoonga, AK, natives have observed a shift from historically predominant northerly wind patterns to southerly and easterly and dominated winds. In a previous study Dr. Jon Rosales (Environmental Studies) and his team collected images of grass lay from St. Lawrence University's Living Laboratory and manually attempted to measure grass lay angles and relate them with wind data. This research project seeks to reinforce Traditional Ecological Knowledge (TEK) with Scientific Ecological Knowledge (SEK) to develop our understanding of Alaskan indigenous wisdom and its relation with modern scientific findings. We investigated the Histogram of Oriented Gradients (HOG) algorithm to automate the measurement of grass lay angles. We applied the algorithm to various images sampled from the internet and the Living Laboratory to test its viability.</span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a>&lt;br /&gt;</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="fu">## References</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

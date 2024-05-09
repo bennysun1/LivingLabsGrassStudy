@@ -1,22 +1,20 @@
 ---
 title: "Methods"
 author: "Ben Sunshine"
+bibliography: references.bib
 lightbox:
   match: auto
   effect: zoom
   desc-position: bottom
-
 ---
 
-|       The HOG algorithm, introduced by Navneet Dalal and Bill Triggs in 2005, is a popular technique for object detection in images. The algorithm can identify gradient magnitudes and angles at each pixel in an image. The preliminary steps involved using the ‘skimage’ library from Python to preprocess the images of interest. This included loading, resizing, and converting the images to grayscale. Images were rescaled to standardize their resolutions and preserve their aspect ratios to prevent distortion that could affect the accuracy of angle identification. Converting the images to grayscale was necessary because it allowed for focusing on a single channel to represent pixel intensity, rather than three channels (red, green, and blue).
+|       The HOG algorithm, introduced by Navneet Dalal and Bill Triggs in 2005 [@1467360], is a popular technique for object detection in images. The algorithm can identify gradient magnitudes and angles at each pixel in an image. The preliminary steps involved using the ‘skimage’ library from Python to preprocess the images of interest. This included loading, resizing, and converting the images to grayscale. Images were rescaled to standardize their resolutions and preserve their aspect ratios to prevent distortion that could affect the accuracy of angle identification. Converting the images to grayscale was necessary because it allowed for focusing on a single channel to represent pixel intensity, rather than three channels (red, green, and blue).
 
 <br />
 
-
 <div align="center">
 
-::: {#fig-input_image layout-ncol=1}
-
+::: {#fig-input_image layout-ncol="1"}
 ![Colored Image with Diagonal Lines](images/plots/input_to_rescaled_plot.png){#fig-input_image_to_new}
 
 Rescaling and Converting Image to Greyscale
@@ -26,18 +24,15 @@ Rescaling and Converting Image to Greyscale
 
 <div align="left">
 
-|       The HOG features were then computed for the resized images, which involved calculating the gradient magnitudes and angles at each pixel. The gradient magnitude at each pixel is comprised of the gradients in the ‘x’ and ‘y’ directions. The gradient in the x-direction is computed by subtracting the pixel value to the left of pixel of interest is subtracted from the pixel value to its right. Similarly, the gradient in the y-direction is calculated by pixel value below the pixel of interest is subtracted from the pixel value above the pixel of interest. 
+|       The HOG features were then computed for the resized images, which involved calculating the gradient magnitudes and angles at each pixel. The gradient magnitude at each pixel is comprised of the gradients in the ‘x’ and ‘y’ directions. The gradient in the x-direction is computed by subtracting the pixel value to the left of pixel of interest is subtracted from the pixel value to its right. Similarly, the gradient in the y-direction is calculated by pixel value below the pixel of interest is subtracted from the pixel value above the pixel of interest.
 
 <div>
 
 <div align="center">
+
 $G_x=I(r,c+1)−I(r,c-1)$
 
-
 $G_y=I(r+1,c)−I(r-1,c)$
-
-
-
 
 <div align="left">
 
@@ -48,35 +43,33 @@ $G_y=I(r+1,c)−I(r-1,c)$
 <br />
 
 <div align="center">
+
 $Magnitude(\mu)=\sqrt{G_{x}^{2} + G_{y}^{2}}$
 
 $Angle(\Theta)=tan^{−1} (\frac{G_y}{G_x})$
 
-::: {#fig-mag_plot layout-ncol=1}
-
+::: {#fig-mag_plot layout-ncol="1"}
 <br />
-
 
 ![Gradient Magnitudes of Diagonal Lines Image](images/plots/diagonal_lines_mag.png){#fig-magnitude_grass}
 
 Plotting Gradient Magnitudes as Image
 :::
 
-
 <div>
 
-
-
 <div align="left">
-|       
+
+| 
 |       Next, histograms are constructed to visualize the distribution of gradient magnitudes and angles. Two different techniques for creating gradient angle histograms were implemented. The first histogram was created by counting the number of angles that fell into their respective bins. The second scheme factors in a pixel’s gradient magnitude and its allocation to its bordering bins. Here, the weight assigned to each bin is calculated by the angle’s deviation from the center of its central bin. This approach allows for a more representative histogram which splits angles between bins and takes their magnitudes into account. Lastly, these histograms are converted to polar histograms so the primary angles can be visualized and compared to their original images.
+
 <div>
 
 <br />
 
 <div align="center">
-::: {#fig-histograms-plot-diag-line layout-valign="top" layout-ncol=4}
 
+::: {#fig-histograms-plot-diag-line layout-valign="top" layout-ncol="4"}
 ![Histograms of Gradient Magnitudes](images/plots/diagonal/diag_histogram_mag_plot.jpg){group="methods-histograms-diag-gallery"}
 
 ![Histograms of Gradient Angles](images/plots/diagonal/diag_histogram_theta_plot.jpg){group="methods-histograms-diag-gallery"}
@@ -85,10 +78,15 @@ Plotting Gradient Magnitudes as Image
 
 ![Polar Plot Using Distributed Histogram Technique](images/plots/diagonal/diag_contribution_polar_plot.jpg){group="methods-histograms-diag-gallery"}
 
-
 Plotting Histograms of Gradients
 :::
 
 <div>
 
+<div align="left">
+
+
+## References
+
+<div>
 

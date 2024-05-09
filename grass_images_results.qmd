@@ -8,6 +8,27 @@ lightbox:
 code-annotations: below
 ---
 
+
+## Motivation
+
+Use images from the internet and St. Lawrence University's Living Laboratory to determine if the HOG algorithm is capable of identifying dominant angles of grass lay.
+
+## Input Images
+
+<div align="center">
+
+::: {#fig-grass-images layout-valign="top" layout-ncol=3}
+![Internet Grass Image](images/grass_image2.jpg){group="grass-rescale-gallery"}
+
+![Living Lab Aerial Image](images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg){group="grass-rescale-gallery"}
+
+![Living Lab Close-Up Image](images/living_lab_aerial/LL_zoomed_in_12.jpg){group="grass-rescale-gallery"}
+
+Input Grass Images
+:::
+
+<div>
+
 ## Load R Packages and Python Libraries
 
 ```{r load_r_packages, message=FALSE}
@@ -40,6 +61,9 @@ import numpy as np
 
 ```
 
+
+
+
 ## Collect HOG Features for Grass Images
 
 ```{python}
@@ -49,14 +73,14 @@ img_list = []
 # Internet Grass Image
 img_list.append(color.rgb2gray(io.imread("images/grass_image2.jpg")))
 
-# Living Labs Rotated Aerial Grass
+# Living Lab Rotated Aerial Grass
 img_list.append(
   color.rgb2gray(
     io.imread("images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg")
     )
     )
 
-# Living Labs Grass Close-up
+# Living Lab Grass Close-up
 img_list.append(
   color.rgb2gray(
     io.imread("images/living_lab_aerial/LL_zoomed_in_12.jpg")
@@ -155,11 +179,11 @@ for x in range(len(img_list)):
 ::: {#fig-grass-images layout-valign="top" layout-ncol=3}
 ![Internet Grass Image](images/plots/grass/0.jpg){group="grass-rescale-gallery"}
 
-![Living Labs Aerial Image](images/plots/grass/1.jpg){group="grass-rescale-gallery"}
+![Living Lab Aerial Image](images/plots/grass/1.jpg){group="grass-rescale-gallery"}
 
-![Living Labs Close-Up Image](images/plots/grass/2.jpg){group="grass-rescale-gallery"}
+![Living Lab Close-Up Image](images/plots/grass/2.jpg){group="grass-rescale-gallery"}
 
-Grass Images Rescaled and Converted to Greyscale
+Grass Images Re-Scaled and Converted to Grayscale
 :::
 
 <div>
@@ -171,11 +195,11 @@ Grass Images Rescaled and Converted to Greyscale
 mag_internet_grass = np.array(mag_list[0])
 theta_internet_grass = np.array(theta_list[0])
 
-# Aerial Living Labs DF of gradient magnitudes and angles
+# Aerial Living Lab DF of gradient magnitudes and angles
 mag_aerial_living_lab = np.array(mag_list[1])
 theta_aerial_living_lab = np.array(theta_list[1])
 
-# Close-up Living Labs DF of gradient magnitudes and angles
+# Close-up Living Lab DF of gradient magnitudes and angles
 mag_close_up_living_lab = np.array(mag_list[2])
 theta_close_up_living_lab = np.array(theta_list[2])
 
@@ -196,7 +220,7 @@ theta_close_up_living_lab = np.array(theta_list[2])
 ```
 
 ```{python}
-# Save gradient magnitudes of Aerial Living Labs in image form
+# Save gradient magnitudes of Aerial Living Lab in image form
 
 # plt.figure(figsize=(15, 8))
 # #plt.title('Salt Lake City, UT Gradient Magnitudes')
@@ -209,7 +233,7 @@ theta_close_up_living_lab = np.array(theta_list[2])
 ```
 
 ```{python}
-# Save gradient magnitudes of Close-Up Living Labs in image form
+# Save gradient magnitudes of Close-Up Living Lab in image form
 
 # plt.figure(figsize=(15, 8))
 # #plt.title('Detroit, MI Gradient Magnitudes')
@@ -225,9 +249,9 @@ theta_close_up_living_lab = np.array(theta_list[2])
 ::: {#fig-grass-mags layout-ncol=3}
 ![Internet Grass](images/plots/grass/internet_grass_mag.png){group="grass-mag-gallery"}
 
-![Aerial Living Labs](images/plots/grass/aerial_living_lab_grass_mag.png){group="grass-mag-gallery"}
+![Aerial Living Lab](images/plots/grass/aerial_living_lab_grass_mag.png){group="grass-mag-gallery"}
 
-![Close-Up Living Labs](images/plots/grass/close_up_living_lab_grass_mag.png){group="grass-mag-gallery"}
+![Close-Up Living Lab](images/plots/grass/close_up_living_lab_grass_mag.png){group="grass-mag-gallery"}
 
 Grass Image Magnitudes
 :::
@@ -245,9 +269,9 @@ internet_grass_hog_df <- data.frame(mag = as.vector(py$mag_internet_grass),
 
 
 ```{r, warning=FALSE, message=FALSE}
-#| code-summary: "Make Data Frame for aerial Living Labs image magnitudes and angles"
+#| code-summary: "Make Data Frame for aerial Living Lab image magnitudes and angles"
 
-# Aerial Living Labs DF
+# Aerial Living Lab DF
 aerial_living_lab_hog_df <- data.frame(mag = as.vector(py$mag_aerial_living_lab),
                               theta = as.vector((py$theta_aerial_living_lab))) %>%
   mutate(radian = theta*(pi/180))
@@ -259,7 +283,7 @@ aerial_living_lab_hog_df <- data.frame(mag = as.vector(py$mag_aerial_living_lab)
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Make Data Frame for close-up Living Lab image magnitudes and angles"
 
-# Close-up Living Labs DF
+# Close-up Living Lab DF
 close_up_living_lab_hog_df <- data.frame(mag = as.vector(py$mag_close_up_living_lab),
                               theta = as.vector((py$theta_close_up_living_lab))) %>%
   mutate(radian = theta*(pi/180))
@@ -325,9 +349,9 @@ ggsave("images/plots/grass/internet_grass_histogram_theta_plot.jpg", internet_gr
 ```
 
 ```{r, warning=FALSE, message=FALSE}
-#| code-summary: "Plot histogram of aerial Living Labs grass image gradient magnitudes and define the magnitude level for later filtering"
+#| code-summary: "Plot histogram of aerial Living Lab grass image gradient magnitudes and define the magnitude level for later filtering"
 
-# Aerial Living Labs image histogram of gradient mags
+# Aerial Living Lab image histogram of gradient mags
 aerial_living_lab_histogram_mag_plot <-
   ggplot(grass_standard_df_list[[2]], 
          aes(x = mag)) +
@@ -335,12 +359,12 @@ aerial_living_lab_histogram_mag_plot <-
   scale_x_continuous() + 
   labs(x = "Gradient Magnitude", 
        y = "Count", 
-       title = "Aerial Living Labs Image Histogram of Gradient Magnitudes"
+       title = "Aerial Living Lab Image Histogram of Gradient Magnitudes"
   ) +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
 
-# Aerial Living Labs mag filter
+# Aerial Living Lab mag filter
 aerial_living_lab_mag_filter <- 0.08
 
 # save image
@@ -352,9 +376,9 @@ ggsave("images/plots/grass/aerial_living_lab_histogram_mag_plot.jpg",
 
 
 ```{r, warning=FALSE, message=FALSE}
-#| code-summary: "Plot histogram of aerial Living Labs grass image gradient angles"
+#| code-summary: "Plot histogram of aerial Living Lab grass image gradient angles"
 
-# Aerial Living Labs image histogram of gradient angles
+# Aerial Living Lab image histogram of gradient angles
 aerial_living_lab_histogram_theta_plot <-
   ggplot(grass_standard_df_list[[2]], 
          aes(x = theta)) +
@@ -362,7 +386,7 @@ aerial_living_lab_histogram_theta_plot <-
   scale_x_continuous() + 
   labs(x = "Gradient Angle", 
        y = "Count", 
-       title = "Aerial Living Labs Image Histogram of Gradient Angles"
+       title = "Aerial Living Lab Image Histogram of Gradient Angles"
   ) +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
@@ -373,9 +397,9 @@ ggsave("images/plots/grass/aerial_living_lab_histogram_theta_plot.jpg",
 ```
 
 ```{r, warning=FALSE, message=FALSE}
-#| code-summary: "Plot histogram of close-up Living Labs grass image gradient magnitudes and define the magnitude level for later filtering"
+#| code-summary: "Plot histogram of close-up Living Lab grass image gradient magnitudes and define the magnitude level for later filtering"
 
-# Close-up Living Labs image histogram of gradient mags
+# Close-up Living Lab image histogram of gradient mags
 close_up_living_lab_histogram_mag_plot <-
   ggplot(grass_standard_df_list[[3]], 
          aes(x = mag)) +
@@ -383,7 +407,7 @@ close_up_living_lab_histogram_mag_plot <-
   scale_x_continuous() + 
   labs(x = "Gradient Magnitude", 
        y = "Count", 
-       title = "Close-Up Living Labs Histogram of Gradient Magnitudes"
+       title = "Close-Up Living Lab Histogram of Gradient Magnitudes"
        ) +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
@@ -398,9 +422,9 @@ ggsave("images/plots/grass/close_up_living_lab_histogram_mag_plot.jpg", close_up
 
 
 ```{r, warning=FALSE, message=FALSE}
-#| code-summary: "Plot histogram of close-up Living Labs grass image gradient angles"
+#| code-summary: "Plot histogram of close-up Living Lab grass image gradient angles"
 
-# Close-up Living Labs image histogram of gradient angles
+# Close-up Living Lab image histogram of gradient angles
 close_up_living_lab_histogram_theta_plot <-
   ggplot(grass_standard_df_list[[3]], 
          aes(x = theta)) +
@@ -408,7 +432,7 @@ close_up_living_lab_histogram_theta_plot <-
   scale_x_continuous() + 
   labs(x = "Gradient Angle", 
        y = "Count", 
-       title = "Close-Up Living Labs Image Histogram of Gradient Angles"
+       title = "Close-Up Living Lab Image Histogram of Gradient Angles"
        ) +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
@@ -420,15 +444,20 @@ ggsave("images/plots/grass/close_up_living_lab_histogram_theta_plot.jpg", close_
 <div align="center">
 
 ::: {#fig-grass-histograms layout-ncol=3}
-![Internet Grass Image Histogram of Gradient Magnitudes](images/plots/grass/internet_grass_histogram_mag_plot.jpg){group="grass-hist-gallery"} 
-![Internet Grass Image Histogram of Gradient Angles](images/plots/grass/internet_grass_histogram_theta_plot.jpg){group="grass-hist-gallery"}
+![Internet Grass Image Gradient Magnitudes](images/plots/grass/internet_grass_histogram_mag_plot.jpg){group="grass-hist-gallery"}
 
-![Aerial Living Lab Image Histogram of Gradient Magnitudes](images/plots/grass/aerial_living_lab_histogram_mag_plot.jpg){group="grass-hist-gallery"} 
-![Aerial Living Lab Image Histogram of Gradient Angles](images/plots/grass/aerial_living_lab_histogram_theta_plot.jpg){group="grass-hist-gallery"}
+![Aerial Living Lab Image Gradient Magnitudes](images/plots/grass/aerial_living_lab_histogram_mag_plot.jpg){group="grass-hist-gallery"} 
 
-![Close-Up Living Labs Image Histogram of Gradient Magnitudes](images/plots/grass/close_up_living_lab_histogram_mag_plot.jpg){group="grass-hist-gallery"} ![Close-Up Living Labs Image Histogram of Gradient Angles](images/plots/grass/close_up_living_lab_histogram_theta_plot.jpg){group="grass-hist-gallery"}
+![Close-Up Living Lab Image Gradient Magnitudes](images/plots/grass/close_up_living_lab_histogram_mag_plot.jpg){group="grass-hist-gallery"} 
+
+![Internet Grass Image Gradient Angles](images/plots/grass/internet_grass_histogram_theta_plot.jpg){group="grass-hist-gallery"}
+
+![Aerial Living Lab Image Gradient Angles](images/plots/grass/aerial_living_lab_histogram_theta_plot.jpg){group="grass-hist-gallery"}
+
+![Close-Up Living Lab Image Gradient Angles](images/plots/grass/close_up_living_lab_histogram_theta_plot.jpg){group="grass-hist-gallery"}
 
 Grass Image Magnitudes and Angles
+
 :::
 
 <div>
@@ -555,9 +584,9 @@ ggsave("images/plots/grass/internet_grass_standard_polar_plot.jpg", internet_gra
 ```
 
 ```{r, warning=FALSE, message=FALSE}
-#| code-summary: "Polar plot of aerial Living Labs histogram of gradient angles using standard binning technique"
+#| code-summary: "Polar plot of aerial Living Lab histogram of gradient angles using standard binning technique"
 
-# Aerial Living Labs plot
+# Aerial Living Lab plot
 aerial_living_lab_plot <-
   ggplot(filtered_grass_standard_df_list[[2]], 
          aes(x = theta)) +
@@ -573,7 +602,7 @@ aerial_living_lab_plot <-
     breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
   )+
-  labs(title = "Polar Plot of Aerial Living Labs Image\nUsing Standard HOG Technique") +
+  labs(title = "Polar Plot of Aerial Living Lab Image\nUsing Standard HOG Technique") +
   theme_minimal() +
   labs(x = "") +
   theme(axis.title.y = element_blank(),
@@ -586,9 +615,9 @@ ggsave("images/plots/grass/aerial_living_lab_standard_polar_plot.jpg", aerial_li
 ```
 
 ```{r, warning=FALSE, message=FALSE}
-#| code-summary: "Polar plot of close-up Living Labs histogram of gradient angles using standard binning technique"
+#| code-summary: "Polar plot of close-up Living Lab histogram of gradient angles using standard binning technique"
 
-# Close-up Living Labs plot
+# Close-up Living Lab plot
 close_up_living_lab_plot <-
   ggplot(filtered_grass_standard_df_list[[3]], 
          aes(x = theta)) +
@@ -636,12 +665,12 @@ ggsave("images/plots/grass/all_grass_standard_polar_plots.jpg",
 
 ![Internet Grass Image](images/plots/grass/internet_grass_standard_polar_plot.jpg){group="grass-standard-polar-gallery"}
 
-![Aerial Living Labs Image](images/plots/grass/aerial_living_lab_standard_polar_plot.jpg){group="grass-standard-polar-gallery"}
+![Aerial Living Lab Image](images/plots/grass/aerial_living_lab_standard_polar_plot.jpg){group="grass-standard-polar-gallery"}
 
-![Close-Up Living Labs Image](images/plots/grass/close_up_living_lab_standard_polar_plot.jpg){group="grass-standard-polar-gallery"} 
+![Close-Up Living Lab Image](images/plots/grass/close_up_living_lab_standard_polar_plot.jpg){group="grass-standard-polar-gallery"} 
 
 
-Aerial Cityscape Standard Polar Plots
+Polar Plots using Standard Binning Technique for Grass Images
 :::
 
 <div>
@@ -683,9 +712,9 @@ ggsave("images/plots/grass/internet_grass_contribution_polar_plot.jpg", internet
 ```
 
 ```{r, warning=FALSE, message=FALSE}
-#| code-summary: "Polar plot of aerial Living Labs histogram of gradient angles using distributed binning technique"
+#| code-summary: "Polar plot of aerial Living Lab histogram of gradient angles using distributed binning technique"
 
-# Aerial Living Labs plot
+# Aerial Living Lab plot
 aerial_living_lab_split_plot <-
   ggplot(grass_contribution_df_list[[2]], 
          aes(x = bin, y = contribution_sum)) +
@@ -714,9 +743,9 @@ ggsave("images/plots/grass/aerial_living_lab_contribution_polar_plot.jpg", aeria
 ```
 
 ```{r, warning=FALSE, message=FALSE}
-#| code-summary: "Polar plot of close-up Living Labs histogram of gradient angles using distributed binning technique"
+#| code-summary: "Polar plot of close-up Living Lab histogram of gradient angles using distributed binning technique"
 
-# Close-up Living Labs plot
+# Close-up Living Lab plot
 close_up_living_lab_split_plot <-
   ggplot(grass_contribution_df_list[[3]], 
          aes(x = bin, y = contribution_sum)) +
@@ -766,16 +795,23 @@ ggsave("images/plots/grass/all_grass_contribution_plots.jpg",
 
 ![Internet Grass Image](images/plots/grass/internet_grass_contribution_polar_plot.jpg){group="grass-distributed-polar-gallery"}
 
-![Aerial Living Labs Image](images/plots/grass/aerial_living_lab_contribution_polar_plot.jpg){group="grass-distributed-polar-gallery"}
+![Aerial Living Lab Image](images/plots/grass/aerial_living_lab_contribution_polar_plot.jpg){group="grass-distributed-polar-gallery"}
 
-![Close-Up Living Labs Grass Image](images/plots/grass/close_up_living_lab_contribution_polar_plot.jpg){group="grass-distributed-polar-gallery"} 
+![Close-Up Living Lab Grass Image](images/plots/grass/close_up_living_lab_contribution_polar_plot.jpg){group="grass-distributed-polar-gallery"} 
 
 
-Distributed Method Polar Plots for Grass Images
+Polar Plots using Distributed Binning Technique for Grass Images
+
 :::
 
-<div align="center">
+<div>
 
 
+## Discussion
 
+<div align="left">
+
+|       The internet grass image was selected for its simplicity and general diagonal direction. Both techniques proved quite successful at identifying the image's predominate diagonal gradient angles. The aerial image from the Living Laboratory posed a greater challenge due to its wider zoom range, causing a higher degree of variability in grass lay direction. Ultimately, the standard binning technique was able to identify this north-eastern trend seen on the right side of the image, while the distributed method identified a slightly more eastern trend. Lastly, the north-eastern trend in close-up image from the Living Laboratory was successfully identified in both the standard and distributed methods of binning.
+
+<div>
 
