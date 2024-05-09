@@ -15,7 +15,7 @@ lightbox:
 
 ::: {#fig-images layout-ncol=4}
 
-![Diagnol Lines](images/diagnol_lines.jpg){#fig-lines}
+![Diagonal Lines](images/diagnol_lines.jpg){#fig-lines}
 
 ![Downtown San Francisco, CA](images/san_francisco_scale_zoom_12.png){#fig-sf}
 

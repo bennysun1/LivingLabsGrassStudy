@@ -6,6 +6,7 @@ lightbox:
   effect: zoom
   desc-position: bottom
 code-annotations: below
+code-line-numbers: true
 ---
 
 ## Motivation
@@ -174,7 +175,7 @@ theta_flip = np.array(theta_list[0])
 
 ```
 
-## Plot Magnitudes as Image for Backflip Image
+## Plot Gradient Magnitudes as Image for Backflip Image
 
 ```{python}
 # Save gradient magnitudes of backflip in image form
@@ -379,7 +380,7 @@ for (i in 1:length(filtered_flip_standard_df_list)){
 
 ```
 
-## Generate Polar Plots for Standard Historgrams for Backflip Image
+## Generate Polar Plots for Standard Histograms for Backflip Image
 
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Polar plot of backflip image histogram of gradient angles using standard binning technique"
@@ -400,7 +401,8 @@ flip_plot <-
     breaks = c(0, 45, 90, 135, 180, 225, 270, 315),
     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
   )+
-  labs(title = "Polar Plot of Skiing Backflip\nImage Using Standard HOG Technique") +
+  labs(title = "Polar Plot of Skiing Backflip
+       Image Using Standard HOG Technique") +
   theme_minimal() +
   labs(x = "") +
   theme(axis.title.y = element_blank(),
@@ -419,7 +421,7 @@ ggsave("images/plots/backflip/backflip_standard_polar_plot.jpg",
 
 
 
-## Generate Polar Plots for Distributed Historgrams of Diagonal Image
+## Generate Polar Plots for Distributed Histograms for Backflip Image
 
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Polar plot of backflip image histogram of gradient angles using distributed binning technique"
@@ -441,7 +443,8 @@ flip_split_plot <-
     breaks = c(0, 45, 90, 135, 180, 225, 270, 315),
     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
   )+
-  labs(title = "Polar Plot of Skiing Backflip Image\nUsing Distributed HOG Technique") +
+  labs(title = "Polar Plot of Skiing Backflip Image
+       Using Distributed HOG Technique") +
   theme_minimal() +
   labs(x = "") +
   theme(axis.title.y = element_blank(),
@@ -479,6 +482,8 @@ Polar Plots using Standard and Distributed Binning Technique for Skiing Backflip
 
 
 <div align="left">
+
+## Discussion
 
 |       When looking at the gradient magnitudes in image form the most definitive lines occur where the snow from the jump is visible. This makes sense, because the snowy jump is a uniform white, resulting in minimal gradient magnitudes from one pixel to the next within this area. When the edge of the snow meets the crowd in the background, there is a great increase in gradient magnitude. Since the snowy jump in this image is mostly horizontal with some incline and decline, both polar plots identify the horizontal angle as being the most frequent. Interestingly, the distributed binning technique has a notably smaller frequency of vertical lines, likely due to the greater influence of magnitudes on their contribution to the histogram.
 

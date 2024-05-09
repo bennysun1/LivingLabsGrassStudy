@@ -36,5 +36,20 @@ format:
     documentclass: scrreprt
     bibliography: references.bib
     csl: apa-6th-edition.csl
+    include-in-header: 
+      text: |
+        \let\oldsection\section
+        \renewcommand\section{\clearpage\oldsection}
+    
+  docx: 
+    toc: true
+    bibliography: references.bib
+    csl: apa-6th-edition.csl
+    number-sections: true
+    number-depth: 0
+    date: "2024-05-10"
+    abstract-title: "Abstract"
+    fig-align: center
+
   
 editor: visual

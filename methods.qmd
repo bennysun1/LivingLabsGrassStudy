@@ -28,11 +28,18 @@ Rescaling and Converting Image to Greyscale
 
 <div>
 
+<br />
+
 <div align="center">
+
 
 $G_x=I(r,c+1)−I(r,c-1)$
 
 $G_y=I(r+1,c)−I(r-1,c)$
+
+<div>
+
+<br />
 
 <div align="left">
 
@@ -44,9 +51,11 @@ $G_y=I(r+1,c)−I(r-1,c)$
 
 <div align="center">
 
+
 $Magnitude(\mu)=\sqrt{G_{x}^{2} + G_{y}^{2}}$
 
 $Angle(\Theta)=tan^{−1} (\frac{G_y}{G_x})$
+
 
 ::: {#fig-mag_plot layout-ncol="1"}
 <br />
@@ -69,7 +78,23 @@ Plotting Gradient Magnitudes as Image
 
 <div align="center">
 
-::: {#fig-histograms-plot-diag-line layout-valign="top" layout-ncol="4"}
+::: {#fig-histograms-techniques layout-valign="top" layout-ncol="2"}
+![Standard Technique](images/plots/standard_method_screenshot.jpg){group="methods-histograms-tech-gallery"}
+
+![Distributed Technique](images/plots/distributed_method_screenshot.jpg){group="methods-histograms-tech-gallery"}
+
+Standard and Distributed Technique for Binning Gradients Angles into Histograms [@Singh_2024]
+
+:::
+
+<div>
+
+
+<br />
+
+<div align="center">
+
+::: {#fig-histograms-plot-diag-line layout-valign="top" layout-ncol="2"}
 ![Histograms of Gradient Magnitudes](images/plots/diagonal/diag_histogram_mag_plot.jpg){group="methods-histograms-diag-gallery"}
 
 ![Histograms of Gradient Angles](images/plots/diagonal/diag_histogram_theta_plot.jpg){group="methods-histograms-diag-gallery"}
@@ -78,14 +103,13 @@ Plotting Gradient Magnitudes as Image
 
 ![Polar Plot Using Distributed Histogram Technique](images/plots/diagonal/diag_contribution_polar_plot.jpg){group="methods-histograms-diag-gallery"}
 
-Plotting Histograms of Gradients
+Plotting Histograms of Gradients for Diagonal Image
 :::
+
 
 <div>
 
 <div align="left">
-
-
 ## References
 
 <div>

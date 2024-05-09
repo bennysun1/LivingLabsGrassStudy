@@ -6,6 +6,8 @@ lightbox:
   effect: zoom
   desc-position: bottom
 code-annotations: below
+code-line-numbers: true
+
 ---
 
 ## Motivation
@@ -696,10 +698,12 @@ Aerial Cityscape Images
 img_list = []
 
 # SF aerial
-img_list.append(color.rgb2gray(io.imread("images/san_francisco_scale_zoom_12.png")))
+img_list.append(color.rgb2gray(
+  io.imread("images/san_francisco_scale_zoom_12.png")))
 
 # Salt Lake City Aerial
-img_list.append(color.rgb2gray(io.imread("images/salt_lake_city_zoom_12.png")))
+img_list.append(color.rgb2gray(
+  io.imread("images/salt_lake_city_zoom_12.png")))
 
 # Detroit Aerial
 img_list.append(color.rgb2gray(io.imread("images/detroit_zoom_12.png")))
@@ -815,7 +819,7 @@ Aerial Cityscape Images Re-scaled and Converted to Grayscale
 
 <div>
 
-## Build Data Frames for Each Aerial Cityscape
+##  Extract Gradient Magnitudes and Angles from each Aerial Cityscape
 
 ```{python}
 # San Francisco DF of gradient magnitudes and angles
@@ -832,7 +836,7 @@ theta_detroit = np.array(theta_list[2])
 
 ```
 
-## Extract Gradient Magnitudes and Angles from each Aerial Cityscape
+## Plot Gradient Magnitudes as Image for each Aerial Cityscape
 
 ```{python}
 # Save gradient magnitudes of San Francisco in image form
@@ -943,7 +947,11 @@ sf_histogram_mag_plot <-
 sf_mag_filter <- 0.4
 
 # save image
-ggsave("images/plots/aerial_cities/sf_histogram_mag_plot.jpg", sf_histogram_mag_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/aerial_cities/sf_histogram_mag_plot.jpg", 
+       sf_histogram_mag_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 ```
 
 ```{r, warning=FALSE, message=FALSE}
@@ -963,7 +971,11 @@ sf_histogram_theta_plot <-
   theme(plot.title = element_text(hjust = 0.5))
 
 # save image
-ggsave("images/plots/aerial_cities/sf_histogram_theta_plot.jpg", sf_histogram_theta_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/aerial_cities/sf_histogram_theta_plot.jpg", 
+       sf_histogram_theta_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 
 ```
 
@@ -987,7 +999,11 @@ salt_lake_histogram_mag_plot <-
 salt_lake_mag_filter <- 0.12
 
 # save image
-ggsave("images/plots/aerial_cities/salt_lake_histogram_mag_plot.jpg", salt_lake_histogram_mag_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/aerial_cities/salt_lake_histogram_mag_plot.jpg", 
+       salt_lake_histogram_mag_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 
 ```
 
@@ -1008,7 +1024,11 @@ salt_lake_histogram_theta_plot <-
   theme(plot.title = element_text(hjust = 0.5))
 
 # save image
-ggsave("images/plots/aerial_cities/salt_lake_histogram_theta_plot.jpg", salt_lake_histogram_theta_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/aerial_cities/salt_lake_histogram_theta_plot.jpg",
+       salt_lake_histogram_theta_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 ```
 
 ```{r, warning=FALSE, message=FALSE}
@@ -1030,7 +1050,11 @@ detroit_histogram_mag_plot <-
 # Detroit mag filter level
 detroit_mag_filter <- 0.15
 
-ggsave("images/plots/aerial_cities/detroit_histogram_mag_plot.jpg", detroit_histogram_mag_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/aerial_cities/detroit_histogram_mag_plot.jpg", 
+       detroit_histogram_mag_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 
 ```
 
@@ -1051,7 +1075,11 @@ detroit_histogram_theta_plot <-
   theme(plot.title = element_text(hjust = 0.5))
 
 # save image
-ggsave("images/plots/aerial_cities/detroit_histogram_theta_plot.jpg", detroit_histogram_theta_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/aerial_cities/detroit_histogram_theta_plot.jpg", 
+       detroit_histogram_theta_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 ```
 
 <div align="center">
@@ -1112,7 +1140,8 @@ calculate_bin_contributions <- function(angle, magnitude, num_bins) {
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Filter each data set of aerial image gradients and angles to only contain observations with magnitudes greater than or equal to the respective magnitude levels determined above"
 
-# Create filtered data frames using the filter levels for magnitudes defined above, store all in a list
+# Create filtered data frames using the filter levels 
+# for magnitudes defined above, store all in a list
 filtered_aerial_standard_df_list <-list(sf_hog_df %>%
                                    filter(mag >= sf_mag_filter),
                                  salt_lake_hog_df %>%
@@ -1187,14 +1216,19 @@ sf_plot <-
     breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
   )+
-  labs(title = "Polar Plot of San Francisco, CA Image\nUsing Standard HOG Technique") +
+  labs(title = "Polar Plot of San Francisco, CA Image
+       Using Standard HOG Technique") +
   theme_minimal() +
   labs(x = "") +
   theme(axis.title.y = element_blank(),
         plot.title = element_text(hjust = 0.5))
 
 # save image
-ggsave("images/plots/aerial_cities/sf_standard_polar_plot.jpg", sf_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/aerial_cities/sf_standard_polar_plot.jpg", 
+       sf_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 
 ```
 
@@ -1217,14 +1251,19 @@ salt_lake_plot <-
     breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
   )+
-  labs(title = "Polar Plot of Salt Lake City, UT Image\nUsing Standard HOG Technique") +
+  labs(title = "Polar Plot of Salt Lake City, UT Image
+       Using Standard HOG Technique") +
   theme_minimal() +
   labs(x = "") +
   theme(axis.title.y = element_blank(),
         plot.title = element_text(hjust = 0.5))
 
 # save image
-ggsave("images/plots/aerial_cities/salt_lake_standard_polar_plot.jpg", salt_lake_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/aerial_cities/salt_lake_standard_polar_plot.jpg", 
+       salt_lake_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 
 ```
 
@@ -1247,14 +1286,19 @@ detroit_plot <-
     breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
   )+
-  labs(title = "Polar Plot of Detroit, MI Image\nUsing Standard HOG Technique") +
+  labs(title = "Polar Plot of Detroit, MI Image
+       Using Standard HOG Technique") +
   theme_minimal() +
   labs(x = "") +
   theme(axis.title.y = element_blank(),
         plot.title = element_text(hjust = 0.5))
 
 # save image
-ggsave("images/plots/aerial_cities/detroit_standard_polar_plot.jpg", detroit_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/aerial_cities/detroit_standard_polar_plot.jpg", 
+       detroit_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 
 ```
 
@@ -1309,14 +1353,19 @@ sf_split_plot <-
     breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
   )+
-  labs(title = "Polar Plot of San Francisco, CA Image\nUsing Distributed HOG Technique") +
+  labs(title = "Polar Plot of San Francisco, CA Image
+       Using Distributed HOG Technique") +
   theme_minimal() +
   labs(x = "") +
   theme(axis.title.y = element_blank(),
         plot.title = element_text(hjust = 0.5))
 
 # save image
-ggsave("images/plots/aerial_cities/sf_contribution_polar_plot.jpg", sf_split_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/aerial_cities/sf_contribution_polar_plot.jpg", 
+       sf_split_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 
 ```
 
@@ -1340,14 +1389,19 @@ salt_lake_split_plot <-
     breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
   )+
-  labs(title = "Polar Plot of Salt Lake City, UT Image\nUsing Distributed HOG Technique") +
+  labs(title = "Polar Plot of Salt Lake City, UT Image
+       Using Distributed HOG Technique") +
   theme_minimal() +
   labs(x = "") +
   theme(axis.title.y = element_blank(),
         plot.title = element_text(hjust = 0.5))
 
 # save image
-ggsave("images/plots/aerial_cities/salt_lake_contribution_polar_plot.jpg", salt_lake_split_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/aerial_cities/salt_lake_contribution_polar_plot.jpg", 
+       salt_lake_split_plot, 
+       width = 6,
+       height = 4, 
+       dpi = 300)
 
 ```
 
@@ -1371,14 +1425,19 @@ detroit_split_plot <-
     breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
   )+
-  labs(title = "Polar Plot of Detroit, MI Image\nUsing Distributed HOG Technique") +
+  labs(title = "Polar Plot of Detroit, MI Image
+       Using Distributed HOG Technique") +
   theme_minimal() +
   labs(x = "") +
   theme(axis.title.y = element_blank(),
         plot.title = element_text(hjust = 0.5))
 
 # save image
-ggsave("images/plots/aerial_cities/detroit_contribution_polar_plot.jpg", detroit_split_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/aerial_cities/detroit_contribution_polar_plot.jpg", 
+       detroit_split_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 
 ```
 

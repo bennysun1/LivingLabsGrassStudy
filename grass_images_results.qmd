@@ -6,12 +6,14 @@ lightbox:
   effect: zoom
   desc-position: bottom
 code-annotations: below
+code-line-numbers: true
+
 ---
 
 
 ## Motivation
 
-Use images from the internet and St. Lawrence University's Living Laboratory to determine if the HOG algorithm is capable of identifying dominant angles of grass lay.
+Use images from the internet and St. Lawrence University's Living Laboratory to determine if the HOG algorithm can identify dominant angles of grass lay.
 
 ## Input Images
 
@@ -76,9 +78,7 @@ img_list.append(color.rgb2gray(io.imread("images/grass_image2.jpg")))
 # Living Lab Rotated Aerial Grass
 img_list.append(
   color.rgb2gray(
-    io.imread("images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg")
-    )
-    )
+    io.imread("images/living_lab_aerial/aerial_grass_living_lab_rotated.jpg")))
 
 # Living Lab Grass Close-up
 img_list.append(
@@ -188,7 +188,7 @@ Grass Images Re-Scaled and Converted to Grayscale
 
 <div>
 
-## Build Data Frames for Each Grass Image
+## Extract Gradient Magnitudes and Angles from each Grass Image
 
 ```{python}
 # Internet grass DF of gradient magnitudes and angles
@@ -205,7 +205,7 @@ theta_close_up_living_lab = np.array(theta_list[2])
 
 ```
 
-## Extract Gradient Magnitudes and Angles from each Grass Image
+## Plot Gradient Magnitudes as Image for each Grass Image
 
 ```{python}
 # Save gradient magnitudes of Internet Grass in image form
@@ -262,8 +262,9 @@ Grass Image Magnitudes
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Make Data Frame for internet grass image magnitudes and angles"
 # Internet grass DF
-internet_grass_hog_df <- data.frame(mag = as.vector(py$mag_internet_grass),
-                              theta = as.vector((py$theta_internet_grass))) %>%
+internet_grass_hog_df <- 
+  data.frame(mag = as.vector(py$mag_internet_grass),
+             theta = as.vector((py$theta_internet_grass))) %>%
   mutate(radian = theta*(pi/180))
 ```
 
@@ -272,10 +273,10 @@ internet_grass_hog_df <- data.frame(mag = as.vector(py$mag_internet_grass),
 #| code-summary: "Make Data Frame for aerial Living Lab image magnitudes and angles"
 
 # Aerial Living Lab DF
-aerial_living_lab_hog_df <- data.frame(mag = as.vector(py$mag_aerial_living_lab),
-                              theta = as.vector((py$theta_aerial_living_lab))) %>%
+aerial_living_lab_hog_df <- 
+  data.frame(mag = as.vector(py$mag_aerial_living_lab),
+             theta = as.vector((py$theta_aerial_living_lab))) %>%
   mutate(radian = theta*(pi/180))
-
 
 ```
 
@@ -284,8 +285,9 @@ aerial_living_lab_hog_df <- data.frame(mag = as.vector(py$mag_aerial_living_lab)
 #| code-summary: "Make Data Frame for close-up Living Lab image magnitudes and angles"
 
 # Close-up Living Lab DF
-close_up_living_lab_hog_df <- data.frame(mag = as.vector(py$mag_close_up_living_lab),
-                              theta = as.vector((py$theta_close_up_living_lab))) %>%
+close_up_living_lab_hog_df <- 
+  data.frame(mag = as.vector(py$mag_close_up_living_lab),
+             theta = as.vector((py$theta_close_up_living_lab))) %>%
   mutate(radian = theta*(pi/180))
 
 ```
@@ -322,7 +324,11 @@ internet_grass_histogram_mag_plot <-
 internet_grass_mag_filter <- 0.3
 
 # save image
-ggsave("images/plots/grass/internet_grass_histogram_mag_plot.jpg", internet_grass_histogram_mag_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/grass/internet_grass_histogram_mag_plot.jpg", 
+       internet_grass_histogram_mag_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 
 ```
 
@@ -344,7 +350,11 @@ internet_grass_histogram_theta_plot <-
   theme(plot.title = element_text(hjust = 0.5))
 
 # save image
-ggsave("images/plots/grass/internet_grass_histogram_theta_plot.jpg", internet_grass_histogram_theta_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/grass/internet_grass_histogram_theta_plot.jpg", 
+       internet_grass_histogram_theta_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 
 ```
 
@@ -369,7 +379,10 @@ aerial_living_lab_mag_filter <- 0.08
 
 # save image
 ggsave("images/plots/grass/aerial_living_lab_histogram_mag_plot.jpg", 
-       aerial_living_lab_histogram_mag_plot, width = 6, height = 4, dpi = 300)
+       aerial_living_lab_histogram_mag_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 
 ```
 
@@ -393,7 +406,10 @@ aerial_living_lab_histogram_theta_plot <-
 
 # save image
 ggsave("images/plots/grass/aerial_living_lab_histogram_theta_plot.jpg", 
-       aerial_living_lab_histogram_theta_plot, width = 6, height = 4, dpi = 300)
+       aerial_living_lab_histogram_theta_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 ```
 
 ```{r, warning=FALSE, message=FALSE}
@@ -416,7 +432,11 @@ close_up_living_lab_histogram_mag_plot <-
 close_up_living_lab_mag_filter <- 0.12
 
 # save image
-ggsave("images/plots/grass/close_up_living_lab_histogram_mag_plot.jpg", close_up_living_lab_histogram_mag_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/grass/close_up_living_lab_histogram_mag_plot.jpg", 
+       close_up_living_lab_histogram_mag_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 
 ```
 
@@ -438,7 +458,11 @@ close_up_living_lab_histogram_theta_plot <-
   theme(plot.title = element_text(hjust = 0.5))
 
 # save image
-ggsave("images/plots/grass/close_up_living_lab_histogram_theta_plot.jpg", close_up_living_lab_histogram_theta_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/grass/close_up_living_lab_histogram_theta_plot.jpg", 
+       close_up_living_lab_histogram_theta_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 ```
 
 <div align="center">
@@ -499,13 +523,15 @@ calculate_bin_contributions <- function(angle, magnitude, num_bins) {
 ```{r, warning=FALSE, message=FALSE}
 #| code-summary: "Filter each data set of grass image gradients and angles to only contain observations with magnitudes greater than or equal to the respective magnitude levels determined above"
 
-# Create filtered data frames using the filter levels for magnitudes defined above, store all in a list
-filtered_grass_standard_df_list <-list(internet_grass_hog_df %>%
-                                          filter(mag >= internet_grass_mag_filter),
-                                        aerial_living_lab_hog_df %>%
-                                          filter(mag >= aerial_living_lab_mag_filter), 
-                                        close_up_living_lab_hog_df %>%
-                                          filter(mag >= close_up_living_lab_mag_filter))
+# Create filtered data frames using the filter levels for 
+# magnitudes defined above, store all in a list
+filtered_grass_standard_df_list <-
+  list(internet_grass_hog_df %>%
+         filter(mag >= internet_grass_mag_filter),
+       aerial_living_lab_hog_df %>%
+         filter(mag >= aerial_living_lab_mag_filter), 
+       close_up_living_lab_hog_df %>%
+         filter(mag >= close_up_living_lab_mag_filter))
 ```
 
 
@@ -572,14 +598,19 @@ internet_grass_plot <-
     breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
   )+
-  labs(title = "Polar Plot of Internet Grass Image\nUsing Standard HOG Technique") +
+  labs(title = "Polar Plot of Internet Grass Image
+       Using Standard HOG Technique") +
   theme_minimal() +
   labs(x = "") +
   theme(axis.title.y = element_blank(),
         plot.title = element_text(hjust = 0.5))
 
 # save image
-ggsave("images/plots/grass/internet_grass_standard_polar_plot.jpg", internet_grass_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/grass/internet_grass_standard_polar_plot.jpg", 
+       internet_grass_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 
 ```
 
@@ -602,14 +633,19 @@ aerial_living_lab_plot <-
     breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
   )+
-  labs(title = "Polar Plot of Aerial Living Lab Image\nUsing Standard HOG Technique") +
+  labs(title = "Polar Plot of Aerial Living Lab Image
+       Using Standard HOG Technique") +
   theme_minimal() +
   labs(x = "") +
   theme(axis.title.y = element_blank(),
         plot.title = element_text(hjust = 0.5))
 
 # save image
-ggsave("images/plots/grass/aerial_living_lab_standard_polar_plot.jpg", aerial_living_lab_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/grass/aerial_living_lab_standard_polar_plot.jpg", 
+       aerial_living_lab_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 
 
 ```
@@ -633,14 +669,19 @@ close_up_living_lab_plot <-
     breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
   )+
-  labs(title = "Polar Plot of Close-Up Living Lab Image\nUsing Standard HOG Technique") +
+  labs(title = "Polar Plot of Close-Up Living Lab Image
+       Using Standard HOG Technique") +
   theme_minimal() +
   labs(x = "") +
   theme(axis.title.y = element_blank(),
         plot.title = element_text(hjust = 0.5))
 
 # save image
-ggsave("images/plots/grass/close_up_living_lab_standard_polar_plot.jpg", close_up_living_lab_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/grass/close_up_living_lab_standard_polar_plot.jpg", 
+       close_up_living_lab_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 
 ```
 
@@ -699,14 +740,19 @@ internet_grass_split_plot <-
     breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
   )+
-  labs(title = "Polar Plot of Internet Grass Image\nUsing Distributed HOG Technique") +
+  labs(title = "Polar Plot of Internet Grass Image
+       Using Distributed HOG Technique") +
   theme_minimal() +
   labs(x = "") +
   theme(axis.title.y = element_blank(),
         plot.title = element_text(hjust = 0.5))
 
 # save image
-ggsave("images/plots/grass/internet_grass_contribution_polar_plot.jpg", internet_grass_split_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/grass/internet_grass_contribution_polar_plot.jpg", 
+       internet_grass_split_plot, 
+       width = 6,
+       height = 4, 
+       dpi = 300)
 
 
 ```
@@ -731,14 +777,19 @@ aerial_living_lab_split_plot <-
     breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
   )+
-  labs(title = "Polar Plot of Aerial Living Lab Image\nUsing Distributed HOG Technique") +
+  labs(title = "Polar Plot of Aerial Living Lab Image
+       Using Distributed HOG Technique") +
   theme_minimal() +
   labs(x = "") +
   theme(axis.title.y = element_blank(),
         plot.title = element_text(hjust = 0.5))
 
 # save image
-ggsave("images/plots/grass/aerial_living_lab_contribution_polar_plot.jpg", aerial_living_lab_split_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/grass/aerial_living_lab_contribution_polar_plot.jpg", 
+       aerial_living_lab_split_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 
 ```
 
@@ -762,14 +813,19 @@ close_up_living_lab_split_plot <-
     breaks = c(0, 45, 90, 135, 180, 225, 270, 315), 
     labels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
   )+
-  labs(title = "Polar Plot of Close-Up Living Lab Image\nUsing Distributed HOG Technique") +
+  labs(title = "Polar Plot of Close-Up Living Lab Image
+       Using Distributed HOG Technique") +
   theme_minimal() +
   labs(x = "") +
   theme(axis.title.y = element_blank(),
         plot.title = element_text(hjust = 0.5))
 
 # save image
-ggsave("images/plots/grass/close_up_living_lab_contribution_polar_plot.jpg", close_up_living_lab_split_plot, width = 6, height = 4, dpi = 300)
+ggsave("images/plots/grass/close_up_living_lab_contribution_polar_plot.jpg", 
+       close_up_living_lab_split_plot, 
+       width = 6, 
+       height = 4, 
+       dpi = 300)
 
 ```
 
@@ -777,9 +833,10 @@ ggsave("images/plots/grass/close_up_living_lab_contribution_polar_plot.jpg", clo
 #| code-summary: "Save an arranged image of the 3 distributed-binned polar plots side-by-side"
 
 # Save to an arranged image
-all_grass_contribution_plots <- ggpubr::ggarrange(internet_grass_split_plot, 
-                                                  aerial_living_lab_split_plot, 
-                                                  close_up_living_lab_split_plot)
+all_grass_contribution_plots <- 
+  ggpubr::ggarrange(internet_grass_split_plot, 
+                    aerial_living_lab_split_plot, 
+                    close_up_living_lab_split_plot)
 
 ggsave("images/plots/grass/all_grass_contribution_plots.jpg", 
        all_grass_contribution_plots, 
@@ -806,10 +863,13 @@ Polar Plots using Distributed Binning Technique for Grass Images
 
 <div>
 
+<br />
 
-## Discussion
+
 
 <div align="left">
+
+## Discussion
 
 |       The internet grass image was selected for its simplicity and general diagonal direction. Both techniques proved quite successful at identifying the image's predominate diagonal gradient angles. The aerial image from the Living Laboratory posed a greater challenge due to its wider zoom range, causing a higher degree of variability in grass lay direction. Ultimately, the standard binning technique was able to identify this north-eastern trend seen on the right side of the image, while the distributed method identified a slightly more eastern trend. Lastly, the north-eastern trend in close-up image from the Living Laboratory was successfully identified in both the standard and distributed methods of binning.
 
