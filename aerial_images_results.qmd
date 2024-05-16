@@ -822,15 +822,15 @@ Aerial Cityscape Images Re-scaled and Converted to Grayscale
 ##  Extract Gradient Magnitudes and Angles from each Aerial Cityscape
 
 ```{python}
-# San Francisco DF of gradient magnitudes and angles
+# array of San Francisco gradient magnitudes and angles
 mag_sf = np.array(mag_list[0])
 theta_sf = np.array(theta_list[0])
 
-# Salt Lake City DF of gradient magnitudes and angles
+# array of Salt Lake City gradient magnitudes and angles
 mag_salt_lake = np.array(mag_list[1])
 theta_salt_lake = np.array(theta_list[1])
 
-# Detorit DF of gradient magnitudes and angles
+# array of Detorit gradient magnitudes and angles
 mag_detroit = np.array(mag_list[2])
 theta_detroit = np.array(theta_list[2])
 
