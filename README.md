@@ -11,5 +11,5 @@ We collected images from:
 * Complex image of a skier doing a backflip in front of a crowd students at St. Lawrence University's Titus weekend.
 
 Helpful Links:
-[Project via Quarto Book](https://bennysun1.github.io/LivingLabsGrassStudy/)
+[Project via Quarto Book](https://bennysun1.github.io/LivingLabsGrassStudy/)\n
 [Formatted Paper](https://github.com/bennysun1/LivingLabsGrassStudy/blob/main/docs/living_labs_grass_study_formatted.pdf)
